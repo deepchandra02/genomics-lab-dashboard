@@ -1,8 +1,8 @@
-import Home from "./pages";
+import Home from "./pages/index.tsx";
 
 function App() {
   return (
-    <Home />
+    <Home></Home>
   );
 }
 
