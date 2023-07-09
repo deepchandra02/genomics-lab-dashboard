@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 
 import {
@@ -14,6 +13,7 @@ import {
 } from "@tremor/react";
 
 import CustomAreaChart from "../components/overview/CustomAreaChart";
+import { data1 } from "../dummyData.js"
 
 var kpiData = [
   {
@@ -57,68 +57,7 @@ var Kpis = {
 
 var tabs1 = [Kpis.Samples, Kpis.Flowcells];
 
-var data1 = [
-  {
-    "date": "Jan/23",
-    "Samples": 1086,
-    "Flowcells": 35
-  },
-  {
-    "date": "Feb/23",
-    "Samples": 926,
-    "Flowcells": 57
-  },
-  {
-    "date": "Mar/23",
-    "Samples": 1151,
-    "Flowcells": 21
-  },
-  {
-    "date": "Apr/23",
-    "Samples": 1112,
-    "Flowcells": 28
-  },
-  {
-    "date": "May/23",
-    "Samples": 1028,
-    "Flowcells": 44
-  },
-  {
-    "date": "Jun/23",
-    "Samples": 838,
-    "Flowcells": 24
-  },
-  {
-    "date": "Jul/23",
-    "Samples": 873,
-    "Flowcells": 45
-  },
-  {
-    "date": "Aug/23",
-    "Samples": 1425,
-    "Flowcells": 51
-  },
-  {
-    "date": "Sep/23",
-    "Samples": 1241,
-    "Flowcells": 41
-  },
-  {
-    "date": "Oct/23",
-    "Samples": 558,
-    "Flowcells": 34
-  },
-  {
-    "date": "Nov/23",
-    "Samples": 917,
-    "Flowcells": 59
-  },
-  {
-    "date": "Dec/23",
-    "Samples": 1262,
-    "Flowcells": 42
-  }
-];
+
 
 export default function Home() {
 
