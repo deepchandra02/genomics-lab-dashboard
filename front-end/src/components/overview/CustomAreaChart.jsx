@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { EyeIcon, InformationCircleIcon } from "@heroicons/react/solid";
-
+import { preprocessData } from "../utils.js";
 
 import {
   Card,
@@ -23,12 +23,20 @@ const CustomAreaChart = (props) => {
 
   const [value, setValue] = useState(3);
 
+  const [preprocessedData, setPreprocessedData] = useState(props.data);
+  useEffect(() => {
+    let newData = preprocessData(props.data, value);
+    setPreprocessedData(newData);
+  }, [props.data, value]);
+
   const areaChartArgs = {
     categories: [selectedKpi],
     animationDuration: 500,
+    autoMinValue: true,
 
     className: props.className,
-    data: props.data,
+    data: preprocessedData,
+    // data: props.data,
     index: props.index,
     colors: props.colors,
     showLegend: props.showLegend,
@@ -53,9 +61,14 @@ const CustomAreaChart = (props) => {
             value={value}
             defaultValue={3}
             placeholder="Select a time period"
-            onValueChange={setValue}
+            onValueChange={val => {
+              setValue(val);
+              let newData = preprocessData(props.data, val);
+              setPreprocessedData(newData); //<-- You'd set the state here
+            }}
             icon={EyeIcon}
           >
+
             <SelectItem value="1">
               Daily
             </SelectItem>
