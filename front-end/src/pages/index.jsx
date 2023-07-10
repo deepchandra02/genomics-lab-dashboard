@@ -13,7 +13,8 @@ import {
 } from "@tremor/react";
 
 import CustomAreaChart from "../components/overview/CustomAreaChart";
-import { data1 } from "../dummyData.js"
+
+const data1 = require('../data1.json')
 
 var kpiData = [
   {

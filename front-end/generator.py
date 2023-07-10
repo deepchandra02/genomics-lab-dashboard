@@ -19,10 +19,10 @@ def generate_data(start_date, end_date):
 
     return data
 
-start_date = datetime.strptime('01-01-2022', '%m-%d-%Y')
-end_date = datetime.strptime('03-31-2022', '%m-%d-%Y')
+start_date = datetime.strptime('10-10-2021', '%m-%d-%Y')
+end_date = datetime.strptime('03-31-2023', '%m-%d-%Y')
 
 data = generate_data(start_date, end_date)
 
-with open('data.json', 'w') as f:
+with open('data1.json', 'w') as f:
     json.dump(data, f, indent=2)

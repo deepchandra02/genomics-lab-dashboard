@@ -69,16 +69,16 @@ const CustomAreaChart = (props) => {
             icon={EyeIcon}
           >
 
-            <SelectItem value="1">
+            <SelectItem value={1}>
               Daily
             </SelectItem>
-            <SelectItem value="2">
+            <SelectItem value={2}>
               Weekly
             </SelectItem>
-            <SelectItem value="3">
+            <SelectItem value={3}>
               Monthly
             </SelectItem>
-            <SelectItem value="4">
+            <SelectItem value={4}>
               Yearly
             </SelectItem>
           </Select>
