@@ -64,7 +64,7 @@ export default function Home() {
 
   return (
     <main className="px-8 py-8">
-      <Title className="font-cabin font-bold text-[2rem] ">Overview</Title>
+      <Title className="font-cabin font-bold text-[2.25rem] ">Overview</Title>
       <Grid numItemsLg={3} className="mt-6 gap-6">
         <Col numColSpan={2}>
           <div>
