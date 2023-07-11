@@ -1,0 +1,3789 @@
+[
+  {
+    "date": "10-10-2021",
+    "Samples": 73,
+    "Flowcells": 4,
+    "SamplesTotal": 73,
+    "FlowcellsTotal": 4
+  },
+  {
+    "date": "10-11-2021",
+    "Samples": 22,
+    "Flowcells": 1,
+    "SamplesTotal": 95,
+    "FlowcellsTotal": 5
+  },
+  {
+    "date": "10-12-2021",
+    "Samples": 81,
+    "Flowcells": 3,
+    "SamplesTotal": 176,
+    "FlowcellsTotal": 8
+  },
+  {
+    "date": "10-13-2021",
+    "Samples": 70,
+    "Flowcells": 4,
+    "SamplesTotal": 246,
+    "FlowcellsTotal": 12
+  },
+  {
+    "date": "10-14-2021",
+    "Samples": 42,
+    "Flowcells": 3,
+    "SamplesTotal": 288,
+    "FlowcellsTotal": 15
+  },
+  {
+    "date": "10-15-2021",
+    "Samples": 20,
+    "Flowcells": 2,
+    "SamplesTotal": 308,
+    "FlowcellsTotal": 17
+  },
+  {
+    "date": "10-16-2021",
+    "Samples": 53,
+    "Flowcells": 2,
+    "SamplesTotal": 361,
+    "FlowcellsTotal": 19
+  },
+  {
+    "date": "10-17-2021",
+    "Samples": 10,
+    "Flowcells": 3,
+    "SamplesTotal": 371,
+    "FlowcellsTotal": 22
+  },
+  {
+    "date": "10-18-2021",
+    "Samples": 9,
+    "Flowcells": 3,
+    "SamplesTotal": 380,
+    "FlowcellsTotal": 25
+  },
+  {
+    "date": "10-19-2021",
+    "Samples": 40,
+    "Flowcells": 2,
+    "SamplesTotal": 420,
+    "FlowcellsTotal": 27
+  },
+  {
+    "date": "10-20-2021",
+    "Samples": 39,
+    "Flowcells": 2,
+    "SamplesTotal": 459,
+    "FlowcellsTotal": 29
+  },
+  {
+    "date": "10-21-2021",
+    "Samples": 38,
+    "Flowcells": 3,
+    "SamplesTotal": 497,
+    "FlowcellsTotal": 32
+  },
+  {
+    "date": "10-22-2021",
+    "Samples": 13,
+    "Flowcells": 2,
+    "SamplesTotal": 510,
+    "FlowcellsTotal": 34
+  },
+  {
+    "date": "10-23-2021",
+    "Samples": 25,
+    "Flowcells": 3,
+    "SamplesTotal": 535,
+    "FlowcellsTotal": 37
+  },
+  {
+    "date": "10-24-2021",
+    "Samples": 56,
+    "Flowcells": 2,
+    "SamplesTotal": 591,
+    "FlowcellsTotal": 39
+  },
+  {
+    "date": "10-25-2021",
+    "Samples": 17,
+    "Flowcells": 2,
+    "SamplesTotal": 608,
+    "FlowcellsTotal": 41
+  },
+  {
+    "date": "10-26-2021",
+    "Samples": 57,
+    "Flowcells": 3,
+    "SamplesTotal": 665,
+    "FlowcellsTotal": 44
+  },
+  {
+    "date": "10-27-2021",
+    "Samples": 32,
+    "Flowcells": 2,
+    "SamplesTotal": 697,
+    "FlowcellsTotal": 46
+  },
+  {
+    "date": "10-28-2021",
+    "Samples": 9,
+    "Flowcells": 1,
+    "SamplesTotal": 706,
+    "FlowcellsTotal": 47
+  },
+  {
+    "date": "10-29-2021",
+    "Samples": 13,
+    "Flowcells": 1,
+    "SamplesTotal": 719,
+    "FlowcellsTotal": 48
+  },
+  {
+    "date": "10-30-2021",
+    "Samples": 31,
+    "Flowcells": 3,
+    "SamplesTotal": 750,
+    "FlowcellsTotal": 51
+  },
+  {
+    "date": "10-31-2021",
+    "Samples": 1,
+    "Flowcells": 3,
+    "SamplesTotal": 751,
+    "FlowcellsTotal": 54
+  },
+  {
+    "date": "11-01-2021",
+    "Samples": 29,
+    "Flowcells": 3,
+    "SamplesTotal": 780,
+    "FlowcellsTotal": 57
+  },
+  {
+    "date": "11-02-2021",
+    "Samples": 32,
+    "Flowcells": 3,
+    "SamplesTotal": 812,
+    "FlowcellsTotal": 60
+  },
+  {
+    "date": "11-03-2021",
+    "Samples": 9,
+    "Flowcells": 3,
+    "SamplesTotal": 821,
+    "FlowcellsTotal": 63
+  },
+  {
+    "date": "11-04-2021",
+    "Samples": 15,
+    "Flowcells": 1,
+    "SamplesTotal": 836,
+    "FlowcellsTotal": 64
+  },
+  {
+    "date": "11-05-2021",
+    "Samples": 2,
+    "Flowcells": 1,
+    "SamplesTotal": 838,
+    "FlowcellsTotal": 65
+  },
+  {
+    "date": "11-06-2021",
+    "Samples": 20,
+    "Flowcells": 1,
+    "SamplesTotal": 858,
+    "FlowcellsTotal": 66
+  },
+  {
+    "date": "11-07-2021",
+    "Samples": 24,
+    "Flowcells": 1,
+    "SamplesTotal": 882,
+    "FlowcellsTotal": 67
+  },
+  {
+    "date": "11-08-2021",
+    "Samples": 25,
+    "Flowcells": 2,
+    "SamplesTotal": 907,
+    "FlowcellsTotal": 69
+  },
+  {
+    "date": "11-09-2021",
+    "Samples": 50,
+    "Flowcells": 2,
+    "SamplesTotal": 957,
+    "FlowcellsTotal": 71
+  },
+  {
+    "date": "11-10-2021",
+    "Samples": 86,
+    "Flowcells": 4,
+    "SamplesTotal": 1043,
+    "FlowcellsTotal": 75
+  },
+  {
+    "date": "11-11-2021",
+    "Samples": 6,
+    "Flowcells": 1,
+    "SamplesTotal": 1049,
+    "FlowcellsTotal": 76
+  },
+  {
+    "date": "11-12-2021",
+    "Samples": 35,
+    "Flowcells": 4,
+    "SamplesTotal": 1084,
+    "FlowcellsTotal": 80
+  },
+  {
+    "date": "11-13-2021",
+    "Samples": 12,
+    "Flowcells": 1,
+    "SamplesTotal": 1096,
+    "FlowcellsTotal": 81
+  },
+  {
+    "date": "11-14-2021",
+    "Samples": 15,
+    "Flowcells": 2,
+    "SamplesTotal": 1111,
+    "FlowcellsTotal": 83
+  },
+  {
+    "date": "11-15-2021",
+    "Samples": 69,
+    "Flowcells": 3,
+    "SamplesTotal": 1180,
+    "FlowcellsTotal": 86
+  },
+  {
+    "date": "11-16-2021",
+    "Samples": 39,
+    "Flowcells": 2,
+    "SamplesTotal": 1219,
+    "FlowcellsTotal": 88
+  },
+  {
+    "date": "11-17-2021",
+    "Samples": 28,
+    "Flowcells": 1,
+    "SamplesTotal": 1247,
+    "FlowcellsTotal": 89
+  },
+  {
+    "date": "11-18-2021",
+    "Samples": 39,
+    "Flowcells": 3,
+    "SamplesTotal": 1286,
+    "FlowcellsTotal": 92
+  },
+  {
+    "date": "11-19-2021",
+    "Samples": 27,
+    "Flowcells": 3,
+    "SamplesTotal": 1313,
+    "FlowcellsTotal": 95
+  },
+  {
+    "date": "11-20-2021",
+    "Samples": 42,
+    "Flowcells": 3,
+    "SamplesTotal": 1355,
+    "FlowcellsTotal": 98
+  },
+  {
+    "date": "11-21-2021",
+    "Samples": 8,
+    "Flowcells": 1,
+    "SamplesTotal": 1363,
+    "FlowcellsTotal": 99
+  },
+  {
+    "date": "11-22-2021",
+    "Samples": 96,
+    "Flowcells": 4,
+    "SamplesTotal": 1459,
+    "FlowcellsTotal": 103
+  },
+  {
+    "date": "11-23-2021",
+    "Samples": 42,
+    "Flowcells": 4,
+    "SamplesTotal": 1501,
+    "FlowcellsTotal": 107
+  },
+  {
+    "date": "11-24-2021",
+    "Samples": 11,
+    "Flowcells": 2,
+    "SamplesTotal": 1512,
+    "FlowcellsTotal": 109
+  },
+  {
+    "date": "11-25-2021",
+    "Samples": 31,
+    "Flowcells": 3,
+    "SamplesTotal": 1543,
+    "FlowcellsTotal": 112
+  },
+  {
+    "date": "11-26-2021",
+    "Samples": 5,
+    "Flowcells": 1,
+    "SamplesTotal": 1548,
+    "FlowcellsTotal": 113
+  },
+  {
+    "date": "11-27-2021",
+    "Samples": 83,
+    "Flowcells": 3,
+    "SamplesTotal": 1631,
+    "FlowcellsTotal": 116
+  },
+  {
+    "date": "11-28-2021",
+    "Samples": 9,
+    "Flowcells": 2,
+    "SamplesTotal": 1640,
+    "FlowcellsTotal": 118
+  },
+  {
+    "date": "11-29-2021",
+    "Samples": 55,
+    "Flowcells": 4,
+    "SamplesTotal": 1695,
+    "FlowcellsTotal": 122
+  },
+  {
+    "date": "11-30-2021",
+    "Samples": 94,
+    "Flowcells": 4,
+    "SamplesTotal": 1789,
+    "FlowcellsTotal": 126
+  },
+  {
+    "date": "12-01-2021",
+    "Samples": 33,
+    "Flowcells": 4,
+    "SamplesTotal": 1822,
+    "FlowcellsTotal": 130
+  },
+  {
+    "date": "12-02-2021",
+    "Samples": 27,
+    "Flowcells": 1,
+    "SamplesTotal": 1849,
+    "FlowcellsTotal": 131
+  },
+  {
+    "date": "12-03-2021",
+    "Samples": 76,
+    "Flowcells": 4,
+    "SamplesTotal": 1925,
+    "FlowcellsTotal": 135
+  },
+  {
+    "date": "12-04-2021",
+    "Samples": 63,
+    "Flowcells": 3,
+    "SamplesTotal": 1988,
+    "FlowcellsTotal": 138
+  },
+  {
+    "date": "12-05-2021",
+    "Samples": 30,
+    "Flowcells": 2,
+    "SamplesTotal": 2018,
+    "FlowcellsTotal": 140
+  },
+  {
+    "date": "12-06-2021",
+    "Samples": 21,
+    "Flowcells": 1,
+    "SamplesTotal": 2039,
+    "FlowcellsTotal": 141
+  },
+  {
+    "date": "12-07-2021",
+    "Samples": 20,
+    "Flowcells": 4,
+    "SamplesTotal": 2059,
+    "FlowcellsTotal": 145
+  },
+  {
+    "date": "12-08-2021",
+    "Samples": 15,
+    "Flowcells": 3,
+    "SamplesTotal": 2074,
+    "FlowcellsTotal": 148
+  },
+  {
+    "date": "12-09-2021",
+    "Samples": 16,
+    "Flowcells": 4,
+    "SamplesTotal": 2090,
+    "FlowcellsTotal": 152
+  },
+  {
+    "date": "12-10-2021",
+    "Samples": 105,
+    "Flowcells": 4,
+    "SamplesTotal": 2195,
+    "FlowcellsTotal": 156
+  },
+  {
+    "date": "12-11-2021",
+    "Samples": 3,
+    "Flowcells": 4,
+    "SamplesTotal": 2198,
+    "FlowcellsTotal": 160
+  },
+  {
+    "date": "12-12-2021",
+    "Samples": 71,
+    "Flowcells": 3,
+    "SamplesTotal": 2269,
+    "FlowcellsTotal": 163
+  },
+  {
+    "date": "12-13-2021",
+    "Samples": 56,
+    "Flowcells": 2,
+    "SamplesTotal": 2325,
+    "FlowcellsTotal": 165
+  },
+  {
+    "date": "12-14-2021",
+    "Samples": 28,
+    "Flowcells": 1,
+    "SamplesTotal": 2353,
+    "FlowcellsTotal": 166
+  },
+  {
+    "date": "12-15-2021",
+    "Samples": 45,
+    "Flowcells": 3,
+    "SamplesTotal": 2398,
+    "FlowcellsTotal": 169
+  },
+  {
+    "date": "12-16-2021",
+    "Samples": 20,
+    "Flowcells": 1,
+    "SamplesTotal": 2418,
+    "FlowcellsTotal": 170
+  },
+  {
+    "date": "12-17-2021",
+    "Samples": 49,
+    "Flowcells": 2,
+    "SamplesTotal": 2467,
+    "FlowcellsTotal": 172
+  },
+  {
+    "date": "12-18-2021",
+    "Samples": 40,
+    "Flowcells": 3,
+    "SamplesTotal": 2507,
+    "FlowcellsTotal": 175
+  },
+  {
+    "date": "12-19-2021",
+    "Samples": 1,
+    "Flowcells": 1,
+    "SamplesTotal": 2508,
+    "FlowcellsTotal": 176
+  },
+  {
+    "date": "12-20-2021",
+    "Samples": 44,
+    "Flowcells": 2,
+    "SamplesTotal": 2552,
+    "FlowcellsTotal": 178
+  },
+  {
+    "date": "12-21-2021",
+    "Samples": 51,
+    "Flowcells": 2,
+    "SamplesTotal": 2603,
+    "FlowcellsTotal": 180
+  },
+  {
+    "date": "12-22-2021",
+    "Samples": 109,
+    "Flowcells": 4,
+    "SamplesTotal": 2712,
+    "FlowcellsTotal": 184
+  },
+  {
+    "date": "12-23-2021",
+    "Samples": 32,
+    "Flowcells": 2,
+    "SamplesTotal": 2744,
+    "FlowcellsTotal": 186
+  },
+  {
+    "date": "12-24-2021",
+    "Samples": 54,
+    "Flowcells": 2,
+    "SamplesTotal": 2798,
+    "FlowcellsTotal": 188
+  },
+  {
+    "date": "12-25-2021",
+    "Samples": 66,
+    "Flowcells": 4,
+    "SamplesTotal": 2864,
+    "FlowcellsTotal": 192
+  },
+  {
+    "date": "12-26-2021",
+    "Samples": 79,
+    "Flowcells": 4,
+    "SamplesTotal": 2943,
+    "FlowcellsTotal": 196
+  },
+  {
+    "date": "12-27-2021",
+    "Samples": 34,
+    "Flowcells": 4,
+    "SamplesTotal": 2977,
+    "FlowcellsTotal": 200
+  },
+  {
+    "date": "12-28-2021",
+    "Samples": 38,
+    "Flowcells": 2,
+    "SamplesTotal": 3015,
+    "FlowcellsTotal": 202
+  },
+  {
+    "date": "12-29-2021",
+    "Samples": 10,
+    "Flowcells": 2,
+    "SamplesTotal": 3025,
+    "FlowcellsTotal": 204
+  },
+  {
+    "date": "12-30-2021",
+    "Samples": 37,
+    "Flowcells": 2,
+    "SamplesTotal": 3062,
+    "FlowcellsTotal": 206
+  },
+  {
+    "date": "12-31-2021",
+    "Samples": 9,
+    "Flowcells": 1,
+    "SamplesTotal": 3071,
+    "FlowcellsTotal": 207
+  },
+  {
+    "date": "01-01-2022",
+    "Samples": 65,
+    "Flowcells": 3,
+    "SamplesTotal": 3136,
+    "FlowcellsTotal": 210
+  },
+  {
+    "date": "01-02-2022",
+    "Samples": 30,
+    "Flowcells": 2,
+    "SamplesTotal": 3166,
+    "FlowcellsTotal": 212
+  },
+  {
+    "date": "01-03-2022",
+    "Samples": 28,
+    "Flowcells": 3,
+    "SamplesTotal": 3194,
+    "FlowcellsTotal": 215
+  },
+  {
+    "date": "01-04-2022",
+    "Samples": 42,
+    "Flowcells": 4,
+    "SamplesTotal": 3236,
+    "FlowcellsTotal": 219
+  },
+  {
+    "date": "01-05-2022",
+    "Samples": 28,
+    "Flowcells": 3,
+    "SamplesTotal": 3264,
+    "FlowcellsTotal": 222
+  },
+  {
+    "date": "01-06-2022",
+    "Samples": 25,
+    "Flowcells": 3,
+    "SamplesTotal": 3289,
+    "FlowcellsTotal": 225
+  },
+  {
+    "date": "01-07-2022",
+    "Samples": 51,
+    "Flowcells": 2,
+    "SamplesTotal": 3340,
+    "FlowcellsTotal": 227
+  },
+  {
+    "date": "01-08-2022",
+    "Samples": 45,
+    "Flowcells": 2,
+    "SamplesTotal": 3385,
+    "FlowcellsTotal": 229
+  },
+  {
+    "date": "01-09-2022",
+    "Samples": 43,
+    "Flowcells": 3,
+    "SamplesTotal": 3428,
+    "FlowcellsTotal": 232
+  },
+  {
+    "date": "01-10-2022",
+    "Samples": 52,
+    "Flowcells": 3,
+    "SamplesTotal": 3480,
+    "FlowcellsTotal": 235
+  },
+  {
+    "date": "01-11-2022",
+    "Samples": 23,
+    "Flowcells": 3,
+    "SamplesTotal": 3503,
+    "FlowcellsTotal": 238
+  },
+  {
+    "date": "01-12-2022",
+    "Samples": 71,
+    "Flowcells": 3,
+    "SamplesTotal": 3574,
+    "FlowcellsTotal": 241
+  },
+  {
+    "date": "01-13-2022",
+    "Samples": 12,
+    "Flowcells": 3,
+    "SamplesTotal": 3586,
+    "FlowcellsTotal": 244
+  },
+  {
+    "date": "01-14-2022",
+    "Samples": 63,
+    "Flowcells": 4,
+    "SamplesTotal": 3649,
+    "FlowcellsTotal": 248
+  },
+  {
+    "date": "01-15-2022",
+    "Samples": 71,
+    "Flowcells": 3,
+    "SamplesTotal": 3720,
+    "FlowcellsTotal": 251
+  },
+  {
+    "date": "01-16-2022",
+    "Samples": 19,
+    "Flowcells": 2,
+    "SamplesTotal": 3739,
+    "FlowcellsTotal": 253
+  },
+  {
+    "date": "01-17-2022",
+    "Samples": 49,
+    "Flowcells": 3,
+    "SamplesTotal": 3788,
+    "FlowcellsTotal": 256
+  },
+  {
+    "date": "01-18-2022",
+    "Samples": 55,
+    "Flowcells": 2,
+    "SamplesTotal": 3843,
+    "FlowcellsTotal": 258
+  },
+  {
+    "date": "01-19-2022",
+    "Samples": 3,
+    "Flowcells": 2,
+    "SamplesTotal": 3846,
+    "FlowcellsTotal": 260
+  },
+  {
+    "date": "01-20-2022",
+    "Samples": 104,
+    "Flowcells": 4,
+    "SamplesTotal": 3950,
+    "FlowcellsTotal": 264
+  },
+  {
+    "date": "01-21-2022",
+    "Samples": 38,
+    "Flowcells": 2,
+    "SamplesTotal": 3988,
+    "FlowcellsTotal": 266
+  },
+  {
+    "date": "01-22-2022",
+    "Samples": 55,
+    "Flowcells": 4,
+    "SamplesTotal": 4043,
+    "FlowcellsTotal": 270
+  },
+  {
+    "date": "01-23-2022",
+    "Samples": 12,
+    "Flowcells": 2,
+    "SamplesTotal": 4055,
+    "FlowcellsTotal": 272
+  },
+  {
+    "date": "01-24-2022",
+    "Samples": 34,
+    "Flowcells": 3,
+    "SamplesTotal": 4089,
+    "FlowcellsTotal": 275
+  },
+  {
+    "date": "01-25-2022",
+    "Samples": 75,
+    "Flowcells": 3,
+    "SamplesTotal": 4164,
+    "FlowcellsTotal": 278
+  },
+  {
+    "date": "01-26-2022",
+    "Samples": 40,
+    "Flowcells": 2,
+    "SamplesTotal": 4204,
+    "FlowcellsTotal": 280
+  },
+  {
+    "date": "01-27-2022",
+    "Samples": 16,
+    "Flowcells": 1,
+    "SamplesTotal": 4220,
+    "FlowcellsTotal": 281
+  },
+  {
+    "date": "01-28-2022",
+    "Samples": 10,
+    "Flowcells": 1,
+    "SamplesTotal": 4230,
+    "FlowcellsTotal": 282
+  },
+  {
+    "date": "01-29-2022",
+    "Samples": 39,
+    "Flowcells": 4,
+    "SamplesTotal": 4269,
+    "FlowcellsTotal": 286
+  },
+  {
+    "date": "01-30-2022",
+    "Samples": 20,
+    "Flowcells": 1,
+    "SamplesTotal": 4289,
+    "FlowcellsTotal": 287
+  },
+  {
+    "date": "01-31-2022",
+    "Samples": 22,
+    "Flowcells": 1,
+    "SamplesTotal": 4311,
+    "FlowcellsTotal": 288
+  },
+  {
+    "date": "02-01-2022",
+    "Samples": 20,
+    "Flowcells": 1,
+    "SamplesTotal": 4331,
+    "FlowcellsTotal": 289
+  },
+  {
+    "date": "02-02-2022",
+    "Samples": 11,
+    "Flowcells": 3,
+    "SamplesTotal": 4342,
+    "FlowcellsTotal": 292
+  },
+  {
+    "date": "02-03-2022",
+    "Samples": 66,
+    "Flowcells": 4,
+    "SamplesTotal": 4408,
+    "FlowcellsTotal": 296
+  },
+  {
+    "date": "02-04-2022",
+    "Samples": 27,
+    "Flowcells": 2,
+    "SamplesTotal": 4435,
+    "FlowcellsTotal": 298
+  },
+  {
+    "date": "02-05-2022",
+    "Samples": 50,
+    "Flowcells": 3,
+    "SamplesTotal": 4485,
+    "FlowcellsTotal": 301
+  },
+  {
+    "date": "02-06-2022",
+    "Samples": 59,
+    "Flowcells": 4,
+    "SamplesTotal": 4544,
+    "FlowcellsTotal": 305
+  },
+  {
+    "date": "02-07-2022",
+    "Samples": 38,
+    "Flowcells": 2,
+    "SamplesTotal": 4582,
+    "FlowcellsTotal": 307
+  },
+  {
+    "date": "02-08-2022",
+    "Samples": 69,
+    "Flowcells": 3,
+    "SamplesTotal": 4651,
+    "FlowcellsTotal": 310
+  },
+  {
+    "date": "02-09-2022",
+    "Samples": 23,
+    "Flowcells": 3,
+    "SamplesTotal": 4674,
+    "FlowcellsTotal": 313
+  },
+  {
+    "date": "02-10-2022",
+    "Samples": 51,
+    "Flowcells": 2,
+    "SamplesTotal": 4725,
+    "FlowcellsTotal": 315
+  },
+  {
+    "date": "02-11-2022",
+    "Samples": 34,
+    "Flowcells": 4,
+    "SamplesTotal": 4759,
+    "FlowcellsTotal": 319
+  },
+  {
+    "date": "02-12-2022",
+    "Samples": 8,
+    "Flowcells": 1,
+    "SamplesTotal": 4767,
+    "FlowcellsTotal": 320
+  },
+  {
+    "date": "02-13-2022",
+    "Samples": 51,
+    "Flowcells": 2,
+    "SamplesTotal": 4818,
+    "FlowcellsTotal": 322
+  },
+  {
+    "date": "02-14-2022",
+    "Samples": 69,
+    "Flowcells": 4,
+    "SamplesTotal": 4887,
+    "FlowcellsTotal": 326
+  },
+  {
+    "date": "02-15-2022",
+    "Samples": 42,
+    "Flowcells": 4,
+    "SamplesTotal": 4929,
+    "FlowcellsTotal": 330
+  },
+  {
+    "date": "02-16-2022",
+    "Samples": 11,
+    "Flowcells": 1,
+    "SamplesTotal": 4940,
+    "FlowcellsTotal": 331
+  },
+  {
+    "date": "02-17-2022",
+    "Samples": 25,
+    "Flowcells": 1,
+    "SamplesTotal": 4965,
+    "FlowcellsTotal": 332
+  },
+  {
+    "date": "02-18-2022",
+    "Samples": 50,
+    "Flowcells": 4,
+    "SamplesTotal": 5015,
+    "FlowcellsTotal": 336
+  },
+  {
+    "date": "02-19-2022",
+    "Samples": 104,
+    "Flowcells": 4,
+    "SamplesTotal": 5119,
+    "FlowcellsTotal": 340
+  },
+  {
+    "date": "02-20-2022",
+    "Samples": 73,
+    "Flowcells": 4,
+    "SamplesTotal": 5192,
+    "FlowcellsTotal": 344
+  },
+  {
+    "date": "02-21-2022",
+    "Samples": 20,
+    "Flowcells": 2,
+    "SamplesTotal": 5212,
+    "FlowcellsTotal": 346
+  },
+  {
+    "date": "02-22-2022",
+    "Samples": 8,
+    "Flowcells": 4,
+    "SamplesTotal": 5220,
+    "FlowcellsTotal": 350
+  },
+  {
+    "date": "02-23-2022",
+    "Samples": 30,
+    "Flowcells": 3,
+    "SamplesTotal": 5250,
+    "FlowcellsTotal": 353
+  },
+  {
+    "date": "02-24-2022",
+    "Samples": 64,
+    "Flowcells": 3,
+    "SamplesTotal": 5314,
+    "FlowcellsTotal": 356
+  },
+  {
+    "date": "02-25-2022",
+    "Samples": 80,
+    "Flowcells": 4,
+    "SamplesTotal": 5394,
+    "FlowcellsTotal": 360
+  },
+  {
+    "date": "02-26-2022",
+    "Samples": 55,
+    "Flowcells": 2,
+    "SamplesTotal": 5449,
+    "FlowcellsTotal": 362
+  },
+  {
+    "date": "02-27-2022",
+    "Samples": 35,
+    "Flowcells": 3,
+    "SamplesTotal": 5484,
+    "FlowcellsTotal": 365
+  },
+  {
+    "date": "02-28-2022",
+    "Samples": 18,
+    "Flowcells": 3,
+    "SamplesTotal": 5502,
+    "FlowcellsTotal": 368
+  },
+  {
+    "date": "03-01-2022",
+    "Samples": 53,
+    "Flowcells": 3,
+    "SamplesTotal": 5555,
+    "FlowcellsTotal": 371
+  },
+  {
+    "date": "03-02-2022",
+    "Samples": 12,
+    "Flowcells": 2,
+    "SamplesTotal": 5567,
+    "FlowcellsTotal": 373
+  },
+  {
+    "date": "03-03-2022",
+    "Samples": 27,
+    "Flowcells": 1,
+    "SamplesTotal": 5594,
+    "FlowcellsTotal": 374
+  },
+  {
+    "date": "03-04-2022",
+    "Samples": 73,
+    "Flowcells": 3,
+    "SamplesTotal": 5667,
+    "FlowcellsTotal": 377
+  },
+  {
+    "date": "03-05-2022",
+    "Samples": 21,
+    "Flowcells": 1,
+    "SamplesTotal": 5688,
+    "FlowcellsTotal": 378
+  },
+  {
+    "date": "03-06-2022",
+    "Samples": 27,
+    "Flowcells": 2,
+    "SamplesTotal": 5715,
+    "FlowcellsTotal": 380
+  },
+  {
+    "date": "03-07-2022",
+    "Samples": 8,
+    "Flowcells": 2,
+    "SamplesTotal": 5723,
+    "FlowcellsTotal": 382
+  },
+  {
+    "date": "03-08-2022",
+    "Samples": 104,
+    "Flowcells": 4,
+    "SamplesTotal": 5827,
+    "FlowcellsTotal": 386
+  },
+  {
+    "date": "03-09-2022",
+    "Samples": 48,
+    "Flowcells": 4,
+    "SamplesTotal": 5875,
+    "FlowcellsTotal": 390
+  },
+  {
+    "date": "03-10-2022",
+    "Samples": 13,
+    "Flowcells": 2,
+    "SamplesTotal": 5888,
+    "FlowcellsTotal": 392
+  },
+  {
+    "date": "03-11-2022",
+    "Samples": 63,
+    "Flowcells": 4,
+    "SamplesTotal": 5951,
+    "FlowcellsTotal": 396
+  },
+  {
+    "date": "03-12-2022",
+    "Samples": 9,
+    "Flowcells": 2,
+    "SamplesTotal": 5960,
+    "FlowcellsTotal": 398
+  },
+  {
+    "date": "03-13-2022",
+    "Samples": 5,
+    "Flowcells": 1,
+    "SamplesTotal": 5965,
+    "FlowcellsTotal": 399
+  },
+  {
+    "date": "03-14-2022",
+    "Samples": 47,
+    "Flowcells": 4,
+    "SamplesTotal": 6012,
+    "FlowcellsTotal": 403
+  },
+  {
+    "date": "03-15-2022",
+    "Samples": 51,
+    "Flowcells": 2,
+    "SamplesTotal": 6063,
+    "FlowcellsTotal": 405
+  },
+  {
+    "date": "03-16-2022",
+    "Samples": 16,
+    "Flowcells": 1,
+    "SamplesTotal": 6079,
+    "FlowcellsTotal": 406
+  },
+  {
+    "date": "03-17-2022",
+    "Samples": 81,
+    "Flowcells": 4,
+    "SamplesTotal": 6160,
+    "FlowcellsTotal": 410
+  },
+  {
+    "date": "03-18-2022",
+    "Samples": 2,
+    "Flowcells": 3,
+    "SamplesTotal": 6162,
+    "FlowcellsTotal": 413
+  },
+  {
+    "date": "03-19-2022",
+    "Samples": 50,
+    "Flowcells": 4,
+    "SamplesTotal": 6212,
+    "FlowcellsTotal": 417
+  },
+  {
+    "date": "03-20-2022",
+    "Samples": 30,
+    "Flowcells": 2,
+    "SamplesTotal": 6242,
+    "FlowcellsTotal": 419
+  },
+  {
+    "date": "03-21-2022",
+    "Samples": 14,
+    "Flowcells": 3,
+    "SamplesTotal": 6256,
+    "FlowcellsTotal": 422
+  },
+  {
+    "date": "03-22-2022",
+    "Samples": 34,
+    "Flowcells": 2,
+    "SamplesTotal": 6290,
+    "FlowcellsTotal": 424
+  },
+  {
+    "date": "03-23-2022",
+    "Samples": 16,
+    "Flowcells": 4,
+    "SamplesTotal": 6306,
+    "FlowcellsTotal": 428
+  },
+  {
+    "date": "03-24-2022",
+    "Samples": 20,
+    "Flowcells": 3,
+    "SamplesTotal": 6326,
+    "FlowcellsTotal": 431
+  },
+  {
+    "date": "03-25-2022",
+    "Samples": 19,
+    "Flowcells": 1,
+    "SamplesTotal": 6345,
+    "FlowcellsTotal": 432
+  },
+  {
+    "date": "03-26-2022",
+    "Samples": 46,
+    "Flowcells": 4,
+    "SamplesTotal": 6391,
+    "FlowcellsTotal": 436
+  },
+  {
+    "date": "03-27-2022",
+    "Samples": 55,
+    "Flowcells": 2,
+    "SamplesTotal": 6446,
+    "FlowcellsTotal": 438
+  },
+  {
+    "date": "03-28-2022",
+    "Samples": 20,
+    "Flowcells": 3,
+    "SamplesTotal": 6466,
+    "FlowcellsTotal": 441
+  },
+  {
+    "date": "03-29-2022",
+    "Samples": 65,
+    "Flowcells": 3,
+    "SamplesTotal": 6531,
+    "FlowcellsTotal": 444
+  },
+  {
+    "date": "03-30-2022",
+    "Samples": 13,
+    "Flowcells": 2,
+    "SamplesTotal": 6544,
+    "FlowcellsTotal": 446
+  },
+  {
+    "date": "03-31-2022",
+    "Samples": 38,
+    "Flowcells": 2,
+    "SamplesTotal": 6582,
+    "FlowcellsTotal": 448
+  },
+  {
+    "date": "04-01-2022",
+    "Samples": 53,
+    "Flowcells": 4,
+    "SamplesTotal": 6635,
+    "FlowcellsTotal": 452
+  },
+  {
+    "date": "04-02-2022",
+    "Samples": 39,
+    "Flowcells": 2,
+    "SamplesTotal": 6674,
+    "FlowcellsTotal": 454
+  },
+  {
+    "date": "04-03-2022",
+    "Samples": 12,
+    "Flowcells": 1,
+    "SamplesTotal": 6686,
+    "FlowcellsTotal": 455
+  },
+  {
+    "date": "04-04-2022",
+    "Samples": 71,
+    "Flowcells": 4,
+    "SamplesTotal": 6757,
+    "FlowcellsTotal": 459
+  },
+  {
+    "date": "04-05-2022",
+    "Samples": 39,
+    "Flowcells": 4,
+    "SamplesTotal": 6796,
+    "FlowcellsTotal": 463
+  },
+  {
+    "date": "04-06-2022",
+    "Samples": 11,
+    "Flowcells": 2,
+    "SamplesTotal": 6807,
+    "FlowcellsTotal": 465
+  },
+  {
+    "date": "04-07-2022",
+    "Samples": 4,
+    "Flowcells": 1,
+    "SamplesTotal": 6811,
+    "FlowcellsTotal": 466
+  },
+  {
+    "date": "04-08-2022",
+    "Samples": 45,
+    "Flowcells": 4,
+    "SamplesTotal": 6856,
+    "FlowcellsTotal": 470
+  },
+  {
+    "date": "04-09-2022",
+    "Samples": 40,
+    "Flowcells": 4,
+    "SamplesTotal": 6896,
+    "FlowcellsTotal": 474
+  },
+  {
+    "date": "04-10-2022",
+    "Samples": 50,
+    "Flowcells": 2,
+    "SamplesTotal": 6946,
+    "FlowcellsTotal": 476
+  },
+  {
+    "date": "04-11-2022",
+    "Samples": 27,
+    "Flowcells": 3,
+    "SamplesTotal": 6973,
+    "FlowcellsTotal": 479
+  },
+  {
+    "date": "04-12-2022",
+    "Samples": 25,
+    "Flowcells": 1,
+    "SamplesTotal": 6998,
+    "FlowcellsTotal": 480
+  },
+  {
+    "date": "04-13-2022",
+    "Samples": 49,
+    "Flowcells": 3,
+    "SamplesTotal": 7047,
+    "FlowcellsTotal": 483
+  },
+  {
+    "date": "04-14-2022",
+    "Samples": 59,
+    "Flowcells": 3,
+    "SamplesTotal": 7106,
+    "FlowcellsTotal": 486
+  },
+  {
+    "date": "04-15-2022",
+    "Samples": 1,
+    "Flowcells": 4,
+    "SamplesTotal": 7107,
+    "FlowcellsTotal": 490
+  },
+  {
+    "date": "04-16-2022",
+    "Samples": 9,
+    "Flowcells": 1,
+    "SamplesTotal": 7116,
+    "FlowcellsTotal": 491
+  },
+  {
+    "date": "04-17-2022",
+    "Samples": 63,
+    "Flowcells": 3,
+    "SamplesTotal": 7179,
+    "FlowcellsTotal": 494
+  },
+  {
+    "date": "04-18-2022",
+    "Samples": 81,
+    "Flowcells": 4,
+    "SamplesTotal": 7260,
+    "FlowcellsTotal": 498
+  },
+  {
+    "date": "04-19-2022",
+    "Samples": 19,
+    "Flowcells": 1,
+    "SamplesTotal": 7279,
+    "FlowcellsTotal": 499
+  },
+  {
+    "date": "04-20-2022",
+    "Samples": 22,
+    "Flowcells": 1,
+    "SamplesTotal": 7301,
+    "FlowcellsTotal": 500
+  },
+  {
+    "date": "04-21-2022",
+    "Samples": 17,
+    "Flowcells": 1,
+    "SamplesTotal": 7318,
+    "FlowcellsTotal": 501
+  },
+  {
+    "date": "04-22-2022",
+    "Samples": 85,
+    "Flowcells": 4,
+    "SamplesTotal": 7403,
+    "FlowcellsTotal": 505
+  },
+  {
+    "date": "04-23-2022",
+    "Samples": 16,
+    "Flowcells": 3,
+    "SamplesTotal": 7419,
+    "FlowcellsTotal": 508
+  },
+  {
+    "date": "04-24-2022",
+    "Samples": 1,
+    "Flowcells": 4,
+    "SamplesTotal": 7420,
+    "FlowcellsTotal": 512
+  },
+  {
+    "date": "04-25-2022",
+    "Samples": 32,
+    "Flowcells": 2,
+    "SamplesTotal": 7452,
+    "FlowcellsTotal": 514
+  },
+  {
+    "date": "04-26-2022",
+    "Samples": 7,
+    "Flowcells": 2,
+    "SamplesTotal": 7459,
+    "FlowcellsTotal": 516
+  },
+  {
+    "date": "04-27-2022",
+    "Samples": 22,
+    "Flowcells": 2,
+    "SamplesTotal": 7481,
+    "FlowcellsTotal": 518
+  },
+  {
+    "date": "04-28-2022",
+    "Samples": 25,
+    "Flowcells": 1,
+    "SamplesTotal": 7506,
+    "FlowcellsTotal": 519
+  },
+  {
+    "date": "04-29-2022",
+    "Samples": 21,
+    "Flowcells": 1,
+    "SamplesTotal": 7527,
+    "FlowcellsTotal": 520
+  },
+  {
+    "date": "04-30-2022",
+    "Samples": 79,
+    "Flowcells": 4,
+    "SamplesTotal": 7606,
+    "FlowcellsTotal": 524
+  },
+  {
+    "date": "05-01-2022",
+    "Samples": 86,
+    "Flowcells": 4,
+    "SamplesTotal": 7692,
+    "FlowcellsTotal": 528
+  },
+  {
+    "date": "05-02-2022",
+    "Samples": 53,
+    "Flowcells": 3,
+    "SamplesTotal": 7745,
+    "FlowcellsTotal": 531
+  },
+  {
+    "date": "05-03-2022",
+    "Samples": 84,
+    "Flowcells": 3,
+    "SamplesTotal": 7829,
+    "FlowcellsTotal": 534
+  },
+  {
+    "date": "05-04-2022",
+    "Samples": 25,
+    "Flowcells": 3,
+    "SamplesTotal": 7854,
+    "FlowcellsTotal": 537
+  },
+  {
+    "date": "05-05-2022",
+    "Samples": 14,
+    "Flowcells": 3,
+    "SamplesTotal": 7868,
+    "FlowcellsTotal": 540
+  },
+  {
+    "date": "05-06-2022",
+    "Samples": 16,
+    "Flowcells": 1,
+    "SamplesTotal": 7884,
+    "FlowcellsTotal": 541
+  },
+  {
+    "date": "05-07-2022",
+    "Samples": 98,
+    "Flowcells": 4,
+    "SamplesTotal": 7982,
+    "FlowcellsTotal": 545
+  },
+  {
+    "date": "05-08-2022",
+    "Samples": 58,
+    "Flowcells": 3,
+    "SamplesTotal": 8040,
+    "FlowcellsTotal": 548
+  },
+  {
+    "date": "05-09-2022",
+    "Samples": 43,
+    "Flowcells": 3,
+    "SamplesTotal": 8083,
+    "FlowcellsTotal": 551
+  },
+  {
+    "date": "05-10-2022",
+    "Samples": 25,
+    "Flowcells": 1,
+    "SamplesTotal": 8108,
+    "FlowcellsTotal": 552
+  },
+  {
+    "date": "05-11-2022",
+    "Samples": 2,
+    "Flowcells": 1,
+    "SamplesTotal": 8110,
+    "FlowcellsTotal": 553
+  },
+  {
+    "date": "05-12-2022",
+    "Samples": 24,
+    "Flowcells": 4,
+    "SamplesTotal": 8134,
+    "FlowcellsTotal": 557
+  },
+  {
+    "date": "05-13-2022",
+    "Samples": 22,
+    "Flowcells": 2,
+    "SamplesTotal": 8156,
+    "FlowcellsTotal": 559
+  },
+  {
+    "date": "05-14-2022",
+    "Samples": 69,
+    "Flowcells": 4,
+    "SamplesTotal": 8225,
+    "FlowcellsTotal": 563
+  },
+  {
+    "date": "05-15-2022",
+    "Samples": 51,
+    "Flowcells": 3,
+    "SamplesTotal": 8276,
+    "FlowcellsTotal": 566
+  },
+  {
+    "date": "05-16-2022",
+    "Samples": 100,
+    "Flowcells": 4,
+    "SamplesTotal": 8376,
+    "FlowcellsTotal": 570
+  },
+  {
+    "date": "05-17-2022",
+    "Samples": 10,
+    "Flowcells": 2,
+    "SamplesTotal": 8386,
+    "FlowcellsTotal": 572
+  },
+  {
+    "date": "05-18-2022",
+    "Samples": 107,
+    "Flowcells": 4,
+    "SamplesTotal": 8493,
+    "FlowcellsTotal": 576
+  },
+  {
+    "date": "05-19-2022",
+    "Samples": 32,
+    "Flowcells": 3,
+    "SamplesTotal": 8525,
+    "FlowcellsTotal": 579
+  },
+  {
+    "date": "05-20-2022",
+    "Samples": 25,
+    "Flowcells": 1,
+    "SamplesTotal": 8550,
+    "FlowcellsTotal": 580
+  },
+  {
+    "date": "05-21-2022",
+    "Samples": 27,
+    "Flowcells": 2,
+    "SamplesTotal": 8577,
+    "FlowcellsTotal": 582
+  },
+  {
+    "date": "05-22-2022",
+    "Samples": 83,
+    "Flowcells": 4,
+    "SamplesTotal": 8660,
+    "FlowcellsTotal": 586
+  },
+  {
+    "date": "05-23-2022",
+    "Samples": 53,
+    "Flowcells": 2,
+    "SamplesTotal": 8713,
+    "FlowcellsTotal": 588
+  },
+  {
+    "date": "05-24-2022",
+    "Samples": 3,
+    "Flowcells": 1,
+    "SamplesTotal": 8716,
+    "FlowcellsTotal": 589
+  },
+  {
+    "date": "05-25-2022",
+    "Samples": 36,
+    "Flowcells": 4,
+    "SamplesTotal": 8752,
+    "FlowcellsTotal": 593
+  },
+  {
+    "date": "05-26-2022",
+    "Samples": 17,
+    "Flowcells": 2,
+    "SamplesTotal": 8769,
+    "FlowcellsTotal": 595
+  },
+  {
+    "date": "05-27-2022",
+    "Samples": 22,
+    "Flowcells": 1,
+    "SamplesTotal": 8791,
+    "FlowcellsTotal": 596
+  },
+  {
+    "date": "05-28-2022",
+    "Samples": 20,
+    "Flowcells": 1,
+    "SamplesTotal": 8811,
+    "FlowcellsTotal": 597
+  },
+  {
+    "date": "05-29-2022",
+    "Samples": 3,
+    "Flowcells": 3,
+    "SamplesTotal": 8814,
+    "FlowcellsTotal": 600
+  },
+  {
+    "date": "05-30-2022",
+    "Samples": 25,
+    "Flowcells": 1,
+    "SamplesTotal": 8839,
+    "FlowcellsTotal": 601
+  },
+  {
+    "date": "05-31-2022",
+    "Samples": 5,
+    "Flowcells": 1,
+    "SamplesTotal": 8844,
+    "FlowcellsTotal": 602
+  },
+  {
+    "date": "06-01-2022",
+    "Samples": 61,
+    "Flowcells": 3,
+    "SamplesTotal": 8905,
+    "FlowcellsTotal": 605
+  },
+  {
+    "date": "06-02-2022",
+    "Samples": 28,
+    "Flowcells": 2,
+    "SamplesTotal": 8933,
+    "FlowcellsTotal": 607
+  },
+  {
+    "date": "06-03-2022",
+    "Samples": 44,
+    "Flowcells": 4,
+    "SamplesTotal": 8977,
+    "FlowcellsTotal": 611
+  },
+  {
+    "date": "06-04-2022",
+    "Samples": 18,
+    "Flowcells": 3,
+    "SamplesTotal": 8995,
+    "FlowcellsTotal": 614
+  },
+  {
+    "date": "06-05-2022",
+    "Samples": 28,
+    "Flowcells": 1,
+    "SamplesTotal": 9023,
+    "FlowcellsTotal": 615
+  },
+  {
+    "date": "06-06-2022",
+    "Samples": 4,
+    "Flowcells": 1,
+    "SamplesTotal": 9027,
+    "FlowcellsTotal": 616
+  },
+  {
+    "date": "06-07-2022",
+    "Samples": 30,
+    "Flowcells": 3,
+    "SamplesTotal": 9057,
+    "FlowcellsTotal": 619
+  },
+  {
+    "date": "06-08-2022",
+    "Samples": 79,
+    "Flowcells": 3,
+    "SamplesTotal": 9136,
+    "FlowcellsTotal": 622
+  },
+  {
+    "date": "06-09-2022",
+    "Samples": 44,
+    "Flowcells": 2,
+    "SamplesTotal": 9180,
+    "FlowcellsTotal": 624
+  },
+  {
+    "date": "06-10-2022",
+    "Samples": 4,
+    "Flowcells": 1,
+    "SamplesTotal": 9184,
+    "FlowcellsTotal": 625
+  },
+  {
+    "date": "06-11-2022",
+    "Samples": 20,
+    "Flowcells": 2,
+    "SamplesTotal": 9204,
+    "FlowcellsTotal": 627
+  },
+  {
+    "date": "06-12-2022",
+    "Samples": 69,
+    "Flowcells": 3,
+    "SamplesTotal": 9273,
+    "FlowcellsTotal": 630
+  },
+  {
+    "date": "06-13-2022",
+    "Samples": 28,
+    "Flowcells": 3,
+    "SamplesTotal": 9301,
+    "FlowcellsTotal": 633
+  },
+  {
+    "date": "06-14-2022",
+    "Samples": 42,
+    "Flowcells": 2,
+    "SamplesTotal": 9343,
+    "FlowcellsTotal": 635
+  },
+  {
+    "date": "06-15-2022",
+    "Samples": 28,
+    "Flowcells": 1,
+    "SamplesTotal": 9371,
+    "FlowcellsTotal": 636
+  },
+  {
+    "date": "06-16-2022",
+    "Samples": 12,
+    "Flowcells": 2,
+    "SamplesTotal": 9383,
+    "FlowcellsTotal": 638
+  },
+  {
+    "date": "06-17-2022",
+    "Samples": 15,
+    "Flowcells": 3,
+    "SamplesTotal": 9398,
+    "FlowcellsTotal": 641
+  },
+  {
+    "date": "06-18-2022",
+    "Samples": 20,
+    "Flowcells": 1,
+    "SamplesTotal": 9418,
+    "FlowcellsTotal": 642
+  },
+  {
+    "date": "06-19-2022",
+    "Samples": 48,
+    "Flowcells": 2,
+    "SamplesTotal": 9466,
+    "FlowcellsTotal": 644
+  },
+  {
+    "date": "06-20-2022",
+    "Samples": 5,
+    "Flowcells": 2,
+    "SamplesTotal": 9471,
+    "FlowcellsTotal": 646
+  },
+  {
+    "date": "06-21-2022",
+    "Samples": 10,
+    "Flowcells": 3,
+    "SamplesTotal": 9481,
+    "FlowcellsTotal": 649
+  },
+  {
+    "date": "06-22-2022",
+    "Samples": 36,
+    "Flowcells": 2,
+    "SamplesTotal": 9517,
+    "FlowcellsTotal": 651
+  },
+  {
+    "date": "06-23-2022",
+    "Samples": 90,
+    "Flowcells": 4,
+    "SamplesTotal": 9607,
+    "FlowcellsTotal": 655
+  },
+  {
+    "date": "06-24-2022",
+    "Samples": 86,
+    "Flowcells": 4,
+    "SamplesTotal": 9693,
+    "FlowcellsTotal": 659
+  },
+  {
+    "date": "06-25-2022",
+    "Samples": 18,
+    "Flowcells": 2,
+    "SamplesTotal": 9711,
+    "FlowcellsTotal": 661
+  },
+  {
+    "date": "06-26-2022",
+    "Samples": 77,
+    "Flowcells": 3,
+    "SamplesTotal": 9788,
+    "FlowcellsTotal": 664
+  },
+  {
+    "date": "06-27-2022",
+    "Samples": 13,
+    "Flowcells": 1,
+    "SamplesTotal": 9801,
+    "FlowcellsTotal": 665
+  },
+  {
+    "date": "06-28-2022",
+    "Samples": 49,
+    "Flowcells": 3,
+    "SamplesTotal": 9850,
+    "FlowcellsTotal": 668
+  },
+  {
+    "date": "06-29-2022",
+    "Samples": 88,
+    "Flowcells": 4,
+    "SamplesTotal": 9938,
+    "FlowcellsTotal": 672
+  },
+  {
+    "date": "06-30-2022",
+    "Samples": 2,
+    "Flowcells": 1,
+    "SamplesTotal": 9940,
+    "FlowcellsTotal": 673
+  },
+  {
+    "date": "07-01-2022",
+    "Samples": 24,
+    "Flowcells": 2,
+    "SamplesTotal": 9964,
+    "FlowcellsTotal": 675
+  },
+  {
+    "date": "07-02-2022",
+    "Samples": 8,
+    "Flowcells": 2,
+    "SamplesTotal": 9972,
+    "FlowcellsTotal": 677
+  },
+  {
+    "date": "07-03-2022",
+    "Samples": 59,
+    "Flowcells": 3,
+    "SamplesTotal": 10031,
+    "FlowcellsTotal": 680
+  },
+  {
+    "date": "07-04-2022",
+    "Samples": 36,
+    "Flowcells": 3,
+    "SamplesTotal": 10067,
+    "FlowcellsTotal": 683
+  },
+  {
+    "date": "07-05-2022",
+    "Samples": 14,
+    "Flowcells": 2,
+    "SamplesTotal": 10081,
+    "FlowcellsTotal": 685
+  },
+  {
+    "date": "07-06-2022",
+    "Samples": 99,
+    "Flowcells": 4,
+    "SamplesTotal": 10180,
+    "FlowcellsTotal": 689
+  },
+  {
+    "date": "07-07-2022",
+    "Samples": 1,
+    "Flowcells": 1,
+    "SamplesTotal": 10181,
+    "FlowcellsTotal": 690
+  },
+  {
+    "date": "07-08-2022",
+    "Samples": 1,
+    "Flowcells": 2,
+    "SamplesTotal": 10182,
+    "FlowcellsTotal": 692
+  },
+  {
+    "date": "07-09-2022",
+    "Samples": 94,
+    "Flowcells": 4,
+    "SamplesTotal": 10276,
+    "FlowcellsTotal": 696
+  },
+  {
+    "date": "07-10-2022",
+    "Samples": 5,
+    "Flowcells": 1,
+    "SamplesTotal": 10281,
+    "FlowcellsTotal": 697
+  },
+  {
+    "date": "07-11-2022",
+    "Samples": 102,
+    "Flowcells": 4,
+    "SamplesTotal": 10383,
+    "FlowcellsTotal": 701
+  },
+  {
+    "date": "07-12-2022",
+    "Samples": 4,
+    "Flowcells": 2,
+    "SamplesTotal": 10387,
+    "FlowcellsTotal": 703
+  },
+  {
+    "date": "07-13-2022",
+    "Samples": 8,
+    "Flowcells": 1,
+    "SamplesTotal": 10395,
+    "FlowcellsTotal": 704
+  },
+  {
+    "date": "07-14-2022",
+    "Samples": 25,
+    "Flowcells": 4,
+    "SamplesTotal": 10420,
+    "FlowcellsTotal": 708
+  },
+  {
+    "date": "07-15-2022",
+    "Samples": 6,
+    "Flowcells": 4,
+    "SamplesTotal": 10426,
+    "FlowcellsTotal": 712
+  },
+  {
+    "date": "07-16-2022",
+    "Samples": 47,
+    "Flowcells": 2,
+    "SamplesTotal": 10473,
+    "FlowcellsTotal": 714
+  },
+  {
+    "date": "07-17-2022",
+    "Samples": 69,
+    "Flowcells": 3,
+    "SamplesTotal": 10542,
+    "FlowcellsTotal": 717
+  },
+  {
+    "date": "07-18-2022",
+    "Samples": 38,
+    "Flowcells": 4,
+    "SamplesTotal": 10580,
+    "FlowcellsTotal": 721
+  },
+  {
+    "date": "07-19-2022",
+    "Samples": 51,
+    "Flowcells": 4,
+    "SamplesTotal": 10631,
+    "FlowcellsTotal": 725
+  },
+  {
+    "date": "07-20-2022",
+    "Samples": 16,
+    "Flowcells": 2,
+    "SamplesTotal": 10647,
+    "FlowcellsTotal": 727
+  },
+  {
+    "date": "07-21-2022",
+    "Samples": 44,
+    "Flowcells": 4,
+    "SamplesTotal": 10691,
+    "FlowcellsTotal": 731
+  },
+  {
+    "date": "07-22-2022",
+    "Samples": 74,
+    "Flowcells": 3,
+    "SamplesTotal": 10765,
+    "FlowcellsTotal": 734
+  },
+  {
+    "date": "07-23-2022",
+    "Samples": 15,
+    "Flowcells": 1,
+    "SamplesTotal": 10780,
+    "FlowcellsTotal": 735
+  },
+  {
+    "date": "07-24-2022",
+    "Samples": 17,
+    "Flowcells": 4,
+    "SamplesTotal": 10797,
+    "FlowcellsTotal": 739
+  },
+  {
+    "date": "07-25-2022",
+    "Samples": 42,
+    "Flowcells": 2,
+    "SamplesTotal": 10839,
+    "FlowcellsTotal": 741
+  },
+  {
+    "date": "07-26-2022",
+    "Samples": 25,
+    "Flowcells": 1,
+    "SamplesTotal": 10864,
+    "FlowcellsTotal": 742
+  },
+  {
+    "date": "07-27-2022",
+    "Samples": 50,
+    "Flowcells": 3,
+    "SamplesTotal": 10914,
+    "FlowcellsTotal": 745
+  },
+  {
+    "date": "07-28-2022",
+    "Samples": 60,
+    "Flowcells": 3,
+    "SamplesTotal": 10974,
+    "FlowcellsTotal": 748
+  },
+  {
+    "date": "07-29-2022",
+    "Samples": 23,
+    "Flowcells": 3,
+    "SamplesTotal": 10997,
+    "FlowcellsTotal": 751
+  },
+  {
+    "date": "07-30-2022",
+    "Samples": 47,
+    "Flowcells": 2,
+    "SamplesTotal": 11044,
+    "FlowcellsTotal": 753
+  },
+  {
+    "date": "07-31-2022",
+    "Samples": 32,
+    "Flowcells": 2,
+    "SamplesTotal": 11076,
+    "FlowcellsTotal": 755
+  },
+  {
+    "date": "08-01-2022",
+    "Samples": 87,
+    "Flowcells": 4,
+    "SamplesTotal": 11163,
+    "FlowcellsTotal": 759
+  },
+  {
+    "date": "08-02-2022",
+    "Samples": 83,
+    "Flowcells": 3,
+    "SamplesTotal": 11246,
+    "FlowcellsTotal": 762
+  },
+  {
+    "date": "08-03-2022",
+    "Samples": 13,
+    "Flowcells": 1,
+    "SamplesTotal": 11259,
+    "FlowcellsTotal": 763
+  },
+  {
+    "date": "08-04-2022",
+    "Samples": 5,
+    "Flowcells": 1,
+    "SamplesTotal": 11264,
+    "FlowcellsTotal": 764
+  },
+  {
+    "date": "08-05-2022",
+    "Samples": 77,
+    "Flowcells": 4,
+    "SamplesTotal": 11341,
+    "FlowcellsTotal": 768
+  },
+  {
+    "date": "08-06-2022",
+    "Samples": 41,
+    "Flowcells": 3,
+    "SamplesTotal": 11382,
+    "FlowcellsTotal": 771
+  },
+  {
+    "date": "08-07-2022",
+    "Samples": 17,
+    "Flowcells": 4,
+    "SamplesTotal": 11399,
+    "FlowcellsTotal": 775
+  },
+  {
+    "date": "08-08-2022",
+    "Samples": 93,
+    "Flowcells": 4,
+    "SamplesTotal": 11492,
+    "FlowcellsTotal": 779
+  },
+  {
+    "date": "08-09-2022",
+    "Samples": 15,
+    "Flowcells": 1,
+    "SamplesTotal": 11507,
+    "FlowcellsTotal": 780
+  },
+  {
+    "date": "08-10-2022",
+    "Samples": 111,
+    "Flowcells": 4,
+    "SamplesTotal": 11618,
+    "FlowcellsTotal": 784
+  },
+  {
+    "date": "08-11-2022",
+    "Samples": 18,
+    "Flowcells": 2,
+    "SamplesTotal": 11636,
+    "FlowcellsTotal": 786
+  },
+  {
+    "date": "08-12-2022",
+    "Samples": 37,
+    "Flowcells": 2,
+    "SamplesTotal": 11673,
+    "FlowcellsTotal": 788
+  },
+  {
+    "date": "08-13-2022",
+    "Samples": 32,
+    "Flowcells": 2,
+    "SamplesTotal": 11705,
+    "FlowcellsTotal": 790
+  },
+  {
+    "date": "08-14-2022",
+    "Samples": 105,
+    "Flowcells": 4,
+    "SamplesTotal": 11810,
+    "FlowcellsTotal": 794
+  },
+  {
+    "date": "08-15-2022",
+    "Samples": 3,
+    "Flowcells": 1,
+    "SamplesTotal": 11813,
+    "FlowcellsTotal": 795
+  },
+  {
+    "date": "08-16-2022",
+    "Samples": 10,
+    "Flowcells": 3,
+    "SamplesTotal": 11823,
+    "FlowcellsTotal": 798
+  },
+  {
+    "date": "08-17-2022",
+    "Samples": 3,
+    "Flowcells": 4,
+    "SamplesTotal": 11826,
+    "FlowcellsTotal": 802
+  },
+  {
+    "date": "08-18-2022",
+    "Samples": 24,
+    "Flowcells": 4,
+    "SamplesTotal": 11850,
+    "FlowcellsTotal": 806
+  },
+  {
+    "date": "08-19-2022",
+    "Samples": 31,
+    "Flowcells": 2,
+    "SamplesTotal": 11881,
+    "FlowcellsTotal": 808
+  },
+  {
+    "date": "08-20-2022",
+    "Samples": 39,
+    "Flowcells": 2,
+    "SamplesTotal": 11920,
+    "FlowcellsTotal": 810
+  },
+  {
+    "date": "08-21-2022",
+    "Samples": 43,
+    "Flowcells": 4,
+    "SamplesTotal": 11963,
+    "FlowcellsTotal": 814
+  },
+  {
+    "date": "08-22-2022",
+    "Samples": 5,
+    "Flowcells": 1,
+    "SamplesTotal": 11968,
+    "FlowcellsTotal": 815
+  },
+  {
+    "date": "08-23-2022",
+    "Samples": 6,
+    "Flowcells": 1,
+    "SamplesTotal": 11974,
+    "FlowcellsTotal": 816
+  },
+  {
+    "date": "08-24-2022",
+    "Samples": 5,
+    "Flowcells": 1,
+    "SamplesTotal": 11979,
+    "FlowcellsTotal": 817
+  },
+  {
+    "date": "08-25-2022",
+    "Samples": 40,
+    "Flowcells": 2,
+    "SamplesTotal": 12019,
+    "FlowcellsTotal": 819
+  },
+  {
+    "date": "08-26-2022",
+    "Samples": 18,
+    "Flowcells": 2,
+    "SamplesTotal": 12037,
+    "FlowcellsTotal": 821
+  },
+  {
+    "date": "08-27-2022",
+    "Samples": 58,
+    "Flowcells": 3,
+    "SamplesTotal": 12095,
+    "FlowcellsTotal": 824
+  },
+  {
+    "date": "08-28-2022",
+    "Samples": 41,
+    "Flowcells": 2,
+    "SamplesTotal": 12136,
+    "FlowcellsTotal": 826
+  },
+  {
+    "date": "08-29-2022",
+    "Samples": 28,
+    "Flowcells": 1,
+    "SamplesTotal": 12164,
+    "FlowcellsTotal": 827
+  },
+  {
+    "date": "08-30-2022",
+    "Samples": 105,
+    "Flowcells": 4,
+    "SamplesTotal": 12269,
+    "FlowcellsTotal": 831
+  },
+  {
+    "date": "08-31-2022",
+    "Samples": 103,
+    "Flowcells": 4,
+    "SamplesTotal": 12372,
+    "FlowcellsTotal": 835
+  },
+  {
+    "date": "09-01-2022",
+    "Samples": 51,
+    "Flowcells": 4,
+    "SamplesTotal": 12423,
+    "FlowcellsTotal": 839
+  },
+  {
+    "date": "09-02-2022",
+    "Samples": 5,
+    "Flowcells": 3,
+    "SamplesTotal": 12428,
+    "FlowcellsTotal": 842
+  },
+  {
+    "date": "09-03-2022",
+    "Samples": 59,
+    "Flowcells": 4,
+    "SamplesTotal": 12487,
+    "FlowcellsTotal": 846
+  },
+  {
+    "date": "09-04-2022",
+    "Samples": 15,
+    "Flowcells": 1,
+    "SamplesTotal": 12502,
+    "FlowcellsTotal": 847
+  },
+  {
+    "date": "09-05-2022",
+    "Samples": 23,
+    "Flowcells": 3,
+    "SamplesTotal": 12525,
+    "FlowcellsTotal": 850
+  },
+  {
+    "date": "09-06-2022",
+    "Samples": 15,
+    "Flowcells": 2,
+    "SamplesTotal": 12540,
+    "FlowcellsTotal": 852
+  },
+  {
+    "date": "09-07-2022",
+    "Samples": 26,
+    "Flowcells": 1,
+    "SamplesTotal": 12566,
+    "FlowcellsTotal": 853
+  },
+  {
+    "date": "09-08-2022",
+    "Samples": 8,
+    "Flowcells": 1,
+    "SamplesTotal": 12574,
+    "FlowcellsTotal": 854
+  },
+  {
+    "date": "09-09-2022",
+    "Samples": 59,
+    "Flowcells": 4,
+    "SamplesTotal": 12633,
+    "FlowcellsTotal": 858
+  },
+  {
+    "date": "09-10-2022",
+    "Samples": 6,
+    "Flowcells": 1,
+    "SamplesTotal": 12639,
+    "FlowcellsTotal": 859
+  },
+  {
+    "date": "09-11-2022",
+    "Samples": 28,
+    "Flowcells": 4,
+    "SamplesTotal": 12667,
+    "FlowcellsTotal": 863
+  },
+  {
+    "date": "09-12-2022",
+    "Samples": 47,
+    "Flowcells": 3,
+    "SamplesTotal": 12714,
+    "FlowcellsTotal": 866
+  },
+  {
+    "date": "09-13-2022",
+    "Samples": 17,
+    "Flowcells": 4,
+    "SamplesTotal": 12731,
+    "FlowcellsTotal": 870
+  },
+  {
+    "date": "09-14-2022",
+    "Samples": 2,
+    "Flowcells": 4,
+    "SamplesTotal": 12733,
+    "FlowcellsTotal": 874
+  },
+  {
+    "date": "09-15-2022",
+    "Samples": 9,
+    "Flowcells": 1,
+    "SamplesTotal": 12742,
+    "FlowcellsTotal": 875
+  },
+  {
+    "date": "09-16-2022",
+    "Samples": 44,
+    "Flowcells": 4,
+    "SamplesTotal": 12786,
+    "FlowcellsTotal": 879
+  },
+  {
+    "date": "09-17-2022",
+    "Samples": 54,
+    "Flowcells": 3,
+    "SamplesTotal": 12840,
+    "FlowcellsTotal": 882
+  },
+  {
+    "date": "09-18-2022",
+    "Samples": 99,
+    "Flowcells": 4,
+    "SamplesTotal": 12939,
+    "FlowcellsTotal": 886
+  },
+  {
+    "date": "09-19-2022",
+    "Samples": 9,
+    "Flowcells": 1,
+    "SamplesTotal": 12948,
+    "FlowcellsTotal": 887
+  },
+  {
+    "date": "09-20-2022",
+    "Samples": 19,
+    "Flowcells": 1,
+    "SamplesTotal": 12967,
+    "FlowcellsTotal": 888
+  },
+  {
+    "date": "09-21-2022",
+    "Samples": 17,
+    "Flowcells": 1,
+    "SamplesTotal": 12984,
+    "FlowcellsTotal": 889
+  },
+  {
+    "date": "09-22-2022",
+    "Samples": 80,
+    "Flowcells": 4,
+    "SamplesTotal": 13064,
+    "FlowcellsTotal": 893
+  },
+  {
+    "date": "09-23-2022",
+    "Samples": 77,
+    "Flowcells": 4,
+    "SamplesTotal": 13141,
+    "FlowcellsTotal": 897
+  },
+  {
+    "date": "09-24-2022",
+    "Samples": 38,
+    "Flowcells": 3,
+    "SamplesTotal": 13179,
+    "FlowcellsTotal": 900
+  },
+  {
+    "date": "09-25-2022",
+    "Samples": 52,
+    "Flowcells": 4,
+    "SamplesTotal": 13231,
+    "FlowcellsTotal": 904
+  },
+  {
+    "date": "09-26-2022",
+    "Samples": 33,
+    "Flowcells": 4,
+    "SamplesTotal": 13264,
+    "FlowcellsTotal": 908
+  },
+  {
+    "date": "09-27-2022",
+    "Samples": 27,
+    "Flowcells": 1,
+    "SamplesTotal": 13291,
+    "FlowcellsTotal": 909
+  },
+  {
+    "date": "09-28-2022",
+    "Samples": 66,
+    "Flowcells": 4,
+    "SamplesTotal": 13357,
+    "FlowcellsTotal": 913
+  },
+  {
+    "date": "09-29-2022",
+    "Samples": 24,
+    "Flowcells": 2,
+    "SamplesTotal": 13381,
+    "FlowcellsTotal": 915
+  },
+  {
+    "date": "09-30-2022",
+    "Samples": 45,
+    "Flowcells": 3,
+    "SamplesTotal": 13426,
+    "FlowcellsTotal": 918
+  },
+  {
+    "date": "10-01-2022",
+    "Samples": 34,
+    "Flowcells": 3,
+    "SamplesTotal": 13460,
+    "FlowcellsTotal": 921
+  },
+  {
+    "date": "10-02-2022",
+    "Samples": 21,
+    "Flowcells": 1,
+    "SamplesTotal": 13481,
+    "FlowcellsTotal": 922
+  },
+  {
+    "date": "10-03-2022",
+    "Samples": 16,
+    "Flowcells": 1,
+    "SamplesTotal": 13497,
+    "FlowcellsTotal": 923
+  },
+  {
+    "date": "10-04-2022",
+    "Samples": 74,
+    "Flowcells": 3,
+    "SamplesTotal": 13571,
+    "FlowcellsTotal": 926
+  },
+  {
+    "date": "10-05-2022",
+    "Samples": 96,
+    "Flowcells": 4,
+    "SamplesTotal": 13667,
+    "FlowcellsTotal": 930
+  },
+  {
+    "date": "10-06-2022",
+    "Samples": 26,
+    "Flowcells": 3,
+    "SamplesTotal": 13693,
+    "FlowcellsTotal": 933
+  },
+  {
+    "date": "10-07-2022",
+    "Samples": 9,
+    "Flowcells": 1,
+    "SamplesTotal": 13702,
+    "FlowcellsTotal": 934
+  },
+  {
+    "date": "10-08-2022",
+    "Samples": 56,
+    "Flowcells": 2,
+    "SamplesTotal": 13758,
+    "FlowcellsTotal": 936
+  },
+  {
+    "date": "10-09-2022",
+    "Samples": 2,
+    "Flowcells": 1,
+    "SamplesTotal": 13760,
+    "FlowcellsTotal": 937
+  },
+  {
+    "date": "10-10-2022",
+    "Samples": 15,
+    "Flowcells": 4,
+    "SamplesTotal": 13775,
+    "FlowcellsTotal": 941
+  },
+  {
+    "date": "10-11-2022",
+    "Samples": 15,
+    "Flowcells": 1,
+    "SamplesTotal": 13790,
+    "FlowcellsTotal": 942
+  },
+  {
+    "date": "10-12-2022",
+    "Samples": 20,
+    "Flowcells": 1,
+    "SamplesTotal": 13810,
+    "FlowcellsTotal": 943
+  },
+  {
+    "date": "10-13-2022",
+    "Samples": 10,
+    "Flowcells": 3,
+    "SamplesTotal": 13820,
+    "FlowcellsTotal": 946
+  },
+  {
+    "date": "10-14-2022",
+    "Samples": 104,
+    "Flowcells": 4,
+    "SamplesTotal": 13924,
+    "FlowcellsTotal": 950
+  },
+  {
+    "date": "10-15-2022",
+    "Samples": 22,
+    "Flowcells": 3,
+    "SamplesTotal": 13946,
+    "FlowcellsTotal": 953
+  },
+  {
+    "date": "10-16-2022",
+    "Samples": 4,
+    "Flowcells": 1,
+    "SamplesTotal": 13950,
+    "FlowcellsTotal": 954
+  },
+  {
+    "date": "10-17-2022",
+    "Samples": 21,
+    "Flowcells": 2,
+    "SamplesTotal": 13971,
+    "FlowcellsTotal": 956
+  },
+  {
+    "date": "10-18-2022",
+    "Samples": 20,
+    "Flowcells": 4,
+    "SamplesTotal": 13991,
+    "FlowcellsTotal": 960
+  },
+  {
+    "date": "10-19-2022",
+    "Samples": 54,
+    "Flowcells": 3,
+    "SamplesTotal": 14045,
+    "FlowcellsTotal": 963
+  },
+  {
+    "date": "10-20-2022",
+    "Samples": 2,
+    "Flowcells": 1,
+    "SamplesTotal": 14047,
+    "FlowcellsTotal": 964
+  },
+  {
+    "date": "10-21-2022",
+    "Samples": 25,
+    "Flowcells": 1,
+    "SamplesTotal": 14072,
+    "FlowcellsTotal": 965
+  },
+  {
+    "date": "10-22-2022",
+    "Samples": 54,
+    "Flowcells": 2,
+    "SamplesTotal": 14126,
+    "FlowcellsTotal": 967
+  },
+  {
+    "date": "10-23-2022",
+    "Samples": 28,
+    "Flowcells": 2,
+    "SamplesTotal": 14154,
+    "FlowcellsTotal": 969
+  },
+  {
+    "date": "10-24-2022",
+    "Samples": 19,
+    "Flowcells": 4,
+    "SamplesTotal": 14173,
+    "FlowcellsTotal": 973
+  },
+  {
+    "date": "10-25-2022",
+    "Samples": 31,
+    "Flowcells": 2,
+    "SamplesTotal": 14204,
+    "FlowcellsTotal": 975
+  },
+  {
+    "date": "10-26-2022",
+    "Samples": 10,
+    "Flowcells": 1,
+    "SamplesTotal": 14214,
+    "FlowcellsTotal": 976
+  },
+  {
+    "date": "10-27-2022",
+    "Samples": 18,
+    "Flowcells": 4,
+    "SamplesTotal": 14232,
+    "FlowcellsTotal": 980
+  },
+  {
+    "date": "10-28-2022",
+    "Samples": 23,
+    "Flowcells": 2,
+    "SamplesTotal": 14255,
+    "FlowcellsTotal": 982
+  },
+  {
+    "date": "10-29-2022",
+    "Samples": 46,
+    "Flowcells": 3,
+    "SamplesTotal": 14301,
+    "FlowcellsTotal": 985
+  },
+  {
+    "date": "10-30-2022",
+    "Samples": 39,
+    "Flowcells": 2,
+    "SamplesTotal": 14340,
+    "FlowcellsTotal": 987
+  },
+  {
+    "date": "10-31-2022",
+    "Samples": 3,
+    "Flowcells": 1,
+    "SamplesTotal": 14343,
+    "FlowcellsTotal": 988
+  },
+  {
+    "date": "11-01-2022",
+    "Samples": 11,
+    "Flowcells": 2,
+    "SamplesTotal": 14354,
+    "FlowcellsTotal": 990
+  },
+  {
+    "date": "11-02-2022",
+    "Samples": 34,
+    "Flowcells": 3,
+    "SamplesTotal": 14388,
+    "FlowcellsTotal": 993
+  },
+  {
+    "date": "11-03-2022",
+    "Samples": 75,
+    "Flowcells": 4,
+    "SamplesTotal": 14463,
+    "FlowcellsTotal": 997
+  },
+  {
+    "date": "11-04-2022",
+    "Samples": 22,
+    "Flowcells": 1,
+    "SamplesTotal": 14485,
+    "FlowcellsTotal": 998
+  },
+  {
+    "date": "11-05-2022",
+    "Samples": 13,
+    "Flowcells": 2,
+    "SamplesTotal": 14498,
+    "FlowcellsTotal": 1000
+  },
+  {
+    "date": "11-06-2022",
+    "Samples": 48,
+    "Flowcells": 2,
+    "SamplesTotal": 14546,
+    "FlowcellsTotal": 1002
+  },
+  {
+    "date": "11-07-2022",
+    "Samples": 18,
+    "Flowcells": 1,
+    "SamplesTotal": 14564,
+    "FlowcellsTotal": 1003
+  },
+  {
+    "date": "11-08-2022",
+    "Samples": 42,
+    "Flowcells": 4,
+    "SamplesTotal": 14606,
+    "FlowcellsTotal": 1007
+  },
+  {
+    "date": "11-09-2022",
+    "Samples": 14,
+    "Flowcells": 1,
+    "SamplesTotal": 14620,
+    "FlowcellsTotal": 1008
+  },
+  {
+    "date": "11-10-2022",
+    "Samples": 58,
+    "Flowcells": 3,
+    "SamplesTotal": 14678,
+    "FlowcellsTotal": 1011
+  },
+  {
+    "date": "11-11-2022",
+    "Samples": 9,
+    "Flowcells": 1,
+    "SamplesTotal": 14687,
+    "FlowcellsTotal": 1012
+  },
+  {
+    "date": "11-12-2022",
+    "Samples": 27,
+    "Flowcells": 1,
+    "SamplesTotal": 14714,
+    "FlowcellsTotal": 1013
+  },
+  {
+    "date": "11-13-2022",
+    "Samples": 31,
+    "Flowcells": 2,
+    "SamplesTotal": 14745,
+    "FlowcellsTotal": 1015
+  },
+  {
+    "date": "11-14-2022",
+    "Samples": 53,
+    "Flowcells": 4,
+    "SamplesTotal": 14798,
+    "FlowcellsTotal": 1019
+  },
+  {
+    "date": "11-15-2022",
+    "Samples": 24,
+    "Flowcells": 3,
+    "SamplesTotal": 14822,
+    "FlowcellsTotal": 1022
+  },
+  {
+    "date": "11-16-2022",
+    "Samples": 58,
+    "Flowcells": 4,
+    "SamplesTotal": 14880,
+    "FlowcellsTotal": 1026
+  },
+  {
+    "date": "11-17-2022",
+    "Samples": 27,
+    "Flowcells": 1,
+    "SamplesTotal": 14907,
+    "FlowcellsTotal": 1027
+  },
+  {
+    "date": "11-18-2022",
+    "Samples": 92,
+    "Flowcells": 4,
+    "SamplesTotal": 14999,
+    "FlowcellsTotal": 1031
+  },
+  {
+    "date": "11-19-2022",
+    "Samples": 8,
+    "Flowcells": 4,
+    "SamplesTotal": 15007,
+    "FlowcellsTotal": 1035
+  },
+  {
+    "date": "11-20-2022",
+    "Samples": 29,
+    "Flowcells": 3,
+    "SamplesTotal": 15036,
+    "FlowcellsTotal": 1038
+  },
+  {
+    "date": "11-21-2022",
+    "Samples": 105,
+    "Flowcells": 4,
+    "SamplesTotal": 15141,
+    "FlowcellsTotal": 1042
+  },
+  {
+    "date": "11-22-2022",
+    "Samples": 7,
+    "Flowcells": 1,
+    "SamplesTotal": 15148,
+    "FlowcellsTotal": 1043
+  },
+  {
+    "date": "11-23-2022",
+    "Samples": 75,
+    "Flowcells": 3,
+    "SamplesTotal": 15223,
+    "FlowcellsTotal": 1046
+  },
+  {
+    "date": "11-24-2022",
+    "Samples": 42,
+    "Flowcells": 2,
+    "SamplesTotal": 15265,
+    "FlowcellsTotal": 1048
+  },
+  {
+    "date": "11-25-2022",
+    "Samples": 17,
+    "Flowcells": 2,
+    "SamplesTotal": 15282,
+    "FlowcellsTotal": 1050
+  },
+  {
+    "date": "11-26-2022",
+    "Samples": 50,
+    "Flowcells": 3,
+    "SamplesTotal": 15332,
+    "FlowcellsTotal": 1053
+  },
+  {
+    "date": "11-27-2022",
+    "Samples": 52,
+    "Flowcells": 3,
+    "SamplesTotal": 15384,
+    "FlowcellsTotal": 1056
+  },
+  {
+    "date": "11-28-2022",
+    "Samples": 22,
+    "Flowcells": 2,
+    "SamplesTotal": 15406,
+    "FlowcellsTotal": 1058
+  },
+  {
+    "date": "11-29-2022",
+    "Samples": 47,
+    "Flowcells": 2,
+    "SamplesTotal": 15453,
+    "FlowcellsTotal": 1060
+  },
+  {
+    "date": "11-30-2022",
+    "Samples": 9,
+    "Flowcells": 2,
+    "SamplesTotal": 15462,
+    "FlowcellsTotal": 1062
+  },
+  {
+    "date": "12-01-2022",
+    "Samples": 50,
+    "Flowcells": 2,
+    "SamplesTotal": 15512,
+    "FlowcellsTotal": 1064
+  },
+  {
+    "date": "12-02-2022",
+    "Samples": 101,
+    "Flowcells": 4,
+    "SamplesTotal": 15613,
+    "FlowcellsTotal": 1068
+  },
+  {
+    "date": "12-03-2022",
+    "Samples": 3,
+    "Flowcells": 1,
+    "SamplesTotal": 15616,
+    "FlowcellsTotal": 1069
+  },
+  {
+    "date": "12-04-2022",
+    "Samples": 6,
+    "Flowcells": 3,
+    "SamplesTotal": 15622,
+    "FlowcellsTotal": 1072
+  },
+  {
+    "date": "12-05-2022",
+    "Samples": 39,
+    "Flowcells": 2,
+    "SamplesTotal": 15661,
+    "FlowcellsTotal": 1074
+  },
+  {
+    "date": "12-06-2022",
+    "Samples": 45,
+    "Flowcells": 3,
+    "SamplesTotal": 15706,
+    "FlowcellsTotal": 1077
+  },
+  {
+    "date": "12-07-2022",
+    "Samples": 26,
+    "Flowcells": 1,
+    "SamplesTotal": 15732,
+    "FlowcellsTotal": 1078
+  },
+  {
+    "date": "12-08-2022",
+    "Samples": 1,
+    "Flowcells": 4,
+    "SamplesTotal": 15733,
+    "FlowcellsTotal": 1082
+  },
+  {
+    "date": "12-09-2022",
+    "Samples": 79,
+    "Flowcells": 3,
+    "SamplesTotal": 15812,
+    "FlowcellsTotal": 1085
+  },
+  {
+    "date": "12-10-2022",
+    "Samples": 64,
+    "Flowcells": 4,
+    "SamplesTotal": 15876,
+    "FlowcellsTotal": 1089
+  },
+  {
+    "date": "12-11-2022",
+    "Samples": 10,
+    "Flowcells": 1,
+    "SamplesTotal": 15886,
+    "FlowcellsTotal": 1090
+  },
+  {
+    "date": "12-12-2022",
+    "Samples": 38,
+    "Flowcells": 2,
+    "SamplesTotal": 15924,
+    "FlowcellsTotal": 1092
+  },
+  {
+    "date": "12-13-2022",
+    "Samples": 42,
+    "Flowcells": 3,
+    "SamplesTotal": 15966,
+    "FlowcellsTotal": 1095
+  },
+  {
+    "date": "12-14-2022",
+    "Samples": 1,
+    "Flowcells": 1,
+    "SamplesTotal": 15967,
+    "FlowcellsTotal": 1096
+  },
+  {
+    "date": "12-15-2022",
+    "Samples": 19,
+    "Flowcells": 4,
+    "SamplesTotal": 15986,
+    "FlowcellsTotal": 1100
+  },
+  {
+    "date": "12-16-2022",
+    "Samples": 15,
+    "Flowcells": 4,
+    "SamplesTotal": 16001,
+    "FlowcellsTotal": 1104
+  },
+  {
+    "date": "12-17-2022",
+    "Samples": 56,
+    "Flowcells": 4,
+    "SamplesTotal": 16057,
+    "FlowcellsTotal": 1108
+  },
+  {
+    "date": "12-18-2022",
+    "Samples": 25,
+    "Flowcells": 1,
+    "SamplesTotal": 16082,
+    "FlowcellsTotal": 1109
+  },
+  {
+    "date": "12-19-2022",
+    "Samples": 36,
+    "Flowcells": 3,
+    "SamplesTotal": 16118,
+    "FlowcellsTotal": 1112
+  },
+  {
+    "date": "12-20-2022",
+    "Samples": 9,
+    "Flowcells": 1,
+    "SamplesTotal": 16127,
+    "FlowcellsTotal": 1113
+  },
+  {
+    "date": "12-21-2022",
+    "Samples": 81,
+    "Flowcells": 4,
+    "SamplesTotal": 16208,
+    "FlowcellsTotal": 1117
+  },
+  {
+    "date": "12-22-2022",
+    "Samples": 25,
+    "Flowcells": 4,
+    "SamplesTotal": 16233,
+    "FlowcellsTotal": 1121
+  },
+  {
+    "date": "12-23-2022",
+    "Samples": 7,
+    "Flowcells": 1,
+    "SamplesTotal": 16240,
+    "FlowcellsTotal": 1122
+  },
+  {
+    "date": "12-24-2022",
+    "Samples": 44,
+    "Flowcells": 2,
+    "SamplesTotal": 16284,
+    "FlowcellsTotal": 1124
+  },
+  {
+    "date": "12-25-2022",
+    "Samples": 6,
+    "Flowcells": 1,
+    "SamplesTotal": 16290,
+    "FlowcellsTotal": 1125
+  },
+  {
+    "date": "12-26-2022",
+    "Samples": 34,
+    "Flowcells": 2,
+    "SamplesTotal": 16324,
+    "FlowcellsTotal": 1127
+  },
+  {
+    "date": "12-27-2022",
+    "Samples": 62,
+    "Flowcells": 4,
+    "SamplesTotal": 16386,
+    "FlowcellsTotal": 1131
+  },
+  {
+    "date": "12-28-2022",
+    "Samples": 45,
+    "Flowcells": 3,
+    "SamplesTotal": 16431,
+    "FlowcellsTotal": 1134
+  },
+  {
+    "date": "12-29-2022",
+    "Samples": 52,
+    "Flowcells": 4,
+    "SamplesTotal": 16483,
+    "FlowcellsTotal": 1138
+  },
+  {
+    "date": "12-30-2022",
+    "Samples": 16,
+    "Flowcells": 1,
+    "SamplesTotal": 16499,
+    "FlowcellsTotal": 1139
+  },
+  {
+    "date": "12-31-2022",
+    "Samples": 13,
+    "Flowcells": 1,
+    "SamplesTotal": 16512,
+    "FlowcellsTotal": 1140
+  },
+  {
+    "date": "01-01-2023",
+    "Samples": 23,
+    "Flowcells": 3,
+    "SamplesTotal": 16535,
+    "FlowcellsTotal": 1143
+  },
+  {
+    "date": "01-02-2023",
+    "Samples": 12,
+    "Flowcells": 1,
+    "SamplesTotal": 16547,
+    "FlowcellsTotal": 1144
+  },
+  {
+    "date": "01-03-2023",
+    "Samples": 10,
+    "Flowcells": 2,
+    "SamplesTotal": 16557,
+    "FlowcellsTotal": 1146
+  },
+  {
+    "date": "01-04-2023",
+    "Samples": 50,
+    "Flowcells": 2,
+    "SamplesTotal": 16607,
+    "FlowcellsTotal": 1148
+  },
+  {
+    "date": "01-05-2023",
+    "Samples": 35,
+    "Flowcells": 3,
+    "SamplesTotal": 16642,
+    "FlowcellsTotal": 1151
+  },
+  {
+    "date": "01-06-2023",
+    "Samples": 6,
+    "Flowcells": 2,
+    "SamplesTotal": 16648,
+    "FlowcellsTotal": 1153
+  },
+  {
+    "date": "01-07-2023",
+    "Samples": 50,
+    "Flowcells": 3,
+    "SamplesTotal": 16698,
+    "FlowcellsTotal": 1156
+  },
+  {
+    "date": "01-08-2023",
+    "Samples": 78,
+    "Flowcells": 4,
+    "SamplesTotal": 16776,
+    "FlowcellsTotal": 1160
+  },
+  {
+    "date": "01-09-2023",
+    "Samples": 13,
+    "Flowcells": 1,
+    "SamplesTotal": 16789,
+    "FlowcellsTotal": 1161
+  },
+  {
+    "date": "01-10-2023",
+    "Samples": 23,
+    "Flowcells": 1,
+    "SamplesTotal": 16812,
+    "FlowcellsTotal": 1162
+  },
+  {
+    "date": "01-11-2023",
+    "Samples": 47,
+    "Flowcells": 4,
+    "SamplesTotal": 16859,
+    "FlowcellsTotal": 1166
+  },
+  {
+    "date": "01-12-2023",
+    "Samples": 4,
+    "Flowcells": 3,
+    "SamplesTotal": 16863,
+    "FlowcellsTotal": 1169
+  },
+  {
+    "date": "01-13-2023",
+    "Samples": 4,
+    "Flowcells": 1,
+    "SamplesTotal": 16867,
+    "FlowcellsTotal": 1170
+  },
+  {
+    "date": "01-14-2023",
+    "Samples": 26,
+    "Flowcells": 2,
+    "SamplesTotal": 16893,
+    "FlowcellsTotal": 1172
+  },
+  {
+    "date": "01-15-2023",
+    "Samples": 24,
+    "Flowcells": 1,
+    "SamplesTotal": 16917,
+    "FlowcellsTotal": 1173
+  },
+  {
+    "date": "01-16-2023",
+    "Samples": 23,
+    "Flowcells": 2,
+    "SamplesTotal": 16940,
+    "FlowcellsTotal": 1175
+  },
+  {
+    "date": "01-17-2023",
+    "Samples": 10,
+    "Flowcells": 2,
+    "SamplesTotal": 16950,
+    "FlowcellsTotal": 1177
+  },
+  {
+    "date": "01-18-2023",
+    "Samples": 23,
+    "Flowcells": 1,
+    "SamplesTotal": 16973,
+    "FlowcellsTotal": 1178
+  },
+  {
+    "date": "01-19-2023",
+    "Samples": 22,
+    "Flowcells": 1,
+    "SamplesTotal": 16995,
+    "FlowcellsTotal": 1179
+  },
+  {
+    "date": "01-20-2023",
+    "Samples": 24,
+    "Flowcells": 2,
+    "SamplesTotal": 17019,
+    "FlowcellsTotal": 1181
+  },
+  {
+    "date": "01-21-2023",
+    "Samples": 47,
+    "Flowcells": 4,
+    "SamplesTotal": 17066,
+    "FlowcellsTotal": 1185
+  },
+  {
+    "date": "01-22-2023",
+    "Samples": 60,
+    "Flowcells": 3,
+    "SamplesTotal": 17126,
+    "FlowcellsTotal": 1188
+  },
+  {
+    "date": "01-23-2023",
+    "Samples": 14,
+    "Flowcells": 2,
+    "SamplesTotal": 17140,
+    "FlowcellsTotal": 1190
+  },
+  {
+    "date": "01-24-2023",
+    "Samples": 51,
+    "Flowcells": 3,
+    "SamplesTotal": 17191,
+    "FlowcellsTotal": 1193
+  },
+  {
+    "date": "01-25-2023",
+    "Samples": 11,
+    "Flowcells": 2,
+    "SamplesTotal": 17202,
+    "FlowcellsTotal": 1195
+  },
+  {
+    "date": "01-26-2023",
+    "Samples": 1,
+    "Flowcells": 1,
+    "SamplesTotal": 17203,
+    "FlowcellsTotal": 1196
+  },
+  {
+    "date": "01-27-2023",
+    "Samples": 25,
+    "Flowcells": 1,
+    "SamplesTotal": 17228,
+    "FlowcellsTotal": 1197
+  },
+  {
+    "date": "01-28-2023",
+    "Samples": 2,
+    "Flowcells": 1,
+    "SamplesTotal": 17230,
+    "FlowcellsTotal": 1198
+  },
+  {
+    "date": "01-29-2023",
+    "Samples": 35,
+    "Flowcells": 3,
+    "SamplesTotal": 17265,
+    "FlowcellsTotal": 1201
+  },
+  {
+    "date": "01-30-2023",
+    "Samples": 7,
+    "Flowcells": 3,
+    "SamplesTotal": 17272,
+    "FlowcellsTotal": 1204
+  },
+  {
+    "date": "01-31-2023",
+    "Samples": 10,
+    "Flowcells": 1,
+    "SamplesTotal": 17282,
+    "FlowcellsTotal": 1205
+  },
+  {
+    "date": "02-01-2023",
+    "Samples": 97,
+    "Flowcells": 4,
+    "SamplesTotal": 17379,
+    "FlowcellsTotal": 1209
+  },
+  {
+    "date": "02-02-2023",
+    "Samples": 9,
+    "Flowcells": 1,
+    "SamplesTotal": 17388,
+    "FlowcellsTotal": 1210
+  },
+  {
+    "date": "02-03-2023",
+    "Samples": 35,
+    "Flowcells": 2,
+    "SamplesTotal": 17423,
+    "FlowcellsTotal": 1212
+  },
+  {
+    "date": "02-04-2023",
+    "Samples": 21,
+    "Flowcells": 2,
+    "SamplesTotal": 17444,
+    "FlowcellsTotal": 1214
+  },
+  {
+    "date": "02-05-2023",
+    "Samples": 1,
+    "Flowcells": 1,
+    "SamplesTotal": 17445,
+    "FlowcellsTotal": 1215
+  },
+  {
+    "date": "02-06-2023",
+    "Samples": 38,
+    "Flowcells": 4,
+    "SamplesTotal": 17483,
+    "FlowcellsTotal": 1219
+  },
+  {
+    "date": "02-07-2023",
+    "Samples": 9,
+    "Flowcells": 1,
+    "SamplesTotal": 17492,
+    "FlowcellsTotal": 1220
+  },
+  {
+    "date": "02-08-2023",
+    "Samples": 15,
+    "Flowcells": 2,
+    "SamplesTotal": 17507,
+    "FlowcellsTotal": 1222
+  },
+  {
+    "date": "02-09-2023",
+    "Samples": 73,
+    "Flowcells": 3,
+    "SamplesTotal": 17580,
+    "FlowcellsTotal": 1225
+  },
+  {
+    "date": "02-10-2023",
+    "Samples": 18,
+    "Flowcells": 1,
+    "SamplesTotal": 17598,
+    "FlowcellsTotal": 1226
+  },
+  {
+    "date": "02-11-2023",
+    "Samples": 7,
+    "Flowcells": 2,
+    "SamplesTotal": 17605,
+    "FlowcellsTotal": 1228
+  },
+  {
+    "date": "02-12-2023",
+    "Samples": 10,
+    "Flowcells": 2,
+    "SamplesTotal": 17615,
+    "FlowcellsTotal": 1230
+  },
+  {
+    "date": "02-13-2023",
+    "Samples": 88,
+    "Flowcells": 4,
+    "SamplesTotal": 17703,
+    "FlowcellsTotal": 1234
+  },
+  {
+    "date": "02-14-2023",
+    "Samples": 21,
+    "Flowcells": 3,
+    "SamplesTotal": 17724,
+    "FlowcellsTotal": 1237
+  },
+  {
+    "date": "02-15-2023",
+    "Samples": 21,
+    "Flowcells": 1,
+    "SamplesTotal": 17745,
+    "FlowcellsTotal": 1238
+  },
+  {
+    "date": "02-16-2023",
+    "Samples": 8,
+    "Flowcells": 3,
+    "SamplesTotal": 17753,
+    "FlowcellsTotal": 1241
+  },
+  {
+    "date": "02-17-2023",
+    "Samples": 6,
+    "Flowcells": 4,
+    "SamplesTotal": 17759,
+    "FlowcellsTotal": 1245
+  },
+  {
+    "date": "02-18-2023",
+    "Samples": 42,
+    "Flowcells": 3,
+    "SamplesTotal": 17801,
+    "FlowcellsTotal": 1248
+  },
+  {
+    "date": "02-19-2023",
+    "Samples": 69,
+    "Flowcells": 3,
+    "SamplesTotal": 17870,
+    "FlowcellsTotal": 1251
+  },
+  {
+    "date": "02-20-2023",
+    "Samples": 72,
+    "Flowcells": 3,
+    "SamplesTotal": 17942,
+    "FlowcellsTotal": 1254
+  },
+  {
+    "date": "02-21-2023",
+    "Samples": 42,
+    "Flowcells": 2,
+    "SamplesTotal": 17984,
+    "FlowcellsTotal": 1256
+  },
+  {
+    "date": "02-22-2023",
+    "Samples": 21,
+    "Flowcells": 2,
+    "SamplesTotal": 18005,
+    "FlowcellsTotal": 1258
+  },
+  {
+    "date": "02-23-2023",
+    "Samples": 83,
+    "Flowcells": 3,
+    "SamplesTotal": 18088,
+    "FlowcellsTotal": 1261
+  },
+  {
+    "date": "02-24-2023",
+    "Samples": 83,
+    "Flowcells": 4,
+    "SamplesTotal": 18171,
+    "FlowcellsTotal": 1265
+  },
+  {
+    "date": "02-25-2023",
+    "Samples": 48,
+    "Flowcells": 4,
+    "SamplesTotal": 18219,
+    "FlowcellsTotal": 1269
+  },
+  {
+    "date": "02-26-2023",
+    "Samples": 61,
+    "Flowcells": 3,
+    "SamplesTotal": 18280,
+    "FlowcellsTotal": 1272
+  },
+  {
+    "date": "02-27-2023",
+    "Samples": 83,
+    "Flowcells": 3,
+    "SamplesTotal": 18363,
+    "FlowcellsTotal": 1275
+  },
+  {
+    "date": "02-28-2023",
+    "Samples": 6,
+    "Flowcells": 4,
+    "SamplesTotal": 18369,
+    "FlowcellsTotal": 1279
+  },
+  {
+    "date": "03-01-2023",
+    "Samples": 34,
+    "Flowcells": 2,
+    "SamplesTotal": 18403,
+    "FlowcellsTotal": 1281
+  },
+  {
+    "date": "03-02-2023",
+    "Samples": 55,
+    "Flowcells": 4,
+    "SamplesTotal": 18458,
+    "FlowcellsTotal": 1285
+  },
+  {
+    "date": "03-03-2023",
+    "Samples": 38,
+    "Flowcells": 4,
+    "SamplesTotal": 18496,
+    "FlowcellsTotal": 1289
+  },
+  {
+    "date": "03-04-2023",
+    "Samples": 26,
+    "Flowcells": 4,
+    "SamplesTotal": 18522,
+    "FlowcellsTotal": 1293
+  },
+  {
+    "date": "03-05-2023",
+    "Samples": 22,
+    "Flowcells": 1,
+    "SamplesTotal": 18544,
+    "FlowcellsTotal": 1294
+  },
+  {
+    "date": "03-06-2023",
+    "Samples": 18,
+    "Flowcells": 3,
+    "SamplesTotal": 18562,
+    "FlowcellsTotal": 1297
+  },
+  {
+    "date": "03-07-2023",
+    "Samples": 9,
+    "Flowcells": 2,
+    "SamplesTotal": 18571,
+    "FlowcellsTotal": 1299
+  },
+  {
+    "date": "03-08-2023",
+    "Samples": 26,
+    "Flowcells": 1,
+    "SamplesTotal": 18597,
+    "FlowcellsTotal": 1300
+  },
+  {
+    "date": "03-09-2023",
+    "Samples": 6,
+    "Flowcells": 1,
+    "SamplesTotal": 18603,
+    "FlowcellsTotal": 1301
+  },
+  {
+    "date": "03-10-2023",
+    "Samples": 55,
+    "Flowcells": 4,
+    "SamplesTotal": 18658,
+    "FlowcellsTotal": 1305
+  },
+  {
+    "date": "03-11-2023",
+    "Samples": 42,
+    "Flowcells": 2,
+    "SamplesTotal": 18700,
+    "FlowcellsTotal": 1307
+  },
+  {
+    "date": "03-12-2023",
+    "Samples": 25,
+    "Flowcells": 2,
+    "SamplesTotal": 18725,
+    "FlowcellsTotal": 1309
+  },
+  {
+    "date": "03-13-2023",
+    "Samples": 63,
+    "Flowcells": 4,
+    "SamplesTotal": 18788,
+    "FlowcellsTotal": 1313
+  },
+  {
+    "date": "03-14-2023",
+    "Samples": 28,
+    "Flowcells": 3,
+    "SamplesTotal": 18816,
+    "FlowcellsTotal": 1316
+  },
+  {
+    "date": "03-15-2023",
+    "Samples": 23,
+    "Flowcells": 1,
+    "SamplesTotal": 18839,
+    "FlowcellsTotal": 1317
+  },
+  {
+    "date": "03-16-2023",
+    "Samples": 1,
+    "Flowcells": 1,
+    "SamplesTotal": 18840,
+    "FlowcellsTotal": 1318
+  },
+  {
+    "date": "03-17-2023",
+    "Samples": 84,
+    "Flowcells": 4,
+    "SamplesTotal": 18924,
+    "FlowcellsTotal": 1322
+  },
+  {
+    "date": "03-18-2023",
+    "Samples": 23,
+    "Flowcells": 1,
+    "SamplesTotal": 18947,
+    "FlowcellsTotal": 1323
+  },
+  {
+    "date": "03-19-2023",
+    "Samples": 11,
+    "Flowcells": 1,
+    "SamplesTotal": 18958,
+    "FlowcellsTotal": 1324
+  },
+  {
+    "date": "03-20-2023",
+    "Samples": 2,
+    "Flowcells": 2,
+    "SamplesTotal": 18960,
+    "FlowcellsTotal": 1326
+  },
+  {
+    "date": "03-21-2023",
+    "Samples": 15,
+    "Flowcells": 3,
+    "SamplesTotal": 18975,
+    "FlowcellsTotal": 1329
+  },
+  {
+    "date": "03-22-2023",
+    "Samples": 13,
+    "Flowcells": 1,
+    "SamplesTotal": 18988,
+    "FlowcellsTotal": 1330
+  },
+  {
+    "date": "03-23-2023",
+    "Samples": 102,
+    "Flowcells": 4,
+    "SamplesTotal": 19090,
+    "FlowcellsTotal": 1334
+  },
+  {
+    "date": "03-24-2023",
+    "Samples": 29,
+    "Flowcells": 4,
+    "SamplesTotal": 19119,
+    "FlowcellsTotal": 1338
+  },
+  {
+    "date": "03-25-2023",
+    "Samples": 75,
+    "Flowcells": 4,
+    "SamplesTotal": 19194,
+    "FlowcellsTotal": 1342
+  },
+  {
+    "date": "03-26-2023",
+    "Samples": 43,
+    "Flowcells": 4,
+    "SamplesTotal": 19237,
+    "FlowcellsTotal": 1346
+  },
+  {
+    "date": "03-27-2023",
+    "Samples": 48,
+    "Flowcells": 2,
+    "SamplesTotal": 19285,
+    "FlowcellsTotal": 1348
+  },
+  {
+    "date": "03-28-2023",
+    "Samples": 12,
+    "Flowcells": 4,
+    "SamplesTotal": 19297,
+    "FlowcellsTotal": 1352
+  },
+  {
+    "date": "03-29-2023",
+    "Samples": 84,
+    "Flowcells": 3,
+    "SamplesTotal": 19381,
+    "FlowcellsTotal": 1355
+  },
+  {
+    "date": "03-30-2023",
+    "Samples": 75,
+    "Flowcells": 3,
+    "SamplesTotal": 19456,
+    "FlowcellsTotal": 1358
+  },
+  {
+    "date": "03-31-2023",
+    "Samples": 43,
+    "Flowcells": 2,
+    "SamplesTotal": 19499,
+    "FlowcellsTotal": 1360
+  },
+  {
+    "date": "04-01-2023",
+    "Samples": 43,
+    "Flowcells": 2,
+    "SamplesTotal": 19542,
+    "FlowcellsTotal": 1362
+  },
+  {
+    "date": "05-01-2023",
+    "Samples": 23,
+    "Flowcells": 2,
+    "SamplesTotal": 19565,
+    "FlowcellsTotal": 1364
+  },
+  {
+    "date": "06-01-2023",
+    "Samples": 13,
+    "Flowcells": 2,
+    "SamplesTotal": 19578,
+    "FlowcellsTotal": 1366
+  }
+]

@@ -14,7 +14,7 @@ import {
 
 import CustomAreaChart from "../components/overview/CustomAreaChart";
 
-const data1 = require('../data1.json')
+const data1 = require('../updated_data.json')
 
 var kpiData = [
   {
@@ -51,12 +51,14 @@ var kpiData = [
   },
 ];
 
-var Kpis = {
+var kpis = {
   Samples: "Samples",
   Flowcells: "Flowcells",
+  SamplesTotal: "SamplesTotal",
+  FlowcellsTotal: "FlowcellsTotal"
 };
 
-var tabs1 = [Kpis.Samples, Kpis.Flowcells];
+var tabs1 = [kpis.Samples, kpis.Flowcells];
 
 
 
@@ -75,9 +77,10 @@ export default function Home() {
               className="mt-5 h-72"
               data={data1}
               index="date"
-              colors={["cyan"]}
+              colors={["cyan", "red"]}
               showLegend={true}
               yAxisWidth={56}
+              kpis={["Samples", "Flowcells", "SamplesTotal", "FlowcellsTotal"]}
             />
           </div>
           <Grid numItemsLg={2} className="gap-6">
@@ -92,6 +95,7 @@ export default function Home() {
                 colors={["orange"]}
                 showLegend={true}
                 yAxisWidth={56}
+                kpis={["Samples", "Flowcells", "SamplesTotal", "FlowcellsTotal"]}
               />
             </div>
             <div className="mt-6">
@@ -105,6 +109,7 @@ export default function Home() {
                 colors={["green"]}
                 showLegend={true}
                 yAxisWidth={56}
+                kpis={["Samples", "Flowcells", "SamplesTotal", "FlowcellsTotal"]}
               />
             </div>
           </Grid>

@@ -22,8 +22,8 @@ import {
 const CustomAreaChart = (props) => {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const selectedKpi = props.tabs[selectedIndex];
-
+  const selectedKpi1 = props.kpis[selectedIndex];
+  const selectedKpi2 = props.kpis[selectedIndex + 2];
   const [value, setValue] = useState(3);
 
   // array of window sizes
@@ -42,6 +42,7 @@ const CustomAreaChart = (props) => {
     // Calculate the initial window start index to be the last possible window after preprocessing
     const initialWindowStart = Math.max(0, newData.length - windowSizes[windowSizeIndex]);
     setWindowStart(initialWindowStart);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.data, value, windowSizeIndex]);
 
   // Create a "windowed" subset of the data
@@ -57,8 +58,9 @@ const CustomAreaChart = (props) => {
   };
 
   const areaChartArgs = {
-    categories: [selectedKpi],
+    categories: [selectedKpi1, selectedKpi2],
     animationDuration: 500,
+    autoMinValue: true,
     className: props.className + " select-none",
     data: windowedData,
     index: props.index,
@@ -103,6 +105,9 @@ const CustomAreaChart = (props) => {
                 setValue(val);
                 let newData = preprocessData(props.data, val);
                 setPreprocessedData(newData);
+                console.log("windowed data: ", windowedData);
+                console.log("selectedKpi1: ", selectedKpi1);
+                console.log("selectedKpi2: ", selectedKpi2);
               }}
               icon={EyeIcon}
             >
