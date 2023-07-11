@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { EyeIcon, InformationCircleIcon } from "@heroicons/react/solid";
 import { preprocessData } from "../utils.js";
-
 import {
   Card,
   Select,
@@ -14,7 +12,12 @@ import {
   AreaChart,
   Icon,
 } from "@tremor/react";
-
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  EyeIcon,
+  InformationCircleIcon
+} from "@heroicons/react/solid";
 
 const CustomAreaChart = (props) => {
 
@@ -23,25 +26,47 @@ const CustomAreaChart = (props) => {
 
   const [value, setValue] = useState(3);
 
+  const windowSize = 6; // Define your window size here
+
+  const [windowStart, setWindowStart] = useState(0); // Initial window start is 0
   const [preprocessedData, setPreprocessedData] = useState(props.data);
+
   useEffect(() => {
     let newData = preprocessData(props.data, value);
     setPreprocessedData(newData);
+
+    // Calculate the initial window start index to be the last possible window after preprocessing
+    const initialWindowStart = Math.max(0, newData.length - windowSize);
+    setWindowStart(initialWindowStart);
   }, [props.data, value]);
+
+  // Create a "windowed" subset of the data
+  const windowedData = preprocessedData.slice(windowStart, windowStart + windowSize);
+
+  // Update the window start index to scroll through the data
+  const scrollData = (direction) => {
+    if (direction === "forward" && windowStart + windowSize < preprocessedData.length) {
+      setWindowStart(windowStart + windowSize);
+      console.log(windowStart);
+    } else if (direction === "backward" && windowStart - windowSize >= 0) {
+      setWindowStart(windowStart - windowSize);
+      console.log(windowStart);
+    }
+  };
 
   const areaChartArgs = {
     categories: [selectedKpi],
     animationDuration: 500,
-    autoMinValue: true,
+    // autoMinValue: true,
 
-    className: props.className,
-    data: preprocessedData,
-    // data: props.data,
+    className: props.className + " select-none",
+    data: windowedData,
     index: props.index,
     colors: props.colors,
     showLegend: props.showLegend,
     yAxisWidth: props.yAxisWidth,
   };
+
   return (
     <Card>
       <>
@@ -56,7 +81,33 @@ const CustomAreaChart = (props) => {
               tooltip={props.tooltip}
             />
           </Flex>
-
+        </div>
+        <div className="flex justify-around text-sele select-none">
+          <TabGroup className="flex justify-start"
+            index={selectedIndex}
+            onIndexChange={setSelectedIndex}>
+            <TabList color="gray" variant="line">
+              {props.tabs.map((tab, index) => (
+                <>
+                  <Tab key={index}>{tab}</Tab>
+                </>
+              ))}
+            </TabList>
+          </TabGroup>
+          <Flex justifyContent="center">
+            <Icon
+              className={"mx-2 bg-white hover:bg-slate-200 text-black border-1 border-gray-300 rounded-lg" + (windowStart <= windowSize ? " opacity-50 hover:bg-white" : "")}
+              variant="solid"
+              icon={ChevronLeftIcon}
+              onClick={() => scrollData("backward")}
+            />
+            <Icon
+              className={"mx-2 bg-white hover:bg-slate-200 text-black border-1 border-gray-300 rounded-lg" + (windowStart + windowSize >= preprocessedData.length ? " opacity-50 hover:bg-white" : "")}
+              variant="solid"
+              icon={ChevronRightIcon}
+              onClick={() => scrollData("forward")}
+            />
+          </Flex>
           <Select className="max-w-[14rem] text-center"
             value={value}
             defaultValue={3}
@@ -68,7 +119,6 @@ const CustomAreaChart = (props) => {
             }}
             icon={EyeIcon}
           >
-
             <SelectItem value={1}>
               Daily
             </SelectItem>
@@ -83,20 +133,11 @@ const CustomAreaChart = (props) => {
             </SelectItem>
           </Select>
         </div>
-        <TabGroup className="flex justify-start" index={selectedIndex} onIndexChange={setSelectedIndex}>
-          <TabList color="gray" variant="line">
-            {props.tabs.map((tab, index) => (
-              <>
-                <Tab key={index}>{tab}</Tab>
-              </>
-            ))}
-          </TabList>
-        </TabGroup>
         <div className="mt-8">
           <AreaChart {...areaChartArgs} />
         </div>
       </>
-    </Card>
+    </Card >
   )
 }
 
