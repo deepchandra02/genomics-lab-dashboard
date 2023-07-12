@@ -13,7 +13,8 @@ import {
 } from "@tremor/react";
 
 import CustomAreaChart from "../components/overview/CustomAreaChart";
-import { data1 } from "../dummyData.js"
+
+const data1 = require('../updated_data.json')
 
 var kpiData = [
   {
@@ -50,12 +51,14 @@ var kpiData = [
   },
 ];
 
-var Kpis = {
+var kpis = {
   Samples: "Samples",
   Flowcells: "Flowcells",
+  SamplesTotal: "SamplesTotal",
+  FlowcellsTotal: "FlowcellsTotal"
 };
 
-var tabs1 = [Kpis.Samples, Kpis.Flowcells];
+var tabs1 = [kpis.Samples, kpis.Flowcells];
 
 
 
@@ -63,7 +66,7 @@ export default function Home() {
 
   return (
     <main className="px-8 py-8">
-      <Title className="font-cabin font-bold text-[2rem] ">Overview</Title>
+      <Title className="font-cabin font-bold text-[2.25rem] ">Overview</Title>
       <Grid numItemsLg={3} className="mt-6 gap-6">
         <Col numColSpan={2}>
           <div>
@@ -74,9 +77,10 @@ export default function Home() {
               className="mt-5 h-72"
               data={data1}
               index="date"
-              colors={["cyan"]}
+              colors={["cyan", "red"]}
               showLegend={true}
               yAxisWidth={56}
+              kpis={["Samples", "Flowcells", "SamplesTotal", "FlowcellsTotal"]}
             />
           </div>
           <Grid numItemsLg={2} className="gap-6">
@@ -91,6 +95,7 @@ export default function Home() {
                 colors={["orange"]}
                 showLegend={true}
                 yAxisWidth={56}
+                kpis={["Samples", "Flowcells", "SamplesTotal", "FlowcellsTotal"]}
               />
             </div>
             <div className="mt-6">
@@ -104,6 +109,7 @@ export default function Home() {
                 colors={["green"]}
                 showLegend={true}
                 yAxisWidth={56}
+                kpis={["Samples", "Flowcells", "SamplesTotal", "FlowcellsTotal"]}
               />
             </div>
           </Grid>

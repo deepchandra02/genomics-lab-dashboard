@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { EyeIcon, InformationCircleIcon } from "@heroicons/react/solid";
 import { preprocessData } from "../utils.js";
-
 import {
   Card,
   Select,
@@ -14,36 +12,65 @@ import {
   AreaChart,
   Icon,
 } from "@tremor/react";
-
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  EyeIcon,
+  InformationCircleIcon
+} from "@heroicons/react/solid";
 
 const CustomAreaChart = (props) => {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const selectedKpi = props.tabs[selectedIndex];
-
+  const selectedKpi1 = props.kpis[selectedIndex];
+  const selectedKpi2 = props.kpis[selectedIndex + 2];
   const [value, setValue] = useState(3);
 
+  // array of window sizes
+  const windowSizes = [3, 6, 9, 12];
+
+  // Use state for window size index
+  const [windowSizeIndex, setWindowSizeIndex] = useState(1); // Default window size index is 1 (6)
+
+  const [windowStart, setWindowStart] = useState(0); // Initial window start is 0
   const [preprocessedData, setPreprocessedData] = useState(props.data);
+
   useEffect(() => {
     let newData = preprocessData(props.data, value);
     setPreprocessedData(newData);
-  }, [props.data, value]);
+
+    // Calculate the initial window start index to be the last possible window after preprocessing
+    const initialWindowStart = Math.max(0, newData.length - windowSizes[windowSizeIndex]);
+    setWindowStart(initialWindowStart);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.data, value, windowSizeIndex]);
+
+  // Create a "windowed" subset of the data
+  const windowedData = preprocessedData.slice(windowStart, windowStart + windowSizes[windowSizeIndex]);
+
+  // Update the window start index to scroll through the data
+  const scrollData = (direction) => {
+    if (direction === "forward" && windowStart + windowSizes[windowSizeIndex] < preprocessedData.length) {
+      setWindowStart(windowStart + windowSizes[windowSizeIndex]);
+    } else if (direction === "backward" && windowStart - windowSizes[windowSizeIndex] >= 0) {
+      setWindowStart(windowStart - windowSizes[windowSizeIndex]);
+    }
+  };
 
   const areaChartArgs = {
-    categories: [selectedKpi],
+    categories: [selectedKpi1, selectedKpi2],
     animationDuration: 500,
     autoMinValue: true,
-
-    className: props.className,
-    data: preprocessedData,
-    // data: props.data,
+    className: props.className + " select-none",
+    data: windowedData,
     index: props.index,
     colors: props.colors,
     showLegend: props.showLegend,
     yAxisWidth: props.yAxisWidth,
   };
+
   return (
-    <Card>
+    <Card decoration="top" decorationColor="teal">
       <>
         <div className="flex justify-between">
 
@@ -52,49 +79,80 @@ const CustomAreaChart = (props) => {
             <Icon
               icon={InformationCircleIcon}
               variant="simple"
-              className=" text-green-600 hover:text-green-400 "
+              className=" text-teal-600 hover:text-teal-400 "
               tooltip={props.tooltip}
             />
           </Flex>
-
-          <Select className="max-w-[14rem] text-center"
-            value={value}
-            defaultValue={3}
-            placeholder="Select a time period"
-            onValueChange={val => {
-              setValue(val);
-              let newData = preprocessData(props.data, val);
-              setPreprocessedData(newData); //<-- You'd set the state here
-            }}
-            icon={EyeIcon}
-          >
-
-            <SelectItem value="1">
-              Daily
-            </SelectItem>
-            <SelectItem value="2">
-              Weekly
-            </SelectItem>
-            <SelectItem value="3">
-              Monthly
-            </SelectItem>
-            <SelectItem value="4">
-              Yearly
-            </SelectItem>
-          </Select>
         </div>
-        <TabGroup className="flex justify-start" index={selectedIndex} onIndexChange={setSelectedIndex}>
-          <TabList color="gray" variant="line">
-            {props.tabs.map((tab, index) => (
-              <>
-                <Tab key={index}>{tab}</Tab>
-              </>
-            ))}
-          </TabList>
-        </TabGroup>
+        <div className="flex justify-between select-none">
+          <TabGroup className="flex justify-start"
+            index={selectedIndex}
+            onIndexChange={setSelectedIndex}>
+            <TabList color="gray" variant="line">
+              {props.tabs.map((tab, index) => (
+                <>
+                  <Tab key={index}>{tab}</Tab>
+                </>
+              ))}
+            </TabList>
+          </TabGroup>
+          <div className="flex gap-x-4">
+            <Select className="flex max-w-[14rem] justify-end"
+              value={value}
+              defaultValue={3}
+              placeholder="Select a time period"
+              onValueChange={val => {
+                setValue(val);
+                let newData = preprocessData(props.data, val);
+                setPreprocessedData(newData);
+                console.log("windowed data: ", windowedData);
+                console.log("selectedKpi1: ", selectedKpi1);
+                console.log("selectedKpi2: ", selectedKpi2);
+              }}
+              icon={EyeIcon}
+            >
+              <SelectItem value={1}>
+                Daily
+              </SelectItem>
+              <SelectItem value={2}>
+                Weekly
+              </SelectItem>
+              <SelectItem value={3}>
+                Monthly
+              </SelectItem>
+              <SelectItem value={4}>
+                Yearly
+              </SelectItem>
+            </Select>
+            <TabGroup className="flex justify-end"
+              index={windowSizeIndex}
+              onIndexChange={setWindowSizeIndex}>
+              <TabList color="gray" variant="solid">
+                {windowSizes.map((size, index) => (
+                  <Tab key={index}>{size}</Tab>
+                ))}
+              </TabList>
+            </TabGroup>
+          </div>
+        </div>
         <div className="mt-8">
           <AreaChart {...areaChartArgs} />
+          <Flex className="mt-2" justifyContent="center">
+            <Icon
+              className={"mx-2 bg-white hover:bg-slate-200 text-black border-[1.5px] border-gray-500 rounded-lg" + (windowStart <= windowSizes[windowSizeIndex] ? " opacity-50 hover:bg-white" : "")}
+              variant="solid"
+              icon={ChevronLeftIcon}
+              onClick={() => scrollData("backward")}
+            />
+            <Icon
+              className={"mx-2 bg-white hover:bg-slate-200 text-black border-[1.5px] border-gray-500 rounded-lg" + (windowStart + windowSizes[windowSizeIndex] >= preprocessedData.length ? " opacity-50 hover:bg-white" : "")}
+              variant="solid"
+              icon={ChevronRightIcon}
+              onClick={() => scrollData("forward")}
+            />
+          </Flex>
         </div>
+
       </>
     </Card>
   )

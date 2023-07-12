@@ -1,18 +1,5 @@
 import { startOfMonth, startOfWeek, startOfYear, format, parse } from "date-fns";
 
-const usNumberformatter = (number, decimals = 0) => {
-  return Intl.NumberFormat("us", {
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-  })
-    .format(Number(number))
-    .toString();
-};
-
-export { usNumberformatter };
-
-
-
 export function preprocessData(data, period) {
   let aggregatedData = {};
 
@@ -21,19 +8,19 @@ export function preprocessData(data, period) {
     let key;
 
     switch (period) {
-      case '1': // Daily
+      case 1: // Daily
         key = item.date;
         break;
-      case '2': // Weekly
+      case 2: // Weekly
         key = format(startOfWeek(date), 'MM-dd-yyyy');
         break;
-      case '3': // Monthly
+      case 3: // Monthly
         key = format(startOfMonth(date), 'MM-dd-yyyy');
         break;
-      case '4': // Yearly
+      case 4: // Yearly
         key = format(startOfYear(date), 'MM-dd-yyyy');
         break;
-      default:
+      default: // Default to daily
         key = item.date;
     }
 
@@ -47,8 +34,9 @@ export function preprocessData(data, period) {
 
     aggregatedData[key].Samples += item.Samples;
     aggregatedData[key].Flowcells += item.Flowcells;
+    aggregatedData[key].SamplesTotal = item.SamplesTotal; // adjust this
+    aggregatedData[key].FlowcellsTotal = item.FlowcellsTotal; // adjust this
   });
 
   return Object.values(aggregatedData);
 }
-//  export default preprocessData;
