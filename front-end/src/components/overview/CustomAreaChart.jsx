@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { preprocessData } from "../utils.js";
 import {
+  Button,
   Card,
   Select,
   SelectItem,
+  Text,
   Title,
   Tab,
   TabList,
@@ -22,8 +24,8 @@ import {
 const CustomAreaChart = (props) => {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const selectedKpi1 = props.kpis[selectedIndex];
-  const selectedKpi2 = props.kpis[selectedIndex + 2];
+  const selectedKpi = props.kpis[selectedIndex];
+  const cumulativeSelectedKpi = props.kpis[selectedIndex + 2];
   const [value, setValue] = useState(3);
 
   // array of window sizes
@@ -34,7 +36,10 @@ const CustomAreaChart = (props) => {
 
   const [windowStart, setWindowStart] = useState(0); // Initial window start is 0
   const [preprocessedData, setPreprocessedData] = useState(props.data);
-
+  const [toggleCumulative, setToggleCumulative] = useState(true);
+  const x = toggleCumulative
+    ? [selectedKpi, cumulativeSelectedKpi]
+    : [selectedKpi];
   useEffect(() => {
     let newData = preprocessData(props.data, value);
     setPreprocessedData(newData);
@@ -58,7 +63,7 @@ const CustomAreaChart = (props) => {
   };
 
   const areaChartArgs = {
-    categories: [selectedKpi1, selectedKpi2],
+    categories: x,
     animationDuration: 500,
     autoMinValue: true,
     className: props.className + " select-none",
@@ -96,6 +101,7 @@ const CustomAreaChart = (props) => {
               ))}
             </TabList>
           </TabGroup>
+
           <div className="flex gap-x-4">
             <Select className="flex max-w-[14rem] justify-end"
               value={value}
@@ -105,9 +111,7 @@ const CustomAreaChart = (props) => {
                 setValue(val);
                 let newData = preprocessData(props.data, val);
                 setPreprocessedData(newData);
-                console.log("windowed data: ", windowedData);
-                console.log("selectedKpi1: ", selectedKpi1);
-                console.log("selectedKpi2: ", selectedKpi2);
+                console.log(props.data.length)
               }}
               icon={EyeIcon}
             >
@@ -133,6 +137,17 @@ const CustomAreaChart = (props) => {
                 ))}
               </TabList>
             </TabGroup>
+            <Button variant="light">
+              <Flex className="items-center">
+                <input
+                  type="checkbox"
+                  id="checkbox1"
+                  className="h-4 w-4 mx-2 shrink-0 rounded-sm border-1  checked:bg-gray-500 hover:ring hover:ring-gray-300 focus:outline-none"
+                  checked={toggleCumulative}
+                  onChange={() => setToggleCumulative(!toggleCumulative)} />
+                <Text className="text-gray-500">Cumulative</Text>
+              </Flex>
+            </Button>
           </div>
         </div>
         <div className="mt-8">
