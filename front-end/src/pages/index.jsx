@@ -14,7 +14,7 @@ import {
 
 import CustomAreaChart from "../components/overview/CustomAreaChart";
 
-const data1 = require('../updated_data.json')
+const data1 = require('../updated_data2.json')
 
 var kpiData = [
   {
@@ -74,7 +74,7 @@ export default function Home() {
               title="1. Quantity processed over time"
               tooltip="This chart gives an overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range."
               tabs={tabs1}
-              className="mt-5 h-72"
+              className="mt-5 h-72 overflow-scroll w-[500vw]"
               data={data1}
               index="date"
               colors={["cyan", "red"]}
@@ -135,6 +135,18 @@ export default function Home() {
           ))}
         </Flex>
       </Grid>
+      {/* <CustomAreaChart
+        title="1. Quantity processed over time"
+        tooltip="This chart gives an overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range."
+        tabs={tabs1}
+        className="mt-5 h-72 overflow-scroll w-screen "
+        data={data1}
+        index="date"
+        colors={["cyan", "red"]}
+        showLegend={true}
+        yAxisWidth={56}
+        kpis={["Samples", "Flowcells", "SamplesTotal", "FlowcellsTotal"]}
+      /> */}
     </main>
   );
 }
