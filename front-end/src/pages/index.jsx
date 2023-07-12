@@ -65,7 +65,7 @@ var tabs1 = [kpis.Samples, kpis.Flowcells];
 export default function Home() {
 
   return (
-    <main className="px-8 py-8">
+    <main className="px-8 py-8 h-[100vh]">
       <Title className="font-cabin font-bold text-[2.25rem] ">Overview</Title>
       <Grid numItemsLg={3} className="mt-6 gap-6">
         <Col numColSpan={2}>
