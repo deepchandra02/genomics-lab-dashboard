@@ -21,6 +21,7 @@ import {
   InformationCircleIcon
 } from "@heroicons/react/solid";
 
+
 const CustomAreaChart = (props) => {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -36,10 +37,11 @@ const CustomAreaChart = (props) => {
 
   const [windowStart, setWindowStart] = useState(0); // Initial window start is 0
   const [preprocessedData, setPreprocessedData] = useState(props.data);
-  const [toggleCumulative, setToggleCumulative] = useState(true);
-  const x = toggleCumulative
-    ? [selectedKpi, cumulativeSelectedKpi]
+  const [toggleCumulative, setToggleCumulative] = useState(false);
+  const categories = toggleCumulative
+    ? [cumulativeSelectedKpi]
     : [selectedKpi];
+  const [colors, setColors] = useState([props.colors[0]]);
   useEffect(() => {
     let newData = preprocessData(props.data, value);
     setPreprocessedData(newData);
@@ -47,8 +49,14 @@ const CustomAreaChart = (props) => {
     // Calculate the initial window start index to be the last possible window after preprocessing
     const initialWindowStart = Math.max(0, newData.length - windowSizes[windowSizeIndex]);
     setWindowStart(initialWindowStart);
+    if (toggleCumulative) {
+      setColors([props.colors[1]]);
+    } else {
+      setColors([props.colors[0]]);
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.data, value, windowSizeIndex]);
+  }, [props.colors, props.data, toggleCumulative, value, windowSizeIndex]);
 
   // Create a "windowed" subset of the data
   const windowedData = preprocessedData.slice(windowStart, windowStart + windowSizes[windowSizeIndex]);
@@ -63,13 +71,13 @@ const CustomAreaChart = (props) => {
   };
 
   const areaChartArgs = {
-    categories: x,
+    categories: categories,
     animationDuration: 500,
     autoMinValue: true,
     className: props.className + " select-none",
     data: windowedData,
     index: props.index,
-    colors: props.colors,
+    colors: colors,
     showLegend: props.showLegend,
     yAxisWidth: props.yAxisWidth,
   };
