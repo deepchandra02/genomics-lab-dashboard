@@ -14,7 +14,7 @@ import {
 
 import CustomAreaChart from "../components/overview/CustomAreaChart";
 
-const data1 = require('../updated_data.json')
+const data1 = require('../data/updated_data.json')
 
 var kpiData = [
   {
