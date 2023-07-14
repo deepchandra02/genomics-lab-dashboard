@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import { preprocessData } from "../utils.js";
 import {
   Button,
@@ -21,19 +22,21 @@ import {
   InformationCircleIcon
 } from "@heroicons/react/solid";
 
+const DEFAULT_WINDOW_SIZE_INDEX = 1;
+const DEFAULT_VALUE = 3;
+const WINDOW_SIZES = [3, 6, 9, 12];
+
+
 
 const CustomAreaChart = (props) => {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selectedKpi = props.kpis[selectedIndex];
   const cumulativeSelectedKpi = props.kpis[selectedIndex + 2];
-  const [value, setValue] = useState(3);
-
-  // array of window sizes
-  const windowSizes = [3, 6, 9, 12];
+  const [value, setValue] = useState(DEFAULT_VALUE);
 
   // Use state for window size index
-  const [windowSizeIndex, setWindowSizeIndex] = useState(1); // Default window size index is 1 (6)
+  const [windowSizeIndex, setWindowSizeIndex] = useState(DEFAULT_WINDOW_SIZE_INDEX);
 
   const [windowStart, setWindowStart] = useState(0); // Initial window start is 0
   const [preprocessedData, setPreprocessedData] = useState(props.data);
@@ -42,31 +45,35 @@ const CustomAreaChart = (props) => {
     ? [cumulativeSelectedKpi]
     : [selectedKpi];
   const [colors, setColors] = useState([props.colors[0]]);
-  useEffect(() => {
-    let newData = preprocessData(props.data, value);
-    setPreprocessedData(newData);
 
+  useEffect(() => {
+    const newData = preprocessData(props.data, value);
+    setPreprocessedData(newData);
+  }, [props.data, value]);
+
+  useEffect(() => {
     // Calculate the initial window start index to be the last possible window after preprocessing
-    const initialWindowStart = Math.max(0, newData.length - windowSizes[windowSizeIndex]);
+    const initialWindowStart = Math.max(0, preprocessedData.length - WINDOW_SIZES[windowSizeIndex]);
     setWindowStart(initialWindowStart);
+  }, [preprocessedData, windowSizeIndex]);
+
+  useEffect(() => {
     if (toggleCumulative) {
       setColors([props.colors[1]]);
     } else {
       setColors([props.colors[0]]);
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.colors, props.data, toggleCumulative, value, windowSizeIndex]);
+  }, [props.colors, toggleCumulative]);
 
   // Create a "windowed" subset of the data
-  const windowedData = preprocessedData.slice(windowStart, windowStart + windowSizes[windowSizeIndex]);
+  const windowedData = preprocessedData.slice(windowStart, windowStart + WINDOW_SIZES[windowSizeIndex]);
 
   // Update the window start index to scroll through the data
   const scrollData = (direction) => {
-    if (direction === "forward" && windowStart + windowSizes[windowSizeIndex] < preprocessedData.length) {
-      setWindowStart(windowStart + windowSizes[windowSizeIndex]);
-    } else if (direction === "backward" && windowStart - windowSizes[windowSizeIndex] >= 0) {
-      setWindowStart(windowStart - windowSizes[windowSizeIndex]);
+    if (direction === "forward" && windowStart + WINDOW_SIZES[windowSizeIndex] < preprocessedData.length) {
+      setWindowStart(windowStart => windowStart + WINDOW_SIZES[windowSizeIndex]);
+    } else if (direction === "backward" && windowStart - WINDOW_SIZES[windowSizeIndex] >= 0) {
+      setWindowStart(windowStart => windowStart - WINDOW_SIZES[windowSizeIndex]);
     }
   };
 
@@ -111,7 +118,7 @@ const CustomAreaChart = (props) => {
           </TabGroup>
 
           <div className="flex gap-x-4">
-            <Select className="flex max-w-[14rem] justify-end"
+            <Select className="max-w-[14rem] justify-end"
               value={value}
               defaultValue={3}
               placeholder="Select a time period"
@@ -140,7 +147,7 @@ const CustomAreaChart = (props) => {
               index={windowSizeIndex}
               onIndexChange={setWindowSizeIndex}>
               <TabList color="gray" variant="solid">
-                {windowSizes.map((size, index) => (
+                {WINDOW_SIZES.map((size, index) => (
                   <Tab key={index}>{size}</Tab>
                 ))}
               </TabList>
@@ -162,13 +169,13 @@ const CustomAreaChart = (props) => {
           <AreaChart {...areaChartArgs} />
           <Flex className="mt-2" justifyContent="center">
             <Icon
-              className={"mx-2 bg-white hover:bg-slate-200 text-black border-[1.5px] border-gray-500 rounded-lg" + (windowStart <= windowSizes[windowSizeIndex] ? " opacity-50 hover:bg-white" : "")}
+              className={"mx-2 bg-white hover:bg-slate-200 text-black border-[1.5px] border-gray-500 rounded-lg" + (windowStart <= WINDOW_SIZES[windowSizeIndex] ? " opacity-50 hover:bg-white" : "")}
               variant="solid"
               icon={ChevronLeftIcon}
               onClick={() => scrollData("backward")}
             />
             <Icon
-              className={"mx-2 bg-white hover:bg-slate-200 text-black border-[1.5px] border-gray-500 rounded-lg" + (windowStart + windowSizes[windowSizeIndex] >= preprocessedData.length ? " opacity-50 hover:bg-white" : "")}
+              className={"mx-2 bg-white hover:bg-slate-200 text-black border-[1.5px] border-gray-500 rounded-lg" + (windowStart + WINDOW_SIZES[windowSizeIndex] >= preprocessedData.length ? " opacity-50 hover:bg-white" : "")}
               variant="solid"
               icon={ChevronRightIcon}
               onClick={() => scrollData("forward")}
@@ -179,6 +186,19 @@ const CustomAreaChart = (props) => {
       </>
     </Card>
   )
+}
+
+CustomAreaChart.propTypes = {
+  kpis: PropTypes.array.isRequired,
+  colors: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
+  className: PropTypes.string,
+  index: PropTypes.number.isRequired,
+  showLegend: PropTypes.bool.isRequired,
+  yAxisWidth: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  tooltip: PropTypes.string.isRequired,
+  tabs: PropTypes.array.isRequired
 }
 
 export default CustomAreaChart
