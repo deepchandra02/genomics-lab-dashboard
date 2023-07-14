@@ -22,22 +22,14 @@ import {
   InformationCircleIcon
 } from "@heroicons/react/solid";
 
-const DEFAULT_WINDOW_SIZE_INDEX = 1;
-const DEFAULT_VALUE = 3;
-const WINDOW_SIZES = [3, 6, 9, 12];
-
-
-
 const CustomAreaChart = (props) => {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selectedKpi = props.kpis[selectedIndex];
   const cumulativeSelectedKpi = props.kpis[selectedIndex + 2];
-  const [value, setValue] = useState(DEFAULT_VALUE);
+  const [value, setValue] = useState(3);
 
-  // Use state for window size index
-  const [windowSizeIndex, setWindowSizeIndex] = useState(DEFAULT_WINDOW_SIZE_INDEX);
-
+  const [windowSize, setWindowSize] = useState(6);
   const [windowStart, setWindowStart] = useState(0); // Initial window start is 0
   const [preprocessedData, setPreprocessedData] = useState(props.data);
   const [toggleCumulative, setToggleCumulative] = useState(false);
@@ -53,9 +45,9 @@ const CustomAreaChart = (props) => {
 
   useEffect(() => {
     // Calculate the initial window start index to be the last possible window after preprocessing
-    const initialWindowStart = Math.max(0, preprocessedData.length - WINDOW_SIZES[windowSizeIndex]);
+    const initialWindowStart = Math.max(0, preprocessedData.length - windowSize);
     setWindowStart(initialWindowStart);
-  }, [preprocessedData, windowSizeIndex]);
+  }, [preprocessedData, windowSize]);
 
   useEffect(() => {
     if (toggleCumulative) {
@@ -66,14 +58,14 @@ const CustomAreaChart = (props) => {
   }, [props.colors, toggleCumulative]);
 
   // Create a "windowed" subset of the data
-  const windowedData = preprocessedData.slice(windowStart, windowStart + WINDOW_SIZES[windowSizeIndex]);
+  const windowedData = preprocessedData.slice(windowStart, windowStart + windowSize);
 
   // Update the window start index to scroll through the data
   const scrollData = (direction) => {
-    if (direction === "forward" && windowStart + WINDOW_SIZES[windowSizeIndex] < preprocessedData.length) {
-      setWindowStart(windowStart => windowStart + WINDOW_SIZES[windowSizeIndex]);
-    } else if (direction === "backward" && windowStart - WINDOW_SIZES[windowSizeIndex] >= 0) {
-      setWindowStart(windowStart => windowStart - WINDOW_SIZES[windowSizeIndex]);
+    if (direction === "forward" && windowStart + windowSize < preprocessedData.length) {
+      setWindowStart(windowStart => windowStart + windowSize);
+    } else if (direction === "backward" && windowStart - windowSize >= 0) {
+      setWindowStart(windowStart => windowStart - windowSize);
     }
   };
 
@@ -126,7 +118,6 @@ const CustomAreaChart = (props) => {
                 setValue(val);
                 let newData = preprocessData(props.data, val);
                 setPreprocessedData(newData);
-                console.log(props.data.length)
               }}
               icon={EyeIcon}
             >
@@ -143,21 +134,25 @@ const CustomAreaChart = (props) => {
                 Yearly
               </SelectItem>
             </Select>
-            <TabGroup className="flex justify-end"
-              index={windowSizeIndex}
-              onIndexChange={setWindowSizeIndex}>
-              <TabList color="gray" variant="solid">
-                {WINDOW_SIZES.map((size, index) => (
-                  <Tab key={index}>{size}</Tab>
-                ))}
-              </TabList>
-            </TabGroup>
+
+            <Flex className="items-center">
+              <input
+                type="number"
+                id="windowSizeStepper"
+                className="text-center w-[4rem] h-9 p-2 border border-gray-200 shadow-tremor-input rounded-lg "
+                value={windowSize}
+                step="6"
+                min="0"
+                max={preprocessedData.length}
+                onChange={(e) => setWindowSize(parseInt(e.target.value))}
+              />
+            </Flex>
             <Button variant="light">
-              <Flex className="items-center">
+              <Flex className="items-center ">
                 <input
                   type="checkbox"
                   id="checkbox1"
-                  className="h-4 w-4 mx-2 shrink-0 rounded-sm border-1  checked:bg-gray-500 hover:ring hover:ring-gray-300 focus:outline-none"
+                  className="h-4 w-4 mx-2 rounded-sm"
                   checked={toggleCumulative}
                   onChange={() => setToggleCumulative(!toggleCumulative)} />
                 <Text className="text-gray-500">Cumulative</Text>
@@ -169,13 +164,13 @@ const CustomAreaChart = (props) => {
           <AreaChart {...areaChartArgs} />
           <Flex className="mt-2" justifyContent="center">
             <Icon
-              className={"mx-2 bg-white hover:bg-slate-200 text-black border-[1.5px] border-gray-500 rounded-lg" + (windowStart <= WINDOW_SIZES[windowSizeIndex] ? " opacity-50 hover:bg-white" : "")}
+              className={"mx-2 bg-white hover:bg-slate-200 text-black border-[1.5px] border-gray-500 rounded-lg" + (windowStart <= windowSize ? " opacity-50 hover:bg-white" : "")}
               variant="solid"
               icon={ChevronLeftIcon}
               onClick={() => scrollData("backward")}
             />
             <Icon
-              className={"mx-2 bg-white hover:bg-slate-200 text-black border-[1.5px] border-gray-500 rounded-lg" + (windowStart + WINDOW_SIZES[windowSizeIndex] >= preprocessedData.length ? " opacity-50 hover:bg-white" : "")}
+              className={"mx-2 bg-white hover:bg-slate-200 text-black border-[1.5px] border-gray-500 rounded-lg" + (windowStart + windowSize >= preprocessedData.length ? " opacity-50 hover:bg-white" : "")}
               variant="solid"
               icon={ChevronRightIcon}
               onClick={() => scrollData("forward")}
