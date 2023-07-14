@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from 'prop-types';
 import {
   Card,
   Grid,
@@ -62,14 +62,14 @@ var tabs1 = [kpis.Samples, kpis.Flowcells];
 
 
 
-export default function Home() {
+function Home() {
 
   return (
-    <main className="px-8 py-8">
+    <main className="px-8 py-8 h-[100vh]">
       <Title className="font-cabin font-bold text-[2.25rem] ">Overview</Title>
       <Grid numItemsLg={3} className="mt-6 gap-6">
         <Col numColSpan={2}>
-          <div>
+          <section>
             <CustomAreaChart
               title="1. Quantity processed over time"
               tooltip="This chart gives an overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range."
@@ -82,9 +82,9 @@ export default function Home() {
               yAxisWidth={56}
               kpis={["Samples", "Flowcells", "SamplesTotal", "FlowcellsTotal"]}
             />
-          </div>
+          </section>
           <Grid numItemsLg={2} className="gap-6">
-            <div className="mt-6">
+            <section className="mt-6">
               <CustomAreaChart
                 title="2. Quantity processed over time"
                 tooltip="This chart gives an overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range."
@@ -97,8 +97,8 @@ export default function Home() {
                 yAxisWidth={56}
                 kpis={["Samples", "Flowcells", "SamplesTotal", "FlowcellsTotal"]}
               />
-            </div>
-            <div className="mt-6">
+            </section>
+            <section className="mt-6">
               <CustomAreaChart
                 title="3. Quantity processed over time"
                 tooltip="This chart gives an overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range."
@@ -111,7 +111,7 @@ export default function Home() {
                 yAxisWidth={56}
                 kpis={["Samples", "Flowcells", "SamplesTotal", "FlowcellsTotal"]}
               />
-            </div>
+            </section>
           </Grid>
         </Col>
 
@@ -150,3 +150,18 @@ export default function Home() {
     </main>
   );
 }
+
+Home.propTypes = {
+  kpiData: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      metric: PropTypes.string.isRequired,
+      progress: PropTypes.number.isRequired,
+      target: PropTypes.string.isRequired,
+      delta: PropTypes.string.isRequired,
+      deltaType: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
+
+export default Home;
