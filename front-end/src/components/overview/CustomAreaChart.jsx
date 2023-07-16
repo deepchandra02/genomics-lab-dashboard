@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from 'prop-types';
 import { preprocessData } from "../utils.js";
 import {
   Button,
@@ -22,33 +21,40 @@ import {
   InformationCircleIcon
 } from "@heroicons/react/solid";
 
+// This component is a wrapper around the AreaChart component from @tremor/react
 const CustomAreaChart = (props) => {
 
+  // State to keep track of the selected KPI
   const [selectedIndex, setSelectedIndex] = useState(0);
   const selectedKpi = props.kpis[selectedIndex];
   const cumulativeSelectedKpi = props.kpis[selectedIndex + 2];
-  const [value, setValue] = useState(3);
-
+  // State to keep track of the selected view (monthly by deafult)
+  const [view, setView] = useState(3);
+  // State to keep track of the window size (number of days/months etc. to display in a window)
   const [windowSize, setWindowSize] = useState(6);
   const [windowStart, setWindowStart] = useState(0); // Initial window start is 0
   const [preprocessedData, setPreprocessedData] = useState(props.data);
   const [toggleCumulative, setToggleCumulative] = useState(false);
+
   const categories = toggleCumulative
     ? [cumulativeSelectedKpi]
     : [selectedKpi];
   const [colors, setColors] = useState([props.colors[0]]);
 
+  // Update the preprocessed data based on the selected view
   useEffect(() => {
-    const newData = preprocessData(props.data, value);
+    const newData = preprocessData(props.data, view);
     setPreprocessedData(newData);
-  }, [props.data, value]);
+  }, [props.data, view]);
 
+  // Update the window size based on the selected view
   useEffect(() => {
     // Calculate the initial window start index to be the last possible window after preprocessing
     const initialWindowStart = Math.max(0, preprocessedData.length - windowSize);
     setWindowStart(initialWindowStart);
   }, [preprocessedData, windowSize]);
 
+  // Update the colors based on the toggleCumulative state
   useEffect(() => {
     if (toggleCumulative) {
       setColors([props.colors[1]]);
@@ -69,6 +75,10 @@ const CustomAreaChart = (props) => {
     }
   };
 
+  // Function to format the numbers to be displayed in US format
+  const valueFormatter = (number) => `${Intl.NumberFormat("us").format(number).toString()}`;
+
+  // Arguments to be passed to the AreaChart component
   const areaChartArgs = {
     categories: categories,
     animationDuration: 500,
@@ -79,43 +89,39 @@ const CustomAreaChart = (props) => {
     colors: colors,
     showLegend: props.showLegend,
     yAxisWidth: props.yAxisWidth,
+    valueFormatter: valueFormatter,
   };
 
   return (
     <Card decoration="top" decorationColor="teal">
       <>
-        <div className="flex justify-between">
-
-          <Flex className="space-x-0.5 font-cabin" justifyContent="start" alignItems="center">
-            <Title> {props.title} </Title>
-            <Icon
-              icon={InformationCircleIcon}
-              variant="simple"
-              className=" text-teal-600 hover:text-teal-400 "
-              tooltip={props.tooltip}
-            />
-          </Flex>
-        </div>
+        <Flex className="space-x-0.5 font-cabin" justifyContent="start" alignItems="center">
+          <Title> {props.title} </Title>
+          <Icon
+            icon={InformationCircleIcon}
+            variant="simple"
+            className=" text-teal-600 hover:text-teal-400 "
+            tooltip={props.tooltip}
+          />
+        </Flex>
         <div className="flex justify-between select-none">
           <TabGroup className="flex justify-start"
             index={selectedIndex}
             onIndexChange={setSelectedIndex}>
-            <TabList color="gray" variant="line">
+            <TabList color={colors} variant="line">
               {props.tabs.map((tab, index) => (
-                <>
-                  <Tab key={index}>{tab}</Tab>
-                </>
+                <Tab key={index}>{tab}</Tab>
               ))}
             </TabList>
           </TabGroup>
 
           <div className="flex gap-x-4">
-            <Select className="max-w-[14rem] justify-end"
-              value={value}
+            <Select className="max-w-[14rem] justify-end text-gray-500 hover:text-black"
+              value={view}
               defaultValue={3}
               placeholder="Select a time period"
               onValueChange={val => {
-                setValue(val);
+                setView(val);
                 let newData = preprocessData(props.data, val);
                 setPreprocessedData(newData);
               }}
@@ -135,7 +141,7 @@ const CustomAreaChart = (props) => {
               </SelectItem>
             </Select>
 
-            <Flex className="items-center">
+            <Flex className="items-center text-gray-500 hover:text-black">
               <input
                 type="number"
                 id="windowSizeStepper"
@@ -181,19 +187,6 @@ const CustomAreaChart = (props) => {
       </>
     </Card>
   )
-}
-
-CustomAreaChart.propTypes = {
-  kpis: PropTypes.array.isRequired,
-  colors: PropTypes.array.isRequired,
-  data: PropTypes.array.isRequired,
-  className: PropTypes.string,
-  index: PropTypes.number.isRequired,
-  showLegend: PropTypes.bool.isRequired,
-  yAxisWidth: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  tooltip: PropTypes.string.isRequired,
-  tabs: PropTypes.array.isRequired
 }
 
 export default CustomAreaChart
