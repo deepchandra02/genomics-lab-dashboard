@@ -1,0 +1,18 @@
+[
+  {
+    "type": "SP",
+    "quantity": 5000
+  },
+  {
+    "type": "S1",
+    "quantity": 10000
+  },
+  {
+    "type": "S2",
+    "quantity": 15000
+  },
+  {
+    "type": "S4",
+    "quantity": 2473
+  }
+]
