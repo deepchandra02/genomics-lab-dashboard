@@ -1,80 +1,31 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import {
-  Card,
-  Grid,
-  Title,
-  Text,
-  BadgeDelta,
-  Flex,
-  Metric,
-  ProgressBar,
-  Col,
-} from "@tremor/react";
+import { Grid, Title, Flex, Col } from "@tremor/react";
 
 import CustomAreaChart from "../components/overview/CustomAreaChart";
+import CustomDonutChart from "../components/overview/CustomDonutChart";
 
-const data1 = require('../data/updated_data.json')
+const data1 = require('../data/data1.json')
+const data4 = require('../data/data4.json')
 
-var kpiData = [
-  {
-    title: "Card 1",
-    metric: "$ 12,699",
-    progress: 15.9,
-    target: "$ 80,000",
-    delta: "13.2%",
-    deltaType: "moderateIncrease",
-  },
-  {
-    title: "Card 2",
-    metric: "$ 45,564",
-    progress: 36.5,
-    target: "$ 125,000",
-    delta: "23.9%",
-    deltaType: "increase",
-  },
-  {
-    title: "Card 3",
-    metric: "1,072",
-    progress: 53.6,
-    target: "2,000",
-    delta: "10.1%",
-    deltaType: "moderateDecrease",
-  },
-  {
-    title: "Card 4",
-    metric: "1,072",
-    progress: 53.6,
-    target: "2,000",
-    delta: "10.1%",
-    deltaType: "moderateDecrease",
-  },
-];
-
-var kpis = {
-  Samples: "Samples",
-  Flowcells: "Flowcells",
-  SamplesTotal: "SamplesTotal",
-  FlowcellsTotal: "FlowcellsTotal"
-};
-
-var tabs1 = [kpis.Samples, kpis.Flowcells];
-
-
-
+// This component is the overview page of the application
 function Home() {
-
+  // Calculate total units across all categories
+  const totalUnits2 = data4.reduce((total, item) => total + item.quantity, 0);
+  const donutValueFormatterFlowcellUsage = (number) => {
+    const percentage = ((number / totalUnits2) * 100).toFixed(2);
+    return `${percentage}% | ${Intl.NumberFormat("us").format(number).toString()} flowcells`;
+  };
   return (
-    <main className="px-8 py-8 h-[100vh]">
-      <Title className="font-cabin font-bold text-[2.25rem] ">Overview</Title>
-      <Grid numItemsLg={3} className="mt-6 gap-6">
+    <main className="px-8 py-8">
+      <Title className="font-cabin font-bold text-[2rem] ">Overview</Title>
+      <Grid numItemsLg={3} className="my-8 gap-6">
         <Col numColSpan={2}>
           <section>
             <CustomAreaChart
               title="1. Quantity processed over time"
-              tooltip="This chart gives an overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range."
-              tabs={tabs1}
-              className="mt-5 h-72"
+              tooltip="Overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range."
+              tabs={["Samples", "Flowcells"]}
+              className="mt-5 h-[15rem]"
               data={data1}
               index="date"
               colors={["cyan", "red"]}
@@ -88,7 +39,7 @@ function Home() {
               <CustomAreaChart
                 title="2. Quantity processed over time"
                 tooltip="This chart gives an overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range."
-                tabs={tabs1}
+                tabs={["Samples", "Flowcells"]}
                 className="mt-5 h-72"
                 data={data1}
                 index="date"
@@ -101,8 +52,8 @@ function Home() {
             <section className="mt-6">
               <CustomAreaChart
                 title="3. Quantity processed over time"
-                tooltip="This chart gives an overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range."
-                tabs={tabs1}
+                tooltip="Overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range."
+                tabs={["Samples", "Flowcells"]}
                 className="mt-5 h-72"
                 data={data1}
                 index="date"
@@ -116,40 +67,22 @@ function Home() {
         </Col>
 
         <Flex flexDirection="col" >
-          {kpiData.map((item) => (
-            <Card key={item.title}>
-              <Flex alignItems="start">
-                <div className="truncate">
-                  <Text>{item.title}</Text>
-                  <Metric className="truncate">{item.metric}</Metric>
-                </div>
-                <BadgeDelta deltaType={item.deltaType}>{item.delta}</BadgeDelta>
-              </Flex>
-              <Flex className="mt-4 space-x-2">
-                <Text className="truncate">{`${item.progress}% (${item.metric})`}</Text>
-                <Text>{item.target}</Text>
-              </Flex>
-              <ProgressBar value={item.progress} className="mt-2" />
-              <ProgressBar value={item.progress} className="mt-2" />
-            </Card>
-          ))}
+          <CustomDonutChart
+            title="4. Flowcell-Type distribution"
+            tooltip="Overview of the usage of different types of flowcells over the specified date range."
+            className="w-1/2 select-none"
+            data={data4}
+            index="type"
+            category="quantity"
+            variant="donut"
+            colors={["violet", "indigo", "rose", "cyan"]}
+            valueFormatter={donutValueFormatterFlowcellUsage}
+            label=" flowcells"
+          />
         </Flex>
       </Grid>
     </main>
   );
 }
-
-Home.propTypes = {
-  kpiData: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      metric: PropTypes.string.isRequired,
-      progress: PropTypes.number.isRequired,
-      target: PropTypes.string.isRequired,
-      delta: PropTypes.string.isRequired,
-      deltaType: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
 
 export default Home;
