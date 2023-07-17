@@ -5,7 +5,7 @@ import {
   Card,
   Select,
   SelectItem,
-  Text,
+  Subtitle,
   Title,
   Tab,
   TabList,
@@ -161,7 +161,7 @@ const CustomAreaChart = (props) => {
                   className="h-4 w-4 mx-2 rounded-sm"
                   checked={toggleCumulative}
                   onChange={() => setToggleCumulative(!toggleCumulative)} />
-                <Text className="text-gray-500">Cumulative</Text>
+                <Subtitle>Cumulative</Subtitle>
               </Flex>
             </Button>
           </div>

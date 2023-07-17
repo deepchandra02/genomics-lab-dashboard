@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Title, Flex, Col } from "@tremor/react";
+import { Grid, Title, Col } from "@tremor/react";
 
 import CustomAreaChart from "../components/overview/CustomAreaChart";
 import CustomDonutChart from "../components/overview/CustomDonutChart";
@@ -19,14 +19,14 @@ function Home() {
     return `${percentage}% | ${Intl.NumberFormat("us").format(number).toString()} flowcells`;
   };
   return (
-    <main className="px-8 py-8">
-      <Title className="font-cabin font-bold text-4xl">Overview</Title>
+    <main className="px-8 py-8 text-gray-700">
+      <span className="font-cabin font-bold text-4xl">Overview</span>
       <Grid numItemsLg={9} className="my-8 gap-6">
         <Col numColSpan={6}>
           <section>
             <CustomAreaChart
               title="1. Quantity processed over time"
-              tooltip="Overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range."
+              tooltip="Overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range"
               tabs={["Samples", "Flowcells"]}
               className="h-96"
               data={data1}
@@ -44,7 +44,7 @@ function Home() {
             <div>
               <CustomDonutChart
                 title="4. Flowcell - Type distribution"
-                tooltip="Overview of the usage of different types of flowcells over the specified date range."
+                tooltip="Overview of the usage of different types of flowcells over the specified date range"
                 className="w-1/2 h-44"
                 data={data4}
                 index="type"
@@ -58,7 +58,7 @@ function Home() {
             <div>
               <CustomDonutChart
                 title="5. Services distribution"
-                tooltip="Overview of the different types of services requested among samples over the specified date range."
+                tooltip="Overview of the different types of services requested among samples over the specified date range"
                 className="w-1/2 h-44"
                 data={data5}
                 index="type"
@@ -76,8 +76,8 @@ function Home() {
         <Col numColSpan={6}>
           <section>
             <CustomAreaChart
-              title="1. Quantity processed over time"
-              tooltip="Overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range."
+              title="2. Quantity processed over time"
+              tooltip="Overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range"
               tabs={["Samples", "Flowcells"]}
               className="h-96"
               data={data1}
@@ -95,7 +95,7 @@ function Home() {
             <div>
               <CustomDonutChart
                 title="6. Sequencer distribution"
-                tooltip="Overview of the usage of sequencers over the specified date range."
+                tooltip="Overview of the usage of sequencers over the specified date range"
                 className="w-1/2 h-44"
                 data={data6}
                 index="type"
@@ -109,7 +109,7 @@ function Home() {
             <div>
               <CustomDonutChart
                 title="7. Reference Genome distribution"
-                tooltip="Overview of the different types of reference genomes among samples over the specified date range."
+                tooltip="Overview of the different types of reference genomes among samples over the specified date range"
                 className="w-1/2 h-44"
                 data={data7}
                 index="type"
