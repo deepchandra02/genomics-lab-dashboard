@@ -1,0 +1,12 @@
+Found 1 HTML file(s) generated.
+./input-data-for-externs/input-data-for-externs/flowcell-qc-reports/HNKCVDSX5/HNKCVDSX5.html
+Parsing '230413' for './input-data-for-externs/input-data-for-externs/flowcell-qc-reports/HNKCVDSX5/HNKCVDSX5.html'...
+Data stored in the database.
+Found 1 HTML file(s) generated.
+./input-data-for-externs/input-data-for-externs/flowcell-qc-reports/HNHMYDSX5/HNHMYDSX5.html
+Parsing '230411' for './input-data-for-externs/input-data-for-externs/flowcell-qc-reports/HNHMYDSX5/HNHMYDSX5.html'...
+Data stored in the database.
+Found 1 HTML file(s) generated.
+./input-data-for-externs/input-data-for-externs/flowcell-qc-reports/HFTVCDRX2/HFTVCDRX2.html
+Parsing '230411' for './input-data-for-externs/input-data-for-externs/flowcell-qc-reports/HFTVCDRX2/HFTVCDRX2.html'...
+Data stored in the database.
