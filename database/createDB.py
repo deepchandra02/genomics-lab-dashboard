@@ -79,7 +79,7 @@ sql("CREATE TABLE flowcell (\
 sql("CREATE TABLE pools (\
       pooling_id      VARCHAR(32) PRIMARY KEY,\
       pf_reads        VARCHAR(08) NOT NULL,\
-      loading_conc    NUMERIC(4, 2) NOT NULL CHECK (loading_conc >= 0),\
+      loading_conc    VARCHAR(08) NOT NULL,\
       q30             NUMERIC(5, 3) NOT NULL CHECK ((q30 >= 0) AND (q30 <= 100)),\
       lane_1          BOOLEAN  NOT NULL DEFAULT FALSE,\
       lane_2          BOOLEAN  NOT NULL DEFAULT FALSE,\
