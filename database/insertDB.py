@@ -50,25 +50,25 @@ def store_row(row):
     try:
         cursor.execute("INSERT INTO i5 (i5_id, i5_sequence) VALUES ('%s', '%s');"%(row["INDEX_I5_ID"], row["INDEX_I5_sequencing"])) #ON CONFLICT (i5_id) DO NOTHING
     except:
-        print("i5_sequence already exists; checking for data integrity...")
+        # print("i5_sequence already exists; checking for data integrity...")
         sql("SELECT i5_sequence FROM i5 WHERE i5_id = '%s';"%(row["INDEX_I5_ID"], ))
         data = cursor.fetchone()
         if data != None and data[0] != row["INDEX_I5_sequencing"]:
             print("entry with i5_index %s already exists with i5_sequence %s"%(row["INDEX_I5_ID"], data[0]))
-        else:
-            print("data integrity checked for i5")
+        # else:
+            # print("data integrity checked for i5")
 
     #  table 17
     try:
         cursor.execute("INSERT INTO i7 (i7_id, i7_sequence) VALUES ('%s', '%s');"%(row["INDEX_I7_ID"], row["INDEX_I7_sequencing"])) #ON CONFLICT (i7_id) DO NOTHING
     except:
-        print("i7_sequence already exists; checking for data integrity...")
+        # print("i7_sequence already exists; checking for data integrity...")
         sql("SELECT i7_sequence FROM i7 WHERE i7_id = '%s';"%(row["INDEX_I7_ID"], ))
         data = cursor.fetchone()
         if data != None and data[0] != row["INDEX_I7_sequencing"]:
             print("entry with i7_index %s already exists with i7_sequence %s"%(row["INDEX_I7_ID"], data[0]))
-        else:
-            print("data integrity checked for i7")
+        # else:
+            # print("data integrity checked for i7")
 
     # table sequencer
     sql("INSERT INTO sequencer (sequencer_id) VALUES ('%s') ON CONFLICT (sequencer_id) DO NOTHING;"%(row["Sequencer"], ))
@@ -77,31 +77,34 @@ def store_row(row):
     try:
         cursor.execute("INSERT INTO pi_projects (project_id, pi, requirement) VALUES ('%s', '%s', '%s');"%(row["Project"], row["PI"], row["Data Requirement"]))
     except:
-        print("pi, project pair already exists; checking for data integrity...")
+        # print("pi, project pair already exists; checking for data integrity...")
         sql("SELECT requirement FROM pi_projects WHERE project_id = '%s' AND pi = '%s';"%(row["Project"], row["PI"]))
         data = cursor.fetchone()
         if data != None and data[0] != row["Data Requirement"]:
             print("data requirement changed for project %s from %s to %s"%(row["Project"], data[0], row["Data Requirement"]))
-        else:
-            print("data integrity checked for pi_project")
+        # else:
+            # print("data integrity checked for pi_project")
 
     sql("SELECT earliest, latest FROM pi_projects WHERE project_id = '%s';"%(row["Project"]))
     data = cursor.fetchone()
 
     if data != None:
         assert(len(data) == 2)
-        if data[0] == None or data[0] > row["Submission Date"].date():
+        if data[0] == None or data[0] > row["Submission Date"]:
             sql("UPDATE pi_projects SET earliest = '%s' WHERE project_id = '%s' AND pi = '%s';"%(row["Submission Date"], row["Project"], row["PI"]))
-        if data[1] == None or data[1] < row["Submission Date"].date():
+        if data[1] == None or data[1] < row["Submission Date"]:
             sql("UPDATE pi_projects SET latest = '%s' WHERE project_id = '%s' AND pi = '%s';"%(row["Submission Date"], row["Project"], row["PI"]))
     else:
         print("date fetch failed")
 
     #  table submissions
     try:
-        cursor.execute("INSERT INTO submissions (submission_id, project_id, pi, date, datatype) VALUES ('%s', '%s', '%s', '%s', '%s');"%(row["Submission ID"], row["Project"], row["PI"], row["Submission Date"], row["Datatype"]))
-    except:
-        print("submission_id already exists; checking for data integrity...")
+        cursor.execute("INSERT INTO submissions (submission_id, project_id, date, datatype) VALUES ('%s', '%s', '%s', '%s');"%(row["Submission ID"], row["Project"], row["Submission Date"], row["Datatype"]))
+    except Exception as e:
+        if not str(e).startswith("duplicate key value violates"):
+            print(e)
+        # print("submission_id already exists; checking for data integrity...")
+
 
     if row["Comments"] != "":
         comments = row["Comments"].split(" ")
@@ -150,64 +153,73 @@ def store_row(row):
             # sql("INSERT INTO submissions (submission_id, srv, rg, cov, anl) VALUES ('%s', '%s', '%s', '%s', '%s');"%(row["Submission ID"], srv[1], rg[1], cov[1], anl[1]))
 
     if row["Remark"] != "":
-        sql("SELECT remark FROM submissions WHERE submission_id = '%s' ;"%(srv[1], row["Submission ID"]))
-        data = cursor.fethone()
+        sql("SELECT remark FROM submissions WHERE submission_id = '%s' ;"%(row["Submission ID"]))
+        data = cursor.fetchone()
         if data != None:
             assert(len(data) == 1)
-            if data[0] != "":
+            # print(data)
+            if data[0] != None and str(data[0]) != 'None':
                 if data[0] != row["Remark"]:
                     print("remark changed for submission '%s' from '%s' to '%s'"%(row["Submission ID"], data[0], row["Remark"]))
             elif row["Remark"] != "":
                 sql("UPDATE submissions SET remark = '%s' WHERE submission_id = '%s' ;"%(data[0], row["Submission ID"]))
         else:
-            sql("UPDATE submissions SET remark = '%s' WHERE submission_id = '%s' ;"%(data[0], row["Submission ID"]))
+            sql("UPDATE submissions SET remark = '%s' WHERE submission_id = '%s' ;"%(row["Remark"], row["Submission ID"]))
 
     # table fc
 
     try:
-        cursor.execute("INSERT INTO flowcell (fc_id, fc_type, loaded_by, loading_date, completed_date, order_no, sequencer_id, position)\
-        VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');"%(row["FC"], row["FC Type"], row["Loaded By"], row["Loading Date"], row["Completion Date"], row["Order No"], row["Sequencer"], row["position"]))
-    except:
-        print("flowcell already exists; checking for data integrity...")
+        # print(row["Completion Date"])
+        # print(row)
+        cursor.execute("INSERT INTO flowcell (fc_id, fc_type, loaded_by, loading_date, completion_date, order_no, sequencer_id, position)\
+        VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');"%(row["FC"], row["FC Type"], row["Loaded By"], row["Loading Date"], row["Completion Date"], row["Order No"], row["Sequencer"], row["Position"]))
+        
+    except Exception as e:
+        # print(e)
+        # print(row["Completion Date"])
+        # print(row)
+        # print("flowcell already exists; checking for data integrity...")
         sql("SELECT fc_type, loaded_by, loading_date, completion_date, order_no, sequencer_id, position FROM flowcell WHERE fc_id = '%s' ;"%(row["FC"])) # try except data integrity
         data = cursor.fetchone()
         if data != None:
             assert(len(data) == 7)
+            loading_date = datetime.datetime.strptime(row["Loading Date"], '%m/%d/%Y').date()
+            completion_date = datetime.datetime.strptime(row["Completion Date"], '%m/%d/%Y').date()
             if data[0] != row["FC Type"]:
                 print("FC Type data changed for flowcell %s from %s to %s"%(row["FC"], data[0], row["FC Type"]))
             if data[1] != row["Loaded By"]:
                 print("Loaded By data changed for flowcell %s from %s to %s"%(row["FC"], data[1], row["Loaded By"]))
-            if data[2] != row["Loading Date"]:
-                print("Loading Date data changed for flowcell %s from %s to %s"%(row["FC"], data[2], row["Loading Date"]))
-            if data[3] != row["Completed Date"]:
-                print("Completed Date data changed for flowcell %s from %s to %s"%(row["FC"], data[3], row["Completed Date"]))
+            if data[2] != loading_date:
+                print("Loading Date data changed for flowcell %s from %s to %s"%(row["FC"], data[2], loading_date))
+            if data[3] != completion_date:
+                print("Completed Date data changed for flowcell %s from %s to %s"%(row["FC"], data[3], completion_date))
             if data[4] != row["Order No"]:
                 print("Order No data changed for flowcell %s from %s to %s"%(row["FC"], data[4], row["Order No"]))
             if data[5] != row["Sequencer"]:
                 print("Sequencer data changed for flowcell %s from %s to %s"%(row["FC"], data[5], row["Sequencer"]))
-            if data[6] != row["position"]:
-                print("position data changed for flowcell %s from %s to %s"%(row["FC"], data[6], row["position"]))
+            if data[6] != row["Position"]:
+                print("position data changed for flowcell %s from %s to %s"%(row["FC"], data[6], row["Position"]))
 
         else:
             print("flowcell data fetch failed")
 
     # table pools
     try:
-        cursor.execute("INSERT INTO pools (pooling_id, pf_reads, loading_conc, q30, fc_id) VALUES ('%s', '%s', '%s', '%s', '%s');"%(row["Pooling ID"], row["Reads (PF)"], row["Loading Conc. (nM)"], row["Q30"], row["FC"]))
+        cursor.execute("INSERT INTO pools (pooling_id, pf_reads, loading_conc, q30, fc_id) VALUES ('%s', '%s', '%s', '%s', '%s');"%(row["Pooling ID"], row["Reads (PF)"], row["Loading Conc."], row["Q30"], row["FC"]))
     except Exception as e:
-        print(e)
-        print("pools data already exists; checking for data integrity...")
+        # print(e)
+        # print("pools data already exists; checking for data integrity...")
         sql("SELECT pf_reads, loading_conc, q30, fc_id FROM pools WHERE pooling_id = '%s';"%(row["Pooling ID"])) # try except data integrity
         data = cursor.fetchone()
         if data != None:
             assert(len(data) == 4)
-            if data[0] != row["pf_reads"]:
+            if data[0] != row["Reads (PF)"]:
                 print("pf_reads data changed for pool '%s' from '%s' to '%s'"%(row["Pooling ID"], data[0], row["Reads (PF)"]))
-            if data[1] != row["loading_conc"]:
-                print("loading_conc data changed for pool '%s' from '%s' to '%s'"%(row["Pooling ID"], data[1], row["Loading Conc. (nM)"]))
-            if data[2] != row["q30"]:
-                print("q30 data changed for pool '%s' from '%s' to '%s'"%(row["Pooling ID"], data[2], row["q30"]))
-            if data[3] != row["fc_id"]:
+            if data[1] != row["Loading Conc."]:
+                print("loading_conc data changed for pool '%s' from '%s' to '%s'"%(row["Pooling ID"], data[1], row["Loading Conc."]))
+            if float(data[2]) != float(row["Q30"]):
+                print("q30 data changed for pool '%s' from '%s' to '%s'"%(row["Pooling ID"], data[2], row["Q30"]))
+            if data[3] != row["FC"]:
                 print("fc_id data changed for pool '%s' from '%s' to '%s'"%(row["Pooling ID"], data[3], row["FC"]))
         else:
             print("pool data fetch failed")
@@ -232,10 +244,8 @@ def store_row(row):
      FROM samples WHERE sample_id = '%s' AND fc_id = '%s';"%(row["Sample Name"], row["FC"]))
     data = cursor.fetchone()
     if data == None:
-        sql("INSERT INTO samples (sample_id, pooling_id, fc_id, sample_name, submission_id, qpcr, fragment, labchip_conc, well, pre_norm_well, i5_id, i7_id, data_sample, urgent, lib_received, sample_qc, lib_qc)\
-        VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s' );"%(row["Sample Name"], row["Pooling ID"], row["FC"], row["Original Sample Name"], row["Submission ID"],
-                                                                                                         row["QPCR Conc. (nM) / iseq output"], row["Fragment size (bp)"], row["LabChip/Bioanalyzer Conc. (nM)"],
-                                                                                                         row["Well"], row["Pre-Norm Well"], row["INDEX_I5_ID"], row["INDEX_I7_ID"], row["Data_Sample_Status"],
+        sql("INSERT INTO samples (sample_id, pooling_id, fc_id, sample_name, submission_id, fragment, well, pre_norm_well, i5_id, i7_id, data_sample, urgent, lib_received, sample_qc, lib_qc)\
+        VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s' );"%(row["Sample Name"], row["Pooling ID"], row["FC"], row["Original Sample Name"], row["Submission ID"], row["Fragment size (bp)"], row["Well"], row["Pre-Norm Well"], row["INDEX_I5_ID"], row["INDEX_I7_ID"], row["Data_Sample_Status"],
                                                                                                          row["Urgency"], row["Libaries and info received date"], row["Sample QC P/F"], row["Lib QC P/F"]))
     else:
         assert(len(data) == 15)
@@ -245,12 +255,12 @@ def store_row(row):
             print("Original Sample Name data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[1], row["Original Sample Name"]))
         if data[2] != row["Submission ID"]:
             print("Submission ID data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[2], row["Submission ID"]))
-        if data[3] != row["QPCR Conc. (nM) / iseq output"]:
-            print("QPCR Conc. (nM) / iseq output data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[3], row["QPCR Conc. (nM) / iseq output"]))
-        if data[4] != row["Fragment size (bp)"]:
+        # if float(data[3]) != float(row["QPCR Conc. (nM) / iseq output"]):
+        #     print("QPCR Conc. (nM) / iseq output data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[3], row["QPCR Conc. (nM) / iseq output"]))
+        if int(data[4]) != int(row["Fragment size (bp)"]):
             print("Fragment size (bp) data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[4], row["Fragment size (bp)"]))
-        if data[5] != row["LabChip/Bioanalyzer Conc. (nM)"]:
-            print("LabChip/Bioanalyzer Conc. (nM) data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[5], row["LabChip/Bioanalyzer Conc. (nM)"]))
+        # if float(data[5]) != float(row["LabChip/Bioanalyzer Conc. (nM)"]):
+        #     print("LabChip/Bioanalyzer Conc. (nM) data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[5], row["LabChip/Bioanalyzer Conc. (nM)"]))
         if data[6] != row["Well"]:
             print("Well data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[6], row["Well"]))
         if data[7] != row["Pre-Norm Well"]:
@@ -263,12 +273,18 @@ def store_row(row):
             print("Data_Sample_status data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[10], row["Data_Sample_status"]))
         if data[11] != row["Urgency"]:
             print("Urgency data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[11], row["Urgency"]))
-        if data[12] != row["Libaries and info received date"]:
+        if data[12] != datetime.datetime.strptime(row["Libaries and info received date"], "%Y%m%d").date():
             print("Libaries and info received date data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[12], row["Libaries and info received date"]))
         if data[13] != row["Sample QC P/F"]:
             print("Sample QC P/F data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[13], row["Sample QC P/F"]))
         if data[14] != row["Lib QC P/F"]:
             print("Lib QC P/F data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[14], row["Lib QC P/F"]))
+
+    if row["QPCR Conc. (nM) / iseq output"] != "":
+        sql("UPDATE samples SET qpcr = '%s' WHERE sample_id = '%s' AND fc_id = '%s';"%(row["QPCR Conc. (nM) / iseq output"], row["Sample Name"], row["FC"]))
+    if row["LabChip/Bioanalyzer Conc. (nM)"] != "":
+        sql("UPDATE samples SET labchip_conc = '%s' WHERE sample_id = '%s' AND fc_id = '%s';"%(row["LabChip/Bioanalyzer Conc. (nM)"], row["Sample Name"], row["FC"]))
+    
 
     return 0
 
@@ -310,7 +326,7 @@ def store_fc(fc):
                 cells = line.split('\t')
                 assert(len(cells) == col_numbers)
                 for i in range(col_numbers):
-                  row[fields[i]] = cells[i]
+                  row[fields[i].strip()] = cells[i].strip()
 
                 if row["FC"] == fc:
                     row["Sequencer"] = sequencer
@@ -318,8 +334,8 @@ def store_fc(fc):
                     tokens = row["Project name"].split("_")
                     row["Project"] = tokens[1]
                     row["PI"] = tokens[0]
-                    row["Submission Date"] = datetime.datetime.strptime('20' + tokens[2], '%Y%m%d')
-                    row["Datatype"] = tokens[3]
+                    row["Submission Date"] = datetime.datetime.strptime('20' + tokens[-3], '%Y%m%d').date()
+                    row["Datatype"] = tokens[-2]
                     row.pop("Submission ID", None)
                     row.pop("Run Duration (H:M)", None)
                     row.pop("Data Update Contacts", None)
@@ -334,7 +350,14 @@ def store_fc(fc):
                     elif "Reads (PF M )" in row:
                         row["Reads (PF)"] = row["Reads (PF M )"] + " M"
                         row.pop("Reads (PF M )", None)
-                        
+
+                    if "Loading Conc. (pM)" in row:
+                        row["Loading Conc."] = row["Loading Conc. (pM)"] + " pM"
+                        row.pop("Loading Conc. (pM)", None)
+                    elif "Loading Conc. (nM)" in row:
+                        row["Loading Conc."] = row["Loading Conc. (nM)"] + " nM"
+                        row.pop("Loading Conc. (nM)", None)
+
                     if row["Urgency"] == "Urgent":
                         row["Urgency"] = True
                     else:
