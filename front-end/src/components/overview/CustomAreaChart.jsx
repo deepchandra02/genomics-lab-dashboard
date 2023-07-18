@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { preprocessData } from "../utils.js";
 import {
-  Button,
   Card,
   Select,
   SelectItem,
@@ -153,24 +152,24 @@ const CustomAreaChart = (props) => {
                 onChange={(e) => setWindowSize(parseInt(e.target.value))}
               />
             </Flex>
-            <Button variant="light">
-              <Flex className="items-center ">
-                <input
-                  type="checkbox"
-                  id="checkbox1"
-                  className="h-4 w-4 mx-2 rounded-sm"
-                  checked={toggleCumulative}
-                  onChange={() => setToggleCumulative(!toggleCumulative)} />
-                <Subtitle>Cumulative</Subtitle>
-              </Flex>
-            </Button>
+
+            <Flex className="items-center ">
+              <input
+                type="checkbox"
+                id="checkbox1"
+                className="h-4 w-4 mx-2 rounded-sm"
+                checked={toggleCumulative}
+                onChange={() => setToggleCumulative(!toggleCumulative)} />
+              <Subtitle>Cumulative</Subtitle>
+            </Flex>
+
           </div>
         </div>
         <div className="mt-8">
           <AreaChart {...areaChartArgs} />
           <Flex className="mt-2" justifyContent="center">
             <Icon
-              className={"mx-2 bg-white hover:bg-slate-200 text-black border-[1.5px] border-gray-500 rounded-lg" + (windowStart <= windowSize ? " opacity-50 hover:bg-white" : "")}
+              className={"mx-2 bg-white hover:bg-slate-200 text-black border-[1.5px] border-gray-500 rounded-lg" + (windowStart === 0 ? " opacity-50 hover:bg-white" : "")}
               variant="solid"
               icon={ChevronLeftIcon}
               onClick={() => scrollData("backward")}
