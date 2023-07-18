@@ -1,0 +1,344 @@
+[
+  {
+    "pi": "LL",
+    "New": 3200,
+    "Top up": 2942,
+    "Repeat": 1890
+  },
+  {
+    "pi": "CQ",
+    "New": 1590,
+    "Top up": 866,
+    "Repeat": 4726
+  },
+  {
+    "pi": "HQO",
+    "New": 198,
+    "Top up": 4047,
+    "Repeat": 1721
+  },
+  {
+    "pi": "BPX",
+    "New": 3166,
+    "Top up": 3614,
+    "Repeat": 2618
+  },
+  {
+    "pi": "RC",
+    "New": 388,
+    "Top up": 3778,
+    "Repeat": 3936
+  },
+  {
+    "pi": "UJJ",
+    "New": 2848,
+    "Top up": 3132,
+    "Repeat": 4017
+  },
+  {
+    "pi": "EIS",
+    "New": 4422,
+    "Top up": 3725,
+    "Repeat": 3740
+  },
+  {
+    "pi": "SFT",
+    "New": 2960,
+    "Top up": 2777,
+    "Repeat": 1214
+  },
+  {
+    "pi": "NZC",
+    "New": 2824,
+    "Top up": 503,
+    "Repeat": 1356
+  },
+  {
+    "pi": "FG",
+    "New": 2259,
+    "Top up": 2082,
+    "Repeat": 4676
+  },
+  {
+    "pi": "LB",
+    "New": 331,
+    "Top up": 3916,
+    "Repeat": 4054
+  },
+  {
+    "pi": "CZ",
+    "New": 1945,
+    "Top up": 1907,
+    "Repeat": 3709
+  },
+  {
+    "pi": "OP",
+    "New": 2574,
+    "Top up": 239,
+    "Repeat": 3677
+  },
+  {
+    "pi": "YCM",
+    "New": 4527,
+    "Top up": 230,
+    "Repeat": 1384
+  },
+  {
+    "pi": "WM",
+    "New": 603,
+    "Top up": 1274,
+    "Repeat": 643
+  },
+  {
+    "pi": "IDL",
+    "New": 2284,
+    "Top up": 3767,
+    "Repeat": 894
+  },
+  {
+    "pi": "DZ",
+    "New": 3578,
+    "Top up": 169,
+    "Repeat": 3008
+  },
+  {
+    "pi": "YW",
+    "New": 496,
+    "Top up": 3713,
+    "Repeat": 5079
+  },
+  {
+    "pi": "CPU",
+    "New": 4736,
+    "Top up": 4041,
+    "Repeat": 2538
+  },
+  {
+    "pi": "BU",
+    "New": 4714,
+    "Top up": 4163,
+    "Repeat": 3950
+  },
+  {
+    "pi": "QM",
+    "New": 2,
+    "Top up": 3651,
+    "Repeat": 1994
+  },
+  {
+    "pi": "EX",
+    "New": 2132,
+    "Top up": 2895,
+    "Repeat": 93
+  },
+  {
+    "pi": "PDO",
+    "New": 360,
+    "Top up": 3728,
+    "Repeat": 1495
+  },
+  {
+    "pi": "TJT",
+    "New": 813,
+    "Top up": 2400,
+    "Repeat": 4337
+  },
+  {
+    "pi": "GKE",
+    "New": 2490,
+    "Top up": 1927,
+    "Repeat": 1051
+  },
+  {
+    "pi": "CAW",
+    "New": 5050,
+    "Top up": 4469,
+    "Repeat": 2254
+  },
+  {
+    "pi": "OYI",
+    "New": 3685,
+    "Top up": 3251,
+    "Repeat": 437
+  },
+  {
+    "pi": "DT",
+    "New": 692,
+    "Top up": 3346,
+    "Repeat": 4758
+  },
+  {
+    "pi": "HNG",
+    "New": 3135,
+    "Top up": 2679,
+    "Repeat": 947
+  },
+  {
+    "pi": "BIR",
+    "New": 3214,
+    "Top up": 3290,
+    "Repeat": 3249
+  },
+  {
+    "pi": "OO",
+    "New": 4803,
+    "Top up": 3726,
+    "Repeat": 4186
+  },
+  {
+    "pi": "MW",
+    "New": 4947,
+    "Top up": 4455,
+    "Repeat": 4769
+  },
+  {
+    "pi": "ZKQ",
+    "New": 3119,
+    "Top up": 2130,
+    "Repeat": 687
+  },
+  {
+    "pi": "PLL",
+    "New": 4146,
+    "Top up": 1287,
+    "Repeat": 4604
+  },
+  {
+    "pi": "JNX",
+    "New": 1583,
+    "Top up": 3034,
+    "Repeat": 1169
+  },
+  {
+    "pi": "FO",
+    "New": 4712,
+    "Top up": 3023,
+    "Repeat": 2908
+  },
+  {
+    "pi": "BW",
+    "New": 3439,
+    "Top up": 953,
+    "Repeat": 1808
+  },
+  {
+    "pi": "TUV",
+    "New": 4766,
+    "Top up": 1791,
+    "Repeat": 2992
+  },
+  {
+    "pi": "ESU",
+    "New": 4076,
+    "Top up": 2795,
+    "Repeat": 4245
+  },
+  {
+    "pi": "CA",
+    "New": 2672,
+    "Top up": 4960,
+    "Repeat": 2698
+  },
+  {
+    "pi": "BY",
+    "New": 948,
+    "Top up": 3732,
+    "Repeat": 3885
+  },
+  {
+    "pi": "WU",
+    "New": 4108,
+    "Top up": 421,
+    "Repeat": 4624
+  },
+  {
+    "pi": "RQT",
+    "New": 4869,
+    "Top up": 3236,
+    "Repeat": 3221
+  },
+  {
+    "pi": "WKZ",
+    "New": 1573,
+    "Top up": 4484,
+    "Repeat": 876
+  },
+  {
+    "pi": "KVU",
+    "New": 67,
+    "Top up": 2761,
+    "Repeat": 2292
+  },
+  {
+    "pi": "MF",
+    "New": 3438,
+    "Top up": 1426,
+    "Repeat": 2528
+  },
+  {
+    "pi": "OL",
+    "New": 4929,
+    "Top up": 1976,
+    "Repeat": 1461
+  },
+  {
+    "pi": "WXN",
+    "New": 980,
+    "Top up": 4878,
+    "Repeat": 898
+  },
+  {
+    "pi": "QCH",
+    "New": 2157,
+    "Top up": 1558,
+    "Repeat": 3520
+  },
+  {
+    "pi": "QG",
+    "New": 3905,
+    "Top up": 3215,
+    "Repeat": 3249
+  },
+  {
+    "pi": "NW",
+    "New": 2326,
+    "Top up": 2419,
+    "Repeat": 2945
+  },
+  {
+    "pi": "WTV",
+    "New": 1381,
+    "Top up": 3325,
+    "Repeat": 4240
+  },
+  {
+    "pi": "LGW",
+    "New": 669,
+    "Top up": 2340,
+    "Repeat": 1632
+  },
+  {
+    "pi": "XLQ",
+    "New": 4565,
+    "Top up": 3518,
+    "Repeat": 2766
+  },
+  {
+    "pi": "BI",
+    "New": 797,
+    "Top up": 640,
+    "Repeat": 3746
+  },
+  {
+    "pi": "OAI",
+    "New": 2392,
+    "Top up": 4319,
+    "Repeat": 2840
+  },
+  {
+    "pi": "WW",
+    "New": 148,
+    "Top up": 4353,
+    "Repeat": 2951
+  }
+]

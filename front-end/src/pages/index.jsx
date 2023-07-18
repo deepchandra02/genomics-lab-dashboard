@@ -1,10 +1,12 @@
 import React from "react";
-import { Grid, Title, Col } from "@tremor/react";
+import { Grid, Col } from "@tremor/react";
 
 import CustomAreaChart from "../components/overview/CustomAreaChart";
+import CustomBarChart from "../components/overview/CustomBarChart";
 import CustomDonutChart from "../components/overview/CustomDonutChart";
 
 const data1 = require('../data/data1.json')
+const data2 = require('../data/data2.json')
 const data4 = require('../data/data4.json')
 const data5 = require('../data/data5.json')
 const data6 = require('../data/data6.json')
@@ -75,17 +77,16 @@ function Home() {
       <Grid numItemsLg={9} className="my-8 gap-6">
         <Col numColSpan={6}>
           <section>
-            <CustomAreaChart
-              title="2. Quantity processed over time"
-              tooltip="Overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range"
-              tabs={["Samples", "Flowcells"]}
+            <CustomBarChart
+              title="2. Sample - P.I. distribution"
+              tooltip="Overview of the distribution of sample requests per PI, over the specified date range"
               className="h-96"
-              data={data1}
-              index="date"
-              colors={["cyan", "red"]}
+              data={data2}
+              index="pi"
+              colors={["sky", "violet", "fuchsia"]}
               showLegend={true}
               yAxisWidth={56}
-              kpis={["Samples", "Flowcells", "SamplesTotal", "FlowcellsTotal"]}
+              categories={["New", "Top up", "Repeat"]}
             />
           </section>
         </Col>
