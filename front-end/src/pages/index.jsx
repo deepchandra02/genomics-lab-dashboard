@@ -1,11 +1,13 @@
 import React from "react";
-
+import { Bold, Badge, Flex, Text, ProgressBar } from "@tremor/react";
+import { CheckCircleIcon, ExclamationCircleIcon } from "@heroicons/react/solid";
 import CustomAreaChart from "../components/overview/CustomAreaChart";
 import CustomBarChart from "../components/overview/CustomBarChart";
 import CustomDonutChart from "../components/overview/CustomDonutChart";
 
 const data1 = require('../data/data1.json')
 const data2 = require('../data/data2.json')
+const data3 = require('../data/data3.json')
 const data4 = require('../data/data4.json')
 const data5 = require('../data/data5.json')
 const data6 = require('../data/data6.json')
@@ -13,15 +15,35 @@ const data7 = require('../data/data7.json')
 
 // This component is the overview page of the application
 function Home() {
-  // Calculate total units across all categories
-  const totalUnits2 = data4.reduce((total, item) => total + item.quantity, 0);
-  const donutValueFormatterFlowcellUsage = (number) => {
-    const percentage = ((number / totalUnits2) * 100).toFixed(2);
-    return `${percentage}% | ${Intl.NumberFormat("us").format(number).toString()} flowcells`;
-  };
+
+  const staged = data3.reduce((total, item) => total + item.quantity, 0);
+  // Calculate percentages for each status
+  const stagedPercentageArray = data3.map(item => {
+    const percentage = ((item.quantity / staged) * 100).toFixed(1);
+    return percentage;
+  });
   return (
     <main className="flex flex-col h-screen p-5">
-      <span className="font-cabin font-bold text-4xl">Overview</span>
+      <div className="flex justify-start items-center">
+        <span className="font-cabin font-bold text-5xl">Overview</span>
+        <div className="w-64 mx-auto">
+          <Flex justifyContent="between">
+            <Text><Bold>Staged</Bold> &bull; {stagedPercentageArray[1]}%</Text>
+            <Badge
+              className="font-cabin shadow-inner"
+              size="lg"
+              icon={stagedPercentageArray[1] < 100 ? ExclamationCircleIcon : CheckCircleIcon}
+              color={stagedPercentageArray[1] < 100 ? "amber" : "green"}
+            >
+              {stagedPercentageArray[1] < 100 ? "Pending" : "Done"}
+            </Badge>
+          </Flex>
+          <ProgressBar
+            value={stagedPercentageArray[1]}
+            color={stagedPercentageArray[1] < 100 ? "amber" : "green"}
+            className="mt-3" />
+        </div>
+      </div>
       <div className="flex flex-col space-y-4 mt-4 pb-8 flex-grow">
         <div className="flex space-x-4">
           <div className="w-2/3">
@@ -48,7 +70,6 @@ function Home() {
               category="quantity"
               variant="donut"
               colors={["cyan", "indigo", "rose", "violet"]}
-              valueFormatter={donutValueFormatterFlowcellUsage}
               label=" FC"
             />
             <CustomDonutChart
@@ -60,7 +81,6 @@ function Home() {
               category="quantity"
               variant="donut"
               colors={["violet", "indigo", "rose", "cyan", "teal", "fuchsia", "red"]}
-              valueFormatter={donutValueFormatterFlowcellUsage}
               label=" smpls"
             />
           </div>
@@ -89,7 +109,6 @@ function Home() {
               category="quantity"
               variant="donut"
               colors={["pink", "blue"]}
-              valueFormatter={donutValueFormatterFlowcellUsage}
               label=" FC"
             />
             <CustomDonutChart
@@ -101,7 +120,6 @@ function Home() {
               category="quantity"
               variant="donut"
               colors={["pink", "teal", "cyan", "indigo"]}
-              valueFormatter={donutValueFormatterFlowcellUsage}
               label=" smpls"
             />
           </div>
