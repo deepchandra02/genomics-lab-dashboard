@@ -6,7 +6,10 @@ import { InformationCircleIcon } from "@heroicons/react/solid";
 const CustomDonutChart = (props) => {
   // Calculate the total units across all categories by using the reduce method
   const totalUnits = props.data.reduce((total, item) => total + item.quantity, 0);
-
+  const valueFormatter = (number) => {
+    const percentage = ((number / totalUnits) * 100).toFixed(2);
+    return `${percentage}% | ${Intl.NumberFormat("us").format(number).toString()}`;
+  };
   // Arguments to be passed to the DonutChart component
   const donutChartArgs = {
     animationDuration: 500, // Animation duration in milliseconds
@@ -19,7 +22,7 @@ const CustomDonutChart = (props) => {
     variant: props.variant,
     className: props.className + " w-1/2",
     colors: props.colors,
-    valueFormatter: props.valueFormatter,
+    valueFormatter: valueFormatter,
     // The label is the total units formatted as a US number + the label received as prop
     label: Intl.NumberFormat("us").format(totalUnits).toString() + props.label,
   };
