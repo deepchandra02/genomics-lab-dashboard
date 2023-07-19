@@ -7,7 +7,7 @@ const CustomDonutChart = (props) => {
   // Calculate the total units across all categories by using the reduce method
   const totalUnits = props.data.reduce((total, item) => total + item.quantity, 0);
 
-  // Argume
+  // Arguments to be passed to the DonutChart component
   const donutChartArgs = {
     animationDuration: 500, // Animation duration in milliseconds
     showLabel: true, // To show the label at the centre of the donut chart
@@ -17,7 +17,7 @@ const CustomDonutChart = (props) => {
     category: props.category,
     index: props.index,
     variant: props.variant,
-    className: props.className,
+    className: props.className + " w-1/2",
     colors: props.colors,
     valueFormatter: props.valueFormatter,
     // The label is the total units formatted as a US number + the label received as prop
@@ -33,8 +33,8 @@ const CustomDonutChart = (props) => {
 
   // Return the JSX to render
   return (
-    <Card decoration="top" decorationColor="teal">
-      <Flex className="space-x-0.5 font-cabin" justifyContent="start" alignItems="center">
+    <Card decoration="top" decorationColor="teal" className="flex flex-col space-y-2 h-full">
+      <Flex className="space-x-0.5 font-cabin h-[5%]" justifyContent="start" alignItems="center">
         <Title> {props.title} </Title> {/* Display the title received as prop */}
         <Icon
           icon={InformationCircleIcon}
@@ -43,10 +43,10 @@ const CustomDonutChart = (props) => {
           tooltip={props.tooltip}
         />
       </Flex>
-      <Flex alignItems='center' justifyContent='around'>
+      <div className="pt-4 h-[82%] flex items-center space-x-16">
         <DonutChart {...donutChartArgs} /> {/* Render the DonutChart component with prepared props */}
         <Legend {...legendArgs} /> {/* Render the Legend component with prepared props */}
-      </Flex>
+      </div>
     </Card>
   )
 }

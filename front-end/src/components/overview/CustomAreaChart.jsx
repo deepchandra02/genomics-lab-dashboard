@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { preprocessData } from "../utils.js";
 import {
+  Button,
   Card,
   Select,
   SelectItem,
@@ -92,98 +93,105 @@ const CustomAreaChart = (props) => {
   };
 
   return (
-    <Card decoration="top" decorationColor="teal">
-      <>
-        <Flex className="space-x-0.5 font-cabin" justifyContent="start" alignItems="center">
-          <Title> {props.title} </Title>
-          <Icon
-            icon={InformationCircleIcon}
-            variant="simple"
-            className=" text-teal-600 hover:text-teal-400 "
-            tooltip={props.tooltip}
-          />
-        </Flex>
-        <div className="flex justify-between select-none">
-          <TabGroup className="flex justify-start"
-            index={selectedIndex}
-            onIndexChange={setSelectedIndex}>
-            <TabList color={colors} variant="line">
-              {props.tabs.map((tab, index) => (
-                <Tab key={index}>{tab}</Tab>
-              ))}
-            </TabList>
-          </TabGroup>
+    <Card decoration="top" decorationColor="teal" className="flex flex-col space-y-2 h-full">
+      <Flex className="space-x-0.5 font-cabin h-[5%]" justifyContent="start" alignItems="center">
+        <Title> {props.title} </Title>
+        <Icon
+          icon={InformationCircleIcon}
+          variant="simple"
+          className=" text-teal-600 hover:text-teal-400 "
+          tooltip={props.tooltip}
+        />
+      </Flex>
+      <Flex className="select-none h-[10%]" justifyContent="between" alignItems="center">
+        <TabGroup className="flex justify-start"
+          index={selectedIndex}
+          onIndexChange={setSelectedIndex}>
+          <TabList color={colors} variant="line">
+            {props.tabs.map((tab, index) => (
+              <Tab key={index}>{tab}</Tab>
+            ))}
+          </TabList>
+        </TabGroup>
 
-          <div className="flex gap-x-4">
-            <Select className="max-w-[14rem] justify-end text-gray-500 hover:text-black"
-              value={view}
-              defaultValue={3}
-              placeholder="Select a time period"
-              onValueChange={val => {
-                setView(val);
-                let newData = preprocessData(props.data, val);
-                setPreprocessedData(newData);
-              }}
-              icon={EyeIcon}
-            >
-              <SelectItem value={1}>
-                Daily
-              </SelectItem>
-              <SelectItem value={2}>
-                Weekly
-              </SelectItem>
-              <SelectItem value={3}>
-                Monthly
-              </SelectItem>
-              <SelectItem value={4}>
-                Yearly
-              </SelectItem>
-            </Select>
+        <div className="flex gap-x-4">
+          <Select className="max-w-[14rem] justify-end text-gray-500 hover:text-black"
+            value={view}
+            defaultValue={3}
+            placeholder="Select a time period"
+            onValueChange={val => {
+              setView(val);
+              let newData = preprocessData(props.data, val);
+              setPreprocessedData(newData);
+            }}
+            icon={EyeIcon}
+          >
+            <SelectItem value={1}>
+              Daily
+            </SelectItem>
+            <SelectItem value={2}>
+              Weekly
+            </SelectItem>
+            <SelectItem value={3}>
+              Monthly
+            </SelectItem>
+            <SelectItem value={4}>
+              Yearly
+            </SelectItem>
+          </Select>
 
-            <Flex className="items-center text-gray-500 hover:text-black">
-              <input
-                type="number"
-                id="windowSizeStepper"
-                className="text-center w-[4rem] h-9 p-2 border border-gray-200 shadow-tremor-input rounded-lg "
-                value={windowSize}
-                step="6"
-                min="0"
-                max={preprocessedData.length}
-                onChange={(e) => setWindowSize(parseInt(e.target.value))}
-              />
-            </Flex>
-
-            <Flex className="items-center ">
-              <input
-                type="checkbox"
-                id="checkbox1"
-                className="h-4 w-4 mx-2 rounded-sm"
-                checked={toggleCumulative}
-                onChange={() => setToggleCumulative(!toggleCumulative)} />
-              <Subtitle>Cumulative</Subtitle>
-            </Flex>
-
-          </div>
-        </div>
-        <div className="mt-8">
-          <AreaChart {...areaChartArgs} />
-          <Flex className="mt-2" justifyContent="center">
-            <Icon
-              className={"mx-2 bg-white hover:bg-slate-200 text-black border-[1.5px] border-gray-500 rounded-lg" + (windowStart === 0 ? " opacity-50 hover:bg-white" : "")}
-              variant="solid"
-              icon={ChevronLeftIcon}
-              onClick={() => scrollData("backward")}
-            />
-            <Icon
-              className={"mx-2 bg-white hover:bg-slate-200 text-black border-[1.5px] border-gray-500 rounded-lg" + (windowStart + windowSize >= preprocessedData.length ? " opacity-50 hover:bg-white" : "")}
-              variant="solid"
-              icon={ChevronRightIcon}
-              onClick={() => scrollData("forward")}
+          <Flex className="items-center text-gray-500 hover:text-black">
+            <input
+              type="number"
+              id="windowSizeStepper"
+              className="text-center w-[4rem] h-9 p-2 border border-gray-200 shadow-tremor-input rounded-lg "
+              value={windowSize}
+              step="6"
+              min="0"
+              max={preprocessedData.length}
+              onChange={(e) => setWindowSize(parseInt(e.target.value))}
             />
           </Flex>
-        </div>
 
-      </>
+          <Flex className="items-center ">
+            <input
+              type="checkbox"
+              id="checkbox1"
+              className="h-4 w-4 mx-2 rounded-sm"
+              checked={toggleCumulative}
+              onChange={() => setToggleCumulative(!toggleCumulative)} />
+            <Subtitle>Cumulative</Subtitle>
+          </Flex>
+
+        </div>
+      </Flex>
+      <div className="mt-4 h-[75%]">
+        <AreaChart {...areaChartArgs} />
+        <Flex className="space-x-4" justifyContent="center">
+          <Button
+            className={"p-2 h-6 bg-slate-700 hover:bg-slate-500 border-none " + (windowStart === 0 ? " opacity-50 bg-slate-500" : "")}
+            variant="primary"
+            onClick={() => scrollData("backward")}
+          >
+            <Icon
+              className="text-white"
+              variant="simple"
+              icon={ChevronLeftIcon}
+            />
+          </Button>
+          <Button
+            className={"p-2 h-6 bg-slate-700 hover:bg-slate-500 border-none " + (windowStart + windowSize >= preprocessedData.length ? " opacity-50 bg-slate-500" : "")}
+            variant="primary"
+            onClick={() => scrollData("forward")}
+          >
+            <Icon
+              className="text-white"
+              variant="simple"
+              icon={ChevronRightIcon}
+            />
+          </Button>
+        </Flex>
+      </div>
     </Card>
   )
 }
