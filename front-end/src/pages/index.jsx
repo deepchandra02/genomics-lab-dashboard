@@ -1,17 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Bold, Badge, Flex, Text, ProgressBar } from "@tremor/react";
 import { CheckCircleIcon, ExclamationCircleIcon } from "@heroicons/react/solid";
 import CustomAreaChart from "../components/overview/CustomAreaChart";
 import CustomBarChart from "../components/overview/CustomBarChart";
 import CustomDonutChart from "../components/overview/CustomDonutChart";
+import CustomStackedBarChart from "../components/overview/CustomStackedBarChart";
 
 const data1 = require('../data/data1.json')
-const data2 = require('../data/data2.json')
+const data2a = require('../data/data2a.json')
+const data2b = require('../data/data2b.json')
 const data3 = require('../data/data3.json')
 const data4 = require('../data/data4.json')
 const data5 = require('../data/data5.json')
 const data6 = require('../data/data6.json')
 const data7 = require('../data/data7.json')
+
+// Define available colors
+const Colors = [
+  "slate",
+  "gray",
+  "zinc",
+  "neutral",
+  "stone",
+  "red",
+  "orange",
+  "amber",
+  "yellow",
+  "lime",
+  "green",
+  "emerald",
+  "teal",
+  "cyan",
+  "sky",
+  "blue",
+  "indigo",
+  "violet",
+  "purple",
+  "fuchsia",
+  "pink",
+  "rose"
+];
+// A function to shuffle the colors chosen for each project
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
 
 // This component is the overview page of the application
 function Home() {
@@ -22,6 +58,32 @@ function Home() {
     const percentage = ((item.quantity / staged) * 100).toFixed(1);
     return percentage;
   });
+
+  const [categories, setCategories] = useState([]);
+  const [colors, setColors] = useState([]);
+
+  useEffect(() => {
+    // Your data
+    const rawData = data2b;
+    // Extract all project names and colors
+    const allProjects = {};
+
+    rawData.forEach(item => {
+      Object.keys(item).forEach(key => {
+        if (key !== 'pi') {
+          allProjects[key] = true;
+        }
+      });
+    });
+
+    const allCategories = Object.keys(allProjects);
+    setCategories(allCategories);
+    const shuffledColors = shuffleArray(Colors);
+    const allColors = allCategories.map((_, i) => shuffledColors[i % shuffledColors.length]);
+    setColors(allColors);
+  }, []);
+
+
   return (
     <main className="flex flex-col h-screen p-5">
       <div className="flex justify-start items-center">
@@ -40,7 +102,8 @@ function Home() {
           </Flex>
           <ProgressBar
             value={stagedPercentageArray[1]}
-            color={stagedPercentageArray[1] < 100 ? "amber" : "green"}
+            color="blue"
+            // {stagedPercentageArray[1] < 100 ? "amber" : "green"}
             className="mt-3" />
         </div>
       </div>
@@ -87,16 +150,27 @@ function Home() {
         </div>
         <div className="flex space-x-4">
           <div className="w-2/3">
-            <CustomBarChart
+            {/* <CustomBarChart
               title="2. Sample - P.I. distribution"
               tooltip="Overview of the distribution of sample requests per PI, over the specified date range"
               className="h-full"
-              data={data2}
+              data={data2a}
               index="pi"
               colors={["sky", "violet", "fuchsia"]}
               showLegend={true}
               yAxisWidth={56}
               categories={["New", "Top up", "Repeat"]}
+            /> */}
+            <CustomStackedBarChart
+              title="2. Sample - P.I. distribution"
+              tooltip="Overview of the distribution of sample requests per PI, over the specified date range"
+              className="h-full"
+              data={data2b}
+              index="pi"
+              categories={categories}
+              colors={colors}
+              showLegend={false}
+              yAxisWidth={56}
             />
           </div>
           <div className="flex flex-col w-1/3 space-y-4">

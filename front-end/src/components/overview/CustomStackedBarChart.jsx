@@ -14,7 +14,7 @@ import {
   InformationCircleIcon
 } from "@heroicons/react/solid";
 
-const CustomBarChart = (props) => {
+const CustomStackedBarChart = (props) => {
   const [windowSize, setWindowSize] = useState(6);
   const [windowStart, setWindowStart] = useState(0); // Initial window start is 0
   const [toggleStacked, setToggleStacked] = useState(true);
@@ -113,4 +113,4 @@ const CustomBarChart = (props) => {
   )
 }
 
-export default CustomBarChart
+export default CustomStackedBarChart
