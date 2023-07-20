@@ -2,13 +2,12 @@ import React from "react";
 import { Bold, Badge, Flex, Text, ProgressBar } from "@tremor/react";
 import { CheckCircleIcon, ExclamationCircleIcon } from "@heroicons/react/solid";
 import CustomAreaChart from "../components/overview/CustomAreaChart";
-import CustomBarChart from "../components/overview/CustomBarChart";
+import Card2MultipleCharts from "../components/overview/Card2MultipleCharts";
 import CustomDonutChart from "../components/overview/CustomDonutChart";
-import CustomStackedBarChart from "../components/overview/CustomStackedBarChart";
+
 
 const data1 = require('../data/data1.json')
-const data2a = require('../data/data2a.json')
-const data2b = require('../data/data2b.json')
+
 const data3 = require('../data/data3.json')
 const data4 = require('../data/data4.json')
 const data5 = require('../data/data5.json')
@@ -91,25 +90,11 @@ function Home() {
         </div>
         <div className="flex space-x-4">
           <div className="w-2/3">
-            {/* <CustomBarChart
-              title="2. Sample - P.I. distribution"
-              tooltip="Overview of the distribution of sample requests per PI, over the specified date range"
-              className="h-full"
-              data={data2a}
-              index="pi"
-              colors={["sky", "violet", "fuchsia"]}
-              showLegend={true}
-              yAxisWidth={56}
-              categories={["New", "Top up", "Repeat"]}
-            /> */}
-            <CustomStackedBarChart
-              title="2. Sample - P.I. distribution"
-              tooltip="Overview of the distribution of sample requests per PI, over the specified date range"
-              className="h-full"
-              data={data2b}
-              index="pi"
-              showLegend={false}
-              yAxisWidth={56}
+            <Card2MultipleCharts
+              title="2. P.I. Overview"
+              tooltips={["Overview of the distribution of sample requests per PI, over the specified date range",
+                "Overview of the distribution of sample requests per PI, over the specified date range",
+                "Overview of the distribution of sample requests per PI, over the specified date range"]}
             />
           </div>
           <div className="flex flex-col w-1/3 space-y-4">
