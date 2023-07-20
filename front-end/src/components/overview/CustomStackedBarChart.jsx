@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import {
   BarChart,
   Button,
@@ -18,7 +18,55 @@ const CustomStackedBarChart = (props) => {
   const [windowSize, setWindowSize] = useState(6);
   const [windowStart, setWindowStart] = useState(0); // Initial window start is 0
   const [toggleStacked, setToggleStacked] = useState(true);
-  // const [colors, setColors] = useState([props.colors[0]]);
+  const [categories, setCategories] = useState([]);
+  const [colors, setColors] = useState([]);
+
+  // Define available colors
+  const Colors = [
+    "red",
+    "lime",
+    "indigo",
+    "orange",
+    "teal",
+    "violet",
+    "amber",
+    "cyan",
+    "pink",
+    "green",
+    "sky",
+    "purple",
+    "emerald",
+    "blue",
+    "rose",
+    "slate",
+    "yellow",
+    "fuchsia"
+  ];
+
+  useEffect(() => {
+    setWindowStart(0); // Reset the window start whenever the window size changes
+  }, [windowSize]); // Only run this effect when windowSize changes
+
+  useEffect(() => {
+    // Extract all project names from the windowed data
+    const allProjects = {};
+    const windowedData = props.data.slice(windowStart, windowStart + windowSize);
+
+    windowedData.forEach(item => {
+      Object.keys(item).forEach(key => {
+        if (key !== 'pi') {
+          allProjects[key] = true;
+        }
+      });
+    });
+
+    const allCategories = Object.keys(allProjects);
+    setCategories(allCategories);
+    const allColors = allCategories.map((_, i) => Colors[i % Colors.length]);
+    setColors(allColors);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [windowStart, windowSize]); // Run this effect when windowStart or windowSize changes
+
 
   // Create a "windowed" subset of the data
   const windowedData = props.data.slice(windowStart, windowStart + windowSize);
@@ -32,18 +80,17 @@ const CustomStackedBarChart = (props) => {
     }
   };
 
-  // Function to format the numbers to be displayed in US format
   const valueFormatter = (number) => `${Intl.NumberFormat("us").format(number).toString()}`;
 
   // Arguments to be passed to the BarChart component
   const barChartArgs = {
-    categories: props.categories,
-    animationDuration: 500,
+    categories: categories,
+    animationDuration: 200,
     autoMinValue: true,
     className: props.className + " select-none",
     data: windowedData,
     index: props.index,
-    colors: props.colors,
+    colors: colors,
     showLegend: props.showLegend,
     yAxisWidth: props.yAxisWidth,
     valueFormatter: valueFormatter,
@@ -70,7 +117,13 @@ const CustomStackedBarChart = (props) => {
           step="6"
           min="0"
           max={props.data.length}
-          onChange={(e) => setWindowSize(parseInt(e.target.value))}
+          onChange={(e) => {
+            const newWindowSize = parseInt(e.target.value);
+            if (newWindowSize + windowStart > props.data.length) {
+              setWindowStart(props.data.length - newWindowSize);
+            }
+            setWindowSize(newWindowSize);
+          }}
         />
         <div className='flex justify-end items-center'>
           <input

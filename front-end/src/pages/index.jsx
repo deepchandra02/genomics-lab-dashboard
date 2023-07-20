@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Bold, Badge, Flex, Text, ProgressBar } from "@tremor/react";
 import { CheckCircleIcon, ExclamationCircleIcon } from "@heroicons/react/solid";
 import CustomAreaChart from "../components/overview/CustomAreaChart";
@@ -15,39 +15,6 @@ const data5 = require('../data/data5.json')
 const data6 = require('../data/data6.json')
 const data7 = require('../data/data7.json')
 
-// Define available colors
-const Colors = [
-  "slate",
-  "gray",
-  "zinc",
-  "neutral",
-  "stone",
-  "red",
-  "orange",
-  "amber",
-  "yellow",
-  "lime",
-  "green",
-  "emerald",
-  "teal",
-  "cyan",
-  "sky",
-  "blue",
-  "indigo",
-  "violet",
-  "purple",
-  "fuchsia",
-  "pink",
-  "rose"
-];
-// A function to shuffle the colors chosen for each project
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
 
 // This component is the overview page of the application
 function Home() {
@@ -58,31 +25,6 @@ function Home() {
     const percentage = ((item.quantity / staged) * 100).toFixed(1);
     return percentage;
   });
-
-  const [categories, setCategories] = useState([]);
-  const [colors, setColors] = useState([]);
-
-  useEffect(() => {
-    // Your data
-    const rawData = data2b;
-    // Extract all project names and colors
-    const allProjects = {};
-
-    rawData.forEach(item => {
-      Object.keys(item).forEach(key => {
-        if (key !== 'pi') {
-          allProjects[key] = true;
-        }
-      });
-    });
-
-    const allCategories = Object.keys(allProjects);
-    setCategories(allCategories);
-    const shuffledColors = shuffleArray(Colors);
-    const allColors = allCategories.map((_, i) => shuffledColors[i % shuffledColors.length]);
-    setColors(allColors);
-  }, []);
-
 
   return (
     <main className="flex flex-col h-screen p-5">
@@ -103,7 +45,6 @@ function Home() {
           <ProgressBar
             value={stagedPercentageArray[1]}
             color="blue"
-            // {stagedPercentageArray[1] < 100 ? "amber" : "green"}
             className="mt-3" />
         </div>
       </div>
@@ -167,8 +108,6 @@ function Home() {
               className="h-full"
               data={data2b}
               index="pi"
-              categories={categories}
-              colors={colors}
               showLegend={false}
               yAxisWidth={56}
             />
