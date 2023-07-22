@@ -12,6 +12,7 @@ import { InformationCircleIcon } from "@heroicons/react/solid";
 
 import CustomBarChart1 from './CustomBarChart1'
 import CustomBarChart2 from './CustomBarChart2'
+import CustomBarChart3 from './CustomBarChart3'
 const data2a = require('../../data/data2a.json')
 const data2b = require('../../data/data2b.json')
 
@@ -47,7 +48,7 @@ const Card2MultipleCharts = (props) => {
           icon={InformationCircleIcon}
           variant="simple"
           className=" text-teal-600 hover:text-teal-400 "
-          tooltip={props.tooltips[0]}
+          tooltip={props.tooltip}
         />
       </Flex>
       <Flex className="select-none h-[10%]" justifyContent="between" alignItems="center">
@@ -55,9 +56,9 @@ const Card2MultipleCharts = (props) => {
           index={selectedTab}
           onIndexChange={setSelectedTab}>
           <TabList color={"green"} variant="line">
-            <Tab key="View 1">View 1</Tab>
-            <Tab key="View 2">View 2</Tab>
-            <Tab key="View 3">View 3</Tab>
+            <Tab key={0}>Data Sample Status</Tab>
+            <Tab key={1}>Projects</Tab>
+            <Tab key={2}>View 3</Tab>
           </TabList>
         </TabGroup>
       </Flex>
@@ -67,6 +68,9 @@ const Card2MultipleCharts = (props) => {
         }
         {
           selectedTab === 1 && <CustomBarChart2 {...props2} />
+        }
+        {
+          selectedTab === 2 && <CustomBarChart3 />
         }
       </div>
     </Card>

@@ -4,7 +4,6 @@ import {
   Button,
   Flex,
   Icon,
-  Subtitle
 } from "@tremor/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 

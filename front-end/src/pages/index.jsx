@@ -92,9 +92,7 @@ function Home() {
           <div className="w-2/3">
             <Card2MultipleCharts
               title="2. P.I. Overview"
-              tooltips={["Overview of the distribution of sample requests per PI, over the specified date range",
-                "Overview of the distribution of sample requests per PI, over the specified date range",
-                "Overview of the distribution of sample requests per PI, over the specified date range"]}
+              tooltip="Overview of the distribution of sample requests per PI over the specified date range in different parameters"
             />
           </div>
           <div className="flex flex-col w-1/3 space-y-4">
