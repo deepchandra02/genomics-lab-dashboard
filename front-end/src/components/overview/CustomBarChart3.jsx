@@ -35,9 +35,17 @@ const dataByPI = data2c.reduce((groups, row) => {
 }, {});
 
 const CustomBarChart3 = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [genomeColors, setGenomeColors] = useState({});
 
+  const [zoom, setZoom] = useState(1); // 1 is the default zoom level
+  const zoomIn = () => setZoom(prevZoom => Math.max(prevZoom - 1, 1)); // Adjust these numbers as needed
+  const zoomOut = () => setZoom(prevZoom => Math.min(prevZoom + 1, 5)); // Adjust these numbers as needed
+
+  // Calculate number of items in grid and card size based on zoom level
+  const numItemsInGrid = 3 + zoom; // Adjust this calculation as needed
+  const cardSize = ``; // Adjust this calculation as needed
+  console.log(`cardSize: ${cardSize}`);
   useEffect(() => {
     const genomeNames = [...new Set(data2c.map(item => item.genome))];
     const genomeColorMapping = genomeNames.reduce((acc, genome, index) => {
@@ -126,7 +134,7 @@ const CustomBarChart3 = () => {
               <div className="inline-block align-bottom bg-white rounded-sm text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle max-w-[90vw] w-full">
                 <div className="bg-white p-10 overflow-y-auto h-[85vh] mx-auto max-w-full">
 
-                  <Grid numItems={4} className="gap-4">
+                  <Grid numItems={numItemsInGrid} className="gap-4">
                     {Object.entries(dataByPI).map(([pi, rows]) => {
                       const chartData = rows.reduce((result, row) => {
                         const projectIndex = result.findIndex(item => item.name === row.project);
@@ -149,6 +157,7 @@ const CustomBarChart3 = () => {
                         <Card key={pi}>
                           <Title>{pi}</Title>
                           <BarChart
+                            className={cardSize}
                             data={chartData}
                             index="name"
                             categories={Object.keys(genomeColors)}
@@ -166,6 +175,8 @@ const CustomBarChart3 = () => {
                   </Grid>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                  <Button onClick={zoomIn}>Zoom In</Button>
+                  <Button onClick={zoomOut}>Zoom Out</Button>
                   <Button icon={XIcon} className="bg-gray-700 text-white hover:bg-gray-500 border-none mx-auto" onClick={closeModal}>
                     Go back
                   </Button>

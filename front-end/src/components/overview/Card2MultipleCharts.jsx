@@ -18,7 +18,7 @@ const data2b = require('../../data/data2b.json')
 
 const Card2MultipleCharts = (props) => {
   // State to keep track of the selected KPI
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(2);
 
   // Arguments to be passed to CustomBarChart1
   const props1 = {
