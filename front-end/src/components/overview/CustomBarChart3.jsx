@@ -86,6 +86,7 @@ const CustomBarChart3 = () => {
                   yAxisWidth={48}
                   showLegend={false}
                   showXAxis={false}
+                  stack={true}
                 />
               </Card>
             );
