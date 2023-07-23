@@ -27,29 +27,48 @@ function Home() {
 
   return (
     <main className="flex flex-col h-screen p-5">
-      <div className="flex justify-start items-center">
+      <div className="flex justify-between items-center">
         <span className="font-cabin font-bold text-5xl">Overview</span>
-        <div className="w-64 mx-auto">
-          <Flex justifyContent="between">
-            <Text><Bold>Staged</Bold> &bull; {stagedPercentageArray[1]}%</Text>
-            <Badge
-              className="font-cabin shadow-inner"
-              size="lg"
-              icon={stagedPercentageArray[1] < 100 ? ExclamationCircleIcon : CheckCircleIcon}
-              color={stagedPercentageArray[1] < 100 ? "amber" : "green"}
-            >
-              {stagedPercentageArray[1] < 100 ? "Pending" : "Done"}
-            </Badge>
-          </Flex>
-          <ProgressBar
-            value={stagedPercentageArray[1]}
-            color="blue"
-            className="mt-3" />
+        <div className="flex space-x-10">
+          <div className="w-60">
+            <Flex justifyContent="between">
+              <Text><Bold>Staged</Bold> &bull; {stagedPercentageArray[1]}%</Text>
+              <Badge
+                className="font-cabin shadow-inner"
+                size="lg"
+                icon={stagedPercentageArray[1] < 100 ? ExclamationCircleIcon : CheckCircleIcon}
+                color={stagedPercentageArray[1] < 100 ? "amber" : "green"}
+              >
+                {stagedPercentageArray[1] < 100 ? "Pending" : "Done"}
+              </Badge>
+            </Flex>
+            <ProgressBar
+              value={stagedPercentageArray[1]}
+              color="blue"
+              className="mt-3" />
+          </div>
+          <div className="w-64">
+            <Flex justifyContent="between">
+              <Text><Bold>Staged</Bold> &bull; {stagedPercentageArray[1]}%</Text>
+              <Badge
+                className="font-cabin shadow-inner"
+                size="lg"
+                icon={stagedPercentageArray[1] < 100 ? ExclamationCircleIcon : CheckCircleIcon}
+                color={stagedPercentageArray[1] < 100 ? "amber" : "green"}
+              >
+                {stagedPercentageArray[1] < 100 ? "Pending" : "Done"}
+              </Badge>
+            </Flex>
+            <ProgressBar
+              value={stagedPercentageArray[1]}
+              color="blue"
+              className="mt-3" />
+          </div>
         </div>
       </div>
       <div className="flex flex-col space-y-4 mt-4 pb-8 flex-grow">
         <div className="flex space-x-4">
-          <div className="w-2/3">
+          <div className="w-[75%]">
             <CustomAreaChart
               title="1. Quantity processed over time"
               tooltip="Overview of the no. of samples/flowcells processed along with the cumulative no. of units in a daily/weekly/monthly/yearly view, over the specified date range"
@@ -63,7 +82,7 @@ function Home() {
               kpis={["Samples", "Flowcells", "SamplesTotal", "FlowcellsTotal"]}
             />
           </div>
-          <div className="flex flex-col w-1/3 space-y-4">
+          <div className="flex flex-col w-[25%] space-y-4">
             <CustomDonutChart
               title="3. Flowcell - Type distribution"
               tooltip="Overview of the usage of different types of flowcells over the specified date range"
@@ -89,13 +108,13 @@ function Home() {
           </div>
         </div>
         <div className="flex space-x-4">
-          <div className="w-2/3">
+          <div className="w-[75%]">
             <Card2MultipleCharts
               title="2. P.I. Overview"
               tooltip="Overview of the distribution of sample requests per PI over the specified date range in different parameters"
             />
           </div>
-          <div className="flex flex-col w-1/3 space-y-4">
+          <div className="flex flex-col w-[25%] space-y-4">
             <CustomDonutChart
               title="5. Sequencer distribution"
               tooltip="Overview of the usage of sequencers over the specified date range"

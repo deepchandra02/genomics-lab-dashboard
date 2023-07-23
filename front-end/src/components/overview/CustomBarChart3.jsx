@@ -1,77 +1,95 @@
-import React, { Fragment, useState } from 'react';
-import { Card, Grid, Col, Title, BarChart, Button } from "@tremor/react";
+import React, { Fragment, useState, useEffect } from 'react';
+import { Card, Grid, Title, BarChart, Button } from "@tremor/react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ArrowsExpandIcon, XIcon } from "@heroicons/react/outline";
 
 const data2c = require('../../data/data2c.json');
+const predefinedColors = [
+  "red",
+  "lime",
+  "indigo",
+  "orange",
+  "teal",
+  "violet",
+  "amber",
+  "cyan",
+  "pink",
+  "green",
+  "sky",
+  "purple",
+  "emerald",
+  "blue",
+  "rose",
+  "slate",
+  "yellow",
+  "fuchsia"
+];
+
+const dataByPI = data2c.reduce((groups, row) => {
+  const pi = row.pi;
+  if (!groups[pi]) {
+    groups[pi] = [];
+  }
+  groups[pi].push(row);
+  return groups;
+}, {});
 
 const CustomBarChart3 = () => {
-  // Define available colors
-  const Colors = [
-    "red",
-    "lime",
-    "indigo",
-    "orange",
-    "teal",
-    "violet",
-    "amber",
-    "cyan",
-    "pink",
-    "green",
-    "sky",
-    "purple",
-    "emerald",
-    "blue",
-    "rose",
-    "slate",
-    "yellow",
-    "fuchsia"
-  ];
   const [isOpen, setIsOpen] = useState(false);
+  const [genomeColors, setGenomeColors] = useState({});
+
+  useEffect(() => {
+    const genomeNames = [...new Set(data2c.map(item => item.genome))];
+    const genomeColorMapping = genomeNames.reduce((acc, genome, index) => {
+      acc[genome] = predefinedColors[index % predefinedColors.length];  // Loop back to start if there are more genomes than colors
+      return acc;
+    }, {});
+    setGenomeColors(genomeColorMapping);
+  }, []);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
-  // Function to format the y-axis values
-  const dataFormatter = (number) => {
-    return number.toString();
-  };
-
-  // Function to generate the categories array from an object
-  const getCategories = (obj) => {
-    let categories = [];
-    for (let key in obj) {
-      if (key !== 'pi') {
-        categories.push(key);
-      }
-    }
-    return categories;
-  };
-
-  // Split the data into chunks of 4 for each row
-  const chunkedData = [];
-  for (let i = 0; i < data2c.length; i += 4) {
-    chunkedData.push(data2c.slice(i, i + 4));
-  }
-
   return (
     <div className='flex flex-col space-y-4'>
       <div className='flex justify-between space-x-2'>
-        {chunkedData[0].map((item, index) => (
-          <Card key={index} className=''>
-            <Title>{item.pi}</Title>
-            <BarChart
-              className="mt-6 h-[80%]"
-              data={[item]}
-              index="pi"
-              categories={getCategories(item)}
-              colors={Colors}
-              valueFormatter={dataFormatter}
-              yAxisWidth={48}
-              showLegend={false}
-            />
-          </Card>
-        ))}
+        {Object.entries(dataByPI)
+          // limit to first 3 PIs when the modal is closed
+          .slice(0, isOpen ? undefined : 3)
+          .map(([pi, rows]) => {
+            const chartData = rows.reduce((result, row) => {
+              const projectIndex = result.findIndex(item => item.name === row.project);
+
+              if (projectIndex !== -1) {
+                result[projectIndex][row.genome] = row.sample_count;
+              } else {
+                result.push({
+                  name: row.project,
+                  [row.genome]: row.sample_count
+                });
+              }
+
+              return result;
+            }, []);
+
+            const colors = Object.values(genomeColors);
+
+            return (
+              <Card key={pi}>
+                <Title>{pi}</Title>
+                <BarChart
+                  className='h-[91%]'
+                  data={chartData}
+                  index="name"
+                  categories={Object.keys(genomeColors)}
+                  colors={colors}
+                  yAxisWidth={48}
+                  showLegend={false}
+                  showXAxis={false}
+                />
+              </Card>
+            );
+          })}
       </div>
       <Button
         icon={ArrowsExpandIcon}
@@ -108,25 +126,42 @@ const CustomBarChart3 = () => {
                 <div className="bg-white p-10 overflow-y-auto h-[85vh] mx-auto max-w-full">
 
                   <Grid numItems={4} className="gap-4">
-                    {chunkedData.map((row, rowIndex) => (
-                      <Col key={rowIndex} numColSpan={1}>
-                        {row.map((item, index) => (
-                          <Card key={index} className='m-4'>
-                            <Title>{item.pi}</Title>
-                            <BarChart
-                              className="mt-6 h-40"
-                              data={[item]}
-                              index="pi"
-                              categories={getCategories(item)}
-                              colors={Colors}
-                              valueFormatter={dataFormatter}
-                              yAxisWidth={48}
-                              showLegend={false}
-                            />
-                          </Card>
-                        ))}
-                      </Col>
-                    ))}
+                    {Object.entries(dataByPI).map(([pi, rows]) => {
+                      const chartData = rows.reduce((result, row) => {
+                        const projectIndex = result.findIndex(item => item.name === row.project);
+
+                        if (projectIndex !== -1) {
+                          result[projectIndex][row.genome] = row.sample_count;
+                        } else {
+                          result.push({
+                            name: row.project,
+                            [row.genome]: row.sample_count
+                          });
+                        }
+
+                        return result;
+                      }, []);
+
+                      const colors = Object.values(genomeColors);
+
+                      return (
+                        <Card key={pi}>
+                          <Title>{pi}</Title>
+                          <BarChart
+                            data={chartData}
+                            index="name"
+                            categories={Object.keys(genomeColors)}
+                            colors={colors}
+                            yAxisWidth={48}
+                            showLegend={false}
+                            stack={true}
+                            showXAxis={false}
+                          />
+                        </Card>
+                      );
+                    })}
+
+
                   </Grid>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">

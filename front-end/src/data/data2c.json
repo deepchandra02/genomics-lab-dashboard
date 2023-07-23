@@ -1,415 +1,1460 @@
 [
   {
     "pi": "OL",
-    "SDR 196": 225,
-    "SDR 197": 948,
-    "SDR 198": 525,
-    "SDR 199": 938,
-    "SDR 200": 775,
-    "SDR 201": 781,
-    "SDR 202": 968,
-    "SDR 203": 576
+    "project": "SDR 196",
+    "sample_count": 225,
+    "genome": "genome2"
+  },
+  {
+    "pi": "OL",
+    "project": "SDR 197",
+    "sample_count": 948,
+    "genome": "genome2"
+  },
+  {
+    "pi": "OL",
+    "project": "SDR 198",
+    "sample_count": 525,
+    "genome": "genome2"
+  },
+  {
+    "pi": "OL",
+    "project": "SDR 199",
+    "sample_count": 938,
+    "genome": "genome2"
+  },
+  {
+    "pi": "OL",
+    "project": "SDR 200",
+    "sample_count": 775,
+    "genome": "genome2"
+  },
+  {
+    "pi": "OL",
+    "project": "SDR 201",
+    "sample_count": 781,
+    "genome": "genome1"
+  },
+  {
+    "pi": "OL",
+    "project": "SDR 202",
+    "sample_count": 968,
+    "genome": "genome2"
+  },
+  {
+    "pi": "OL",
+    "project": "SDR 203",
+    "sample_count": 576,
+    "genome": "genome2"
   },
   {
     "pi": "CA",
-    "SDR 161": 627,
-    "SDR 162": 205,
-    "SDR 163": 457,
-    "SDR 164": 989,
-    "SDR 165": 915,
-    "SDR 166": 542,
-    "SDR 167": 934,
-    "SDR 168": 701
+    "project": "SDR 161",
+    "sample_count": 627,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CA",
+    "project": "SDR 162",
+    "sample_count": 205,
+    "genome": "genome2"
+  },
+  {
+    "pi": "CA",
+    "project": "SDR 163",
+    "sample_count": 457,
+    "genome": "genome2"
+  },
+  {
+    "pi": "CA",
+    "project": "SDR 164",
+    "sample_count": 989,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CA",
+    "project": "SDR 165",
+    "sample_count": 915,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CA",
+    "project": "SDR 166",
+    "sample_count": 542,
+    "genome": "genome2"
+  },
+  {
+    "pi": "CA",
+    "project": "SDR 167",
+    "sample_count": 934,
+    "genome": "genome2"
+  },
+  {
+    "pi": "CA",
+    "project": "SDR 168",
+    "sample_count": 701,
+    "genome": "genome2"
   },
   {
     "pi": "CAW",
-    "SDR 101": 868,
-    "SDR 102": 366,
-    "SDR 103": 673,
-    "SDR 104": 224,
-    "SDR 105": 981,
-    "SDR 106": 893,
-    "SDR 107": 281,
-    "SDR 108": 533
+    "project": "SDR 101",
+    "sample_count": 868,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CAW",
+    "project": "SDR 102",
+    "sample_count": 366,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CAW",
+    "project": "SDR 103",
+    "sample_count": 673,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CAW",
+    "project": "SDR 104",
+    "sample_count": 224,
+    "genome": "genome2"
+  },
+  {
+    "pi": "CAW",
+    "project": "SDR 105",
+    "sample_count": 981,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CAW",
+    "project": "SDR 106",
+    "sample_count": 893,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CAW",
+    "project": "SDR 107",
+    "sample_count": 281,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CAW",
+    "project": "SDR 108",
+    "sample_count": 533,
+    "genome": "genome1"
   },
   {
     "pi": "BPX",
-    "SDR 13": 370,
-    "SDR 14": 202,
-    "SDR 15": 949,
-    "SDR 16": 993,
-    "SDR 17": 925,
-    "SDR 18": 598,
-    "SDR 19": 136,
-    "SDR 20": 402
+    "project": "SDR 13",
+    "sample_count": 370,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BPX",
+    "project": "SDR 14",
+    "sample_count": 202,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BPX",
+    "project": "SDR 15",
+    "sample_count": 949,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BPX",
+    "project": "SDR 16",
+    "sample_count": 993,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BPX",
+    "project": "SDR 17",
+    "sample_count": 925,
+    "genome": "genome1"
+  },
+  {
+    "pi": "BPX",
+    "project": "SDR 18",
+    "sample_count": 598,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BPX",
+    "project": "SDR 19",
+    "sample_count": 136,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BPX",
+    "project": "SDR 20",
+    "sample_count": 402,
+    "genome": "genome2"
   },
   {
     "pi": "EIS",
-    "SDR 26": 867,
-    "SDR 27": 610,
-    "SDR 28": 776,
-    "SDR 29": 59,
-    "SDR 30": 458,
-    "SDR 31": 931,
-    "SDR 32": 548
+    "project": "SDR 26",
+    "sample_count": 867,
+    "genome": "genome2"
+  },
+  {
+    "pi": "EIS",
+    "project": "SDR 27",
+    "sample_count": 610,
+    "genome": "genome1"
+  },
+  {
+    "pi": "EIS",
+    "project": "SDR 28",
+    "sample_count": 776,
+    "genome": "genome1"
+  },
+  {
+    "pi": "EIS",
+    "project": "SDR 29",
+    "sample_count": 59,
+    "genome": "genome2"
+  },
+  {
+    "pi": "EIS",
+    "project": "SDR 30",
+    "sample_count": 458,
+    "genome": "genome2"
+  },
+  {
+    "pi": "EIS",
+    "project": "SDR 31",
+    "sample_count": 931,
+    "genome": "genome2"
+  },
+  {
+    "pi": "EIS",
+    "project": "SDR 32",
+    "sample_count": 548,
+    "genome": "genome2"
   },
   {
     "pi": "OAI",
-    "SDR 232": 357,
-    "SDR 233": 686,
-    "SDR 234": 222,
-    "SDR 235": 627,
-    "SDR 236": 340,
-    "SDR 237": 640,
-    "SDR 238": 515,
-    "SDR 239": 819
+    "project": "SDR 232",
+    "sample_count": 357,
+    "genome": "genome1"
+  },
+  {
+    "pi": "OAI",
+    "project": "SDR 233",
+    "sample_count": 686,
+    "genome": "genome1"
+  },
+  {
+    "pi": "OAI",
+    "project": "SDR 234",
+    "sample_count": 222,
+    "genome": "genome2"
+  },
+  {
+    "pi": "OAI",
+    "project": "SDR 235",
+    "sample_count": 627,
+    "genome": "genome1"
+  },
+  {
+    "pi": "OAI",
+    "project": "SDR 236",
+    "sample_count": 340,
+    "genome": "genome2"
+  },
+  {
+    "pi": "OAI",
+    "project": "SDR 237",
+    "sample_count": 640,
+    "genome": "genome1"
+  },
+  {
+    "pi": "OAI",
+    "project": "SDR 238",
+    "sample_count": 515,
+    "genome": "genome1"
+  },
+  {
+    "pi": "OAI",
+    "project": "SDR 239",
+    "sample_count": 819,
+    "genome": "genome2"
   },
   {
     "pi": "BU",
-    "SDR 81": 360,
-    "SDR 82": 876,
-    "SDR 83": 885,
-    "SDR 84": 150,
-    "SDR 85": 567,
-    "SDR 86": 856,
-    "SDR 87": 490
+    "project": "SDR 81",
+    "sample_count": 360,
+    "genome": "genome1"
+  },
+  {
+    "pi": "BU",
+    "project": "SDR 82",
+    "sample_count": 876,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BU",
+    "project": "SDR 83",
+    "sample_count": 885,
+    "genome": "genome1"
+  },
+  {
+    "pi": "BU",
+    "project": "SDR 84",
+    "sample_count": 150,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BU",
+    "project": "SDR 85",
+    "sample_count": 567,
+    "genome": "genome1"
+  },
+  {
+    "pi": "BU",
+    "project": "SDR 86",
+    "sample_count": 856,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BU",
+    "project": "SDR 87",
+    "sample_count": 490,
+    "genome": "genome1"
   },
   {
     "pi": "WU",
-    "SDR 176": 430,
-    "SDR 177": 549,
-    "SDR 178": 688,
-    "SDR 179": 435,
-    "SDR 180": 913,
-    "SDR 181": 106,
-    "SDR 182": 935
+    "project": "SDR 176",
+    "sample_count": 430,
+    "genome": "genome2"
+  },
+  {
+    "pi": "WU",
+    "project": "SDR 177",
+    "sample_count": 549,
+    "genome": "genome1"
+  },
+  {
+    "pi": "WU",
+    "project": "SDR 178",
+    "sample_count": 688,
+    "genome": "genome2"
+  },
+  {
+    "pi": "WU",
+    "project": "SDR 179",
+    "sample_count": 435,
+    "genome": "genome2"
+  },
+  {
+    "pi": "WU",
+    "project": "SDR 180",
+    "sample_count": 913,
+    "genome": "genome1"
+  },
+  {
+    "pi": "WU",
+    "project": "SDR 181",
+    "sample_count": 106,
+    "genome": "genome1"
+  },
+  {
+    "pi": "WU",
+    "project": "SDR 182",
+    "sample_count": 935,
+    "genome": "genome2"
   },
   {
     "pi": "BY",
-    "SDR 169": 699,
-    "SDR 170": 172,
-    "SDR 171": 815,
-    "SDR 172": 532,
-    "SDR 173": 542,
-    "SDR 174": 686,
-    "SDR 175": 567
+    "project": "SDR 169",
+    "sample_count": 699,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BY",
+    "project": "SDR 170",
+    "sample_count": 172,
+    "genome": "genome1"
+  },
+  {
+    "pi": "BY",
+    "project": "SDR 171",
+    "sample_count": 815,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BY",
+    "project": "SDR 172",
+    "sample_count": 532,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BY",
+    "project": "SDR 173",
+    "sample_count": 542,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BY",
+    "project": "SDR 174",
+    "sample_count": 686,
+    "genome": "genome1"
+  },
+  {
+    "pi": "BY",
+    "project": "SDR 175",
+    "sample_count": 567,
+    "genome": "genome2"
   },
   {
     "pi": "FG",
-    "SDR 36": 564,
-    "SDR 37": 347,
-    "SDR 38": 274,
-    "SDR 39": 943,
-    "SDR 40": 942,
-    "SDR 41": 909
+    "project": "SDR 36",
+    "sample_count": 564,
+    "genome": "genome1"
+  },
+  {
+    "pi": "FG",
+    "project": "SDR 37",
+    "sample_count": 347,
+    "genome": "genome2"
+  },
+  {
+    "pi": "FG",
+    "project": "SDR 38",
+    "sample_count": 274,
+    "genome": "genome2"
+  },
+  {
+    "pi": "FG",
+    "project": "SDR 39",
+    "sample_count": 943,
+    "genome": "genome1"
+  },
+  {
+    "pi": "FG",
+    "project": "SDR 40",
+    "sample_count": 942,
+    "genome": "genome1"
+  },
+  {
+    "pi": "FG",
+    "project": "SDR 41",
+    "sample_count": 909,
+    "genome": "genome2"
   },
   {
     "pi": "DZ",
-    "SDR 67": 794,
-    "SDR 68": 902,
-    "SDR 69": 523,
-    "SDR 70": 830,
-    "SDR 71": 711,
-    "SDR 72": 194
+    "project": "SDR 67",
+    "sample_count": 794,
+    "genome": "genome1"
+  },
+  {
+    "pi": "DZ",
+    "project": "SDR 68",
+    "sample_count": 902,
+    "genome": "genome2"
+  },
+  {
+    "pi": "DZ",
+    "project": "SDR 69",
+    "sample_count": 523,
+    "genome": "genome2"
+  },
+  {
+    "pi": "DZ",
+    "project": "SDR 70",
+    "sample_count": 830,
+    "genome": "genome1"
+  },
+  {
+    "pi": "DZ",
+    "project": "SDR 71",
+    "sample_count": 711,
+    "genome": "genome1"
+  },
+  {
+    "pi": "DZ",
+    "project": "SDR 72",
+    "sample_count": 194,
+    "genome": "genome1"
   },
   {
     "pi": "CPU",
-    "SDR 74": 835,
-    "SDR 75": 481,
-    "SDR 76": 377,
-    "SDR 77": 537,
-    "SDR 78": 339,
-    "SDR 79": 462,
-    "SDR 80": 728
+    "project": "SDR 74",
+    "sample_count": 835,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CPU",
+    "project": "SDR 75",
+    "sample_count": 481,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CPU",
+    "project": "SDR 76",
+    "sample_count": 377,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CPU",
+    "project": "SDR 77",
+    "sample_count": 537,
+    "genome": "genome2"
+  },
+  {
+    "pi": "CPU",
+    "project": "SDR 78",
+    "sample_count": 339,
+    "genome": "genome2"
+  },
+  {
+    "pi": "CPU",
+    "project": "SDR 79",
+    "sample_count": 462,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CPU",
+    "project": "SDR 80",
+    "sample_count": 728,
+    "genome": "genome1"
   },
   {
     "pi": "OYI",
-    "SDR 109": 239,
-    "SDR 110": 573,
-    "SDR 111": 400,
-    "SDR 112": 287,
-    "SDR 113": 820,
-    "SDR 114": 245,
-    "SDR 115": 812
+    "project": "SDR 109",
+    "sample_count": 239,
+    "genome": "genome2"
+  },
+  {
+    "pi": "OYI",
+    "project": "SDR 110",
+    "sample_count": 573,
+    "genome": "genome2"
+  },
+  {
+    "pi": "OYI",
+    "project": "SDR 111",
+    "sample_count": 400,
+    "genome": "genome1"
+  },
+  {
+    "pi": "OYI",
+    "project": "SDR 112",
+    "sample_count": 287,
+    "genome": "genome1"
+  },
+  {
+    "pi": "OYI",
+    "project": "SDR 113",
+    "sample_count": 820,
+    "genome": "genome2"
+  },
+  {
+    "pi": "OYI",
+    "project": "SDR 114",
+    "sample_count": 245,
+    "genome": "genome1"
+  },
+  {
+    "pi": "OYI",
+    "project": "SDR 115",
+    "sample_count": 812,
+    "genome": "genome1"
   },
   {
     "pi": "LB",
-    "SDR 42": 602,
-    "SDR 43": 305,
-    "SDR 44": 772,
-    "SDR 45": 873,
-    "SDR 46": 126,
-    "SDR 47": 573,
-    "SDR 48": 68
+    "project": "SDR 42",
+    "sample_count": 602,
+    "genome": "genome1"
+  },
+  {
+    "pi": "LB",
+    "project": "SDR 43",
+    "sample_count": 305,
+    "genome": "genome1"
+  },
+  {
+    "pi": "LB",
+    "project": "SDR 44",
+    "sample_count": 772,
+    "genome": "genome2"
+  },
+  {
+    "pi": "LB",
+    "project": "SDR 45",
+    "sample_count": 873,
+    "genome": "genome2"
+  },
+  {
+    "pi": "LB",
+    "project": "SDR 46",
+    "sample_count": 126,
+    "genome": "genome1"
+  },
+  {
+    "pi": "LB",
+    "project": "SDR 47",
+    "sample_count": 573,
+    "genome": "genome2"
+  },
+  {
+    "pi": "LB",
+    "project": "SDR 48",
+    "sample_count": 68,
+    "genome": "genome2"
   },
   {
     "pi": "OO",
-    "SDR 133": 607,
-    "SDR 134": 447,
-    "SDR 135": 558,
-    "SDR 136": 985,
-    "SDR 137": 687
+    "project": "SDR 133",
+    "sample_count": 607,
+    "genome": "genome2"
+  },
+  {
+    "pi": "OO",
+    "project": "SDR 134",
+    "sample_count": 447,
+    "genome": "genome1"
+  },
+  {
+    "pi": "OO",
+    "project": "SDR 135",
+    "sample_count": 558,
+    "genome": "genome1"
+  },
+  {
+    "pi": "OO",
+    "project": "SDR 136",
+    "sample_count": 985,
+    "genome": "genome1"
+  },
+  {
+    "pi": "OO",
+    "project": "SDR 137",
+    "sample_count": 687,
+    "genome": "genome1"
   },
   {
     "pi": "BIR",
-    "SDR 125": 331,
-    "SDR 126": 270,
-    "SDR 127": 555,
-    "SDR 128": 281,
-    "SDR 129": 368,
-    "SDR 130": 486,
-    "SDR 131": 564,
-    "SDR 132": 391
+    "project": "SDR 125",
+    "sample_count": 331,
+    "genome": "genome1"
+  },
+  {
+    "pi": "BIR",
+    "project": "SDR 126",
+    "sample_count": 270,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BIR",
+    "project": "SDR 127",
+    "sample_count": 555,
+    "genome": "genome1"
+  },
+  {
+    "pi": "BIR",
+    "project": "SDR 128",
+    "sample_count": 281,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BIR",
+    "project": "SDR 129",
+    "sample_count": 368,
+    "genome": "genome1"
+  },
+  {
+    "pi": "BIR",
+    "project": "SDR 130",
+    "sample_count": 486,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BIR",
+    "project": "SDR 131",
+    "sample_count": 564,
+    "genome": "genome2"
+  },
+  {
+    "pi": "BIR",
+    "project": "SDR 132",
+    "sample_count": 391,
+    "genome": "genome1"
   },
   {
     "pi": "MF",
-    "SDR 192": 529,
-    "SDR 193": 807,
-    "SDR 194": 891,
-    "SDR 195": 734
+    "project": "SDR 192",
+    "sample_count": 529,
+    "genome": "genome1"
+  },
+  {
+    "pi": "MF",
+    "project": "SDR 192",
+    "sample_count": 529,
+    "genome": "genome2"
+  },
+  {
+    "pi": "MF",
+    "project": "SDR 193",
+    "sample_count": 807,
+    "genome": "genome2"
+  },
+  {
+    "pi": "MF",
+    "project": "SDR 194",
+    "sample_count": 891,
+    "genome": "genome1"
+  },
+  {
+    "pi": "MF",
+    "project": "SDR 195",
+    "sample_count": 734,
+    "genome": "genome1"
   },
   {
     "pi": "WTV",
-    "SDR 219": 134,
-    "SDR 220": 189,
-    "SDR 221": 68,
-    "SDR 222": 780,
-    "SDR 223": 396,
-    "SDR 224": 874,
-    "SDR 225": 488
+    "project": "SDR 219",
+    "sample_count": 134,
+    "genome": "genome2"
+  },
+  {
+    "pi": "WTV",
+    "project": "SDR 220",
+    "sample_count": 189,
+    "genome": "genome2"
+  },
+  {
+    "pi": "WTV",
+    "project": "SDR 221",
+    "sample_count": 68,
+    "genome": "genome2"
+  },
+  {
+    "pi": "WTV",
+    "project": "SDR 222",
+    "sample_count": 780,
+    "genome": "genome1"
+  },
+  {
+    "pi": "WTV",
+    "project": "SDR 223",
+    "sample_count": 396,
+    "genome": "genome2"
+  },
+  {
+    "pi": "WTV",
+    "project": "SDR 224",
+    "sample_count": 874,
+    "genome": "genome1"
+  },
+  {
+    "pi": "WTV",
+    "project": "SDR 225",
+    "sample_count": 488,
+    "genome": "genome2"
   },
   {
     "pi": "IDL",
-    "SDR 62": 722,
-    "SDR 63": 114,
-    "SDR 64": 864,
-    "SDR 65": 283,
-    "SDR 66": 879
+    "project": "SDR 62",
+    "sample_count": 722,
+    "genome": "genome1"
+  },
+  {
+    "pi": "IDL",
+    "project": "SDR 63",
+    "sample_count": 114,
+    "genome": "genome1"
+  },
+  {
+    "pi": "IDL",
+    "project": "SDR 64",
+    "sample_count": 864,
+    "genome": "genome1"
+  },
+  {
+    "pi": "IDL",
+    "project": "SDR 65",
+    "sample_count": 283,
+    "genome": "genome2"
+  },
+  {
+    "pi": "IDL",
+    "project": "SDR 66",
+    "sample_count": 879,
+    "genome": "genome2"
   },
   {
     "pi": "OP",
-    "SDR 55": 993,
-    "SDR 56": 134,
-    "SDR 57": 877,
-    "SDR 58": 849
+    "project": "SDR 55",
+    "sample_count": 993,
+    "genome": "genome1"
+  },
+  {
+    "pi": "OP",
+    "project": "SDR 56",
+    "sample_count": 134,
+    "genome": "genome2"
+  },
+  {
+    "pi": "OP",
+    "project": "SDR 57",
+    "sample_count": 877,
+    "genome": "genome2"
+  },
+  {
+    "pi": "OP",
+    "project": "SDR 58",
+    "sample_count": 849,
+    "genome": "genome1"
   },
   {
     "pi": "LL",
-    "SDR 1": 286,
-    "SDR 2": 780,
-    "SDR 3": 908,
-    "SDR 4": 723
+    "project": "SDR 1",
+    "sample_count": 286,
+    "genome": "genome1"
+  },
+  {
+    "pi": "LL",
+    "project": "SDR 2",
+    "sample_count": 780,
+    "genome": "genome1"
+  },
+  {
+    "pi": "LL",
+    "project": "SDR 3",
+    "sample_count": 908,
+    "genome": "genome2"
+  },
+  {
+    "pi": "LL",
+    "project": "SDR 4",
+    "sample_count": 723,
+    "genome": "genome2"
   },
   {
     "pi": "NW",
-    "SDR 213": 74,
-    "SDR 214": 961,
-    "SDR 215": 29,
-    "SDR 216": 38,
-    "SDR 217": 956,
-    "SDR 218": 614
+    "project": "SDR 213",
+    "sample_count": 74,
+    "genome": "genome2"
+  },
+  {
+    "pi": "NW",
+    "project": "SDR 214",
+    "sample_count": 961,
+    "genome": "genome2"
+  },
+  {
+    "pi": "NW",
+    "project": "SDR 215",
+    "sample_count": 29,
+    "genome": "genome1"
+  },
+  {
+    "pi": "NW",
+    "project": "SDR 216",
+    "sample_count": 38,
+    "genome": "genome2"
+  },
+  {
+    "pi": "NW",
+    "project": "SDR 217",
+    "sample_count": 956,
+    "genome": "genome2"
+  },
+  {
+    "pi": "NW",
+    "project": "SDR 218",
+    "sample_count": 614,
+    "genome": "genome2"
   },
   {
     "pi": "CQ",
-    "SDR 5": 605,
-    "SDR 6": 691,
-    "SDR 7": 358,
-    "SDR 8": 48,
-    "SDR 9": 797
+    "project": "SDR 5",
+    "sample_count": 605,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CQ",
+    "project": "SDR 6",
+    "sample_count": 691,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CQ",
+    "project": "SDR 7",
+    "sample_count": 358,
+    "genome": "genome2"
+  },
+  {
+    "pi": "CQ",
+    "project": "SDR 8",
+    "sample_count": 48,
+    "genome": "genome2"
+  },
+  {
+    "pi": "CQ",
+    "project": "SDR 9",
+    "sample_count": 797,
+    "genome": "genome1"
   },
   {
     "pi": "WXN",
-    "SDR 204": 654,
-    "SDR 205": 64,
-    "SDR 206": 120,
-    "SDR 207": 683,
-    "SDR 208": 900
+    "project": "SDR 204",
+    "sample_count": 654,
+    "genome": "genome2"
+  },
+  {
+    "pi": "WXN",
+    "project": "SDR 205",
+    "sample_count": 64,
+    "genome": "genome1"
+  },
+  {
+    "pi": "WXN",
+    "project": "SDR 206",
+    "sample_count": 120,
+    "genome": "genome2"
+  },
+  {
+    "pi": "WXN",
+    "project": "SDR 207",
+    "sample_count": 683,
+    "genome": "genome2"
+  },
+  {
+    "pi": "WXN",
+    "project": "SDR 208",
+    "sample_count": 900,
+    "genome": "genome1"
   },
   {
     "pi": "DT",
-    "SDR 116": 188,
-    "SDR 117": 842,
-    "SDR 118": 190,
-    "SDR 119": 496,
-    "SDR 120": 650
+    "project": "SDR 116",
+    "sample_count": 188,
+    "genome": "genome1"
+  },
+  {
+    "pi": "DT",
+    "project": "SDR 117",
+    "sample_count": 842,
+    "genome": "genome2"
+  },
+  {
+    "pi": "DT",
+    "project": "SDR 118",
+    "sample_count": 190,
+    "genome": "genome2"
+  },
+  {
+    "pi": "DT",
+    "project": "SDR 119",
+    "sample_count": 496,
+    "genome": "genome2"
+  },
+  {
+    "pi": "DT",
+    "project": "SDR 120",
+    "sample_count": 650,
+    "genome": "genome1"
   },
   {
     "pi": "CZ",
-    "SDR 49": 674,
-    "SDR 50": 248,
-    "SDR 51": 621,
-    "SDR 52": 94,
-    "SDR 53": 405,
-    "SDR 54": 290
+    "project": "SDR 49",
+    "sample_count": 674,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CZ",
+    "project": "SDR 50",
+    "sample_count": 248,
+    "genome": "genome2"
+  },
+  {
+    "pi": "CZ",
+    "project": "SDR 51",
+    "sample_count": 621,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CZ",
+    "project": "SDR 52",
+    "sample_count": 94,
+    "genome": "genome1"
+  },
+  {
+    "pi": "CZ",
+    "project": "SDR 53",
+    "sample_count": 405,
+    "genome": "genome2"
+  },
+  {
+    "pi": "CZ",
+    "project": "SDR 54",
+    "sample_count": 290,
+    "genome": "genome2"
   },
   {
     "pi": "LGW",
-    "SDR 226": 957,
-    "SDR 227": 519,
-    "SDR 228": 613,
-    "SDR 229": 210
+    "project": "SDR 226",
+    "sample_count": 957,
+    "genome": "genome1"
+  },
+  {
+    "pi": "LGW",
+    "project": "SDR 227",
+    "sample_count": 519,
+    "genome": "genome2"
+  },
+  {
+    "pi": "LGW",
+    "project": "SDR 228",
+    "sample_count": 613,
+    "genome": "genome2"
+  },
+  {
+    "pi": "LGW",
+    "project": "SDR 229",
+    "sample_count": 210,
+    "genome": "genome1"
   },
   {
     "pi": "EX",
-    "SDR 91": 964,
-    "SDR 92": 940,
-    "SDR 93": 224,
-    "SDR 94": 109
+    "project": "SDR 91",
+    "sample_count": 964,
+    "genome": "genome1"
+  },
+  {
+    "pi": "EX",
+    "project": "SDR 92",
+    "sample_count": 940,
+    "genome": "genome1"
+  },
+  {
+    "pi": "EX",
+    "project": "SDR 93",
+    "sample_count": 224,
+    "genome": "genome1"
+  },
+  {
+    "pi": "EX",
+    "project": "SDR 94",
+    "sample_count": 109,
+    "genome": "genome2"
   },
   {
     "pi": "KVU",
-    "SDR 189": 771,
-    "SDR 190": 986,
-    "SDR 191": 472
+    "project": "SDR 189",
+    "sample_count": 771,
+    "genome": "genome2"
+  },
+  {
+    "pi": "KVU",
+    "project": "SDR 190",
+    "sample_count": 986,
+    "genome": "genome1"
+  },
+  {
+    "pi": "KVU",
+    "project": "SDR 191",
+    "sample_count": 472,
+    "genome": "genome2"
   },
   {
     "pi": "HQO",
-    "SDR 10": 463,
-    "SDR 11": 946,
-    "SDR 12": 733
+    "project": "SDR 10",
+    "sample_count": 463,
+    "genome": "genome2"
+  },
+  {
+    "pi": "HQO",
+    "project": "SDR 11",
+    "sample_count": 946,
+    "genome": "genome2"
+  },
+  {
+    "pi": "HQO",
+    "project": "SDR 12",
+    "sample_count": 733,
+    "genome": "genome2"
   },
   {
     "pi": "WKZ",
-    "SDR 184": 119,
-    "SDR 185": 292,
-    "SDR 186": 489,
-    "SDR 187": 636,
-    "SDR 188": 604
+    "project": "SDR 184",
+    "sample_count": 119,
+    "genome": "genome1"
+  },
+  {
+    "pi": "WKZ",
+    "project": "SDR 185",
+    "sample_count": 292,
+    "genome": "genome1"
+  },
+  {
+    "pi": "WKZ",
+    "project": "SDR 186",
+    "sample_count": 489,
+    "genome": "genome2"
+  },
+  {
+    "pi": "WKZ",
+    "project": "SDR 187",
+    "sample_count": 636,
+    "genome": "genome2"
+  },
+  {
+    "pi": "WKZ",
+    "project": "SDR 188",
+    "sample_count": 604,
+    "genome": "genome2"
   },
   {
     "pi": "HNG",
-    "SDR 121": 184,
-    "SDR 122": 860,
-    "SDR 123": 590,
-    "SDR 124": 397
+    "project": "SDR 121",
+    "sample_count": 184,
+    "genome": "genome1"
+  },
+  {
+    "pi": "HNG",
+    "project": "SDR 122",
+    "sample_count": 860,
+    "genome": "genome1"
+  },
+  {
+    "pi": "HNG",
+    "project": "SDR 123",
+    "sample_count": 590,
+    "genome": "genome2"
+  },
+  {
+    "pi": "HNG",
+    "project": "SDR 124",
+    "sample_count": 397,
+    "genome": "genome2"
   },
   {
     "pi": "FO",
-    "SDR 150": 348,
-    "SDR 151": 211,
-    "SDR 152": 436,
-    "SDR 153": 360,
-    "SDR 154": 666
+    "project": "SDR 150",
+    "sample_count": 348,
+    "genome": "genome1"
+  },
+  {
+    "pi": "FO",
+    "project": "SDR 151",
+    "sample_count": 211,
+    "genome": "genome2"
+  },
+  {
+    "pi": "FO",
+    "project": "SDR 152",
+    "sample_count": 436,
+    "genome": "genome1"
+  },
+  {
+    "pi": "FO",
+    "project": "SDR 153",
+    "sample_count": 360,
+    "genome": "genome2"
+  },
+  {
+    "pi": "FO",
+    "project": "SDR 154",
+    "sample_count": 666,
+    "genome": "genome2"
   },
   {
     "pi": "TUV",
-    "SDR 157": 697,
-    "SDR 158": 463,
-    "SDR 159": 629
+    "project": "SDR 157",
+    "sample_count": 697,
+    "genome": "genome2"
+  },
+  {
+    "pi": "TUV",
+    "project": "SDR 158",
+    "sample_count": 463,
+    "genome": "genome2"
+  },
+  {
+    "pi": "TUV",
+    "project": "SDR 159",
+    "sample_count": 629,
+    "genome": "genome2"
   },
   {
     "pi": "GKE",
-    "SDR 97": 370,
-    "SDR 98": 690,
-    "SDR 99": 552,
-    "SDR 100": 114
+    "project": "SDR 97",
+    "sample_count": 370,
+    "genome": "genome1"
+  },
+  {
+    "pi": "GKE",
+    "project": "SDR 98",
+    "sample_count": 690,
+    "genome": "genome2"
+  },
+  {
+    "pi": "GKE",
+    "project": "SDR 99",
+    "sample_count": 552,
+    "genome": "genome1"
+  },
+  {
+    "pi": "GKE",
+    "project": "SDR 100",
+    "sample_count": 114,
+    "genome": "genome1"
   },
   {
     "pi": "WW",
-    "SDR 240": 576,
-    "SDR 241": 219,
-    "SDR 242": 887
+    "project": "SDR 240",
+    "sample_count": 576,
+    "genome": "genome2"
+  },
+  {
+    "pi": "WW",
+    "project": "SDR 241",
+    "sample_count": 219,
+    "genome": "genome2"
+  },
+  {
+    "pi": "WW",
+    "project": "SDR 242",
+    "sample_count": 887,
+    "genome": "genome1"
   },
   {
     "pi": "QM",
-    "SDR 88": 538,
-    "SDR 89": 839,
-    "SDR 90": 29
+    "project": "SDR 88",
+    "sample_count": 538,
+    "genome": "genome2"
+  },
+  {
+    "pi": "QM",
+    "project": "SDR 89",
+    "sample_count": 839,
+    "genome": "genome2"
+  },
+  {
+    "pi": "QM",
+    "project": "SDR 90",
+    "sample_count": 29,
+    "genome": "genome2"
   },
   {
     "pi": "MW",
-    "SDR 138": 892,
-    "SDR 139": 426
+    "project": "SDR 138",
+    "sample_count": 892,
+    "genome": "genome2"
+  },
+  {
+    "pi": "MW",
+    "project": "SDR 139",
+    "sample_count": 426,
+    "genome": "genome2"
   },
   {
     "pi": "JNX",
-    "SDR 146": 167,
-    "SDR 147": 805,
-    "SDR 148": 58,
-    "SDR 149": 287
+    "project": "SDR 146",
+    "sample_count": 167,
+    "genome": "genome1"
+  },
+  {
+    "pi": "JNX",
+    "project": "SDR 147",
+    "sample_count": 805,
+    "genome": "genome1"
+  },
+  {
+    "pi": "JNX",
+    "project": "SDR 148",
+    "sample_count": 58,
+    "genome": "genome1"
+  },
+  {
+    "pi": "JNX",
+    "project": "SDR 149",
+    "sample_count": 287,
+    "genome": "genome2"
   },
   {
     "pi": "RC",
-    "SDR 21": 194,
-    "SDR 22": 412,
-    "SDR 23": 322,
-    "SDR 24": 385
+    "project": "SDR 21",
+    "sample_count": 194,
+    "genome": "genome1"
+  },
+  {
+    "pi": "RC",
+    "project": "SDR 22",
+    "sample_count": 412,
+    "genome": "genome2"
+  },
+  {
+    "pi": "RC",
+    "project": "SDR 23",
+    "sample_count": 322,
+    "genome": "genome1"
+  },
+  {
+    "pi": "RC",
+    "project": "SDR 24",
+    "sample_count": 385,
+    "genome": "genome1"
   },
   {
     "pi": "PLL",
-    "SDR 143": 232,
-    "SDR 144": 322,
-    "SDR 145": 681
+    "project": "SDR 143",
+    "sample_count": 232,
+    "genome": "genome2"
+  },
+  {
+    "pi": "PLL",
+    "project": "SDR 144",
+    "sample_count": 322,
+    "genome": "genome1"
+  },
+  {
+    "pi": "PLL",
+    "project": "SDR 145",
+    "sample_count": 681,
+    "genome": "genome2"
   },
   {
     "pi": "QCH",
-    "SDR 209": 369,
-    "SDR 210": 753
+    "project": "SDR 209",
+    "sample_count": 369,
+    "genome": "genome1"
+  },
+  {
+    "pi": "QCH",
+    "project": "SDR 210",
+    "sample_count": 753,
+    "genome": "genome1"
   },
   {
     "pi": "YCM",
-    "SDR 59": 435,
-    "SDR 60": 643
+    "project": "SDR 59",
+    "sample_count": 435,
+    "genome": "genome1"
+  },
+  {
+    "pi": "YCM",
+    "project": "SDR 60",
+    "sample_count": 643,
+    "genome": "genome1"
   },
   {
     "pi": "ZKQ",
-    "SDR 140": 304,
-    "SDR 141": 342,
-    "SDR 142": 418
+    "project": "SDR 140",
+    "sample_count": 304,
+    "genome": "genome1"
+  },
+  {
+    "pi": "ZKQ",
+    "project": "SDR 141",
+    "sample_count": 342,
+    "genome": "genome1"
+  },
+  {
+    "pi": "ZKQ",
+    "project": "SDR 142",
+    "sample_count": 418,
+    "genome": "genome2"
   },
   {
     "pi": "YW",
-    "SDR 73": 1000
+    "project": "SDR 73",
+    "sample_count": 1000,
+    "genome": "genome1"
   },
   {
     "pi": "ESU",
-    "SDR 160": 905
+    "project": "SDR 160",
+    "sample_count": 905,
+    "genome": "genome2"
   },
   {
     "pi": "TJT",
-    "SDR 96": 838
+    "project": "SDR 96",
+    "sample_count": 838,
+    "genome": "genome1"
   },
   {
     "pi": "PDO",
-    "SDR 95": 801
+    "project": "SDR 95",
+    "sample_count": 801,
+    "genome": "genome1"
   },
   {
     "pi": "UJJ",
-    "SDR 25": 786
+    "project": "SDR 25",
+    "sample_count": 786,
+    "genome": "genome2"
   },
   {
     "pi": "XLQ",
-    "SDR 230": 780
+    "project": "SDR 230",
+    "sample_count": 780,
+    "genome": "genome2"
   },
   {
     "pi": "QG",
-    "SDR 211": 249,
-    "SDR 212": 512
+    "project": "SDR 211",
+    "sample_count": 249,
+    "genome": "genome1"
+  },
+  {
+    "pi": "QG",
+    "project": "SDR 212",
+    "sample_count": 512,
+    "genome": "genome1"
   },
   {
     "pi": "SFT",
-    "SDR 33": 323,
-    "SDR 34": 283
+    "project": "SDR 33",
+    "sample_count": 323,
+    "genome": "genome1"
+  },
+  {
+    "pi": "SFT",
+    "project": "SDR 34",
+    "sample_count": 283,
+    "genome": "genome2"
   },
   {
     "pi": "NZC",
-    "SDR 35": 551
+    "project": "SDR 35",
+    "sample_count": 551,
+    "genome": "genome2"
   },
   {
     "pi": "WM",
-    "SDR 61": 485
+    "project": "SDR 61",
+    "sample_count": 485,
+    "genome": "genome1"
   },
   {
     "pi": "BW",
-    "SDR 155": 401,
-    "SDR 156": 72
+    "project": "SDR 155",
+    "sample_count": 401,
+    "genome": "genome1"
+  },
+  {
+    "pi": "BW",
+    "project": "SDR 156",
+    "sample_count": 72,
+    "genome": "genome2"
   },
   {
     "pi": "BI",
-    "SDR 231": 384
+    "project": "SDR 231",
+    "sample_count": 384,
+    "genome": "genome2"
   },
   {
     "pi": "RQT",
-    "SDR 183": 158
+    "project": "SDR 183",
+    "sample_count": 158,
+    "genome": "genome1"
   }
 ]

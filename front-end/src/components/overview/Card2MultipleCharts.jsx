@@ -58,7 +58,7 @@ const Card2MultipleCharts = (props) => {
           <TabList color={"green"} variant="line">
             <Tab key={0}>Data Sample Status</Tab>
             <Tab key={1}>Projects</Tab>
-            <Tab key={2}>View 3</Tab>
+            <Tab key={2}>Reference Genome</Tab>
           </TabList>
         </TabGroup>
       </Flex>
