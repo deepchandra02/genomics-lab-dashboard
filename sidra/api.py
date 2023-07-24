@@ -7,7 +7,7 @@ app = Flask(__name__)   # Flask constructor
 
 conn = psycopg2.connect(database="sidra",
                         host="localhost",
-                        user="postgres",
+                        user="deepc",
                         password="mypassword",
                         port="5432")
 conn.set_session(autocommit=True)
@@ -44,21 +44,21 @@ def type1(date):
     try:
         # Execute the SQL query
         cursor.execute("SELECT\
-                            TO_CHAR(demultiplex_date, 'MM-DD-YYYY') AS date,\
+                            TO_CHAR(loading_date, 'MM-DD-YYYY') AS date,\
                             COUNT(DISTINCT samples.sample_id) AS Samples,\
                             COUNT(DISTINCT samples.fc_id) AS Flowcells,\
-                            SUM(COUNT(DISTINCT samples.sample_id)) OVER (ORDER BY demultiplex_date) AS SamplesTotal,\
-                            SUM(COUNT(DISTINCT samples.fc_id)) OVER (ORDER BY demultiplex_date) AS FlowcellsTotal\
+                            SUM(COUNT(DISTINCT samples.sample_id)) OVER (ORDER BY loading_date) AS SamplesTotal,\
+                            SUM(COUNT(DISTINCT samples.fc_id)) OVER (ORDER BY loading_date) AS FlowcellsTotal\
                         FROM\
                             flowcell\
                         INNER JOIN\
                             samples ON flowcell.fc_id = samples.fc_id\
                         WHERE\
-                            demultiplex_date >= '%s'::DATE AND demultiplex_date <= '%s'::DATE\
+                            loading_date >= '%s'::DATE AND loading_date <= '%s'::DATE\
                         GROUP BY\
-                            demultiplex_date\
+                            loading_date\
                         ORDER BY\
-                            demultiplex_date;"%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+                            loading_date;"%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
     
                 
         # Fetch the results from the cursor
@@ -95,7 +95,7 @@ def type2(date):
         cursor.execute("""
                         SELECT fc_type, COUNT(*) as quantity
                         FROM flowcell
-                        WHERE demultiplex_date BETWEEN '%s' AND '%s'
+                        WHERE loading_date BETWEEN '%s' AND '%s'
                         GROUP BY fc_type
                         """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
                         

@@ -12,7 +12,7 @@ import datetime
 
 conn = psycopg2.connect(database="sidra",
                         host="localhost",
-                        user="postgres",
+                        user="deepc",
                         password="mypassword",
                         port="5432")
 # conn.autocommit = True
@@ -35,8 +35,8 @@ def sql(command):
 
 
 # Set up the paths
-directory_path = "./input-data-for-externs/input-data-for-externs/FC multiqc"
-directory = "./input-data-for-externs/input-data-for-externs"
+directory_path = "./input-data-for-externs/FC multiqc"
+directory = "./input-data-for-externs"
 fcqc_directory = directory + "/flowcell-qc-reports"
 rawinfo_directory = directory + "/rawinfo-dirs"
 runs_directory = directory + "/Runs"
@@ -183,8 +183,16 @@ def store_row(row):
         data = cursor.fetchone()
         if data != None:
             assert(len(data) == 7)
-            loading_date = datetime.datetime.strptime(row["Loading Date"], '%m/%d/%Y').date()
-            completion_date = datetime.datetime.strptime(row["Completion Date"], '%m/%d/%Y').date()
+            try:
+                loading_date = datetime.datetime.strptime(row["Loading Date"], '%m/%d/%Y').date()
+            except:
+                loading_date = datetime.datetime.strptime(row["Loading Date"], '%Y-%m-%d').date()
+
+            try:
+                completion_date = datetime.datetime.strptime(row["Completion Date"], '%m/%d/%Y').date()
+            except:
+                completion_date = datetime.datetime.strptime(row["Completion Date"], '%Y-%m-%d').date()
+
             if data[0] != row["FC Type"]:
                 print("FC Type data changed for flowcell %s from %s to %s"%(row["FC"], data[0], row["FC Type"]))
             if data[1] != row["Loaded By"]:
@@ -324,6 +332,13 @@ def store_fc(fc):
             for line in raw_info_file:
                 row = dict()
                 cells = line.split('\t')
+                if cells == ['\n']:
+                    # print("empty line")
+                    break
+                # print(len(cells))
+                # if (len(cells) != col_numbers):
+                    # print(cells)
+
                 assert(len(cells) == col_numbers)
                 for i in range(col_numbers):
                   row[fields[i].strip()] = cells[i].strip()
