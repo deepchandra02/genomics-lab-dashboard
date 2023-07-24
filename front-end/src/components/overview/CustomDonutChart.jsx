@@ -20,7 +20,7 @@ const CustomDonutChart = (props) => {
     category: props.category,
     index: props.index,
     variant: props.variant,
-    className: props.className + " w-1/2",
+    className: props.className + " w-1/2 text-sm",
     colors: props.colors,
     valueFormatter: valueFormatter,
     // The label is the total units formatted as a US number + the label received as prop

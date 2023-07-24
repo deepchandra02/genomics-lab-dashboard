@@ -31,7 +31,7 @@ const CustomAreaChart = (props) => {
   // State to keep track of the selected view (monthly by deafult)
   const [view, setView] = useState(3);
   // State to keep track of the window size (number of days/months etc. to display in a window)
-  const [windowSize, setWindowSize] = useState(12);
+  const [windowSize, setWindowSize] = useState(6);
   const [windowStart, setWindowStart] = useState(0); // Initial window start is 0
   const [preprocessedData, setPreprocessedData] = useState(props.data);
   const [toggleCumulative, setToggleCumulative] = useState(false);
@@ -146,7 +146,7 @@ const CustomAreaChart = (props) => {
               id="windowSizeStepper"
               className="text-center w-[4rem] h-9 p-2 border border-gray-200 shadow-tremor-input rounded-lg "
               value={windowSize}
-              step="12"
+              step="6"
               min="0"
               max={preprocessedData.length}
               onChange={(e) => setWindowSize(parseInt(e.target.value))}

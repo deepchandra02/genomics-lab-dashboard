@@ -2,23 +2,16 @@ import React, { useState } from 'react'
 import {
   BarChart,
   Button,
-  Card,
-  Title,
   Flex,
   Icon,
   Subtitle
 } from "@tremor/react";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  InformationCircleIcon
-} from "@heroicons/react/solid";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 
-const CustomBarChart = (props) => {
+const CustomBarChart1 = (props) => {
   const [windowSize, setWindowSize] = useState(6);
   const [windowStart, setWindowStart] = useState(0); // Initial window start is 0
   const [toggleStacked, setToggleStacked] = useState(true);
-  // const [colors, setColors] = useState([props.colors[0]]);
 
   // Create a "windowed" subset of the data
   const windowedData = props.data.slice(windowStart, windowStart + windowSize);
@@ -51,16 +44,7 @@ const CustomBarChart = (props) => {
   };
 
   return (
-    <Card decoration="top" decorationColor="teal" className="flex flex-col space-y-2 h-full">
-      <Flex className="space-x-0.5 font-cabin h-[5%]" justifyContent="start" alignItems="center">
-        <Title> {props.title} </Title>
-        <Icon
-          icon={InformationCircleIcon}
-          variant="simple"
-          className=" text-teal-600 hover:text-teal-400 "
-          tooltip={props.tooltip}
-        />
-      </Flex>
+    <div className="flex flex-col space-y-2 h-full">
       <Flex className="gap-x-4 text-gray-500 hover:text-black h-[10%]" justifyContent='end' alignItems='center'>
         <input
           type="number"
@@ -82,7 +66,7 @@ const CustomBarChart = (props) => {
           <Subtitle>Stacked</Subtitle>
         </div>
       </Flex>
-      <div className="mt-4 h-[75%]">
+      <div className="mt-4 h-[85%]">
         <BarChart {...barChartArgs} />
         <Flex className="space-x-4" justifyContent="center">
           <Button
@@ -109,8 +93,8 @@ const CustomBarChart = (props) => {
           </Button>
         </Flex>
       </div>
-    </Card>
+    </div>
   )
 }
 
-export default CustomBarChart
+export default CustomBarChart1
