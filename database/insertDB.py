@@ -35,8 +35,8 @@ def sql(command):
 
 
 # Set up the paths
-directory_path = "./input-data-for-externs/FC multiqc"
-directory = "./input-data-for-externs"
+directory_path = "./input-data-for-externs/input-data-for-externs/FC multiqc"
+directory = "./input-data-for-externs/input-data-for-externs"
 fcqc_directory = directory + "/flowcell-qc-reports"
 rawinfo_directory = directory + "/rawinfo-dirs"
 runs_directory = directory + "/Runs"
@@ -171,28 +171,22 @@ def store_row(row):
     try:
         # print(row["Completion Date"])
         # print(row)
-        cursor.execute("INSERT INTO flowcell (fc_id, fc_type, loaded_by, loading_date, completion_date, order_no, sequencer_id, position)\
-        VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');"%(row["FC"], row["FC Type"], row["Loaded By"], row["Loading Date"], row["Completion Date"], row["Order No"], row["Sequencer"], row["Position"]))
+        cursor.execute("INSERT INTO flowcell (fc_id, fc_type, loaded_by, loading_date, completion_date, demultiplex_date, order_no, sequencer_id, position)\
+        VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');"%(row["FC"], row["FC Type"], row["Loaded By"], row["Loading Date"], row["Completion Date"], row["Demultiplex Date"], row["Order No"], row["Sequencer"], row["Position"]))
         
     except Exception as e:
         # print(e)
         # print(row["Completion Date"])
         # print(row)
         # print("flowcell already exists; checking for data integrity...")
-        sql("SELECT fc_type, loaded_by, loading_date, completion_date, order_no, sequencer_id, position FROM flowcell WHERE fc_id = '%s' ;"%(row["FC"])) # try except data integrity
+        sql("SELECT fc_type, loaded_by, loading_date, completion_date, demultiplex_date, order_no, sequencer_id, position FROM flowcell WHERE fc_id = '%s' ;"%(row["FC"])) # try except data integrity
         data = cursor.fetchone()
         if data != None:
-            assert(len(data) == 7)
-            try:
-                loading_date = datetime.datetime.strptime(row["Loading Date"], '%m/%d/%Y').date()
-            except:
-                loading_date = datetime.datetime.strptime(row["Loading Date"], '%Y-%m-%d').date()
-
-            try:
-                completion_date = datetime.datetime.strptime(row["Completion Date"], '%m/%d/%Y').date()
-            except:
-                completion_date = datetime.datetime.strptime(row["Completion Date"], '%Y-%m-%d').date()
-
+            # print(data)
+            assert(len(data) == 8)
+            loading_date = datetime.datetime.strptime(row["Loading Date"], '%m/%d/%Y').date()
+            completion_date = datetime.datetime.strptime(row["Completion Date"], '%m/%d/%Y').date()
+            # demultiplex_date = datetime.datetime.strptime(row["Demultiplex Date", ])
             if data[0] != row["FC Type"]:
                 print("FC Type data changed for flowcell %s from %s to %s"%(row["FC"], data[0], row["FC Type"]))
             if data[1] != row["Loaded By"]:
@@ -201,12 +195,15 @@ def store_row(row):
                 print("Loading Date data changed for flowcell %s from %s to %s"%(row["FC"], data[2], loading_date))
             if data[3] != completion_date:
                 print("Completed Date data changed for flowcell %s from %s to %s"%(row["FC"], data[3], completion_date))
-            if data[4] != row["Order No"]:
-                print("Order No data changed for flowcell %s from %s to %s"%(row["FC"], data[4], row["Order No"]))
-            if data[5] != row["Sequencer"]:
-                print("Sequencer data changed for flowcell %s from %s to %s"%(row["FC"], data[5], row["Sequencer"]))
-            if data[6] != row["Position"]:
-                print("position data changed for flowcell %s from %s to %s"%(row["FC"], data[6], row["Position"]))
+            if data[4] != row["Demultiplex Date"]:
+                print("Demultiplex Date data changed for flowcell %s from %s to %s"%(row["FC"], data[4], row["Demultiplex Date"]))
+            if data[5] != row["Order No"]:
+                print("Order No data changed for flowcell %s from %s to %s"%(row["FC"], data[5], row["Order No"]))
+            if data[6] != row["Sequencer"]:
+                print("Sequencer data changed for flowcell %s from %s to %s"%(row["FC"], data[6], row["Sequencer"]))
+            if data[7] != row["Position"]:
+                print("position data changed for flowcell %s from %s to %s"%(row["FC"], data[7], row["Position"]))
+            
 
         else:
             print("flowcell data fetch failed")
@@ -332,18 +329,12 @@ def store_fc(fc):
             for line in raw_info_file:
                 row = dict()
                 cells = line.split('\t')
-                if cells == ['\n']:
-                    # print("empty line")
-                    break
-                # print(len(cells))
-                # if (len(cells) != col_numbers):
-                    # print(cells)
-
                 assert(len(cells) == col_numbers)
                 for i in range(col_numbers):
                   row[fields[i].strip()] = cells[i].strip()
 
                 if row["FC"] == fc:
+                    row["Demultiplex Date"] = datetime.datetime.strptime('20' + raw_info_filename, "%Y%m%d").date()
                     row["Sequencer"] = sequencer
                     row["Position"] = position
                     tokens = row["Project name"].split("_")
@@ -414,6 +405,9 @@ for dir in subdirectories:
       for html_file_path in html_files:
         print(html_file_path)
         fc = html_file_path.split("/")[-1]
+
+        
+
         store_fc(fc.split(".")[0])
 
         print("Data stored in the database.")
