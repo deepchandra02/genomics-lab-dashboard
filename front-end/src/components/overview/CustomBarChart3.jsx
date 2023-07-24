@@ -6,8 +6,8 @@ import { ArrowsExpandIcon, XIcon, PlusCircleIcon, MinusCircleIcon } from "@heroi
 const data2c = require('../../data/data2c.json');
 const predefinedColors = [
   "teal",
-  "sky",
   "rose",
+  "amber",
   "violet",
 ];
 
@@ -21,7 +21,7 @@ const dataByPI = data2c.reduce((groups, row) => {
 }, {});
 
 const CustomBarChart3 = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [genomeColors, setGenomeColors] = useState({});
 
   const [rowSize, setRowSize] = useState(4);
