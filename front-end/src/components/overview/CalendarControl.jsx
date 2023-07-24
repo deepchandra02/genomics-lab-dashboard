@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { DateRangePicker, DateRangePickerItem, DateRangePickerValue } from "@tremor/react";
+import { DateRangePicker, DateRangePickerItem } from "@tremor/react";
 
 const CalendarControl = () => {
   const [value, setValue] = useState({
-    from: new Date(2023, 1, 1),
+    from: new Date(2023, 0, 1),
     to: new Date(),
   });
+
+
 
   return (
     <DateRangePicker

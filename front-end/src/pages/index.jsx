@@ -1,8 +1,9 @@
 import React from "react";
 import { Bold, Badge, Flex, Text, ProgressBar } from "@tremor/react";
 import { CheckCircleIcon, ExclamationCircleIcon } from "@heroicons/react/solid";
-import CustomAreaChart from "../components/overview/CustomAreaChart";
+import CalendarControl from "../components/overview/CalendarControl";
 import Card2MultipleCharts from "../components/overview/Card2MultipleCharts";
+import CustomAreaChart from "../components/overview/CustomAreaChart";
 import CustomDonutChart from "../components/overview/CustomDonutChart";
 
 
@@ -64,6 +65,7 @@ function Home() {
               color="blue"
               className="mt-3" />
           </div>
+          <CalendarControl />
         </div>
       </div>
       <div className="flex flex-col space-y-4 mt-4 pb-8 flex-grow">
