@@ -3,6 +3,10 @@
 # Clear the terminal screen
 clear
 
+sudo service postgresql start
+
+sudo -u postgres psql -U postgres -c "ALTER USER postgres PASSWORD 'mypassword';"
+
 # Drop and create the database using psql
 sudo -u postgres psql -U postgres -c 'DROP DATABASE IF EXISTS sidra;'
 sudo -u postgres psql -U postgres -c 'CREATE DATABASE sidra;'
