@@ -7,7 +7,7 @@ import sys
 
 conn = psycopg2.connect(database="sidra",
                         host="localhost",
-                        user="postgres",
+                        user="deepc",
                         password="mypassword",
                         port="5432")
 # conn.autocommit = True
