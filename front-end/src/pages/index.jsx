@@ -30,8 +30,8 @@ function Home() {
     <main className="flex flex-col h-screen p-5">
       <div className="flex justify-between items-center">
         <span className="font-cabin font-bold text-5xl">Overview</span>
-        <div className="flex space-x-10">
-          <div className="w-60">
+        <div className="flex space-x-10 items-center">
+          <div className="min-w-60 max-w-60">
             <Flex justifyContent="between">
               <Text><Bold>Staged</Bold> &bull; {stagedPercentageArray[1]}%</Text>
               <Badge
@@ -48,7 +48,7 @@ function Home() {
               color="blue"
               className="mt-3" />
           </div>
-          <div className="w-64">
+          <div className="min-w-60 max-w-60">
             <Flex justifyContent="between">
               <Text><Bold>Staged</Bold> &bull; {stagedPercentageArray[1]}%</Text>
               <Badge
