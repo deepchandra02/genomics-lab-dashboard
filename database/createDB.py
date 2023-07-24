@@ -7,7 +7,7 @@ import sys
 
 conn = psycopg2.connect(database="sidra",
                         host="localhost",
-                        user="deepc",
+                        user="postgres",
                         password="mypassword",
                         port="5432")
 # conn.autocommit = True
@@ -69,6 +69,7 @@ sql("CREATE TABLE flowcell (\
       loaded_by       VARCHAR(08) NOT NULL CHECK (char_length(loaded_by) > 0),\
       loading_date    DATE     NOT NULL CHECK (loading_date <= current_date),\
       completion_date DATE     NOT NULL CHECK (completion_date <= current_date),\
+      demultiplex_date DATE    NOT NULL CHECK (completion_date <= current_date),\
       order_no        VARCHAR(32) NOT NULL CHECK (char_length(order_no) > 0),\
       sequencer_id    VARCHAR(16) REFERENCES sequencer (sequencer_id),\
       run_duration    SMALLINT CHECK ((run_duration ISNULL) OR (run_duration > 0)) DEFAULT NULL,\
@@ -111,4 +112,4 @@ sql("CREATE TABLE samples (\
       PRIMARY KEY (sample_id, fc_id)\
   );")
 
-conn.close()
+# conn.close()
