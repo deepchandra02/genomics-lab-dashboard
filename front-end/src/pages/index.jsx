@@ -39,6 +39,7 @@ function Home() {
   });
   const [data1, setData1] = useState(null);
   const [data2a, setData2a] = useState(null);
+  const [data2b, setData2b] = useState(null);
   const [data3, setData3] = useState(null);
   const [data4, setData4] = useState(null);
 
@@ -74,6 +75,17 @@ function Home() {
           const data = await response2a.json();
           // Update the state with the fetched data
           setData2a(data);
+        }
+
+        const response2b = await fetch(`http://127.0.0.1:5000/type2b/${startDate}-${endDate}`);
+        if (!response2b.ok) {
+          // Handle error
+          console.error('Server error:', response2b);
+        }
+        else {
+          const data = await response2b.json();
+          // Update the state with the fetched data
+          setData2b(data);
         }
 
         const response3 = await fetch(`http://127.0.0.1:5000/type3/${startDate}-${endDate}`);
@@ -241,6 +253,7 @@ function Home() {
               title="2. P.I. Overview"
               tooltip="Overview of the distribution of sample requests per PI over the specified date range in different parameters"
               data2a={data2a}
+              data2b={data2b}
             />
           </div>
           <div className="flex flex-col w-[25%] space-y-4">

@@ -136,6 +136,55 @@ def type2a(date):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/type2b/<date>')
+def type2b(date):
+    if len(date) != 17:
+        return "format should be 'yyyymmdd-yyyymmdd'"
+    if date[8] != "-":
+        return "format should be 'yyyymmdd-yyyymmdd'"
+    
+    dates = date.split("-")
+    start = datetime.datetime.strptime(dates[0], '%Y%m%d').date()
+    end = datetime.datetime.strptime(dates[1], '%Y%m%d').date()
+
+    try:
+        # Execute the SQL query
+        cursor.execute("""
+                        SELECT pi, pi_projects.project_id, COUNT(*) as quantity
+                        FROM samples
+                        INNER JOIN submissions ON samples.submission_id = submissions.submission_id
+                        INNER JOIN pi_projects ON submissions.project_id = pi_projects.project_id
+                        INNER JOIN flowcell ON samples.fc_id = flowcell.fc_id
+                        WHERE flowcell.loading_date BETWEEN '%s' AND '%s'
+                        GROUP BY pi, pi_projects.project_id
+                        """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+
+        
+        # Fetch the results from the cursor
+        results = cursor.fetchall()
+
+        # Prepare the output
+        output = []
+        for row in results:
+            pi, project_id, quantity = row
+            # find existing entry for the PI, if it exists
+            pi_entry = next((entry for entry in output if entry["pi"] == pi), None)
+            if pi_entry is None:
+                # if no existing entry, create a new one
+                pi_entry = {"pi": pi}
+                output.append(pi_entry)
+            # add the quantity to the appropriate field
+            pi_entry[project_id] = quantity
+
+        # Write the results to a JSON file
+        with open('./front-end/src/newdata/data2b.json', 'w') as f:
+            json.dump(output, f)
+
+        return jsonify(output)
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 @app.route('/type3/<date>')
 def type3(date):
