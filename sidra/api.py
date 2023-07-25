@@ -2,9 +2,12 @@
 from flask import Flask, jsonify
 import datetime
 import psycopg2
+from flask_cors import CORS
+import json
+import os
 
 app = Flask(__name__)   # Flask constructor
-
+CORS(app)
 conn = psycopg2.connect(database="sidra",
                         host="localhost",
                         user="deepc",
@@ -43,22 +46,24 @@ def type1(date):
 
     try:
         # Execute the SQL query
-        cursor.execute("SELECT\
-                            TO_CHAR(loading_date, 'MM-DD-YYYY') AS date,\
-                            COUNT(DISTINCT samples.sample_id) AS Samples,\
-                            COUNT(DISTINCT samples.fc_id) AS Flowcells,\
-                            SUM(COUNT(DISTINCT samples.sample_id)) OVER (ORDER BY loading_date) AS SamplesTotal,\
-                            SUM(COUNT(DISTINCT samples.fc_id)) OVER (ORDER BY loading_date) AS FlowcellsTotal\
-                        FROM\
-                            flowcell\
-                        INNER JOIN\
-                            samples ON flowcell.fc_id = samples.fc_id\
-                        WHERE\
-                            loading_date >= '%s'::DATE AND loading_date <= '%s'::DATE\
-                        GROUP BY\
-                            loading_date\
-                        ORDER BY\
-                            loading_date;"%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+        cursor.execute("""
+            SELECT
+                TO_CHAR(loading_date, 'MM-DD-YYYY') AS "date",
+                COUNT(DISTINCT samples.sample_id) AS "Samples",
+                COUNT(DISTINCT samples.fc_id) AS "Flowcells",
+                (SUM(COUNT(DISTINCT samples.sample_id)) OVER (ORDER BY loading_date))::integer AS "SamplesTotal",
+                (SUM(COUNT(DISTINCT samples.fc_id)) OVER (ORDER BY loading_date))::integer AS "FlowcellsTotal"
+            FROM
+                flowcell
+            INNER JOIN
+                samples ON flowcell.fc_id = samples.fc_id
+            WHERE
+                loading_date >= '%s'::DATE AND loading_date <= '%s'::DATE
+            GROUP BY
+                loading_date
+            ORDER BY
+                loading_date;
+            """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
     
                 
         # Fetch the results from the cursor
@@ -73,11 +78,14 @@ def type1(date):
             for i, column in enumerate(columns):
                 row_dict[column] = row[i]
             rows.append(row_dict)
-        
+
+        # Write the results to a JSON file
+        with open('./front-end/src/newdata/data1.json', 'w') as f:
+            json.dump(rows, f)
         return jsonify(rows)
     
     except Exception as e:
-        return str(e)
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/type2/<date>')
 def type2(date):
@@ -104,10 +112,14 @@ def type2(date):
         results = cursor.fetchall()
         output = [{"type": row[0], "quantity": row[1]} for row in results]
         
+        # Write the results to a JSON file
+        with open('./front-end/src/newdata/data2.json', 'w') as f:
+            json.dump(output, f)
+
         return jsonify(output)
     
     except Exception as e:
-        return str(e)
+        return jsonify({'error': str(e)}), 500
 
 
 

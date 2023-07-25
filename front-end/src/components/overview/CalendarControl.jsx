@@ -7,7 +7,7 @@ function formatDate(date, format = DATE_FORMAT) {
   return date.format(format);
 }
 
-const App = () => {
+const CalendarControl = () => {
   const [value, setValue] = useState({
     startDate: null,
     endDate: null
@@ -67,4 +67,4 @@ const App = () => {
 
   );
 };
-export default App;
+export default CalendarControl;

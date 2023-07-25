@@ -1,12 +1,9 @@
-Found 1 HTML file(s) generated.
-./input-data-for-externs/flowcell-qc-reports/HFTVCDRX2/HFTVCDRX2.html
-Parsing '230411' for './input-data-for-externs/flowcell-qc-reports/HFTVCDRX2/HFTVCDRX2.html'...
-Data stored in the database.
-Found 1 HTML file(s) generated.
-./input-data-for-externs/flowcell-qc-reports/HNKCVDSX5/HNKCVDSX5.html
-Parsing '230413' for './input-data-for-externs/flowcell-qc-reports/HNKCVDSX5/HNKCVDSX5.html'...
-Data stored in the database.
-Found 1 HTML file(s) generated.
-./input-data-for-externs/flowcell-qc-reports/HNHMYDSX5/HNHMYDSX5.html
-Parsing '230411' for './input-data-for-externs/flowcell-qc-reports/HNHMYDSX5/HNHMYDSX5.html'...
-Data stored in the database.
+Traceback (most recent call last):
+  File "/Users/deepc/genomics-lab-dashboard/database/insertDB.py", line 13, in <module>
+    conn = psycopg2.connect(database="sidra",
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "hosting-db" does not exist
+

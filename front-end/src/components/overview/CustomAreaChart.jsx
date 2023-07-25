@@ -29,7 +29,7 @@ const CustomAreaChart = (props) => {
   const selectedKpi = props.kpis[selectedIndex];
   const cumulativeSelectedKpi = props.kpis[selectedIndex + 2];
   // State to keep track of the selected view (monthly by deafult)
-  const [view, setView] = useState(3);
+  const [view, setView] = useState(1);
   // State to keep track of the window size (number of days/months etc. to display in a window)
   const [windowSize, setWindowSize] = useState(6);
   const [windowStart, setWindowStart] = useState(0); // Initial window start is 0
