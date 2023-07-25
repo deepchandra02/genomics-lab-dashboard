@@ -13,7 +13,7 @@ import { InformationCircleIcon } from "@heroicons/react/solid";
 import CustomBarChart1 from './CustomBarChart1'
 import CustomBarChart2 from './CustomBarChart2'
 import CustomBarChart3 from './CustomBarChart3'
-const data2a = require('../../data/data2a.json')
+// const data2a = require('../../data/data2a.json')
 const data2b = require('../../data/data2b.json')
 
 const Card2MultipleCharts = (props) => {
@@ -23,12 +23,12 @@ const Card2MultipleCharts = (props) => {
   // Arguments to be passed to CustomBarChart1
   const props1 = {
     className: "h-full",
-    data: data2a,
+    data: props.data2a,
     index: "pi",
     colors: ["sky", "violet", "fuchsia"],
     showLegend: true,
     yAxisWidth: 56,
-    categories: ["New", "Top up", "Repeat"]
+    categories: ["New", "Top-up", "Repeat"]
   };
 
   // Arguments to be passed to CustomBarChart2
@@ -64,7 +64,7 @@ const Card2MultipleCharts = (props) => {
       </Flex>
       <div className="mt-4 h-[75%]">
         {
-          selectedTab === 0 && <CustomBarChart1 {...props1} />
+          selectedTab === 0 && props.data2a && <CustomBarChart1 {...props1} />
         }
         {
           selectedTab === 1 && <CustomBarChart2 {...props2} />

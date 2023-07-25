@@ -16,19 +16,19 @@ function formatJsDate(date, format = DATE_FORMAT) {
   return require$$0(date).format(format);
 }
 
-const data3 = require('../data/data3.json')
-const data4 = require('../data/data4.json')
-const data5 = require('../data/data5.json')
-const data6 = require('../data/data6.json')
-const data7 = require('../data/data7.json')
+// const data3 = require('../data/data3.json')
+// const data4 = require('../data/data4.json')
+const data5 = require('../data/data6.json')
+const data6 = require('../data/data7.json')
+const dataX = require('../data/dataX.json')
 
 
 // This component is the overview page of the application
 function Home() {
 
-  const staged = data3.reduce((total, item) => total + item.quantity, 0);
+  const staged = dataX.reduce((total, item) => total + item.quantity, 0);
   // Calculate percentages for each status
-  const stagedPercentageArray = data3.map(item => {
+  const stagedPercentageArray = dataX.map(item => {
     const percentage = ((item.quantity / staged) * 100).toFixed(1);
     return percentage;
   });
@@ -38,6 +38,9 @@ function Home() {
     endDate: new Date()
   });
   const [data1, setData1] = useState(null);
+  const [data2a, setData2a] = useState(null);
+  const [data3, setData3] = useState(null);
+  const [data4, setData4] = useState(null);
 
   const handleValueChange = (newValue) => {
     console.log("newValue:", newValue);
@@ -61,6 +64,39 @@ function Home() {
           // Update the state with the fetched data
           setData1(data);
         }
+
+        const response2a = await fetch(`http://127.0.0.1:5000/type2a/${startDate}-${endDate}`);
+        if (!response2a.ok) {
+          // Handle error
+          console.error('Server error:', response2a);
+        }
+        else {
+          const data = await response2a.json();
+          // Update the state with the fetched data
+          setData2a(data);
+        }
+
+        const response3 = await fetch(`http://127.0.0.1:5000/type3/${startDate}-${endDate}`);
+        if (!response3.ok) {
+          // Handle error
+          console.error('Server error:', response3);
+        }
+        else {
+          const data = await response3.json();
+          // Update the state with the fetched data
+          setData3(data);
+        }
+
+        const response4 = await fetch(`http://127.0.0.1:5000/type4/${startDate}-${endDate}`);
+        if (!response4.ok) {
+          // Handle error
+          console.error('Server error:', response4);
+        }
+        else {
+          const data = await response4.json();
+          // Update the state with the fetched data
+          setData4(data);
+        }
       }
     }
 
@@ -68,9 +104,9 @@ function Home() {
     fetchData();
   }, [value]);
 
-  useEffect(() => {
-    console.log("data1:", data1);
-  }, [value, data1]);
+  // useEffect(() => {
+  //   console.log("data1:", data1);
+  // }, [value, data1]);
 
   return (
     <main className="flex flex-col h-screen p-5">
@@ -175,28 +211,28 @@ function Home() {
             />)}
           </div>
           <div className="flex flex-col w-[25%] space-y-4">
-            <CustomDonutChart
+            {data3 && (<CustomDonutChart
               title="3. Flowcell - Type distribution"
               tooltip="Overview of the usage of different types of flowcells over the specified date range"
+              className="h-full"
+              data={data3}
+              index="type"
+              category="quantity"
+              variant="donut"
+              colors={["cyan", "indigo", "rose", "violet"]}
+              label=" FCs"
+            />)}
+            {data4 && (<CustomDonutChart
+              title="4. Services distribution"
+              tooltip="Overview of the different types of services requested among samples over the specified date range"
               className="h-full"
               data={data4}
               index="type"
               category="quantity"
               variant="donut"
-              colors={["cyan", "indigo", "rose", "violet"]}
-              label=" FC"
-            />
-            <CustomDonutChart
-              title="4. Services distribution"
-              tooltip="Overview of the different types of services requested among samples over the specified date range"
-              className="h-full"
-              data={data5}
-              index="type"
-              category="quantity"
-              variant="donut"
               colors={["violet", "indigo", "rose", "cyan", "teal", "fuchsia", "red"]}
               label=" smpls"
-            />
+            />)}
           </div>
         </div>
         <div className="flex space-x-4">
@@ -204,6 +240,7 @@ function Home() {
             <Card2MultipleCharts
               title="2. P.I. Overview"
               tooltip="Overview of the distribution of sample requests per PI over the specified date range in different parameters"
+              data2a={data2a}
             />
           </div>
           <div className="flex flex-col w-[25%] space-y-4">
@@ -211,7 +248,7 @@ function Home() {
               title="5. Sequencer distribution"
               tooltip="Overview of the usage of sequencers over the specified date range"
               className="h-full"
-              data={data6}
+              data={data5}
               index="type"
               category="quantity"
               variant="donut"
@@ -222,7 +259,7 @@ function Home() {
               title="6. Reference Genome distribution"
               tooltip="Overview of the different types of reference genomes among samples over the specified date range"
               className="h-full"
-              data={data7}
+              data={data6}
               index="type"
               category="quantity"
               variant="donut"

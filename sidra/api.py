@@ -87,8 +87,58 @@ def type1(date):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/type2/<date>')
-def type2(date):
+@app.route('/type2a/<date>')
+def type2a(date):
+    if len(date) != 17:
+        return "format should be 'yyyymmdd-yyyymmdd'"
+    if date[8] != "-":
+        return "format should be 'yyyymmdd-yyyymmdd'"
+    
+    dates = date.split("-")
+    start = datetime.datetime.strptime(dates[0], '%Y%m%d').date()
+    end = datetime.datetime.strptime(dates[1], '%Y%m%d').date()
+
+    try:
+        # Execute the SQL query
+        cursor.execute("""
+                        SELECT pi, data_sample, COUNT(*) as quantity
+                        FROM samples
+                        INNER JOIN submissions ON samples.submission_id = submissions.submission_id
+                        INNER JOIN pi_projects ON submissions.project_id = pi_projects.project_id
+                        INNER JOIN flowcell ON samples.fc_id = flowcell.fc_id
+                        WHERE flowcell.loading_date BETWEEN '%s' AND '%s'
+                        GROUP BY pi, data_sample
+                        """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+                        
+                
+        # Fetch the results from the cursor
+        results = cursor.fetchall()
+
+        # Prepare the output
+        output = []
+        for row in results:
+            pi, data_sample, quantity = row
+            # find existing entry for the PI, if it exists
+            pi_entry = next((entry for entry in output if entry["pi"] == pi), None)
+            if pi_entry is None:
+                # if no existing entry, create a new one
+                pi_entry = {"pi": pi, "New": 0, "Top-up": 0, "Repeat": 0}
+                output.append(pi_entry)
+            # add the quantity to the appropriate field
+            pi_entry[data_sample] = quantity
+        
+        # Write the results to a JSON file
+        with open('./front-end/src/newdata/data2a.json', 'w') as f:
+            json.dump(output, f)
+
+        return jsonify(output)
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/type3/<date>')
+def type3(date):
     if len(date) != 17:
         return "format should be 'yyyymmdd-yyyymmdd'"
     if date[8] != "-":
@@ -113,7 +163,7 @@ def type2(date):
         output = [{"type": row[0], "quantity": row[1]} for row in results]
         
         # Write the results to a JSON file
-        with open('./front-end/src/newdata/data2.json', 'w') as f:
+        with open('./front-end/src/newdata/data3.json', 'w') as f:
             json.dump(output, f)
 
         return jsonify(output)
@@ -122,10 +172,40 @@ def type2(date):
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/type4/<date>')
+def type4(date):
+    if len(date) != 17:
+        return "format should be 'yyyymmdd-yyyymmdd'"
+    if date[8] != "-":
+        return "format should be 'yyyymmdd-yyyymmdd'"
+    
+    dates = date.split("-")
+    start = datetime.datetime.strptime(dates[0], '%Y%m%d').date()
+    end = datetime.datetime.strptime(dates[1], '%Y%m%d').date()
 
-    # return "Data is requested for dates from " + str(start) + " to " + str(end)
+    try:
+        # Execute the SQL query
+        cursor.execute("""
+                        SELECT s.srv, COUNT(*) as quantity
+                        FROM samples sm
+                        JOIN submissions s ON sm.submission_id = s.submission_id
+                        JOIN flowcell f ON sm.fc_id = f.fc_id
+                        WHERE f.loading_date BETWEEN '%s' AND '%s'
+                        GROUP BY s.srv
+                        """ % (start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+                
+        # Fetch the results from the cursor
+        results = cursor.fetchall()
+        output = [{"type": row[0], "quantity": row[1]} for row in results]
+        
+        # Write the results to a JSON file
+        with open('./front-end/src/newdata/data4.json', 'w') as f:
+            json.dump(output, f)
 
-
+        return jsonify(output)
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 if __name__=='__main__':
