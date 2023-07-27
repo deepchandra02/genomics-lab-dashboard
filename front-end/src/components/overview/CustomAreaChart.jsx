@@ -13,8 +13,10 @@ import {
   Flex,
   AreaChart,
   Icon,
+  NumberInput
 } from "@tremor/react";
 import {
+  DesktopComputerIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   EyeIcon,
@@ -141,16 +143,15 @@ const CustomAreaChart = (props) => {
           </Select>
 
           <Flex className="items-center text-gray-500 hover:text-black">
-            <input
-              type="number"
-              id="windowSizeStepper"
-              className="text-center w-[4rem] h-9 p-2 border border-gray-200 shadow-tremor-input rounded-lg "
+            <NumberInput
               value={windowSize}
-              step="6"
-              min="0"
-              max={preprocessedData.length}
-              onChange={(e) => setWindowSize(parseInt(e.target.value))}
+              icon={DesktopComputerIcon}
+              step={6}
+              enableStepper={true}
+              min={0}
+              onValueChange={(val) => setWindowSize(val)}
             />
+
           </Flex>
 
           <Flex className="items-center ">

@@ -4,9 +4,10 @@ import {
   Button,
   Flex,
   Icon,
-  Subtitle
+  Subtitle,
+  NumberInput
 } from "@tremor/react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
+import { ChevronLeftIcon, ChevronRightIcon, DesktopComputerIcon } from "@heroicons/react/solid";
 
 const CustomBarChart1 = (props) => {
   const [windowSize, setWindowSize] = useState(6);
@@ -46,15 +47,14 @@ const CustomBarChart1 = (props) => {
   return (
     <div className="flex flex-col space-y-2 h-full">
       <Flex className="gap-x-4 text-gray-500 hover:text-black h-[10%]" justifyContent='end' alignItems='center'>
-        <input
-          type="number"
-          id="windowSizeStepper"
-          className="text-center w-[4rem] h-9 p-2 border border-gray-200 shadow-tremor-input rounded-lg "
+        <NumberInput
+          className='max-w-[5rem]'
           value={windowSize}
-          step="6"
-          min="0"
-          max={props.data.length}
-          onChange={(e) => setWindowSize(parseInt(e.target.value))}
+          icon={DesktopComputerIcon}
+          step={6}
+          enableStepper={true}
+          min={0}
+          onValueChange={(val) => setWindowSize(val)}
         />
         <div className='flex justify-end items-center'>
           <input
@@ -70,7 +70,7 @@ const CustomBarChart1 = (props) => {
         <BarChart {...barChartArgs} />
         <Flex className="space-x-4" justifyContent="center">
           <Button
-            className={"p-2 h-6 bg-slate-700 hover:bg-slate-500 border-none " + (windowStart === 0 ? " opacity-50 bg-slate-500" : "")}
+            className={"p-2 h-6 bg-slate-700 hover:bg-slate-500 border-none " + (windowStart === 0 || windowSize === 0 ? " opacity-50 bg-slate-500" : "")}
             variant="primary"
             onClick={() => scrollData("backward")}
           >
@@ -81,7 +81,7 @@ const CustomBarChart1 = (props) => {
             />
           </Button>
           <Button
-            className={"p-2 h-6 bg-slate-700 hover:bg-slate-500 border-none " + (windowStart + windowSize >= props.data.length ? " opacity-50 bg-slate-500" : "")}
+            className={"p-2 h-6 bg-slate-700 hover:bg-slate-500 border-none " + (windowStart + windowSize >= props.data.length || windowSize === 0 ? " opacity-50 bg-slate-500" : "")}
             variant="primary"
             onClick={() => scrollData("forward")}
           >
