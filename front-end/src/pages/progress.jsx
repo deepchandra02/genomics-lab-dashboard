@@ -51,11 +51,11 @@ const Progress = (props) => {
   return (
     <div>
 
-      {data && (<Table className="pt-6 min-h-screen">
+      {data && (<Table className="pt-6 px-4 min-h-screen">
         <TableHead>
           <TableRow>
             <TableHeaderCell />
-            <TableHeaderCell className="z-10">
+            <TableHeaderCell className="z-10 px-2">
               <MultiSelect
                 onValueChange={setSelectedSamples}
                 placeholder="Select Samples..."
@@ -69,7 +69,7 @@ const Progress = (props) => {
               </MultiSelect>
             </TableHeaderCell>
 
-            <TableHeaderCell className="z-10">
+            <TableHeaderCell className="z-10 px-2">
               <MultiSelect
                 onValueChange={setSelectedFlowcells}
                 placeholder="Select Flowcells..."
@@ -83,7 +83,7 @@ const Progress = (props) => {
               </MultiSelect>
             </TableHeaderCell>
 
-            <TableHeaderCell className="z-10">
+            <TableHeaderCell className="z-10 px-2">
               <MultiSelect
                 onValueChange={setSelectedSubmissions}
                 placeholder="Select Submissions..."
@@ -96,7 +96,7 @@ const Progress = (props) => {
                 ))}
               </MultiSelect>
             </TableHeaderCell>
-            <TableHeaderCell className="z-10">
+            <TableHeaderCell className="z-10 px-2">
               <MultiSelect
                 onValueChange={setSelectedDdates}
                 placeholder="Select Date..."
@@ -109,7 +109,7 @@ const Progress = (props) => {
                 ))}
               </MultiSelect>
             </TableHeaderCell>
-            <TableHeaderCell className="z-10">
+            <TableHeaderCell className="z-10 px-2">
               <MultiSelect
                 onValueChange={setSelectedSdates}
                 placeholder="Select Date..."
@@ -124,14 +124,14 @@ const Progress = (props) => {
             </TableHeaderCell>
           </TableRow>
           <TableRow>
-            <TableHeaderCell>S.No.</TableHeaderCell>
-            <TableHeaderCell>Sample ID</TableHeaderCell>
-            <TableHeaderCell className="">Flowcell ID</TableHeaderCell>
-            <TableHeaderCell className="">Submission ID ($)</TableHeaderCell>
-            <TableHeaderCell className="">Demultiplexed</TableHeaderCell>
-            <TableHeaderCell className="">Staged</TableHeaderCell>
-            <TableHeaderCell className="">Lane fastq</TableHeaderCell>
-            <TableHeaderCell className="">Merged fastq</TableHeaderCell>
+            <TableHeaderCell className="p-2 text-center">S.No.</TableHeaderCell>
+            <TableHeaderCell className="p-2">Sample ID</TableHeaderCell>
+            <TableHeaderCell className="p-2">Flowcell ID</TableHeaderCell>
+            <TableHeaderCell className="p-2">Submission ID</TableHeaderCell>
+            <TableHeaderCell className="p-2">Demultiplexed</TableHeaderCell>
+            <TableHeaderCell className="p-2">Staged</TableHeaderCell>
+            <TableHeaderCell className="p-2">Lane fastq</TableHeaderCell>
+            <TableHeaderCell className="p-2">Merged fastq</TableHeaderCell>
           </TableRow>
         </TableHead>
 
@@ -139,21 +139,21 @@ const Progress = (props) => {
           {data
             .filter((item) => (isSampleSelected(item) && isFlowcellSelected(item) && isSubmissionSelected(item) && isDdateSelected(item) && isSdateSelected(item)))
             .map((item, index) => (
-              <TableRow key={item.sample_id}>
-                <TableCell>{index + 1}</TableCell>
-                <TableCell>{item.sample_id}</TableCell>
-                <TableCell className="">{item.fc_id}</TableCell>
-                <TableCell className="">{item.submission_id}</TableCell>
-                <TableCell className="">{item.loading_date ?
+              <TableRow key={item.sample_id} className="text-xs hover:bg-slate-100">
+                <TableCell className="p-2 text-center">{index + 1}</TableCell>
+                <TableCell className="p-2">{item.sample_id}</TableCell>
+                <TableCell className="p-2">{item.fc_id}</TableCell>
+                <TableCell className="p-2">{item.submission_id}</TableCell>
+                <TableCell className="p-2">{item.loading_date ?
                   (<Badge icon={CheckCircleIcon} color="emerald" size="xs">{item.loading_date}</Badge>)
                   : (<Badge icon={XCircleIcon} color="red" size="xs">Not demultiplexed </Badge>)}</TableCell>
-                <TableCell className="">{item.staging_date ?
+                <TableCell className="p-2">{item.staging_date ?
                   (<Badge icon={CheckCircleIcon} color="emerald" size="xs">{item.staging_date}</Badge>)
                   : (<Badge icon={XCircleIcon} color="red" size="xs">Not staged </Badge>)}
                 </TableCell>
-                <TableCell className="">
+                <TableCell className="p-2">
                 </TableCell>
-                <TableCell className="">
+                <TableCell className="p-2">
                 </TableCell>
               </TableRow>
             ))}
