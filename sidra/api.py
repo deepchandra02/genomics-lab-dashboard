@@ -33,6 +33,57 @@ def hello_world():
 def hello_name(name):
    return 'Hello %s!' % name
 
+@app.route('/type0/<int:page>')
+def type0(page):
+    items_per_page = 100
+    offset = (page - 1) * items_per_page
+
+    try:
+        # Execute the SQL query
+        cursor.execute("""
+                        SELECT 
+                            samples.sample_id, 
+                            samples.fc_id, 
+                            samples.submission_id, 
+                            flowcell.loading_date
+                        FROM 
+                            samples
+                        INNER JOIN 
+                            flowcell ON samples.fc_id = flowcell.fc_id
+                        ORDER BY 
+                            flowcell.loading_date DESC, samples.submission_id
+                        LIMIT %s OFFSET %s
+                        """ % (items_per_page, offset))
+
+
+        
+        # Fetch the results from the cursor
+        results = cursor.fetchall()
+
+        # Get the column names from the cursor description
+        columns = [desc[0] for desc in cursor.description]
+
+        # Convert the results to a list of dictionaries
+        output = []
+        for row in results:
+            row_dict = {}
+            for i, column in enumerate(columns):
+                if isinstance(row[i], datetime.date):
+                    row_dict[column] = row[i].isoformat()
+                else:
+                    row_dict[column] = row[i]
+            output.append(row_dict)
+
+        
+        # Write the results to a JSON file
+        with open('./front-end/src/newdata/data0.json', 'w') as f:
+            json.dump(output, f)
+        return jsonify(output)
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 @app.route('/type1/<date>')
 def type1(date):
     if len(date) != 17:
