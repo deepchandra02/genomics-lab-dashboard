@@ -5,8 +5,17 @@ import psycopg2
 from flask_cors import CORS
 import json
 import os
+from decimal import Decimal
+
+class JSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Decimal):
+            return str(obj)
+        return super(JSONEncoder, self).default(obj)
+
 
 app = Flask(__name__)   # Flask constructor
+app.json_encoder = JSONEncoder
 CORS(app)
 conn = psycopg2.connect(database="sidra",
                         host="localhost",
@@ -33,19 +42,18 @@ def hello_world():
 def hello_name(name):
    return 'Hello %s!' % name
 
+
 @app.route('/type0/<int:page>')
 def type0(page):
-    items_per_page = 100
+    items_per_page = 500
     offset = (page - 1) * items_per_page
 
     try:
         # Execute the SQL query
         cursor.execute("""
                         SELECT 
-                            samples.sample_id, 
-                            samples.fc_id, 
-                            samples.submission_id, 
-                            flowcell.loading_date
+                            samples.*,
+                            flowcell.*
                         FROM 
                             samples
                         INNER JOIN 
@@ -55,8 +63,6 @@ def type0(page):
                         LIMIT %s OFFSET %s
                         """ % (items_per_page, offset))
 
-
-        
         # Fetch the results from the cursor
         results = cursor.fetchall()
 
@@ -74,10 +80,9 @@ def type0(page):
                     row_dict[column] = row[i]
             output.append(row_dict)
 
-        
         # Write the results to a JSON file
         with open('./front-end/src/newdata/data0.json', 'w') as f:
-            json.dump(output, f)
+            json.dump(output, f, cls=JSONEncoder)
         return jsonify(output)
     
     except Exception as e:
