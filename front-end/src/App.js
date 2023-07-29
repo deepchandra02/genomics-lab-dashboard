@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/shared/Layout";
-import Overview from "./pages/Overview1";
-import Progress from "./pages/Progress1";
+import Overview from "./pages/Overview";
+import Progress from "./pages/Progress";
 
 function App() {
   return (
