@@ -62,7 +62,17 @@ const Progress = (props) => {
 
   return (
     <div>
-
+      <MultiSelect
+        onValueChange={setSelectedSubmissions}
+        placeholder="Submissions..."
+        className="w-[20rem] text-xs"
+      >
+        {Array.from(new Set(data.map((item) => item.submission_id))).map((submission_id) => (
+          <MultiSelectItem key={submission_id} value={submission_id} className="text-xs">
+            {submission_id}
+          </MultiSelectItem>
+        ))}
+      </MultiSelect>
       {data && (<Table className="pt-6 px-4 min-h-screen">
         <TableHead>
           <TableRow className="">
@@ -265,7 +275,7 @@ const Progress = (props) => {
               isMergedfastqSelected(item) &&
               isReleasingdateSelected(item)))
             .map((item, index) => (
-              <TableRow key={item.sample_id} className="text-xs hover:bg-slate-100">
+              <TableRow key={item.sample_id} className="text-xs hover:bg-slate-200">
                 <TableCell className="p-2 text-center w-2">{index + 1}</TableCell>
                 <TableCell className="p-2 text-center">{item.sample_id}</TableCell>
                 <TableCell className="p-2 text-center">{item.fc_id}</TableCell>
