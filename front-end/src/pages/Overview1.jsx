@@ -23,7 +23,7 @@ const dataX = require('../data/dataX.json')
 
 
 // This component is the overview page of the application
-function Home() {
+function Overview() {
 
   const staged = dataX.reduce((total, item) => total + item.quantity, 0);
   // Calculate percentages for each status
@@ -285,4 +285,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Overview;

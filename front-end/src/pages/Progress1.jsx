@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Table, TableRow, TableCell, TableHead, TableHeaderCell, TableBody, Badge, Select, SelectItem, MultiSelect, MultiSelectItem }
+import { Table, TableRow, TableCell, TableHead, TableHeaderCell, TableBody, Badge, Select, SelectItem, MultiSelect, MultiSelectItem }
   from "@tremor/react";
 import { CheckCircleIcon, ExclamationCircleIcon, XCircleIcon } from "@heroicons/react/solid";
 const data = require('../data/data0_updated.json');
