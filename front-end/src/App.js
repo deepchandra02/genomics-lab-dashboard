@@ -1,16 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/index.jsx";
-import Progress from "./pages/progress.jsx";
+import Layout from "./components/shared/Layout";
+import Overview from "./pages/Overview1";
+import Progress from "./pages/Progress1";
 
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
-        <Route index element={<Home />} />
-        <Route path="overview" element={<Home />} />
-        <Route path="progress" element={<Progress />} />
-    </Routes>
-  </BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Overview />} />
+          <Route path="/progress" element={<Progress />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   );
 }
 
