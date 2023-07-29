@@ -1,20 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import classNames from 'classnames'
+import { Divider } from '@tremor/react'
 import { Link, useLocation } from 'react-router-dom'
+import { TrendingUpIcon, ChartBarIcon, CogIcon, LogoutIcon, MenuIcon, XIcon } from '@heroicons/react/solid'
 
-import { XCircleIcon, CogIcon } from '@heroicons/react/solid'
 const DASHBOARD_SIDEBAR_LINKS = [
   {
     key: 'overview',
     label: 'Overview',
     path: '/',
-    icon: <XCircleIcon />
+    icon: <ChartBarIcon className="h-6 w-6" />
   },
   {
     key: 'progress',
     label: 'Progress',
     path: '/progress',
-    icon: <XCircleIcon />
+    icon: <TrendingUpIcon className="h-6 w-6" />
   }
 ]
 
@@ -23,37 +24,42 @@ const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
     key: 'settings',
     label: 'Settings',
     path: '/settings',
-    icon: <CogIcon />
+    icon: <CogIcon className="h-6 w-6" />
   }
 ]
 
-
-
-const linkClass = 'flex items-center gap-2 font-light px-3 py-2 hover:bg-neutral-700 hover:no-underline active:bg-neutral-600 rounded-sm text-base'
+const linkClass = 'flex items-center w-52 gap-2 font-semibold text-base py-3 pl-4 transition-colors duration-200 ease-in-out hover:bg-neutral-500'
 
 export default function Sidebar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="bg-neutral-900 w-40 p-3 flex flex-col">
-      <div className="flex items-center gap-2 px-1 py-3">
-        <span className="text-neutral-200 text-lg">OpenShop</span>
-      </div>
-      <div className="py-8 flex flex-1 flex-col gap-0.5">
-        {DASHBOARD_SIDEBAR_LINKS.map((link) => (
-          <SidebarLink key={link.key} link={link} />
-        ))}
-      </div>
-      <div className="flex flex-col gap-0.5 pt-2 border-t border-neutral-700">
-        {DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((link) => (
-          <SidebarLink key={link.key} link={link} />
-        ))}
-        <div className={classNames(linkClass, 'cursor-pointer text-red-500')}>
-          <span className="text-xl">
-            <XCircleIcon />
-          </span>
-          Logout
+    <>
+      <div className={classNames("bg-white font-cabin text-slate-800 w-52 h-screen py-6 flex flex-col ", { 'hidden': !isOpen })}>
+        <div className="flex justify-between items-center px-4 mb-8">
+          <h1 className="text-3xl font-bold">Sidra</h1>
+          <XIcon className="h-6 w-6 cursor-pointer" onClick={() => setIsOpen(false)} />
+        </div>
+        <div className="flex-1 space-y-4">
+          {DASHBOARD_SIDEBAR_LINKS.map((link) => (
+            <SidebarLink key={link.key} link={link} />
+          ))}
+        </div>
+        <div className="mt-6">
+          <div className="px-4">
+            <Divider />
+          </div>
+          {DASHBOARD_SIDEBAR_BOTTOM_LINKS.map((link) => (
+            <SidebarLink key={link.key} link={link} />
+          ))}
+          <div className={classNames(linkClass, 'cursor-pointer text-red-500 hover:text-red-400')}>
+            <LogoutIcon className="h-6 w-6" />
+            <span className="ml-2">Logout</span>
+          </div>
         </div>
       </div>
-    </div>
+      {!isOpen && (<MenuIcon className="h-6 w-6 cursor-pointer fixed top-4 left-4 z-50" onClick={() => setIsOpen(true)} />)}
+    </>
   )
 }
 
@@ -63,10 +69,10 @@ function SidebarLink({ link }) {
   return (
     <Link
       to={link.path}
-      className={classNames(pathname === link.path ? 'bg-neutral-700 text-white' : 'text-neutral-400', linkClass)}
+      className={classNames(pathname === link.path ? 'bg-gray-100 text-teal-700' : 'text-teal-600', linkClass)}
     >
-      <span className="text-xl">{link.icon}</span>
-      {link.label}
+      {link.icon}
+      <span className="ml-2">{link.label}</span>
     </Link>
   )
 }
