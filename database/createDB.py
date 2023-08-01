@@ -30,7 +30,7 @@ def sql(command):
 sql("CREATE TABLE pi_projects (\
       project_id      VARCHAR(32) PRIMARY KEY,\
       pi              VARCHAR(08) NOT NULL,\
-      requirement     VARCHAR(32) DEFAULT NULL,\
+      requirement     VARCHAR(32) DEFAULT '_',\
       earliest        DATE DEFAULT NULL,\
       latest          DATE DEFAULT NULL\
   );")
@@ -54,12 +54,11 @@ sql("CREATE TABLE submissions (\
       submission_id   VARCHAR(64) PRIMARY KEY,\
       project_id      VARCHAR(32) REFERENCES pi_projects (project_id),\
       date            DATE NOT NULL CHECK (date <= current_date),\
-      remark          text DEFAULT NULL,\
-      cov             VARCHAR(16) DEFAULT NULL,\
-      srv             VARCHAR(16) DEFAULT NULL,\
-      datatype        VARCHAR(16) NOT NULL,\
-      rg              VARCHAR(16) DEFAULT NULL,\
-      anl             VARCHAR(16) DEFAULT NULL\
+      cov             VARCHAR(16) DEFAULT '_',\
+      srv             VARCHAR(16) DEFAULT '_',\
+      rg              VARCHAR(16) DEFAULT '_',\
+      anl             VARCHAR(16) DEFAULT '_',\
+      datatype        VARCHAR(16) NOT NULL\
   );")
 
 
@@ -69,13 +68,16 @@ sql("CREATE TABLE flowcell (\
       loaded_by       VARCHAR(08) NOT NULL CHECK (char_length(loaded_by) > 0),\
       loading_date    DATE     NOT NULL CHECK (loading_date <= current_date),\
       completion_date DATE     NOT NULL CHECK (completion_date <= current_date),\
+      demultiplex_date DATE    NOT NULL CHECK (demultiplex_date <= current_date),\
+      stage_date       DATE    DEFAULT NULL CHECK (stage_date <= current_date),\
+      process_date     DATE    DEFAULT NULL CHECK (process_date <= current_date),\
       order_no        VARCHAR(32) NOT NULL CHECK (char_length(order_no) > 0),\
       sequencer_id    VARCHAR(16) REFERENCES sequencer (sequencer_id),\
       run_duration    SMALLINT CHECK ((run_duration ISNULL) OR (run_duration > 0)) DEFAULT NULL,\
       position        BOOLEAN NOT NULL,\
       CHECK (completion_date >= loading_date)\
   );")
-
+# stage_date#########################
 sql("CREATE TABLE pools (\
       pooling_id      VARCHAR(32) PRIMARY KEY,\
       pf_reads        VARCHAR(08) NOT NULL,\
@@ -100,15 +102,20 @@ sql("CREATE TABLE samples (\
       fragment        SMALLINT NOT NULL CHECK (fragment >= 0),\
       labchip_conc    NUMERIC(5, 2) CHECK ((labchip_conc ISNULL) OR (labchip_conc >= 0)) DEFAULT NULL,\
       well            VARCHAR(32) NOT NULL CHECK (char_length(well) > 0),\
-      pre_norm_well   VARCHAR(32) DEFAULT NULL,\
+      pre_norm_well   VARCHAR(32) DEFAULT '_',\
       i5_id           VARCHAR(16) REFERENCES i5 (i5_id),\
       i7_id           VARCHAR(16) REFERENCES i7 (i7_id),\
       data_sample     status NOT NULL,\
       urgent          BOOLEAN NOT NULL DEFAULT FALSE,\
+      remark          text DEFAULT '_',\
       lib_received    DATE NOT NULL CHECK (lib_received <= current_date),\
       sample_qc       BOOLEAN NOT NULL DEFAULT FALSE,\
       lib_qc          BOOLEAN NOT NULL DEFAULT FALSE,\
+      error           VARCHAR(64) NOT NULL DEFAULT '_',\
+      stage_date       DATE    DEFAULT NULL CHECK (stage_date <= current_date),\
+      merged          BOOLEAN DEFAULT FALSE,\
+      lane            BOOLEAN DEFAULT FALSE,\
       PRIMARY KEY (sample_id, fc_id)\
   );")
 
-conn.close()
+# conn.close()
