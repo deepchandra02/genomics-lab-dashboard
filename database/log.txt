@@ -1,9 +1,25 @@
-Traceback (most recent call last):
-  File "/Users/deepc/genomics-lab-dashboard/database/insertDB.py", line 13, in <module>
-    conn = psycopg2.connect(database="sidra",
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/lib/python3.11/site-packages/psycopg2/__init__.py", line 122, in connect
-    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-psycopg2.OperationalError: connection to server at "localhost" (127.0.0.1), port 5432 failed: FATAL:  role "hosting-db" does not exist
-
+2023-08-04 15:06:25.569665  : Found HTML file generated for . ./input-data-for-externs/flowcell-qc-reports/HFTVCDRX2/HFTVCDRX2.html
+2023-08-04 15:06:25.569717  : Found HTML file generated for . ./input-data-for-externs/flowcell-qc-reports/HNKCVDSX5/HNKCVDSX5.html
+2023-08-04 15:06:25.569755  : Found HTML file generated for . ./input-data-for-externs/flowcell-qc-reports/HNHMYDSX5/HNHMYDSX5.html
+2023-08-04 15:06:25.571805  : Parsing '230411' for 'HFTVCDRX2'...
+2023-08-04 15:06:25.659551  : Data stored in the database for fcHFTVCDRX2
+2023-08-04 15:06:25.659671  : Parsing '230413' for 'HNKCVDSX5'...
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
+2023-08-04 15:06:25.853937  : Data stored in the database for fcHNKCVDSX5
+2023-08-04 15:06:25.854014  : Parsing '230411' for 'HNHMYDSX5'...
+2023-08-04 15:06:26.003125  : Data stored in the database for fcHNHMYDSX5
