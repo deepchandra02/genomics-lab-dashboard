@@ -11,7 +11,7 @@ import datetime
 
 conn = psycopg2.connect(database="sidra",
                         host="localhost",
-                        user="hosting-db",
+                        user="deepc",
                         password="mypassword",
                         port="5432")
 # conn.autocommit = True
@@ -185,8 +185,14 @@ def store_row(row):
         if data != None:
             # print(data)
             assert(len(data) == 8)
-            loading_date = datetime.datetime.strptime(row["Loading Date"], '%m/%d/%Y').date()
-            completion_date = datetime.datetime.strptime(row["Completion Date"], '%m/%d/%Y').date()
+            try:
+                loading_date = datetime.datetime.strptime(row["Loading Date"], '%m/%d/%Y').date()
+            except:
+                loading_date = datetime.datetime.strptime(row["Loading Date"], '%Y-%m-%d').date()
+            try:
+                completion_date = datetime.datetime.strptime(row["Completion Date"], '%m/%d/%Y').date()
+            except:
+                completion_date = datetime.datetime.strptime(row["Completion Date"], '%Y-%m-%d').date()
             # demultiplex_date = datetime.datetime.strptime(row["Demultiplex Date", ])
             if data[0] != row["FC Type"]:
                 print("FC Type data changed for flowcell %s from %s to %s"%(row["FC"], data[0], row["FC Type"]))
@@ -332,6 +338,8 @@ def store_fc(fc):
             for line in raw_info_file:
                 row = dict()
                 cells = line.split('\t')
+                if cells == ['\n']:
+                    continue
                 assert(len(cells) == col_numbers)
                 for i in range(col_numbers):
                   row[fields[i].strip()] = cells[i].strip()

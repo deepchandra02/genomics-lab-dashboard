@@ -3,15 +3,15 @@ from flask import Flask, jsonify
 import datetime
 import psycopg2
 from flask_cors import CORS
-# import json
-# import os
-# from decimal import Decimal
+import json
+import os
+from decimal import Decimal
 
-# class JSONEncoder(json.JSONEncoder):
-#     def default(self, obj):
-#         if isinstance(obj, Decimal):
-#             return str(obj)
-#         return super(JSONEncoder, self).default(obj)
+class JSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Decimal):
+            return str(obj)
+        return super(JSONEncoder, self).default(obj)
 
 
 app = Flask(__name__)   # Flask constructor
