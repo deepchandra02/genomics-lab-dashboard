@@ -118,4 +118,4 @@ sql("CREATE TABLE samples (\
       PRIMARY KEY (sample_id, fc_id)\
   );")
 
-# conn.close()
+conn.close()

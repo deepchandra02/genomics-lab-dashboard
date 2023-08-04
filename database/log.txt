@@ -1,9 +1,9 @@
-2023-08-01 10:30:23.722496  : Found HTML file generated for . ./input-data-for-externs/flowcell-qc-reports/HFTVCDRX2/HFTVCDRX2.html
-2023-08-01 10:30:23.722547  : Found HTML file generated for . ./input-data-for-externs/flowcell-qc-reports/HNKCVDSX5/HNKCVDSX5.html
-2023-08-01 10:30:23.722583  : Found HTML file generated for . ./input-data-for-externs/flowcell-qc-reports/HNHMYDSX5/HNHMYDSX5.html
-2023-08-01 10:30:23.723512  : Parsing '230411' for 'HFTVCDRX2'...
-2023-08-01 10:30:23.797290  : Data stored in the database for fcHFTVCDRX2
-2023-08-01 10:30:23.797386  : Parsing '230413' for 'HNKCVDSX5'...
+2023-08-04 15:06:25.569665  : Found HTML file generated for . ./input-data-for-externs/flowcell-qc-reports/HFTVCDRX2/HFTVCDRX2.html
+2023-08-04 15:06:25.569717  : Found HTML file generated for . ./input-data-for-externs/flowcell-qc-reports/HNKCVDSX5/HNKCVDSX5.html
+2023-08-04 15:06:25.569755  : Found HTML file generated for . ./input-data-for-externs/flowcell-qc-reports/HNHMYDSX5/HNHMYDSX5.html
+2023-08-04 15:06:25.571805  : Parsing '230411' for 'HFTVCDRX2'...
+2023-08-04 15:06:25.659551  : Data stored in the database for fcHFTVCDRX2
+2023-08-04 15:06:25.659671  : Parsing '230413' for 'HNKCVDSX5'...
 ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
 ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
 ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
@@ -20,6 +20,6 @@ ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '
 ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
 ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
 ref_genome data changed for submission id 'YM_SDR100031_230321_WGS30N_B1' from '_' to ''
-2023-08-01 10:30:23.965399  : Data stored in the database for fcHNKCVDSX5
-2023-08-01 10:30:23.965454  : Parsing '230411' for 'HNHMYDSX5'...
-2023-08-01 10:30:24.109301  : Data stored in the database for fcHNHMYDSX5
+2023-08-04 15:06:25.853937  : Data stored in the database for fcHNKCVDSX5
+2023-08-04 15:06:25.854014  : Parsing '230411' for 'HNHMYDSX5'...
+2023-08-04 15:06:26.003125  : Data stored in the database for fcHNHMYDSX5
