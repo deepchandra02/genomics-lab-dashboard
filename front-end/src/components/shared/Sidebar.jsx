@@ -31,7 +31,7 @@ const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
 const linkClass = 'flex items-center w-52 gap-2 font-semibold text-base py-3 pl-4 transition-colors duration-200 ease-in-out hover:bg-neutral-500'
 
 export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <>

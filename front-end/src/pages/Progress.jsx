@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
 import { Table, TableRow, TableCell, TableHead, TableHeaderCell, TableBody, Badge, Select, SelectItem, MultiSelect, MultiSelectItem }
   from "@tremor/react";
@@ -61,20 +62,9 @@ const Progress = (props) => {
 
 
   return (
-    <div>
-      <MultiSelect
-        onValueChange={setSelectedSubmissions}
-        placeholder="Submissions..."
-        className="w-[20rem] text-xs"
-      >
-        {Array.from(new Set(data.map((item) => item.submission_id))).map((submission_id) => (
-          <MultiSelectItem key={submission_id} value={submission_id} className="text-xs">
-            {submission_id}
-          </MultiSelectItem>
-        ))}
-      </MultiSelect>
-      {data && (<Table className="pt-6 px-4 min-h-screen">
-        <TableHead>
+    <div className="relative">
+      {data && (<Table className="px-4 relative overflow-visible scroll-smooth">
+        <TableHead className="sticky top-0 z-10 bg-slate-700 rounded-tremor-full">
           <TableRow className="">
             <TableHeaderCell />
             <TableHeaderCell className="z-10 px-2 text-center">
@@ -90,7 +80,6 @@ const Progress = (props) => {
                 ))}
               </MultiSelect>
             </TableHeaderCell>
-
             <TableHeaderCell className="z-10 px-2 text-center">
               <MultiSelect
                 onValueChange={setSelectedFlowcells}
@@ -104,7 +93,6 @@ const Progress = (props) => {
                 ))}
               </MultiSelect>
             </TableHeaderCell>
-
             <TableHeaderCell className="z-10 px-2">
               <MultiSelect
                 onValueChange={setSelectedSubmissions}
@@ -155,7 +143,6 @@ const Progress = (props) => {
                         {staging_date === "_" ? "Not staged" : staging_date}
                       </MultiSelectItem>
                     ))}
-
                 </MultiSelect>
                 <Select
                   onValueChange={setSelectedStagingError}
@@ -248,21 +235,21 @@ const Progress = (props) => {
               </MultiSelect>
             </TableHeaderCell>
           </TableRow>
-          <TableRow>
-            <TableHeaderCell className="p-2 text-center">S.No.</TableHeaderCell>
-            <TableHeaderCell className="p-2 text-center">Sample ID</TableHeaderCell>
-            <TableHeaderCell className="p-2 text-center">Flowcell ID</TableHeaderCell>
-            <TableHeaderCell className="p-2">Submission ID</TableHeaderCell>
-            <TableHeaderCell className="p-2 text-center">Demultiplexed</TableHeaderCell>
-            <TableHeaderCell className="p-2 text-center">Staged</TableHeaderCell>
-            <TableHeaderCell className="p-2 text-center">Processed</TableHeaderCell>
-            <TableHeaderCell className="p-2 text-center">Lane fastq</TableHeaderCell>
-            <TableHeaderCell className="p-2 text-center">Merged fastq</TableHeaderCell>
-            <TableHeaderCell className="p-2 text-center">Released</TableHeaderCell>
+          <TableRow className="bg-slate-800">
+            <TableHeaderCell className="p-2 text-center text-white">S.No.</TableHeaderCell>
+            <TableHeaderCell className="p-2 text-center text-white">Sample ID</TableHeaderCell>
+            <TableHeaderCell className="p-2 text-center text-white">Flowcell ID</TableHeaderCell>
+            <TableHeaderCell className="p-2 text-white">Submission ID</TableHeaderCell>
+            <TableHeaderCell className="p-2 text-center text-white">Demultiplexed</TableHeaderCell>
+            <TableHeaderCell className="p-2 text-center text-white">Staged</TableHeaderCell>
+            <TableHeaderCell className="p-2 text-center text-white">Processed</TableHeaderCell>
+            <TableHeaderCell className="p-2 text-center text-white">Lane fastq</TableHeaderCell>
+            <TableHeaderCell className="p-2 text-center text-white">Merged fastq</TableHeaderCell>
+            <TableHeaderCell className="p-2 text-center text-white">Released</TableHeaderCell>
           </TableRow>
         </TableHead>
 
-        <TableBody>
+        <TableBody className="">
           {data
             .filter((item) => (isSampleSelected(item) &&
               isFlowcellSelected(item) &&
@@ -275,15 +262,15 @@ const Progress = (props) => {
               isMergedfastqSelected(item) &&
               isReleasingdateSelected(item)))
             .map((item, index) => (
-              <TableRow key={item.sample_id} className="text-xs hover:bg-slate-200">
-                <TableCell className="p-2 text-center w-2">{index + 1}</TableCell>
-                <TableCell className="p-2 text-center">{item.sample_id}</TableCell>
-                <TableCell className="p-2 text-center">{item.fc_id}</TableCell>
-                <TableCell className="p-2">{item.submission_id}</TableCell>
-                <TableCell className="p-2 text-center">{item.loading_date !== "_" ?
+              <TableRow key={item.sample_id} className="text-xs select-auto hover:bg-slate-400 hover:text-white hover:cursor-pointer">
+                <TableCell className="p-2 text-center w-2 select-all">{index + 1}</TableCell>
+                <TableCell className="p-2 text-center select-all">{item.sample_id}</TableCell>
+                <TableCell className="p-2 text-center select-all">{item.fc_id}</TableCell>
+                <TableCell className="p-2 select-all">{item.submission_id}</TableCell>
+                <TableCell className="p-2 text-center select-all">{item.loading_date !== "_" ?
                   (<Badge icon={CheckCircleIcon} color="emerald" size="xs">{item.loading_date}</Badge>)
                   : (<Badge icon={XCircleIcon} color="red" size="xs">Not demultiplexed </Badge>)}</TableCell>
-                <TableCell className="p-2 text-center">{item.staging_date !== "_" ?
+                <TableCell className="p-2 text-center select-all">{item.staging_date !== "_" ?
                   (
                     item.staging_error ?
                       (<Badge icon={XCircleIcon} color="red" size="xs">{item.staging_date}</Badge>)
@@ -291,19 +278,19 @@ const Progress = (props) => {
                   )
                   : (<Badge icon={ExclamationCircleIcon} color="amber" size="xs">Not staged</Badge>)}
                 </TableCell>
-                <TableCell className="p-2 text-center">{item.processing_date !== "_" ?
+                <TableCell className="p-2 text-center select-all">{item.processing_date !== "_" ?
                   (<Badge icon={CheckCircleIcon} color="emerald" size="xs">{item.processing_date}</Badge>)
                   : (<Badge icon={ExclamationCircleIcon} color="amber" size="xs">Not processed </Badge>)}
                 </TableCell>
-                <TableCell className="p-2 text-center">{item.lane_fastq !== "_" ?
+                <TableCell className="p-2 text-center select-all">{item.lane_fastq !== "_" ?
                   (<Badge icon={CheckCircleIcon} color="emerald" size="xs">{item.lane_fastq}</Badge>)
                   : (<Badge icon={ExclamationCircleIcon} color="amber" size="xs">Not info </Badge>)}
                 </TableCell>
-                <TableCell className="p-2 text-center">{item.merged_fastq !== "_" ?
+                <TableCell className="p-2 text-center select-all">{item.merged_fastq !== "_" ?
                   (<Badge icon={CheckCircleIcon} color="emerald" size="xs">{item.merged_fastq}</Badge>)
                   : (<Badge icon={ExclamationCircleIcon} color="amber" size="xs">Not merged </Badge>)}
                 </TableCell>
-                <TableCell className="p-2 text-center">{item.releasing_date !== "_" ?
+                <TableCell className="p-2 text-center select-all">{item.releasing_date !== "_" ?
                   (<Badge icon={CheckCircleIcon} color="emerald" size="xs">{item.releasing_date}</Badge>)
                   : (<Badge icon={ExclamationCircleIcon} color="amber" size="xs">Not released </Badge>)}
                 </TableCell>

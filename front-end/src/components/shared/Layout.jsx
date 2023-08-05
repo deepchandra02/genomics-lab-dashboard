@@ -7,7 +7,7 @@ function Layout({ children }) {
     <div className="bg-neutral-100 h-screen w-screen overflow-hidden flex flex-row">
       <Sidebar />
       <div className="flex flex-col flex-1 overflow-x-auto">
-        <div className="flex-1 p-4 min-h-0 ">
+        <div className="flex-1 px-4 pb-4 min-h-0 ">
           {children || <Outlet />}
         </div>
       </div>
