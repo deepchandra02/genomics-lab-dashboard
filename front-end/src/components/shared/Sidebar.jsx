@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import classNames from 'classnames'
 import { Divider } from '@tremor/react'
 import { Link, useLocation } from 'react-router-dom'
-import { TrendingUpIcon, ChartBarIcon, CogIcon, LogoutIcon, MenuIcon, XIcon } from '@heroicons/react/solid'
+import { TrendingUpIcon, ChartBarIcon, CogIcon, LogoutIcon, XIcon } from '@heroicons/react/solid'
 
 const DASHBOARD_SIDEBAR_LINKS = [
   {
@@ -30,8 +30,7 @@ const DASHBOARD_SIDEBAR_BOTTOM_LINKS = [
 
 const linkClass = 'flex justify-between items-center w-72 gap-2 font-semibold font-cabin py-3 pl-4 hover:bg-gray-300'
 
-export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(true);
+export default function Sidebar(props) {
 
   function SidebarLink({ link }) {
     const { pathname } = useLocation()
@@ -50,11 +49,11 @@ export default function Sidebar() {
   }
   return (
     <>
-      <div className={classNames("bg-white font-cabin text-slate-800 w-72 h-screen py-6 flex flex-col justify-between", { 'hidden': !isOpen })}>
+      <div className="bg-white font-cabin text-slate-800 w-72 h-screen py-6 flex flex-col justify-between">
         <div className="flex flex-col">
           <div className="flex justify-between items-center px-4 mb-8">
-            <h1 className="text-3xl font-bold">Sidra</h1>
-            <XIcon className="h-6 w-6 cursor-pointer" onClick={() => setIsOpen(false)} />
+            <XIcon className="h-6 w-6 cursor-pointer" onClick={() => props.setIsOpen(false)} />
+            <h1 className="text-xl font-bold">Navigation Panel</h1>
           </div>
           <div className="flex-1 space-y-4">
             {DASHBOARD_SIDEBAR_LINKS.map((link) => (
@@ -76,7 +75,6 @@ export default function Sidebar() {
             </div>
           </div>
         </div>
-        {!isOpen && (<MenuIcon className="h-6 w-6 cursor-pointer fixed top-4 left-2 z-50" onClick={() => setIsOpen(true)} />)}
       </div>
     </>
   )
