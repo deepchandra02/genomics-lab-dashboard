@@ -1,11 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
-import { Table, TableRow, TableCell, TableHead, TableHeaderCell, TableBody, Badge, Select, SelectItem, MultiSelect, MultiSelectItem }
+import { AccordionList, Accordion, AccordionHeader, AccordionBody, Icon, Table, TableRow, TableCell, TableHead, TableHeaderCell, TableBody, Badge, Select, SelectItem, MultiSelect, MultiSelectItem }
   from "@tremor/react";
-import { CheckCircleIcon, ExclamationCircleIcon, XCircleIcon } from "@heroicons/react/solid";
+import { ChevronLeftIcon, CheckCircleIcon, ExclamationCircleIcon, XCircleIcon, XIcon } from "@heroicons/react/solid";
 const data = require('../data/data0_updated.json');
 
-const Progress = (props) => {
+const Progress = () => {
   // const [page, setPage] = useState(1); // [1, 2, 3, 4, 5
   // const [data, setData] = useState(null);
   // useEffect(() => {
@@ -13,7 +13,7 @@ const Progress = (props) => {
   //     // Check if page number is not null
   //     if (page) {
 
-  //       const response = await fetch(`http://127.0.0.1:5000/type0/${page}`);
+  //       const response = await fetch(`http://127.0.0.1:5000/type0/1`);
   //       if (!response.ok) {
   //         // Handle error
   //         console.error('Server error:', response);
@@ -21,45 +21,90 @@ const Progress = (props) => {
   //       else {
   //         const data = await response.json();
   //         // Update the state with the fetched data
-  //         setData(data);
+  //         // setData(data);
   //       }
   //     }
   //   }
   //   fetchData();
   // }, [page]);
 
-  const [selectedSamples, setSelectedSamples] = useState([]);
-  const [selectedFlowcells, setSelectedFlowcells] = useState([]);
-  const [selectedSubmissions, setSelectedSubmissions] = useState([]);
-  const [selectedDemultiplexed, setSelectedDemultiplexed] = useState([]);
-  const [selectedStaging, setSelectedStaging] = useState([]);
-  const [selectedStagingError, setSelectedStagingError] = useState([]);
-  const [selectedProcessing, setSelectedProcessing] = useState([]);
-  const [selectedLanefastq, setSelectedLanefastq] = useState([]);
-  const [selectedMergedfastq, setSelectedMergedfastq] = useState([]);
-  const [selectedReleasing, setSelectedReleasing] = useState([]);
 
-  const isSampleSelected = (item) =>
-    selectedSamples.includes(item.sample_id) || selectedSamples.length === 0;
-  const isFlowcellSelected = (item) =>
-    selectedFlowcells.includes(item.fc_id) || selectedFlowcells.length === 0;
-  const isSubmissionSelected = (item) =>
-    selectedSubmissions.includes(item.submission_id) || selectedSubmissions.length === 0;
-  const isDemultiplexeddateSelected = (item) =>
-    selectedDemultiplexed.includes(item.loading_date) || selectedDemultiplexed.length === 0;
-  const isStageddateSelected = (item) =>
-    selectedStaging.includes(item.staging_date) || selectedStaging.length === 0;
-  const isStagingErrorSelected = (item) =>
-    selectedStagingError.includes((item.staging_error || false).toString()) || selectedStagingError.length === 0;
-  const isProcessingdateSelected = (item) =>
-    selectedProcessing.includes(item.processing_date) || selectedProcessing.length === 0;
-  const isLanefastqSelected = (item) =>
-    selectedLanefastq.includes(item.lane_fastq) || selectedLanefastq.length === 0;
-  const isMergedfastqSelected = (item) =>
-    selectedMergedfastq.includes(item.merged_fastq) || selectedMergedfastq.length === 0;
-  const isReleasingdateSelected = (item) =>
-    selectedReleasing.includes(item.releasing_date) || selectedReleasing.length === 0;
+  // samples
+  const [filterPoolingId, setFilterPoolingId] = useState([]);
+  const [filterQpcr, setFilterQpcr] = useState([]);
+  const [filterFragment, setFilterFragment] = useState([]);
+  const [filterLabchipConc, setFilterLabchipConc] = useState([]);
+  const [filterWell, setFilterWell] = useState([]);
+  const [filterPreNormWell, setFilterPreNormWell] = useState([]);
+  const [filterI5Id, setFilterI5Id] = useState([]);
+  const [filterI7Id, setFilterI7Id] = useState([]);
+  const [filterDataSample, setFilterDataSample] = useState([]);
+  const [filterUrgent, setFilterUrgent] = useState([]);
+  const [filterSampleQc, setFilterSampleQc] = useState([]);
+  const [filterLibQc, setFilterLibQc] = useState([]);
 
+  // flowcells
+  const [filterFcType, setFilterFcType] = useState([]);
+  const [filterOrderNo, setFilterOrderNo] = useState([]);
+  const [filterRunDuration, setFilterRunDuration] = useState([]);
+  const [filterPosition, setFilterPosition] = useState([]);
+
+  return (
+    <div>
+      <TableData
+        filterPoolingId={filterPoolingId}
+        filterDataSample={filterDataSample}
+      />
+      <Filters
+        setFilterPoolingId={setFilterPoolingId}
+        setFilterDataSample={setFilterDataSample}
+      />
+    </div>
+  );
+};
+
+export default Progress;
+
+
+const TableData = (props) => {
+
+  const [selectSamples, setSelectSamples] = useState([]);
+  const [selectFlowcells, setSelectFlowcells] = useState([]);
+  const [selectSubmissions, setSelectSubmissions] = useState([]);
+  const [selectDemultiplexed, setSelectDemultiplexed] = useState([]);
+  const [selectStaging, setSelectStaging] = useState([]);
+  const [selectStagingError, setSelectStagingError] = useState([]);
+  const [selectProcessing, setSelectProcessing] = useState([]);
+  const [selectLanefastq, setSelectLanefastq] = useState([]);
+  const [selectMergedfastq, setSelectMergedfastq] = useState([]);
+  const [selectReleasing, setSelectReleasing] = useState([]);
+
+  const isSampleSelect = (item) =>
+    selectSamples.includes(item.sample_id) || selectSamples.length === 0;
+  const isFlowcellSelect = (item) =>
+    selectFlowcells.includes(item.fc_id) || selectFlowcells.length === 0;
+  const isSubmissionSelect = (item) =>
+    selectSubmissions.includes(item.submission_id) || selectSubmissions.length === 0;
+  const isDemultiplexeddateSelect = (item) =>
+    selectDemultiplexed.includes(item.loading_date) || selectDemultiplexed.length === 0;
+  const isStageddateSelect = (item) =>
+    selectStaging.includes(item.staging_date) || selectStaging.length === 0;
+  const isStagingErrorSelect = (item) =>
+    selectStagingError.includes((item.staging_error || false).toString()) || selectStagingError.length === 0;
+  const isProcessingdateSelect = (item) =>
+    selectProcessing.includes(item.processing_date) || selectProcessing.length === 0;
+  const isLanefastqSelect = (item) =>
+    selectLanefastq.includes(item.lane_fastq) || selectLanefastq.length === 0;
+  const isMergedfastqSelect = (item) =>
+    selectMergedfastq.includes(item.merged_fastq) || selectMergedfastq.length === 0;
+  const isReleasingdateSelect = (item) =>
+    selectReleasing.includes(item.releasing_date) || selectReleasing.length === 0;
+
+  // filter variables
+  const isPoolingIdFilter = (item) =>
+    props.filterPoolingId.includes(item.pooling_id) || props.filterPoolingId.length === 0;
+  const isDataSampleFilter = (item) =>
+    props.filterDataSample.includes(item.data_sample) || props.filterDataSample.length === 0;
 
   return (
     <div className="relative">
@@ -69,7 +114,7 @@ const Progress = (props) => {
             <TableHeaderCell />
             <TableHeaderCell className="z-10 px-2 text-center">
               <MultiSelect
-                onValueChange={setSelectedSamples}
+                onValueChange={setSelectSamples}
                 placeholder="Samples..."
                 className="min-w-0 w-[8rem] z-10 text-xs"
               >
@@ -82,7 +127,7 @@ const Progress = (props) => {
             </TableHeaderCell>
             <TableHeaderCell className="z-10 px-2 text-center">
               <MultiSelect
-                onValueChange={setSelectedFlowcells}
+                onValueChange={setSelectFlowcells}
                 placeholder="Flowcells..."
                 className="min-w-0 w-[8rem] text-xs"
               >
@@ -95,7 +140,7 @@ const Progress = (props) => {
             </TableHeaderCell>
             <TableHeaderCell className="z-10 px-2">
               <MultiSelect
-                onValueChange={setSelectedSubmissions}
+                onValueChange={setSelectSubmissions}
                 placeholder="Submissions..."
                 className="w-[20rem] text-xs"
               >
@@ -108,7 +153,7 @@ const Progress = (props) => {
             </TableHeaderCell>
             <TableHeaderCell className="z-10 px-2">
               <MultiSelect
-                onValueChange={setSelectedDemultiplexed}
+                onValueChange={setSelectDemultiplexed}
                 placeholder="Date..."
                 className="min-w-0 w-[8rem] text-xs"
               >
@@ -128,7 +173,7 @@ const Progress = (props) => {
             <TableHeaderCell className="z-10 px-2">
               <div className="flex flex-col space-y-1">
                 <MultiSelect
-                  onValueChange={setSelectedStaging}
+                  onValueChange={setSelectStaging}
                   placeholder="Date..."
                   className="min-w-0 w-[8rem] text-xs"
                 >
@@ -145,7 +190,7 @@ const Progress = (props) => {
                     ))}
                 </MultiSelect>
                 <Select
-                  onValueChange={setSelectedStagingError}
+                  onValueChange={setSelectStagingError}
                   placeholder="Error"
                   className="min-w-0 w-[8rem] text-xs"
                   enableClear={true}
@@ -160,7 +205,7 @@ const Progress = (props) => {
             </TableHeaderCell>
             <TableHeaderCell className="z-10 px-2">
               <MultiSelect
-                onValueChange={setSelectedProcessing}
+                onValueChange={setSelectProcessing}
                 placeholder="Date..."
                 className="min-w-0 w-[8rem] text-xs"
               >
@@ -179,7 +224,7 @@ const Progress = (props) => {
             </TableHeaderCell>
             <TableHeaderCell className="z-10 px-2">
               <MultiSelect
-                onValueChange={setSelectedLanefastq}
+                onValueChange={setSelectLanefastq}
                 placeholder="Date..."
                 className="min-w-0 w-[8rem] text-xs"
               >
@@ -198,7 +243,7 @@ const Progress = (props) => {
             </TableHeaderCell>
             <TableHeaderCell className="z-10 px-2">
               <MultiSelect
-                onValueChange={setSelectedMergedfastq}
+                onValueChange={setSelectMergedfastq}
                 placeholder="Date..."
                 className="min-w-0 w-[8rem] text-xs"
               >
@@ -217,7 +262,7 @@ const Progress = (props) => {
             </TableHeaderCell>
             <TableHeaderCell className="z-10 px-2">
               <MultiSelect
-                onValueChange={setSelectedReleasing}
+                onValueChange={setSelectReleasing}
                 placeholder="Date..."
                 className="min-w-0 w-[8rem] text-xs"
               >
@@ -251,19 +296,33 @@ const Progress = (props) => {
 
         <TableBody className="">
           {data
-            .filter((item) => (isSampleSelected(item) &&
-              isFlowcellSelected(item) &&
-              isSubmissionSelected(item) &&
-              isDemultiplexeddateSelected(item) &&
-              isStageddateSelected(item) &&
-              isStagingErrorSelected(item) &&
-              isProcessingdateSelected(item) &&
-              isLanefastqSelected(item) &&
-              isMergedfastqSelected(item) &&
-              isReleasingdateSelected(item)))
+            .filter((item) => (isSampleSelect(item) &&
+              isFlowcellSelect(item) &&
+              isSubmissionSelect(item) &&
+              isDemultiplexeddateSelect(item) &&
+              isStageddateSelect(item) &&
+              isStagingErrorSelect(item) &&
+              isProcessingdateSelect(item) &&
+              isLanefastqSelect(item) &&
+              isMergedfastqSelect(item) &&
+              isReleasingdateSelect(item) &&
+              isPoolingIdFilter(item) &&
+              isDataSampleFilter(item)
+            ))
             .map((item, index) => (
               <TableRow key={item.sample_id} className="text-xs select-auto hover:bg-slate-400 hover:text-white hover:cursor-pointer">
-                <TableCell className="p-2 text-center w-2 select-all">{index + 1}</TableCell>
+                <TableCell className="p-2 text-center w-2">
+                  <Accordion>
+                    <AccordionHeader className="">
+                      {index + 1}
+                    </AccordionHeader>
+                    <AccordionBody className="w-64 text-left">
+
+                      Haha
+
+                    </AccordionBody>
+                  </Accordion>
+                </TableCell>
                 <TableCell className="p-2 text-center select-all">{item.sample_id}</TableCell>
                 <TableCell className="p-2 text-center select-all">{item.fc_id}</TableCell>
                 <TableCell className="p-2 select-all">{item.submission_id}</TableCell>
@@ -300,6 +359,58 @@ const Progress = (props) => {
       </Table>)}
     </div>
   );
-}
+};
 
-export default Progress
+export const Filters = (props) => {
+
+  return (
+    <div className="flex flex-col">
+      <div className="flex justify-between items-center px-4 mb-8">
+        <div className="flex items-center">
+          <Icon
+            icon={ChevronLeftIcon}
+            size='lg'
+            className="mr-2 -ml-4 cursor-pointer"
+            onClick={() => props.setFilter(false)}
+          />
+          <h1 className="text-xl font-bold">Filters</h1>
+        </div>
+        <XIcon className="h-6 w-6 cursor-pointer" onClick={() => props.setIsOpen(false)} />
+      </div>
+      <div className="flex-1 space-y-4">
+        <AccordionList className="mx-2">
+          <Accordion>
+            <AccordionHeader>
+              Sample
+            </AccordionHeader>
+            <AccordionBody className="h-96">
+              <MultiSelect
+                onValueChange={props.setFilterPoolingId}
+                placeholder="Pooling ID..."
+                className="text-sm"
+              >
+                {Array.from(new Set(data.map((item) => item.pooling_id))).map((pooling_id) => (
+                  <MultiSelectItem key={pooling_id} value={pooling_id} className="text-xs">
+                    {pooling_id}
+                  </MultiSelectItem>
+                ))}
+              </MultiSelect>
+
+              <MultiSelect
+                onValueChange={props.setFilterDataSample}
+                placeholder="Data Sample..."
+                className="text-sm"
+              >
+                {Array.from(new Set(data.map((item) => item.data_sample))).map((data_sample) => (
+                  <MultiSelectItem key={data_sample} value={data_sample} className="text-xs">
+                    {data_sample}
+                  </MultiSelectItem>
+                ))}
+              </MultiSelect>
+            </AccordionBody>
+          </Accordion>
+        </AccordionList>
+      </div>
+    </div>
+  )
+};

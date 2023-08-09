@@ -82,7 +82,12 @@ def type0(page):
                 row_dict[column] = row[i]
         output.append(row_dict)
     
+    # DEBUGGING< DON'T REMOVE
+    # Write the results to a JSON file
+    with open('../front-end/src/newdata/data0.json', 'w') as f:
+        json.dump(output, f, cls=JSONEncoder)
     return jsonify(output)
+
 
 
 @app.route('/type1/<date>')
