@@ -39,6 +39,8 @@ const TableData = (props) => {
   // filter variables
   const isPoolingIdFilter = (item) =>
     props.filterPoolingId.includes(item.pooling_id) || props.filterPoolingId.length === 0;
+  const isQpcrFilter = (item) =>
+    props.filterQpcr.includes(item.qpcr) || props.filterQpcr.length === 0;
   const isDataSampleFilter = (item) =>
     props.filterDataSample.includes(item.data_sample) || props.filterDataSample.length === 0;
 
@@ -254,6 +256,7 @@ const TableData = (props) => {
               isMergedfastqSelect(item) &&
               isReleasingdateSelect(item) &&
               isPoolingIdFilter(item) &&
+              isQpcrFilter(item) &&
               isDataSampleFilter(item)
             ))
             .map((item, index) => (
