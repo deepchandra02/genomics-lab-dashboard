@@ -43,18 +43,21 @@ const TableData = (props) => {
     props.filterDataSample.includes(item.data_sample) || props.filterDataSample.length === 0;
 
   return (
-    <div className="relative">
+    <div className="min-w-screen w-full relative">
       {props.data && (<Table className="px-4 relative overflow-visible scroll-smooth">
         <TableHead className="sticky top-0 z-10 bg-slate-700 rounded-tremor-full">
           <TableRow className="">
             <TableHeaderCell>
+
               <Button
                 className="cursor-pointer items-center"
+                variant="secondary"
                 onClick={() => props.setFilterPanelOpen(!props.filterPanelOpen)}
                 icon={props.filterPanelOpen ? XIcon : FilterIcon}
               >
                 Filter
               </Button>
+              <span class="animate-ping absolute right-4 inline-flex h-2 w-2 rounded-full bg-violet-500 opacity-95"></span>
             </TableHeaderCell>
             <TableHeaderCell className="z-10 px-2 text-center">
               <MultiSelect

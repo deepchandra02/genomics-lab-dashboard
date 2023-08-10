@@ -51,13 +51,27 @@ const Progress = () => {
   const [filterPosition, setFilterPosition] = useState([]);
 
   return (
-    <div className="flex">
+    <div className="flex justify-stretch">
 
       {filterPanelOpen && (<FilterPanel
         setFilterPanelOpen={setFilterPanelOpen}
         data={data}
         setFilterPoolingId={setFilterPoolingId}
+        setFilterQpcr={setFilterQpcr}
+        setFilterFragment={setFilterFragment}
+        setFilterLabchipConc={setFilterLabchipConc}
+        setFilterWell={setFilterWell}
+        setFilterPreNormWell={setFilterPreNormWell}
+        setFilterI5Id={setFilterI5Id}
+        setFilterI7Id={setFilterI7Id}
         setFilterDataSample={setFilterDataSample}
+        setFilterUrgent={setFilterUrgent}
+        setFilterSampleQc={setFilterSampleQc}
+        setFilterLibQc={setFilterLibQc}
+        setFilterFcType={setFilterFcType}
+        setFilterOrderNo={setFilterOrderNo}
+        setFilterRunDuration={setFilterRunDuration}
+        setFilterPosition={setFilterPosition}
 
       />)}
       <TableData
@@ -65,7 +79,21 @@ const Progress = () => {
         setFilterPanelOpen={setFilterPanelOpen}
         data={data}
         filterPoolingId={filterPoolingId}
+        filterQpcr={filterQpcr}
+        filterFragment={filterFragment}
+        filterLabchipConc={filterLabchipConc}
+        filterWell={filterWell}
+        filterPreNormWell={filterPreNormWell}
+        filterI5Id={filterI5Id}
+        filterI7Id={filterI7Id}
         filterDataSample={filterDataSample}
+        filterUrgent={filterUrgent}
+        filterSampleQc={filterSampleQc}
+        filterLibQc={filterLibQc}
+        filterFcType={filterFcType}
+        filterOrderNo={filterOrderNo}
+        filterRunDuration={filterRunDuration}
+        filterPosition={filterPosition}
       />
 
     </div>
