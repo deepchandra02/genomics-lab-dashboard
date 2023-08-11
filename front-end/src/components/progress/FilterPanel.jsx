@@ -58,7 +58,7 @@ const FilterPanel = (props) => {
                 <MultiSelect
                   onValueChange={props.setFilterQpcr}
                   placeholder="QPCR..."
-                  className="text-sm z-10"
+                  className="text-sm"
                 >
                   {Array.from(new Set(props.data.map((item) => (item.qpcr !== null ? item.qpcr : "Missing"))))
                     .sort((a, b) => (a === "Missing" ? -1 : b === "Missing" ? 1 : a.localeCompare(b)))

@@ -84,7 +84,7 @@ def type0(page):
     
     # DEBUGGING< DON'T REMOVE
     # Write the results to a JSON file
-    with open('../front-end/src/newdata/data0.json', 'w') as f:
+    with open('./front-end/src/newdata/data0.json', 'w') as f:
         json.dump(output, f, cls=JSONEncoder)
     return jsonify(output)
 
