@@ -28,7 +28,7 @@ const Progress = () => {
   //   fetchData();
   // }, [page]);
   // filter button
-  const [filterPanelOpen, setFilterPanelOpen] = useState(true);
+  const [filterPanelOpen, setFilterPanelOpen] = useState(false);
 
   // samples
   const [filterPoolingId, setFilterPoolingId] = useState([]);
