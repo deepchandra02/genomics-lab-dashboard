@@ -1,67 +1,60 @@
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MaterialReactTable } from 'material-react-table';
-import { Typography } from '@mui/material';
-import {
-  QueryClient,
-  QueryClientProvider,
-  useInfiniteQuery,
-} from '@tanstack/react-query';
-
-const columns = [
-  // Define your columns here
-  {
-    accessorKey: 'sample_id',
-    header: 'Sample ID',
-  },
-  {
-    accessorKey: 'fc_id',
-    header: 'Flowcell ID',
-  },
-  {
-    accessorKey: 'submission_id',
-    header: 'Submission ID',
-  },
-  {
-    accessorKey: 'demultiplex_date',
-    header: 'Demultiplexed',
-  },
-  {
-    accessorKey: 'stage_date',
-    header: 'Staged',
-  },
-  {
-    accessorKey: 'process_date',
-    header: 'Processed',
-  },
-  // {
-  //   accessorKey: 'lane_fastq',
-  //   header: 'Lane fastq',
-  // },
-  // {
-  //   accessorKey: 'merged_fastq',
-  //   header: 'Merged fastq',
-  // },
-  // {
-  //   accessorKey: 'releasing_date',
-  //   header: 'Released',
-  // },
-];
+import { Typography, Box } from '@mui/material';
+import { QueryClient, QueryClientProvider, useInfiniteQuery } from '@tanstack/react-query';
 
 const fetchSize = 25;
 
 const PreTableData = () => {
-  const tableContainerRef = useRef(null); //we can get access to the underlying TableContainer element and react to its scroll events
-  const rowVirtualizerInstanceRef = useRef(null); //we can get access to the underlying Virtualizer instance and call its scrollToIndex method
+  const tableContainerRef = useRef(null);
+  const rowVirtualizerInstanceRef = useRef(null);
 
   const [columnFilters, setColumnFilters] = useState([]);
   const [globalFilter, setGlobalFilter] = useState();
   const [sorting, setSorting] = useState([]);
+
+  const columns = useMemo(
+    () => [
+      {
+        id: 'sampleInfo',
+        header: 'Sample Info',
+        columns: [
+          {
+            accessorKey: 'sample_id',
+            header: 'Sample ID',
+          },
+          {
+            accessorKey: 'fc_id',
+            header: 'Flowcell ID',
+          },
+          {
+            accessorKey: 'submission_id',
+            header: 'Submission ID',
+          },
+        ],
+      },
+      {
+        id: 'dates',
+        header: 'Dates',
+        columns: [
+          {
+            accessorKey: 'demultiplex_date',
+            header: 'Demultiplexed',
+          },
+          {
+            accessorKey: 'stage_date',
+            header: 'Staged',
+          },
+          {
+            accessorKey: 'process_date',
+            header: 'Processed',
+          },
+        ],
+      },
+      // Additional columns as needed
+    ],
+    [],
+  );
 
   const { data, fetchNextPage, isError, isFetching, isLoading } =
     useInfiniteQuery({
@@ -87,12 +80,9 @@ const PreTableData = () => {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     });
-  const flatData = useMemo(
-    () => data?.pages.flatMap((page) => page) ?? [], // Adjusted to match your response structure
-    [data],
-  );
+  const flatData = useMemo(() => data?.pages.flatMap((page) => page) ?? [], [data]);
 
-  const totalDBRowCount = flatData.length; // Adjusted to match your response structure
+  const totalDBRowCount = flatData.length;
   const totalFetched = flatData.length;
 
   //called on scroll and possibly on mount to fetch more data as the user scrolls and reaches bottom of table
@@ -132,26 +122,22 @@ const PreTableData = () => {
     <MaterialReactTable
       columns={columns}
       data={flatData}
-      enablePagination={false}
+      enableColumnFilterModes
+      enableColumnOrdering
+      enableGrouping
+      enablePinning
+      enableRowActions
+      enableRowSelection
       enableRowNumbers
-      enableRowVirtualization //optional, but recommended if it is likely going to be more than 100 rows
+      enableRowVirtualization
       manualFiltering
       manualSorting
       muiTableContainerProps={{
-        ref: tableContainerRef, //get access to the table container element
-        sx: { maxHeight: '600px' }, //give the table a max height
-        onScroll: (
-          event, //add an event listener to the table container element
-        ) => fetchMoreOnBottomReached(event.target),
+        ref: tableContainerRef,
+        sx: { maxHeight: '600px' },
+        onScroll: (event) => fetchMoreOnBottomReached(event.target),
       }}
-      muiToolbarAlertBannerProps={
-        isError
-          ? {
-            color: 'error',
-            children: 'Error loading data',
-          }
-          : undefined
-      }
+      muiToolbarAlertBannerProps={isError ? { color: 'error', children: 'Error loading data' } : undefined}
       onColumnFiltersChange={setColumnFilters}
       onGlobalFilterChange={setGlobalFilter}
       onSortingChange={setSorting}
@@ -159,6 +145,11 @@ const PreTableData = () => {
         <Typography>
           Fetched {totalFetched} of {totalDBRowCount} total rows.
         </Typography>
+      )}
+      renderDetailPanel={({ row }) => (
+        <Box>
+          {/* Custom detail panel content */}
+        </Box>
       )}
       state={{
         columnFilters,
@@ -168,7 +159,7 @@ const PreTableData = () => {
         showProgressBars: isFetching,
         sorting,
       }}
-      rowVirtualizerInstanceRef={rowVirtualizerInstanceRef} //get access to the virtualizer instance
+      rowVirtualizerInstanceRef={rowVirtualizerInstanceRef}
       rowVirtualizerProps={{ overscan: 4 }}
     />
   )
