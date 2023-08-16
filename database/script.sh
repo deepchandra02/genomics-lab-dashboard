@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Clear the terminal screen
-# /opt/homebrew/var/postgresql@12/postgresql.conf
 clear
 
 psql -U postgres -c "ALTER USER deepc PASSWORD 'mypassword';"
