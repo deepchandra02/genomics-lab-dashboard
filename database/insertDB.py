@@ -1,7 +1,6 @@
 import psycopg2
-import sys
+import json
 import os
-import shutil
 import glob
 import datetime
 
@@ -22,10 +21,6 @@ cursor = conn.cursor()
 def sql(command):
     try:
         cursor.execute(command)
-        # print("Successfully Executed\n")
-        # print(command)
-        # conn.commit()
-        # conn.close()
     except Exception as e:
         print("Failed to Execute\n")
         print(command)
@@ -35,15 +30,19 @@ def sql(command):
 
 
 # Set up the paths
-directory_path = "./input-data-for-externs/input-data-for-externs/FC multiqc"
-directory = "./input-data-for-externs/input-data-for-externs"
-fcqc_directory = directory + "/flowcell-qc-reports"
-rawinfo_directory = directory + "/rawinfo-dirs"
-runs_directory = directory + "/Runs"
+
+paths_json = open("./paths.json", 'r')
+paths = json.load(paths_json)
+paths_json.close()
+
+fcqc_directory = paths["FC_QC_reports"]
+rawinfo_directory = paths["Raw_info"]
+runs_directory = paths["Runs"]
 
 col_numbers = 35
 
 ####################################################
+
 
 def store_row(row):
     # table 15
@@ -99,7 +98,7 @@ def store_row(row):
 
     #  table submissions
     try:
-        cursor.execute("INSERT INTO submissions (submission_id, project_id, date, datatype) VALUES ('%s', '%s', '%s', '%s');"%(row["Submission ID"], row["Project"], row["Submission Date"], row["Datatype"]))
+        cursor.execute("INSERT INTO submissions (submission_id, project_id, submission_date, datatype) VALUES ('%s', '%s', '%s', '%s');"%(row["Submission ID"], row["Project"], row["Submission Date"], row["Datatype"]))
     except Exception as e:
         if not str(e).startswith("duplicate key value violates"):
             print(e)
@@ -127,22 +126,26 @@ def store_row(row):
         # if data != None:
             # assert(len(data) == 4)
 
-        if data == None or data[0] == None or data[0] == "":
+        if (data == None or data[0] == None or data[0] == "_") and srv[1] != "":
             sql("UPDATE submissions SET srv = '%s' WHERE submission_id = '%s' ;"%(srv[1], row["Submission ID"]))
         elif data[0] != srv[1]:
             print("service data changed for submission id '%s' from '%s' to '%s'"%(row["Submission ID"], data[0], srv[1]))
 
-        if data == None or data[1] == None or data[1] == "":
-            sql("UPDATE submissions SET rg = '%s' WHERE submission_id = '%s' ;"%(rg[1], row["Submission ID"]))
-        elif data[1] != rg[1]:
-            print("ref_genome data changed for submission id '%s' from '%s' to '%s'"%(row["Submission ID"], data[1], rg[1]))
+        if (data != None and data[1] != None and rg[1] != ''):
+            if data[1] == "_":
+                sql("UPDATE submissions SET rg = '%s' WHERE submission_id = '%s' ;"%(rg[1], row["Submission ID"]))
+            elif data[1] != rg[1]:
+            # print(data)
+            # print(rg)
+            # else :
+                print("ref_genome data changed for submission id '%s' from '%s' to '%s'"%(row["Submission ID"], data[1], rg[1]))
 
-        if data == None or data[2] == None or data[2] == "":
+        if (data == None or data[2] == None or data[2] == "_") and cov[1] != "":
             sql("UPDATE submissions SET cov = '%s' WHERE submission_id = '%s' ;"%(cov[1], row["Submission ID"]))
         elif data[2] != cov[1]:
             print("coverage data changed for submission id '%s' from '%s' to '%s'"%(row["Submission ID"], data[2], cov[1]))
 
-        if data == None or data[3] == None or data[3] == "":
+        if (data == None or data[3] == None or data[3] == "_") and anl[1] != "":
             sql("UPDATE submissions SET anl = '%s' WHERE submission_id = '%s' ;"%(anl[1], row["Submission ID"]))
         elif data[3] != anl[1]:
             print("analysis data changed for submission id '%s' from '%s' to '%s'"%(row["Submission ID"], data[3], anl[1]))
@@ -152,19 +155,19 @@ def store_row(row):
             # sql("UPDATE submissions SET ")
             # sql("INSERT INTO submissions (submission_id, srv, rg, cov, anl) VALUES ('%s', '%s', '%s', '%s', '%s');"%(row["Submission ID"], srv[1], rg[1], cov[1], anl[1]))
 
-    if row["Remark"] != "":
-        sql("SELECT remark FROM submissions WHERE submission_id = '%s' ;"%(row["Submission ID"]))
-        data = cursor.fetchone()
-        if data != None:
-            assert(len(data) == 1)
-            # print(data)
-            if data[0] != None and str(data[0]) != 'None':
-                if data[0] != row["Remark"]:
-                    print("remark changed for submission '%s' from '%s' to '%s'"%(row["Submission ID"], data[0], row["Remark"]))
-            elif row["Remark"] != "":
-                sql("UPDATE submissions SET remark = '%s' WHERE submission_id = '%s' ;"%(data[0], row["Submission ID"]))
-        else:
-            sql("UPDATE submissions SET remark = '%s' WHERE submission_id = '%s' ;"%(row["Remark"], row["Submission ID"]))
+    # if row["Remark"] != "":
+    #     sql("SELECT remark FROM submissions WHERE submission_id = '%s' ;"%(row["Submission ID"]))
+    #     data = cursor.fetchone()
+    #     if data != None:
+    #         assert(len(data) == 1)
+    #         # print(data)
+    #         if data[0] != None and str(data[0]) != 'None':
+    #             if data[0] != row["Remark"]:
+    #                 print("remark changed for submission '%s' from '%s' to '%s'"%(row["Submission ID"], data[0], row["Remark"]))
+    #         elif row["Remark"] != "":
+    #             sql("UPDATE submissions SET remark = '%s' WHERE submission_id = '%s' ;"%(data[0], row["Submission ID"]))
+    #     else:
+    #         sql("UPDATE submissions SET remark = '%s' WHERE submission_id = '%s' ;"%(row["Remark"], row["Submission ID"]))
 
     # table fc
 
@@ -245,27 +248,27 @@ def store_row(row):
         print("pool lane data fetch failed")
 
     # table samples
-    sql("SELECT pooling_id, sample_name, submission_id, qpcr, fragment, labchip_conc, well, pre_norm_well, i5_id, i7_id, data_sample, urgent, lib_received, sample_qc, lib_qc\
+    sql("SELECT pooling_id, sample_name, submission_id, qpcr, fragment, labchip_conc, well, pre_norm_well, i5_id, i7_id, data_sample, urgent, remark, lib_received, sample_qc, lib_qc\
      FROM samples WHERE sample_id = '%s' AND fc_id = '%s';"%(row["Sample Name"], row["FC"]))
     data = cursor.fetchone()
     if data == None:
-        sql("INSERT INTO samples (sample_id, pooling_id, fc_id, sample_name, submission_id, fragment, well, pre_norm_well, i5_id, i7_id, data_sample, urgent, lib_received, sample_qc, lib_qc)\
-        VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s' );"%(row["Sample Name"], row["Pooling ID"], row["FC"], row["Original Sample Name"], row["Submission ID"], row["Fragment size (bp)"], row["Well"], row["Pre-Norm Well"], row["INDEX_I5_ID"], row["INDEX_I7_ID"], row["Data_Sample_Status"],
-                                                                                                         row["Urgency"], row["Libaries and info received date"], row["Sample QC P/F"], row["Lib QC P/F"]))
+        sql("INSERT INTO samples (sample_id, pooling_id, fc_id, sample_name, submission_id, fragment, well, pre_norm_well, i5_id, i7_id, data_sample, urgent, remark, lib_received, sample_qc, lib_qc)\
+        VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s', '%s' );"%(row["Sample Name"], row["Pooling ID"], row["FC"], row["Original Sample Name"], row["Submission ID"], row["Fragment size (bp)"], row["Well"], row["Pre-Norm Well"], row["INDEX_I5_ID"], row["INDEX_I7_ID"], row["Data_Sample_Status"],
+                                                                                                         row["Urgency"], row["Remark"], row["Libaries and info received date"], row["Sample QC P/F"], row["Lib QC P/F"]))
     else:
-        assert(len(data) == 15)
+        assert(len(data) == 16)
         if data[0] != row["Pooling ID"]:
             print("Pooling ID data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[0], row["Pooling ID"]))
         if data[1] != row["Original Sample Name"]:
             print("Original Sample Name data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[1], row["Original Sample Name"]))
         if data[2] != row["Submission ID"]:
             print("Submission ID data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[2], row["Submission ID"]))
-        # if float(data[3]) != float(row["QPCR Conc. (nM) / iseq output"]):
-        #     print("QPCR Conc. (nM) / iseq output data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[3], row["QPCR Conc. (nM) / iseq output"]))
+        if float(data[3]) != float(row["QPCR Conc. (nM) / iseq output"]):
+            print("QPCR Conc. (nM) / iseq output data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[3], row["QPCR Conc. (nM) / iseq output"]))
         if int(data[4]) != int(row["Fragment size (bp)"]):
             print("Fragment size (bp) data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[4], row["Fragment size (bp)"]))
-        # if float(data[5]) != float(row["LabChip/Bioanalyzer Conc. (nM)"]):
-        #     print("LabChip/Bioanalyzer Conc. (nM) data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[5], row["LabChip/Bioanalyzer Conc. (nM)"]))
+        if float(data[5]) != float(row["LabChip/Bioanalyzer Conc. (nM)"]):
+            print("LabChip/Bioanalyzer Conc. (nM) data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[5], row["LabChip/Bioanalyzer Conc. (nM)"]))
         if data[6] != row["Well"]:
             print("Well data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[6], row["Well"]))
         if data[7] != row["Pre-Norm Well"]:
@@ -278,12 +281,14 @@ def store_row(row):
             print("Data_Sample_status data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[10], row["Data_Sample_status"]))
         if data[11] != row["Urgency"]:
             print("Urgency data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[11], row["Urgency"]))
-        if data[12] != datetime.datetime.strptime(row["Libaries and info received date"], "%Y%m%d").date():
-            print("Libaries and info received date data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[12], row["Libaries and info received date"]))
-        if data[13] != row["Sample QC P/F"]:
-            print("Sample QC P/F data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[13], row["Sample QC P/F"]))
-        if data[14] != row["Lib QC P/F"]:
-            print("Lib QC P/F data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[14], row["Lib QC P/F"]))
+        if data[12] != row["Remark"]:
+            print("Remark data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[12], row["Remark"]))        
+        if data[13] != datetime.datetime.strptime(row["Libaries and info received date"], "%Y%m%d").date():
+            print("Libaries and info received date data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[13], row["Libaries and info received date"]))
+        if data[14] != row["Sample QC P/F"]:
+            print("Sample QC P/F data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[14], row["Sample QC P/F"]))
+        if data[15] != row["Lib QC P/F"]:
+            print("Lib QC P/F data changed for sample '%s' and fc '%s' from '%s' to '%s'"%(row["Sample Name"], row["FC"], data[15], row["Lib QC P/F"]))
 
     if row["QPCR Conc. (nM) / iseq output"] != "":
         sql("UPDATE samples SET qpcr = '%s' WHERE sample_id = '%s' AND fc_id = '%s';"%(row["QPCR Conc. (nM) / iseq output"], row["Sample Name"], row["FC"]))
@@ -299,13 +304,13 @@ def store_row(row):
 
 def store_fc(fc):
     files = os.listdir(runs_directory)
-    for file_name in files:
+    for file_name in files: ########################
         tokens = file_name.split("_")
         assert(len(tokens) == 4)
         if tokens[-1][1:] == fc:
             raw_info_filename = tokens[0]
             sequencer = tokens[1]
-            run_id = tokens[2]
+            # run_id = tokens[2] ########################
             if tokens[3][0] == "A":
                 position = True
             elif tokens[3][0] == "B":
@@ -320,8 +325,8 @@ def store_fc(fc):
     # Parse the raw.info file
     raw_info_file_path = os.path.join(rawinfo_directory, raw_info_filename)
     if os.path.exists(raw_info_file_path):
-        print(f"Parsing '{raw_info_filename}' for '{html_file_path}'...")
-        table = []
+        print(str(datetime.datetime.now()).split(".")[0], f" : Parsing '{raw_info_filename}' for '{fc}'...")
+        # table = []
         # Open the raw.info file and read its content
         with open(raw_info_file_path + "/raw.info", "r") as raw_info_file:
             fields = raw_info_file.readline().rstrip('\n').split('\t')
@@ -342,6 +347,9 @@ def store_fc(fc):
                     row["PI"] = tokens[0]
                     row["Submission Date"] = datetime.datetime.strptime('20' + tokens[-3], '%Y%m%d').date()
                     row["Datatype"] = tokens[-2]
+                    if row["Pre-Norm Well"] == "":
+                        row["Pre-Norm Well"] = "_"
+                    
                     row.pop("Submission ID", None)
                     row.pop("Run Duration (H:M)", None)
                     row.pop("Data Update Contacts", None)
@@ -369,6 +377,9 @@ def store_fc(fc):
                     else:
                         row["Urgency"] = False
                     
+                    if row["Data_Sample_Status"] == "":
+                        row["Data_Sample_Status"] = "New"
+
                     if row["Sample QC P/F"] == "P":
                         row["Sample QC P/F"] = True
                     else:
@@ -384,44 +395,74 @@ def store_fc(fc):
 
 
     else:
-      print("No raw info file corresponding date " + date + "for fc " + fc)
+      print(datetime.datetime.now().slice(".")[0], " : No raw info file corresponding date " + raw_info_file_path + "for fc " + fc)
       exit(1)
 
 
 
 ###############################################################################
-# Get the list of HTML files in the directory
-subdirectories = [entry.name for entry in os.scandir(fcqc_directory) if entry.is_dir()]
 
-for dir in subdirectories:
-  # print(fc)
-  subdir = fcqc_directory + "/" + dir
-  html_files = glob.glob(os.path.join(subdir, "*.html"))
-
-
-  if html_files:
-      print(f"Found {len(html_files)} HTML file(s) generated.")
-
-      for html_file_path in html_files:
-        print(html_file_path)
-        fc = html_file_path.split("/")[-1]
-
+def store_multiqc_data(fc):
+    fc_data_folder = fcqc_directory + "/" + fc + "/" + fc + "_data"
+    
+    if os.path.exists(fc_data_folder):
+        multiqc_json_path = os.path.join(fc_data_folder, "multiqc_data.json")
         
+        if os.path.exists(multiqc_json_path):
+            with open(multiqc_json_path, "r") as json_file:
+                multiqc_data = json.load(json_file)
+                if "report_saved_raw_data" in multiqc_data:
+                    if "multiqc_bcl2fastq_bysample" in multiqc_data["report_saved_raw_data"]:
+                        dict = multiqc_data["report_saved_raw_data"]["multiqc_bcl2fastq_bysample"]
+                        for sample in dict:
+                            mean_qscore = dict[sample]["mean_qscore"]
+                            yieldQ30 = dict[sample]["yieldQ30"]
+                            sql("UPDATE samples SET mean_qscore = '%s', yieldQ30 = '%s' WHERE sample_id = '%s' AND fc_id = '%s';"%(mean_qscore, yieldQ30, sample, fc))
+                        
+                        return 0
+                    else:
+                        print(datetime.datetime.now().slice(".")[0], " : 'multiqc_bcl2fastq_bysample' not found in multiqc_data['report_saved_raw_data'] for fc " + fc)
+                else:
+                    print(datetime.datetime.now().slice(".")[0], " : 'report_saved_raw_data' not found in multiqc_data for fc " + fc)
 
-        store_fc(fc.split(".")[0])
-
-        print("Data stored in the database.")
-
-        # Move the raw.info file to a different directory (optional)
-        # processed_directory = "processed"
-        # processed_raw_info_file_path = os.path.join(processed_directory, raw_info_filename)
-        # os.makedirs(processed_directory, exist_ok=True)
-        # shutil.move(raw_info_file_path, processed_raw_info_file_path)
-
-        # print(f"'{raw_info_filename}' moved to '{processed_directory}'.")
-  else:
-      print("No HTML files found in the directory.")
+                
+        else:
+            print(datetime.datetime.now().slice(".")[0], " : MultiQC data JSON file not found for fc " + fc)
+            return None
+    else:
+        print(datetime.datetime.now().slice(".")[0], " : Folder {}_data not found.".format(fc))
+        return None
 
 
 
+def main():
+    FC = dict()
+    subdirectories = [entry.name for entry in os.scandir(fcqc_directory) if entry.is_dir()]
 
+    for dir in subdirectories:
+        subdir = fcqc_directory + "/" + dir
+        html_files = glob.glob(os.path.join(subdir, "*.html"))
+        if html_files:
+            for html_file_path in html_files:
+                fc = html_file_path.split("/")[-1]
+                FC[fc.split(".")[0]] = html_file_path
+
+    sql("SELECT fc_id FROM flowcell;")
+    data = cursor.fetchall()
+
+    demultiplexed_FC = set()
+    for row in data:
+        demultiplexed_FC.add(row[0])
+
+    for fc in FC:
+        if fc not in demultiplexed_FC:
+            print(str(datetime.datetime.now()).split(".")[0], " : Data storing for fc" + fc)
+            store_fc(fc)
+            store_multiqc_data(fc)
+            print(str(datetime.datetime.now()).split(".")[0], " : Data stored for fc" + fc)
+    
+    return 0
+
+
+
+main()
