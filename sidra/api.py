@@ -48,65 +48,6 @@ def hello():
     return 'HELLO'
 
 
-@app.route('/type0')
-def type0():
-    start = int(request.args.get('start', 0))
-    size = int(request.args.get('size', 25))
-    filters = json.loads(request.args.get('filters', '[]'))
-    global_filter = request.args.get('globalFilter', '')
-    sorting = json.loads(request.args.get('sorting', '[]'))
-
-    # Build the WHERE clause for filtering
-    where_clause = ""
-    if global_filter:
-        where_clause += f"WHERE (column1 LIKE '%{global_filter}%' OR column2 LIKE '%{global_filter}%' OR ...)" # Add appropriate columns
-    for filter in filters:
-        where_clause += f" AND {filter['column']} {filter['operator']} '{filter['value']}'"
-
-    # Build the ORDER BY clause for sorting
-    order_by_clause = ""
-    if sorting:
-        order_by_clause = "ORDER BY " + ", ".join([f"{sort['id']} {'DESC' if sort['desc'] else 'ASC'}" for sort in sorting])
-
-    # Execute the SQL query with pagination, filtering, and sorting
-    query = f"""
-        SELECT *
-        FROM samples AS s
-        LEFT JOIN pools AS p ON s.pooling_id = p.pooling_id
-        LEFT JOIN flowcell AS f ON s.fc_id = f.fc_id
-        LEFT JOIN submissions AS sub ON s.submission_id = sub.submission_id
-        LEFT JOIN pi_projects AS proj ON sub.project_id = proj.project_id
-        LEFT JOIN i5 AS i5 ON s.i5_id = i5.i5_id
-        LEFT JOIN i7 AS i7 ON s.i7_id = i7.i7_id
-        LEFT JOIN sequencer AS seq ON f.sequencer_id = seq.sequencer_id
-        {where_clause}
-        {order_by_clause}
-        LIMIT {size} OFFSET {start};
-    """
-    results = sql(query)
-
-    # Get the column names from the cursor description
-    columns = [desc[0] for desc in cursor.description]
-
-    # Convert the results to a list of dictionaries
-    output = []
-    for row in results:
-        row_dict = {}
-        for i, column in enumerate(columns):
-            if isinstance(row[i], datetime.date):
-                row_dict[column] = row[i].isoformat()
-            else:
-                row_dict[column] = row[i]
-        output.append(row_dict)
-    
-    # DEBUGGING< DON'T REMOVE
-    # Write the results to a JSON file
-    with open('./front-end/src/newdata/data0.json', 'w') as f:
-        json.dump(output, f, cls=JSONEncoder)
-    return jsonify(output)
-
-
-
 @app.route('/type1/<date>')
 def type1(date):
     try:
