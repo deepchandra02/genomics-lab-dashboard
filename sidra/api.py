@@ -2,36 +2,17 @@
 from flask import Flask, jsonify, request
 import datetime
 import psycopg2
-from flask_cors import CORS
 import json
 import os
-from decimal import Decimal
-
-class JSONEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, Decimal):
-            return str(obj)
-        return super(JSONEncoder, self).default(obj)
-
-
 app = Flask(__name__)   # Flask constructor
-# app.json_encoder = JSONEncoder
-CORS(app, resources={r"/*": {"origins": "*"}})
+
 conn = psycopg2.connect(database="sidra",
                         host="localhost",
-                        user="deepc",
+                        user="postgres",
                         password="mypassword",
                         port="5432")
 conn.set_session(autocommit=True)
 cursor = conn.cursor()
-
-
-
-def parseDate(date):
-    dates = date.split("-")
-    start = datetime.datetime.strptime(dates[0], '%Y%m%d').date()
-    end = datetime.datetime.strptime(dates[1], '%Y%m%d').date()
-    return start, end
 
 
 def sql(command):
@@ -41,11 +22,68 @@ def sql(command):
         return e
     return cursor.fetchall()
 
-# A decorator used to tell the application
-# which URL is associated function
-@app.route('/')      
-def hello():
-    return 'HELLO'
+def parseDate(date):
+    dates = date.split("-")
+    start = datetime.datetime.strptime(dates[0], '%Y%m%d').date()
+    end = datetime.datetime.strptime(dates[1], '%Y%m%d').date()
+    return start, end
+
+aliases = {
+    'sample_id': 's',
+    'pooling_id': 'p',
+    'fc_id': 'f',
+    'submission_id': 'sub',
+    'project_id': 'proj',
+    'i5_id': 'i5',
+    'i7_id': 'i7',
+    'sequencer_id': 'seq'
+}
+
+def resolve(column):
+    if column[-3:] == "_id":
+        return aliases[column] + "." + column
+    return column
+
+@app.route('./Pregress/refresh')
+def refresh():
+    paths_json = open("./paths.json", 'r')
+    paths = json.load(paths_json)
+    paths_json.close()
+    dir = paths["Staging"]
+
+    results = sql("SELECT sample_id, error FROM samples WHERE error != '_'")
+    if isinstance(results, list):
+        count = 0
+        for row in results:
+            path = dir + row[1]
+            if os.path.isfile(path) and os.pathgetsize(path) == 0:
+                sql("UPDATE samples SET error = '_' WHERE sample_id = '%s'"%(row[0],))
+                count += 1
+        
+        if count == 0:
+            return "No new error file resolved"
+        return str(count) + " error file(s) resolved"
+    else:
+        return "refresh failed for exception " + results
+
+@app.route('./Progress/release/',methods=['PUT'])
+def release():
+    data = request.data
+    failed = dict()
+    for element in data:
+        sample_id, fc_id = element
+        result = sql("UPDATE samples SET release_date = '%s' WHERE sample_id = '%s' AND fc_id = '%s';"%(datetime.datetime.today().date(), sample_id, fc_id))
+        if result != []:
+            failed[element] = result
+    
+    if not failed:
+        return "Released successfully"
+    
+    s = ""
+    for key in failed:
+        s += "Release failed for " + key + " for the exception " + failed[key] + "\n"
+
+    return s
 
 
 @app.route('/type0')
@@ -53,20 +91,46 @@ def type0():
     start = int(request.args.get('start', 0))
     size = int(request.args.get('size', 25))
     filters = json.loads(request.args.get('filters', '[]'))
-    global_filter = request.args.get('globalFilter', '')
+    # global_filter = request.args.get('globalFilter', '')
     sorting = json.loads(request.args.get('sorting', '[]'))
+    
+    print(filters)
 
+    # Multiple column sorting isn't available
+    assert(len(sorting) < 2)
+
+    # Hardcoding to resolve ambiguity
+    # if len(sorting) == 1: 
+    #     if sorting[0]["id"] == "submission_id":
+    #         sorting[0]["id"] = "sub.submission_id"
+    #     if sorting[0]["id"] == "submission_id":
+    #         sorting[0]["id"] = "sub.submission_id"
+        
     # Build the WHERE clause for filtering
-    where_clause = ""
-    if global_filter:
-        where_clause += f"WHERE (column1 LIKE '%{global_filter}%' OR column2 LIKE '%{global_filter}%' OR ...)" # Add appropriate columns
+    where_clause = "WHERE"
+    # if global_filter:
+    #     where_clause += f"WHERE (column1 LIKE '%{global_filter}%' OR column2 LIKE '%{global_filter}%' OR ...)" # Add appropriate columns
     for filter in filters:
-        where_clause += f" AND {filter['column']} {filter['operator']} '{filter['value']}'"
+        value = filter['value']
+
+        if isinstance(value, str):
+            where_clause += f" {resolve(filter['id'])} = '{value}'"
+        elif isinstance(value, list):
+            where_clause += f" {resolve(filter['id'])} IN {tuple(value)}"
+        else:
+            return "value type inappropriate in filter"
+        where_clause += " AND "
+
+    where_clause = where_clause[:-5]
+
+    print(where_clause)
+
+    # where_clause = "WHERE f.fc_id = 'dummy search'"
 
     # Build the ORDER BY clause for sorting
     order_by_clause = ""
     if sorting:
-        order_by_clause = "ORDER BY " + ", ".join([f"{sort['id']} {'DESC' if sort['desc'] else 'ASC'}" for sort in sorting])
+        order_by_clause = "ORDER BY " + ", ".join([f"{resolve(sort['id'])} {'DESC' if sort['desc'] else 'ASC'}" for sort in sorting])
 
     # Execute the SQL query with pagination, filtering, and sorting
     query = f"""
@@ -85,7 +149,11 @@ def type0():
     """
     results = sql(query)
 
+    print(query)
+    print(results)
+
     # Get the column names from the cursor description
+    # return cursor.description
     columns = [desc[0] for desc in cursor.description]
 
     # Convert the results to a list of dictionaries
@@ -101,199 +169,123 @@ def type0():
     
     # DEBUGGING< DON'T REMOVE
     # Write the results to a JSON file
-    with open('./front-end/src/newdata/data0.json', 'w') as f:
-        json.dump(output, f, cls=JSONEncoder)
+    # with open('./front-end/src/newdata/data0.json', 'w') as f:
+    #     json.dump(output, f, cls=JSONEncoder)
     return jsonify(output)
 
 
 
-@app.route('/type1/<date>')
-def type1(date):
+@app.route('/data1/<date>')
+def data1(date):
     try:
         start, end = parseDate(date)
     except:
         return "format should be 'yyyymmdd-yyyymmdd'"
 
-    results = sql("SELECT\
-                    TO_CHAR(demultiplex_date, 'YYYY-MM-DD'),\
-                    COUNT(DISTINCT samples.sample_id),\
-                    COUNT(DISTINCT samples.fc_id),\
-                    SUM(COUNT(DISTINCT samples.sample_id)) OVER (ORDER BY demultiplex_date) ::integer,\
-                    SUM(COUNT(DISTINCT samples.fc_id)) OVER (ORDER BY demultiplex_date) ::integer\
-                FROM\
-                    flowcell\
-                INNER JOIN\
-                    samples ON flowcell.fc_id = samples.fc_id\
-                WHERE\
-                    demultiplex_date >= '%s'::DATE AND demultiplex_date <= '%s'::DATE\
-                GROUP BY\
-                    demultiplex_date\
-                ORDER BY\
-                    demultiplex_date;"%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
-
-    
-    output = [{"date": row[0], "Samples": row[1], "Flowcells":row[2], "SamplesTotal": row[3], "FlowcellsTotal": row[4]} for row in results]
-    return jsonify(output)
-
-
-@app.route('/type2a/<date>')
-def type2a(date):
     try:
-        start, end = parseDate(date)
-    except:
-        return "format should be 'yyyymmdd-yyyymmdd'"
+        # Execute the SQL query
+        cursor.execute("SELECT\
+                            TO_CHAR(demultiplex_date, 'MM-DD-YYYY') AS date,\
+                            COUNT(DISTINCT samples.sample_id) AS Samples,\
+                            COUNT(DISTINCT samples.fc_id) AS Flowcells,\
+                            SUM(COUNT(DISTINCT samples.sample_id)) OVER (ORDER BY demultiplex_date) AS SamplesTotal,\
+                            SUM(COUNT(DISTINCT samples.fc_id)) OVER (ORDER BY demultiplex_date) AS FlowcellsTotal\
+                        FROM\
+                            flowcell\
+                        INNER JOIN\
+                            samples ON flowcell.fc_id = samples.fc_id\
+                        WHERE\
+                            demultiplex_date >= '%s'::DATE AND demultiplex_date <= '%s'::DATE\
+                        GROUP BY\
+                            demultiplex_date\
+                        ORDER BY\
+                            demultiplex_date;"%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
     
-    results = sql("""
-        SELECT pi, data_sample, COUNT(*) as quantity
-        FROM samples
-        INNER JOIN submissions ON samples.submission_id = submissions.submission_id
-        INNER JOIN pi_projects ON submissions.project_id = pi_projects.project_id
-        INNER JOIN flowcell ON samples.fc_id = flowcell.fc_id
-        WHERE flowcell.loading_date BETWEEN '%s' AND '%s'
-        GROUP BY pi, data_sample
-        """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+                
+        # Fetch the results from the cursor
+        results = cursor.fetchall()
+
+        columns = [desc[0] for desc in cursor.description]
+
+        # Convert the results to a list of dictionaries
+        rows = []
+        for row in results:
+            row_dict = {}
+            for i, column in enumerate(columns):
+                row_dict[column] = row[i]
+            rows.append(row_dict)
         
-    # Prepare the output
-    output = []
-    for row in results:
-        pi, data_sample, quantity = row
-        # find existing entry for the PI, if it exists
-        pi_entry = next((entry for entry in output if entry["pi"] == pi), None)
-        if pi_entry is None:
-            # if no existing entry, create a new one
-            pi_entry = {"pi": pi, "New": 0, "Top-up": 0, "Repeat": 0}
-            output.append(pi_entry)
-        # add the quantity to the appropriate field
-        pi_entry[data_sample] = quantity
+        return jsonify(rows)
     
-    return jsonify(output)
+    except Exception as e:
+        return str(e)
 
-@app.route('/type2b/<date>')
-def type2b(date):
+
+@app.route('/data2a/<date>')
+def data2a(date):
     try:
         start, end = parseDate(date)
     except:
         return "format should be 'yyyymmdd-yyyymmdd'"
 
-    results = sql("""
-        SELECT pi, pi_projects.project_id, COUNT(*) as quantity
-        FROM samples
-        INNER JOIN submissions ON samples.submission_id = submissions.submission_id
-        INNER JOIN pi_projects ON submissions.project_id = pi_projects.project_id
-        INNER JOIN flowcell ON samples.fc_id = flowcell.fc_id
-        WHERE flowcell.loading_date BETWEEN '%s' AND '%s'
-        GROUP BY pi, pi_projects.project_id
-        """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
-
-    # Prepare the output
-    output = []
-    for row in results:
-        pi, project_id, quantity = row
-        # find existing entry for the PI, if it exists
-        pi_entry = next((entry for entry in output if entry["pi"] == pi), None)
-        if pi_entry is None:
-            # if no existing entry, create a new one
-            pi_entry = {"pi": pi}
-            output.append(pi_entry)
-        # add the quantity to the appropriate field
-        pi_entry[project_id] = quantity
-
-
-    return jsonify(output)
-
-
-@app.route('/type2c/<date>')
-def type2c(date):
     try:
-        start, end = parseDate(date)
-    except:
-        return "format should be 'yyyymmdd-yyyymmdd'"
-    
-    results = sql("""
-        SELECT pi, pi_projects.project_id, submissions.rg, COUNT(*) as quantity
-        FROM samples
-        INNER JOIN submissions ON samples.submission_id = submissions.submission_id
-        INNER JOIN pi_projects ON submissions.project_id = pi_projects.project_id
-        INNER JOIN flowcell ON samples.fc_id = flowcell.fc_id
-        WHERE flowcell.loading_date BETWEEN '%s' AND '%s'
-        GROUP BY pi, pi_projects.project_id, submissions.rg
-        """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+        cursor.execute("""
+                        SELECT 
+                            pi,
+                            SUM(CASE WHEN data_sample = 'New' THEN 1 ELSE 0 END) AS "New",
+                            SUM(CASE WHEN data_sample = 'Top-up' THEN 1 ELSE 0 END) AS "Top up",
+                            SUM(CASE WHEN data_sample = 'Repeat' THEN 1 ELSE 0 END) AS "Repeat"
+                        FROM
+                            pi_projects p
+                        LEFT JOIN
+                            submissions s ON p.project_id = s.project_id
+                        LEFT JOIN
+                            flowcell f ON s.submission_id = f.fc_id
+                        LEFT JOIN
+                            samples sa ON f.fc_id = sa.fc_id
+                        GROUP BY
+                            pi;
+                    """)
+    except Exception as e:
+        return str(e)
 
-    output = [{"pi": row[0], "project": row[1], "sample_count":row[3], "genome": row[2]} for row in results]
-    return jsonify(output)
-    
-
-@app.route('/type3/<date>')
-def type3(date):
-    try:
-        start, end = parseDate(date)
-    except:
-        return "format should be 'yyyymmdd-yyyymmdd'"
-    results = sql("""
-        SELECT fc_type, COUNT(*) as quantity
-        FROM flowcell
-        WHERE loading_date BETWEEN '%s' AND '%s'
-        GROUP BY fc_type
-        """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
-                    
+    # Fetch twhe results from the cursor
+    results = cursor.fetchall()
     output = [{"type": row[0], "quantity": row[1]} for row in results]
+    
     return jsonify(output)
+        
 
-@app.route('/type4/<date>')
-def type4(date):
+@app.route('/data3/<date>')
+def data3(date):
     try:
         start, end = parseDate(date)
     except:
         return "format should be 'yyyymmdd-yyyymmdd'"
 
-    results = sql("""
-        SELECT s.srv, COUNT(*) as quantity
-        FROM samples sm
-        JOIN submissions s ON sm.submission_id = s.submission_id
-        JOIN flowcell f ON sm.fc_id = f.fc_id
-        WHERE f.loading_date BETWEEN '%s' AND '%s'
-        GROUP BY s.srv
-        """ % (start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
-    
-    output = [{"type": row[0], "quantity": row[1]} for row in results]
-    return jsonify(output)
-
-@app.route('/type5/<date>')
-def type5(date):
     try:
-        start, end = parseDate(date)
-    except:
-        return "format should be 'yyyymmdd-yyyymmdd'"
+        # Execute the SQL query
+        cursor.execute("""
+                        SELECT fc_type, COUNT(*) as quantity
+                        FROM flowcell
+                        WHERE demultiplex_date BETWEEN '%s' AND '%s'
+                        GROUP BY fc_type
+                        """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+                        
+                
+        # Fetch the results from the cursor
+        results = cursor.fetchall()
+        output = [{"type": row[0], "quantity": row[1]} for row in results]
+        
+        return jsonify(output)
     
-    results = sql("""
-        SELECT f.sequencer_id, COUNT(*) as quantity
-        FROM samples sm
-        JOIN flowcell f ON sm.fc_id = f.fc_id
-        WHERE f.loading_date BETWEEN '%s' AND '%s'
-        GROUP BY f.sequencer_id
-        """ % (start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
-            
-    output = [{"type": row[0], "quantity": row[1]} for row in results]
-    return jsonify(output)
-    
-@app.route('/type6/<date>')
-def type6(date):
-    try:
-        start, end = parseDate(date)
-    except:
-        return "format should be 'yyyymmdd-yyyymmdd'"
+    except Exception as e:
+        return str(e)
 
-    results = sql("""
-        SELECT s.rg, COUNT(*) as quantity
-        FROM samples sm
-        JOIN submissions s ON sm.submission_id = s.submission_id
-        JOIN flowcell f ON sm.fc_id = f.fc_id
-        WHERE f.loading_date BETWEEN '%s' AND '%s'
-        GROUP BY s.rg
-        """ % (start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
-    
-    output = [{"type": row[0], "quantity": row[1]} for row in results]
-    return jsonify(output)
+
+
+    # return "Data is requested for dates from " + str(start) + " to " + str(end)
+
 
 
 

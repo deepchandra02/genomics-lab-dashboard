@@ -1,8 +1,13 @@
 import psycopg2
 import os
 import datetime
+import json
 
-dir = "/home/zer0/container/genomics-lab-dashboard/database/input-data-for-externs/input-data-for-externs/staging-dirs/"
+paths_json = open("./paths.json", 'r')
+paths = json.load(paths_json)
+paths_json.close()
+
+dir = paths["Staging"]
 
 
 conn = psycopg2.connect(database="sidra",
@@ -25,8 +30,8 @@ def sql(command):
     return 0
 
 
-# Function to list non-empty files in the 'jobs' subfolder
-def list_non_empty_files(directory):
+# Function to list files in the 'jobs' subfolder
+def list_files(directory):
     jobs_directory = os.path.join(directory, 'jobs')
     
     # Check if the 'jobs' subfolder exists
@@ -37,13 +42,13 @@ def list_non_empty_files(directory):
     job_files = os.listdir(jobs_directory)
 
     # Filter and keep only non-empty files
-    non_empty_files = []
+    files = []
     for file in job_files:
         file_path = os.path.join(jobs_directory, file)
         if os.path.isfile(file_path):
-            non_empty_files.append(file)
+            files.append(file)
 
-    return non_empty_files
+    return files
 
 # Main function to traverse through the subdirectories
 def main():
@@ -51,11 +56,11 @@ def main():
     # Get a list of all subdirectories in the base directory 
     subdirectories = [entry.name for entry in os.scandir(dir) if entry.is_dir()]
 
-    # Traverse through each subdirectory and list non-empty files in the 'jobs' subfolder
+    # Traverse through each subdirectory and list files in the 'jobs' subfolder
     for subdirectory in subdirectories:
         subdirectory_path = os.path.join(dir, subdirectory)
         # print(subdirectory_path)
-        files = list_non_empty_files(subdirectory_path)
+        files = list_files(subdirectory_path)
 
         # Print the results for each subdirectory
         if files:
@@ -69,13 +74,13 @@ def main():
                 filepath = subdirectory_path + "/jobs/" + file
 
                 if os.path.getsize(filepath) > 0:
-                    # sql("UPDATE samples SET error = '%s', stage_date = '%s' WHERE sample_id = '%s';"%(filepath, date, sample))
-                    print(f" - Error in {subdirectory + '/jobs/' + file} ")
+                    sql("UPDATE samples SET error = '%s', stage_date = '%s' WHERE sample_id = '%s' AND stage_date != NULL;"%(subdirectory + '/jobs/' + file, date, sample))
+                    # print(filepath)
+                    # print(f" - Error in {subdirectory + '/jobs/' + file} ")
                 else:
-                    # sql("UPDATE samples SET stage_date = '%s' WHERE sample_id = '%s';"%(date, sample))
-                    print(f" - No Error in {subdirectory + '/jobs/' + file} ")
+                    sql("UPDATE samples SET stage_date = '%s' WHERE sample_id = '%s' AND stage_date != NULL;"%(date, sample))
+                    # print(f" - No Error in {subdirectory + '/jobs/' + file} ")
         else:
-            print(f"No non-empty files found in '{subdirectory}/jobs'.")
+            print(datetime.datetime.now().slice(".")[0], f" : No files found in '{subdirectory}/jobs'.")
 
 main()
-

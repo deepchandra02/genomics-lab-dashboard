@@ -1,24 +1,17 @@
 import psycopg2
-import sys
-
-
-# original_stdout = sys.stdout
-# sys.stdout = open("log.txt", "a")
 
 conn = psycopg2.connect(database="sidra",
                         host="localhost",
-                        user="deepc",
+                        user="postgres",
                         password="mypassword",
                         port="5432")
-# conn.autocommit = True
+
 conn.set_session(autocommit=True)
 cursor = conn.cursor()
 
 def sql(command):
     try:
         cursor.execute(command)
-        # print("Successfully Executed\n")
-        # print(command)
     except Exception as e:
         print("Failed to Execute\n")
         print(command)
@@ -53,7 +46,7 @@ sql("CREATE TABLE sequencer (\
 sql("CREATE TABLE submissions (\
       submission_id   VARCHAR(64) PRIMARY KEY,\
       project_id      VARCHAR(32) REFERENCES pi_projects (project_id),\
-      date            DATE NOT NULL CHECK (date <= current_date),\
+      submission_date DATE NOT NULL CHECK (submission_date <= current_date),\
       cov             VARCHAR(16) DEFAULT '_',\
       srv             VARCHAR(16) DEFAULT '_',\
       rg              VARCHAR(16) DEFAULT '_',\
@@ -71,6 +64,7 @@ sql("CREATE TABLE flowcell (\
       demultiplex_date DATE    NOT NULL CHECK (demultiplex_date <= current_date),\
       stage_date       DATE    DEFAULT NULL CHECK (stage_date <= current_date),\
       process_date     DATE    DEFAULT NULL CHECK (process_date <= current_date),\
+      report_dir      VARCHAR(64) DEFAULT '_',\
       order_no        VARCHAR(32) NOT NULL CHECK (char_length(order_no) > 0),\
       sequencer_id    VARCHAR(16) REFERENCES sequencer (sequencer_id),\
       run_duration    SMALLINT CHECK ((run_duration ISNULL) OR (run_duration > 0)) DEFAULT NULL,\
@@ -112,10 +106,12 @@ sql("CREATE TABLE samples (\
       sample_qc       BOOLEAN NOT NULL DEFAULT FALSE,\
       lib_qc          BOOLEAN NOT NULL DEFAULT FALSE,\
       error           VARCHAR(64) NOT NULL DEFAULT '_',\
-      stage_date       DATE    DEFAULT NULL CHECK (stage_date <= current_date),\
-      merged          BOOLEAN DEFAULT FALSE,\
-      lane            BOOLEAN DEFAULT FALSE,\
+      merged_fastq    BOOLEAN DEFAULT FALSE,\
+      lane_fastq      BOOLEAN DEFAULT FALSE,\
+      release_date    DATE DEFAULT NULL,\
+      mean_qscore     NUMERIC(5,3) DEFAULT NULL,\
+      yieldQ30        BIGINT DEFAULT NULL,\
       PRIMARY KEY (sample_id, fc_id)\
   );")
 
-conn.close()
+# conn.close()

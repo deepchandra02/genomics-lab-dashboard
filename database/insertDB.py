@@ -1,5 +1,5 @@
 import psycopg2
-import sys
+import json
 import os
 import glob
 import datetime
@@ -11,21 +11,16 @@ import datetime
 
 conn = psycopg2.connect(database="sidra",
                         host="localhost",
-                        user="deepc",
+                        user="postgres",
                         password="mypassword",
                         port="5432")
 # conn.autocommit = True
 conn.set_session(autocommit=True)
 cursor = conn.cursor()
 
-
 def sql(command):
     try:
         cursor.execute(command)
-        # print("Successfully Executed\n")
-        # print(command)
-        # conn.commit()
-        # conn.close()
     except Exception as e:
         print("Failed to Execute\n")
         print(command)
@@ -35,11 +30,14 @@ def sql(command):
 
 
 # Set up the paths
-directory_path = "./input-data-for-externs/FC multiqc"
-directory = "./input-data-for-externs"
-fcqc_directory = directory + "/flowcell-qc-reports"
-rawinfo_directory = directory + "/rawinfo-dirs"
-runs_directory = directory + "/Runs"
+
+paths_json = open("./paths.json", 'r')
+paths = json.load(paths_json)
+paths_json.close()
+
+fcqc_directory = paths["FC_QC_reports"]
+rawinfo_directory = paths["Raw_info"]
+runs_directory = paths["Runs"]
 
 col_numbers = 35
 
@@ -100,7 +98,7 @@ def store_row(row):
 
     #  table submissions
     try:
-        cursor.execute("INSERT INTO submissions (submission_id, project_id, date, datatype) VALUES ('%s', '%s', '%s', '%s');"%(row["Submission ID"], row["Project"], row["Submission Date"], row["Datatype"]))
+        cursor.execute("INSERT INTO submissions (submission_id, project_id, submission_date, datatype) VALUES ('%s', '%s', '%s', '%s');"%(row["Submission ID"], row["Project"], row["Submission Date"], row["Datatype"]))
     except Exception as e:
         if not str(e).startswith("duplicate key value violates"):
             print(e)
@@ -133,10 +131,14 @@ def store_row(row):
         elif data[0] != srv[1]:
             print("service data changed for submission id '%s' from '%s' to '%s'"%(row["Submission ID"], data[0], srv[1]))
 
-        if (data == None or data[1] == None or data[1] == "_") and rg[1] != "":
-            sql("UPDATE submissions SET rg = '%s' WHERE submission_id = '%s' ;"%(rg[1], row["Submission ID"]))
-        elif data[1] != rg[1]:
-            print("ref_genome data changed for submission id '%s' from '%s' to '%s'"%(row["Submission ID"], data[1], rg[1]))
+        if (data != None and data[1] != None and rg[1] != ''):
+            if data[1] == "_":
+                sql("UPDATE submissions SET rg = '%s' WHERE submission_id = '%s' ;"%(rg[1], row["Submission ID"]))
+            elif data[1] != rg[1]:
+            # print(data)
+            # print(rg)
+            # else :
+                print("ref_genome data changed for submission id '%s' from '%s' to '%s'"%(row["Submission ID"], data[1], rg[1]))
 
         if (data == None or data[2] == None or data[2] == "_") and cov[1] != "":
             sql("UPDATE submissions SET cov = '%s' WHERE submission_id = '%s' ;"%(cov[1], row["Submission ID"]))
@@ -185,14 +187,8 @@ def store_row(row):
         if data != None:
             # print(data)
             assert(len(data) == 8)
-            try:
-                loading_date = datetime.datetime.strptime(row["Loading Date"], '%m/%d/%Y').date()
-            except:
-                loading_date = datetime.datetime.strptime(row["Loading Date"], '%Y-%m-%d').date()
-            try:
-                completion_date = datetime.datetime.strptime(row["Completion Date"], '%m/%d/%Y').date()
-            except:
-                completion_date = datetime.datetime.strptime(row["Completion Date"], '%Y-%m-%d').date()
+            loading_date = datetime.datetime.strptime(row["Loading Date"], '%m/%d/%Y').date()
+            completion_date = datetime.datetime.strptime(row["Completion Date"], '%m/%d/%Y').date()
             # demultiplex_date = datetime.datetime.strptime(row["Demultiplex Date", ])
             if data[0] != row["FC Type"]:
                 print("FC Type data changed for flowcell %s from %s to %s"%(row["FC"], data[0], row["FC Type"]))
@@ -308,13 +304,13 @@ def store_row(row):
 
 def store_fc(fc):
     files = os.listdir(runs_directory)
-    for file_name in files:
+    for file_name in files: ########################
         tokens = file_name.split("_")
         assert(len(tokens) == 4)
         if tokens[-1][1:] == fc:
             raw_info_filename = tokens[0]
             sequencer = tokens[1]
-            run_id = tokens[2] ########################
+            # run_id = tokens[2] ########################
             if tokens[3][0] == "A":
                 position = True
             elif tokens[3][0] == "B":
@@ -329,8 +325,8 @@ def store_fc(fc):
     # Parse the raw.info file
     raw_info_file_path = os.path.join(rawinfo_directory, raw_info_filename)
     if os.path.exists(raw_info_file_path):
-        print(datetime.datetime.now(), f" : Parsing '{raw_info_filename}' for '{fc}'...")
-        table = []
+        print(str(datetime.datetime.now()).split(".")[0], f" : Parsing '{raw_info_filename}' for '{fc}'...")
+        # table = []
         # Open the raw.info file and read its content
         with open(raw_info_file_path + "/raw.info", "r") as raw_info_file:
             fields = raw_info_file.readline().rstrip('\n').split('\t')
@@ -338,8 +334,6 @@ def store_fc(fc):
             for line in raw_info_file:
                 row = dict()
                 cells = line.split('\t')
-                if cells == ['\n']:
-                    continue
                 assert(len(cells) == col_numbers)
                 for i in range(col_numbers):
                   row[fields[i].strip()] = cells[i].strip()
@@ -353,6 +347,9 @@ def store_fc(fc):
                     row["PI"] = tokens[0]
                     row["Submission Date"] = datetime.datetime.strptime('20' + tokens[-3], '%Y%m%d').date()
                     row["Datatype"] = tokens[-2]
+                    if row["Pre-Norm Well"] == "":
+                        row["Pre-Norm Well"] = "_"
+                    
                     row.pop("Submission ID", None)
                     row.pop("Run Duration (H:M)", None)
                     row.pop("Data Update Contacts", None)
@@ -398,15 +395,48 @@ def store_fc(fc):
 
 
     else:
-      print(datetime.datetime.now(), " : No raw info file corresponding date " + raw_info_file_path + "for fc " + fc)
+      print(datetime.datetime.now().slice(".")[0], " : No raw info file corresponding date " + raw_info_file_path + "for fc " + fc)
       exit(1)
 
 
 
 ###############################################################################
-# Get the list of HTML files in the directory
+
+def store_multiqc_data(fc):
+    fc_data_folder = fcqc_directory + "/" + fc + "/" + fc + "_data"
+    
+    if os.path.exists(fc_data_folder):
+        multiqc_json_path = os.path.join(fc_data_folder, "multiqc_data.json")
+        
+        if os.path.exists(multiqc_json_path):
+            with open(multiqc_json_path, "r") as json_file:
+                multiqc_data = json.load(json_file)
+                if "report_saved_raw_data" in multiqc_data:
+                    if "multiqc_bcl2fastq_bysample" in multiqc_data["report_saved_raw_data"]:
+                        dict = multiqc_data["report_saved_raw_data"]["multiqc_bcl2fastq_bysample"]
+                        for sample in dict:
+                            mean_qscore = dict[sample]["mean_qscore"]
+                            yieldQ30 = dict[sample]["yieldQ30"]
+                            sql("UPDATE samples SET mean_qscore = '%s', yieldQ30 = '%s' WHERE sample_id = '%s' AND fc_id = '%s';"%(mean_qscore, yieldQ30, sample, fc))
+                        
+                        return 0
+                    else:
+                        print(datetime.datetime.now().slice(".")[0], " : 'multiqc_bcl2fastq_bysample' not found in multiqc_data['report_saved_raw_data'] for fc " + fc)
+                else:
+                    print(datetime.datetime.now().slice(".")[0], " : 'report_saved_raw_data' not found in multiqc_data for fc " + fc)
+
+                
+        else:
+            print(datetime.datetime.now().slice(".")[0], " : MultiQC data JSON file not found for fc " + fc)
+            return None
+    else:
+        print(datetime.datetime.now().slice(".")[0], " : Folder {}_data not found.".format(fc))
+        return None
+
+
+
 def main():
-    FC = []
+    FC = dict()
     subdirectories = [entry.name for entry in os.scandir(fcqc_directory) if entry.is_dir()]
 
     for dir in subdirectories:
@@ -414,9 +444,8 @@ def main():
         html_files = glob.glob(os.path.join(subdir, "*.html"))
         if html_files:
             for html_file_path in html_files:
-                print(datetime.datetime.now(), " : Found HTML file generated for .", html_file_path)
                 fc = html_file_path.split("/")[-1]
-                FC.append(fc.split(".")[0])
+                FC[fc.split(".")[0]] = html_file_path
 
     sql("SELECT fc_id FROM flowcell;")
     data = cursor.fetchall()
@@ -427,8 +456,10 @@ def main():
 
     for fc in FC:
         if fc not in demultiplexed_FC:
+            print(str(datetime.datetime.now()).split(".")[0], " : Data storing for fc" + fc)
             store_fc(fc)
-            print(datetime.datetime.now(), " : Data stored in the database for fc" + fc)
+            store_multiqc_data(fc)
+            print(str(datetime.datetime.now()).split(".")[0], " : Data stored for fc" + fc)
     
     return 0
 
