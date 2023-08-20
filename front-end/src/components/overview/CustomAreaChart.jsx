@@ -13,8 +13,10 @@ import {
   Flex,
   AreaChart,
   Icon,
+  NumberInput
 } from "@tremor/react";
 import {
+  DesktopComputerIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   EyeIcon,
@@ -29,7 +31,7 @@ const CustomAreaChart = (props) => {
   const selectedKpi = props.kpis[selectedIndex];
   const cumulativeSelectedKpi = props.kpis[selectedIndex + 2];
   // State to keep track of the selected view (monthly by deafult)
-  const [view, setView] = useState(3);
+  const [view, setView] = useState(1);
   // State to keep track of the window size (number of days/months etc. to display in a window)
   const [windowSize, setWindowSize] = useState(6);
   const [windowStart, setWindowStart] = useState(0); // Initial window start is 0
@@ -141,16 +143,15 @@ const CustomAreaChart = (props) => {
           </Select>
 
           <Flex className="items-center text-gray-500 hover:text-black">
-            <input
-              type="number"
-              id="windowSizeStepper"
-              className="text-center w-[4rem] h-9 p-2 border border-gray-200 shadow-tremor-input rounded-lg "
+            <NumberInput
               value={windowSize}
-              step="6"
-              min="0"
-              max={preprocessedData.length}
-              onChange={(e) => setWindowSize(parseInt(e.target.value))}
+              icon={DesktopComputerIcon}
+              step={6}
+              enableStepper={true}
+              min={0}
+              onValueChange={(val) => setWindowSize(val)}
             />
+
           </Flex>
 
           <Flex className="items-center ">

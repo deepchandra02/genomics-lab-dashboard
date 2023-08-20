@@ -84,4 +84,3 @@ def main():
             print(datetime.datetime.now().slice(".")[0], f" : No files found in '{subdirectory}/jobs'.")
 
 main()
-

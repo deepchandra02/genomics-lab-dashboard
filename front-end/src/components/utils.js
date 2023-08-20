@@ -34,8 +34,8 @@ export function preprocessData(data, period) {
 
     aggregatedData[key].Samples += item.Samples;
     aggregatedData[key].Flowcells += item.Flowcells;
-    aggregatedData[key].SamplesTotal = item.SamplesTotal; // adjust this
-    aggregatedData[key].FlowcellsTotal = item.FlowcellsTotal; // adjust this
+    aggregatedData[key].SamplesTotal = item.SamplesTotal;
+    aggregatedData[key].FlowcellsTotal = item.FlowcellsTotal;
   });
 
   return Object.values(aggregatedData);

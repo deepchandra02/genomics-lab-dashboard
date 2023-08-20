@@ -4,8 +4,9 @@ import {
   Button,
   Flex,
   Icon,
+  NumberInput
 } from "@tremor/react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
+import { ChevronLeftIcon, ChevronRightIcon, DesktopComputerIcon } from "@heroicons/react/solid";
 
 const CustomBarChart2 = (props) => {
   const [windowSize, setWindowSize] = useState(6);
@@ -91,21 +92,14 @@ const CustomBarChart2 = (props) => {
   return (
     <div className="flex flex-col space-y-2 h-full">
       <Flex className="gap-x-4 text-gray-500 hover:text-black h-[10%]" justifyContent='end' alignItems='center'>
-        <input
-          type="number"
-          id="windowSizeStepper"
-          className="text-center w-[4rem] h-9 p-2 border border-gray-200 shadow-tremor-input rounded-lg "
+        <NumberInput
+          className='max-w-[5rem]'
           value={windowSize}
-          step="6"
-          min="0"
-          max={props.data.length}
-          onChange={(e) => {
-            const newWindowSize = parseInt(e.target.value);
-            if (newWindowSize + windowStart > props.data.length) {
-              setWindowStart(props.data.length - newWindowSize);
-            }
-            setWindowSize(newWindowSize);
-          }}
+          icon={DesktopComputerIcon}
+          step={6}
+          enableStepper={true}
+          min={0}
+          onValueChange={(val) => setWindowSize(val)}
         />
       </Flex>
       <div className="mt-4 h-[85%]">
