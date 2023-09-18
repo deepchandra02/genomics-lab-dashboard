@@ -1,33 +1,42 @@
 site_name: Sidra Dashboard Documentation
-# site_url: 
 theme:
   name: material
+  logo: assets/images/logo.png
   features:
+    - navigation.tracking
     - navigation.tabs
     - navigation.sections
+    - navigation.path
+    - navigation.footer
     - toc.integrate
     - navigation.top
     - search.suggest
     - search.highlight
+    - search.share
     - content.tabs.link
-    - content.code.annotation
+    - content.code.annotate
     - content.code.copy
   language: en
   palette:
+    # Palette toggle for light mode
     - scheme: default
       toggle:
-        icon: material/toggle-switch-off-outline 
+        icon: material/brightness-7 
         name: Switch to dark mode
       primary: teal
       accent: purple 
-    - scheme: slate 
+
+    # Palette toggle for dark mode
+    - scheme: slate
       toggle:
-        icon: material/toggle-switch
-        name: Switch to light mode    
+        icon: material/brightness-4
+        name: Switch to light mode
       primary: teal
       accent: lime
 
-# plugins:
+plugins:
+  - search
+  - offline
 #   - social
 
 # extra:
@@ -49,7 +58,13 @@ markdown_extensions:
       generic: true
   - footnotes
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true 
   - pymdownx.mark
   - attr_list
   - pymdownx.emoji:

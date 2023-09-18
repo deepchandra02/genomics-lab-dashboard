@@ -71,7 +71,7 @@ sql("CREATE TABLE flowcell (\
       position        BOOLEAN NOT NULL,\
       CHECK (completion_date >= loading_date)\
   );")
-# stage_date#########################
+
 sql("CREATE TABLE pools (\
       pooling_id      VARCHAR(32) PRIMARY KEY,\
       pf_reads        VARCHAR(08) NOT NULL,\
