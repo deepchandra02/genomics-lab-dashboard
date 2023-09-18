@@ -1,26 +1,10 @@
 [
   {
-    "type": "RNAseq",
-    "quantity": 84348
+    "type": "NVSQ 1",
+    "quantity": 12473
   },
   {
-    "type": "WES",
-    "quantity": 214884
-  },
-  {
-    "type": "WGS",
-    "quantity": 147850
-  },
-  {
-    "type": "ChIPseq",
-    "quantity": 3756
-  },
-  {
-    "type": "ATACseq",
-    "quantity": 9956
-  },
-  {
-    "type": "Hi-C",
-    "quantity": 4481
+    "type": "NVSQ 2",
+    "quantity": 20000
   }
 ]

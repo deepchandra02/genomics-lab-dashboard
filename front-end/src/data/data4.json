@@ -1,18 +1,26 @@
 [
   {
-    "type": "SP",
-    "quantity": 5000
+    "type": "RNAseq",
+    "quantity": 84348
   },
   {
-    "type": "S1",
-    "quantity": 10000
+    "type": "WES",
+    "quantity": 214884
   },
   {
-    "type": "S2",
-    "quantity": 15000
+    "type": "WGS",
+    "quantity": 147850
   },
   {
-    "type": "S4",
-    "quantity": 2473
+    "type": "ChIPseq",
+    "quantity": 3756
+  },
+  {
+    "type": "ATACseq",
+    "quantity": 9956
+  },
+  {
+    "type": "Hi-C",
+    "quantity": 4481
   }
 ]
