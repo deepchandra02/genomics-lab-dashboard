@@ -190,22 +190,22 @@ def data1(date):
     except:
         return "format should be 'yyyymmdd-yyyymmdd'"
 
-    results = sql("SELECT\
-                            TO_CHAR(demultiplex_date, 'MM-DD-YYYY') AS date,\
-                            COUNT(DISTINCT samples.sample_id) AS Samples,\
-                            COUNT(DISTINCT samples.fc_id) AS Flowcells,\
-                            SUM(COUNT(DISTINCT samples.sample_id)) OVER (ORDER BY demultiplex_date) AS SamplesTotal,\
-                            SUM(COUNT(DISTINCT samples.fc_id)) OVER (ORDER BY demultiplex_date) AS FlowcellsTotal\
-                        FROM\
-                            flowcell\
-                        INNER JOIN\
-                            samples ON flowcell.fc_id = samples.fc_id\
-                        WHERE\
-                            demultiplex_date >= '%s'::DATE AND demultiplex_date <= '%s'::DATE\
-                        GROUP BY\
-                            demultiplex_date\
-                        ORDER BY\
-                            demultiplex_date;"%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+    results = sql("""SELECT
+                            TO_CHAR(demultiplex_date, 'MM-DD-YYYY') AS date,
+                            COUNT(DISTINCT samples.sample_id) AS Samples,
+                            COUNT(DISTINCT samples.fc_id) AS Flowcells,
+                            SUM(COUNT(DISTINCT samples.sample_id)) OVER (ORDER BY demultiplex_date) AS SamplesTotal,
+                            SUM(COUNT(DISTINCT samples.fc_id)) OVER (ORDER BY demultiplex_date) AS FlowcellsTotal
+                        FROM
+                            flowcell
+                        INNER JOIN
+                            samples ON flowcell.fc_id = samples.fc_id
+                        WHERE
+                            demultiplex_date BETWEEN '%s' AND '%s'
+                        GROUP BY
+                            demultiplex_date
+                        ORDER BY
+                            demultiplex_date;"""%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
     
                 
     return jsonify(results)
@@ -229,11 +229,11 @@ def data2a(date):
                         LEFT JOIN
                             submissions s ON p.project_id = s.project_id
                         LEFT JOIN
-                            flowcell f ON s.submission_id = f.fc_id
+                            samples sa ON s.submission_id = sa.submission_id
                         LEFT JOIN
-                            samples sa ON f.fc_id = sa.fc_id
+                            flowcell f ON s.fc_id = f.fc_id
                         WHERE
-                            demultiplex_date >= '%s'::DATE AND demultiplex_date <= '%s'::DATE
+                            f.demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY
                             pi;
                     """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
@@ -256,8 +256,10 @@ def data2b(date):
                             submissions s ON p.project_id = s.project_id
                         LEFT JOIN
                             samples sa ON s.submission_id = sa.submission_id
+                        LEFT JOIN
+                            flowcell f ON sa.fc_id = f.fc_id
                         WHERE
-                            demultiplex_date >= '%s'::DATE AND demultiplex_date <= '%s'::DATE
+                            f.demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY
                             pi, project_id;
                     """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
@@ -302,7 +304,8 @@ def data4(date):
                         SELECT srv as type, COUNT(*) as quantity
                         FROM submissions sub
                         LEFT JOIN samples s ON s.submission_id = sub.submission_id
-                        WHERE demultiplex_date BETWEEN '%s' AND '%s'
+                        LEFT JOIN flowcell f ON f.fc_id = s.fc_id
+                        WHERE f.demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY srv
                         """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
                     
@@ -336,7 +339,8 @@ def data6(date):
                         SELECT rg as type, COUNT(*) as quantity
                         FROM submissions sub
                         LEFT JOIN samples s ON s.submission_id = sub.fc_id
-                        WHERE demultiplex_date BETWEEN '%s' AND '%s'
+                        LEFT JOIN flowcell f ON f.fc_id = s.fc_id
+                        WHERE f.demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY rg
                         """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
                     
