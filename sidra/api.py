@@ -231,7 +231,7 @@ def data2a(date):
                         LEFT JOIN
                             samples sa ON s.submission_id = sa.submission_id
                         LEFT JOIN
-                            flowcell f ON s.fc_id = f.fc_id
+                            flowcell f ON sa.fc_id = f.fc_id
                         WHERE
                             f.demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY
@@ -249,7 +249,7 @@ def data2b(date):
 
     results = sql("""
                         SELECT 
-                            pi, project_id, COUNT(*)
+                            p.pi, p.project_id, COUNT(*)
                         FROM
                             pi_projects p
                         LEFT JOIN
@@ -261,7 +261,7 @@ def data2b(date):
                         WHERE
                             f.demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY
-                            pi, project_id;
+                            p.pi, p.project_id;
                     """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
     
     if "Exception" not in results:
@@ -272,7 +272,8 @@ def data2b(date):
                     dct[row[1]] = row[2]
                     break
             else:
-                output.append({"pi": row[0], row[1]:row[2]})
+                dct = {"pi": row[0], row[1]:row[2]}
+                output.append(dct)
         
         return jsonify(output)
     return jsonify(results)
@@ -338,7 +339,7 @@ def data6(date):
     results = sql("""
                         SELECT rg as type, COUNT(*) as quantity
                         FROM submissions sub
-                        LEFT JOIN samples s ON s.submission_id = sub.fc_id
+                        LEFT JOIN samples s ON s.submission_id = sub.submission_id
                         LEFT JOIN flowcell f ON f.fc_id = s.fc_id
                         WHERE f.demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY rg
