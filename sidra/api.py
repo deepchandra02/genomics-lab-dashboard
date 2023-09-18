@@ -243,9 +243,11 @@ def data2a(date):
                             flowcell f ON s.submission_id = f.fc_id
                         LEFT JOIN
                             samples sa ON f.fc_id = sa.fc_id
+                        WHERE
+                            demultiplex_date >= '%s'::DATE AND demultiplex_date <= '%s'::DATE
                         GROUP BY
                             pi;
-                    """)
+                    """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
     except Exception as e:
         return str(e)
 
@@ -254,7 +256,47 @@ def data2a(date):
     output = [{"type": row[0], "quantity": row[1]} for row in results]
     
     return jsonify(output)
-        
+
+@app.route('/data2b/<date>')
+def data2b(date):
+    try:
+        start, end = parseDate(date)
+    except:
+        return "format should be 'yyyymmdd-yyyymmdd'"
+
+    try:
+        cursor.execute("""
+                        SELECT 
+                            pi, project_id, COUNT(*)
+                        FROM
+                            pi_projects p
+                        LEFT JOIN
+                            submissions s ON p.project_id = s.project_id
+                        LEFT JOIN
+                            samples sa ON s.submission_id = sa.submission_id
+                        WHERE
+                            demultiplex_date >= '%s'::DATE AND demultiplex_date <= '%s'::DATE
+                        GROUP BY
+                            pi, project_id;
+                    """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+    except Exception as e:
+        return str(e)
+
+    # Fetch twhe results from the cursor
+    results = cursor.fetchall()
+
+    output = []
+    for row in results:
+        for dct in output:
+            if row[0] == dct["pi"]:
+                dct[row[1]] = row[2]
+                break
+        else:
+            dct = dict()
+            dct["pi"] = row[0]
+            dct[row[1]] = row[2] 
+    
+    return jsonify(output)        
 
 @app.route('/data3/<date>')
 def data3(date):
