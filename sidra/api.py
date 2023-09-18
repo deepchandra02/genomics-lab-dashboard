@@ -52,7 +52,7 @@ def resolve(column):
         return aliases[column] + "." + column
     return column
 
-@app.route('./Pregress/refresh')
+@app.route('/Progress/refresh')
 def refresh():
     paths_json = open("./paths.json", 'r')
     paths = json.load(paths_json)
@@ -74,7 +74,7 @@ def refresh():
     else:
         return "refresh failed for exception " + results
 
-@app.route('./Progress/release/',methods=['PUT'])
+@app.route('/Progress/release/',methods=['PUT'])
 def release():
     data = request.data
     failed = dict()
