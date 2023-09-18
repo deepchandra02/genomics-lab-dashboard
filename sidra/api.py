@@ -8,7 +8,7 @@ app = Flask(__name__)   # Flask constructor
 
 conn = psycopg2.connect(database="sidra",
                         host="localhost",
-                        user="postgres",
+                        user="deepc",
                         password="mypassword",
                         port="5432")
 conn.set_session(autocommit=True)
@@ -19,8 +19,16 @@ def sql(command):
     try:
         cursor.execute(command)
     except Exception as e:
-        return e
-    return cursor.fetchall()
+        return {"Exception" : str(e)}
+    results =  cursor.fetchall()
+    columns = [desc[0] for desc in cursor.description]
+    rows = []
+    for row in results:
+        row_dict = {}
+        for i, column in enumerate(columns):
+            row_dict[column] = row[i]
+        rows.append(row_dict)
+    return rows    
 
 def parseDate(date):
     dates = date.split("-")
@@ -154,24 +162,24 @@ def type0():
 
     # Get the column names from the cursor description
     # return cursor.description
-    columns = [desc[0] for desc in cursor.description]
+    # columns = [desc[0] for desc in cursor.description]
 
     # Convert the results to a list of dictionaries
-    output = []
-    for row in results:
-        row_dict = {}
-        for i, column in enumerate(columns):
-            if isinstance(row[i], datetime.date):
-                row_dict[column] = row[i].isoformat()
-            else:
-                row_dict[column] = row[i]
-        output.append(row_dict)
+    # output = []
+    # for row in results:
+    #     row_dict = {}
+    #     for i, column in enumerate(columns):
+    #         if isinstance(row[i], datetime.date):
+    #             row_dict[column] = row[i].isoformat()
+    #         else:
+    #             row_dict[column] = row[i]
+    #     output.append(row_dict)
     
     # DEBUGGING< DON'T REMOVE
     # Write the results to a JSON file
     # with open('./front-end/src/newdata/data0.json', 'w') as f:
     #     json.dump(output, f, cls=JSONEncoder)
-    return jsonify(output)
+    return jsonify(results)
 
 
 
@@ -182,9 +190,7 @@ def data1(date):
     except:
         return "format should be 'yyyymmdd-yyyymmdd'"
 
-    try:
-        # Execute the SQL query
-        cursor.execute("SELECT\
+    results = sql("SELECT\
                             TO_CHAR(demultiplex_date, 'MM-DD-YYYY') AS date,\
                             COUNT(DISTINCT samples.sample_id) AS Samples,\
                             COUNT(DISTINCT samples.fc_id) AS Flowcells,\
@@ -202,23 +208,7 @@ def data1(date):
                             demultiplex_date;"%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
     
                 
-        # Fetch the results from the cursor
-        results = cursor.fetchall()
-
-        columns = [desc[0] for desc in cursor.description]
-
-        # Convert the results to a list of dictionaries
-        rows = []
-        for row in results:
-            row_dict = {}
-            for i, column in enumerate(columns):
-                row_dict[column] = row[i]
-            rows.append(row_dict)
-        
-        return jsonify(rows)
-    
-    except Exception as e:
-        return str(e)
+    return jsonify(results)
 
 
 @app.route('/data2a/<date>')
@@ -228,8 +218,7 @@ def data2a(date):
     except:
         return "format should be 'yyyymmdd-yyyymmdd'"
 
-    try:
-        cursor.execute("""
+    results = sql("""
                         SELECT 
                             pi,
                             SUM(CASE WHEN data_sample = 'New' THEN 1 ELSE 0 END) AS "New",
@@ -248,14 +237,8 @@ def data2a(date):
                         GROUP BY
                             pi;
                     """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
-    except Exception as e:
-        return str(e)
-
-    # Fetch twhe results from the cursor
-    results = cursor.fetchall()
-    output = [{"type": row[0], "quantity": row[1]} for row in results]
     
-    return jsonify(output)
+    return jsonify(results)
 
 @app.route('/data2b/<date>')
 def data2b(date):
@@ -264,8 +247,7 @@ def data2b(date):
     except:
         return "format should be 'yyyymmdd-yyyymmdd'"
 
-    try:
-        cursor.execute("""
+    results = sql("""
                         SELECT 
                             pi, project_id, COUNT(*)
                         FROM
@@ -279,24 +261,19 @@ def data2b(date):
                         GROUP BY
                             pi, project_id;
                     """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
-    except Exception as e:
-        return str(e)
-
-    # Fetch twhe results from the cursor
-    results = cursor.fetchall()
-
-    output = []
-    for row in results:
-        for dct in output:
-            if row[0] == dct["pi"]:
-                dct[row[1]] = row[2]
-                break
-        else:
-            dct = dict()
-            dct["pi"] = row[0]
-            dct[row[1]] = row[2] 
     
-    return jsonify(output)        
+    if "Exception" not in results:
+        output = []
+        for row in results:
+            for dct in output:
+                if row[0] == dct["pi"]:
+                    dct[row[1]] = row[2]
+                    break
+            else:
+                output.append({"pi": row[0], row[1]:row[2]})
+        
+        return jsonify(output)
+    return jsonify(results)
 
 @app.route('/data4/<date>')
 def data4(date):
@@ -305,9 +282,7 @@ def data4(date):
     except:
         return "format should be 'yyyymmdd-yyyymmdd'"
 
-    try:
-        # Execute the SQL query
-        cursor.execute("""
+    results = sql("""
                         SELECT fc_type as type, COUNT(*) as quantity
                         FROM flowcell f
                         LEFT JOIN samples s ON s.fc_id = f.fc_id
@@ -315,17 +290,7 @@ def data4(date):
                         GROUP BY fc_type
                         """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
                         
-                
-        # Fetch the results from the cursor
-        results = cursor.fetchall()
-        # output = [{"type": row[0], "quantity": row[1]} for row in results]
-        
-        return jsonify(results)
-    
-    except Exception as e:
-        return str(e)
-
-    # return "Data is requested for dates from " + str(start) + " to " + str(end)
+    return jsonify(results)
 
 @app.route('/data5/<date>')
 def data5(date):
@@ -334,26 +299,49 @@ def data5(date):
     except:
         return "format should be 'yyyymmdd-yyyymmdd'"
 
-    try:
-        # Execute the SQL query
-        cursor.execute("""
+    results = sql("""
                         SELECT srv as type, COUNT(*) as quantity
                         FROM submissions sub
                         LEFT JOIN samples s ON s.submission_id = sub.fc_id
                         WHERE demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY srv
                         """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+                    
+    return jsonify(results)
+
+@app.route('/data6/<date>')
+def data6(date):
+    try:
+        start, end = parseDate(date)
+    except:
+        return "format should be 'yyyymmdd-yyyymmdd'"
+
+    results = sql("""
+                        SELECT sequencer_id as type, COUNT(*) as quantity
+                        FROM flowcell f
+                        LEFT JOIN samples s ON s.fc_id = f.fc_id
+                        WHERE demultiplex_date BETWEEN '%s' AND '%s'
+                        GROUP BY sequencer_id
+                        """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
                         
-                
-        # Fetch the results from the cursor
-        results = cursor.fetchall()
-        return jsonify(results)
-    
-    except Exception as e:
-        return str(e)
+    return jsonify(results)
 
+@app.route('/data7/<date>')
+def data7(date):
+    try:
+        start, end = parseDate(date)
+    except:
+        return "format should be 'yyyymmdd-yyyymmdd'"
 
-
+    results = sql("""
+                        SELECT rg as type, COUNT(*) as quantity
+                        FROM submissions sub
+                        LEFT JOIN samples s ON s.submission_id = sub.fc_id
+                        WHERE demultiplex_date BETWEEN '%s' AND '%s'
+                        GROUP BY rg
+                        """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+                    
+    return jsonify(results)
 
 if __name__=='__main__':
     # app.debug = True
