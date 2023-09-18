@@ -276,6 +276,33 @@ def data2b(date):
         return jsonify(output)
     return jsonify(results)
 
+@app.route('/data2c/<date>')
+def data2c(date):
+    try:
+        start, end = parseDate(date)
+    except:
+        return "format should be 'yyyymmdd-yyyymmdd'"
+
+    results = sql("""
+                        SELECT 
+                            p.pi as "pi", p.project_id as "project", s.rg as "genome", COUNT(*) as "sample_count"
+                        FROM
+                            pi_projects p
+                        LEFT JOIN
+                            submissions s ON p.project_id = s.project_id
+                        LEFT JOIN
+                            samples sa ON s.submission_id = sa.submission_id
+                        LEFT JOIN
+                            flowcell f ON s.fc_id = f.fc_id
+                        WHERE
+                            f.demultiplex_date BETWEEN '%s' AND '%s'
+                        GROUP BY
+                            p.pi, p.project_id, s.rg
+                        ORDER BY
+                            "sample_count" DESC;
+                    """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+    
+    return jsonify(results)
 
 @app.route('/data3/<date>')
 def data3(date):
