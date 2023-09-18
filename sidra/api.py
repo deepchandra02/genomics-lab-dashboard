@@ -298,8 +298,8 @@ def data2b(date):
     
     return jsonify(output)        
 
-@app.route('/data3/<date>')
-def data3(date):
+@app.route('/data4/<date>')
+def data4(date):
     try:
         start, end = parseDate(date)
     except:
@@ -308,8 +308,9 @@ def data3(date):
     try:
         # Execute the SQL query
         cursor.execute("""
-                        SELECT fc_type, COUNT(*) as quantity
-                        FROM flowcell
+                        SELECT fc_type as type, COUNT(*) as quantity
+                        FROM flowcell f
+                        LEFT JOIN samples s ON s.fc_id = f.fc_id
                         WHERE demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY fc_type
                         """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
@@ -317,16 +318,39 @@ def data3(date):
                 
         # Fetch the results from the cursor
         results = cursor.fetchall()
-        output = [{"type": row[0], "quantity": row[1]} for row in results]
+        # output = [{"type": row[0], "quantity": row[1]} for row in results]
         
-        return jsonify(output)
+        return jsonify(results)
     
     except Exception as e:
         return str(e)
 
-
-
     # return "Data is requested for dates from " + str(start) + " to " + str(end)
+
+@app.route('/data5/<date>')
+def data5(date):
+    try:
+        start, end = parseDate(date)
+    except:
+        return "format should be 'yyyymmdd-yyyymmdd'"
+
+    try:
+        # Execute the SQL query
+        cursor.execute("""
+                        SELECT srv as type, COUNT(*) as quantity
+                        FROM submissions sub
+                        LEFT JOIN samples s ON s.submission_id = sub.fc_id
+                        WHERE demultiplex_date BETWEEN '%s' AND '%s'
+                        GROUP BY srv
+                        """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+                        
+                
+        # Fetch the results from the cursor
+        results = cursor.fetchall()
+        return jsonify(results)
+    
+    except Exception as e:
+        return str(e)
 
 
 
