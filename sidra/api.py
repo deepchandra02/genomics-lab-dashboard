@@ -293,7 +293,7 @@ def data2c(date):
                         LEFT JOIN
                             samples sa ON s.submission_id = sa.submission_id
                         LEFT JOIN
-                            flowcell f ON s.fc_id = f.fc_id
+                            flowcell f ON sa.fc_id = f.fc_id
                         WHERE
                             f.demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY
