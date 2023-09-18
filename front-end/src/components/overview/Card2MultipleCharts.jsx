@@ -26,7 +26,7 @@ const Card2MultipleCharts = (props) => {
     colors: ["sky", "violet", "fuchsia"],
     showLegend: true,
     yAxisWidth: 56,
-    categories: ["New", "Top-up", "Repeat"]
+    categories: ["New", "Top up", "Repeat"]
   };
 
   // Arguments to be passed to CustomBarChart2
