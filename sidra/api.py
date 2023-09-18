@@ -275,8 +275,8 @@ def data2b(date):
         return jsonify(output)
     return jsonify(results)
 
-@app.route('/data4/<date>')
-def data4(date):
+@app.route('/data3/<date>')
+def data3(date):
     try:
         start, end = parseDate(date)
     except:
@@ -285,15 +285,14 @@ def data4(date):
     results = sql("""
                         SELECT fc_type as type, COUNT(*) as quantity
                         FROM flowcell f
-                        LEFT JOIN samples s ON s.fc_id = f.fc_id
                         WHERE demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY fc_type
                         """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
                         
     return jsonify(results)
 
-@app.route('/data5/<date>')
-def data5(date):
+@app.route('/data4/<date>')
+def data4(date):
     try:
         start, end = parseDate(date)
     except:
@@ -302,15 +301,15 @@ def data5(date):
     results = sql("""
                         SELECT srv as type, COUNT(*) as quantity
                         FROM submissions sub
-                        LEFT JOIN samples s ON s.submission_id = sub.fc_id
+                        LEFT JOIN samples s ON s.submission_id = sub.submission_id
                         WHERE demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY srv
                         """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
                     
     return jsonify(results)
 
-@app.route('/data6/<date>')
-def data6(date):
+@app.route('/data5/<date>')
+def data5(date):
     try:
         start, end = parseDate(date)
     except:
@@ -326,8 +325,8 @@ def data6(date):
                         
     return jsonify(results)
 
-@app.route('/data7/<date>')
-def data7(date):
+@app.route('/data6/<date>')
+def data6(date):
     try:
         start, end = parseDate(date)
     except:
