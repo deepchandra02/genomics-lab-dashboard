@@ -249,7 +249,7 @@ def data2b(date):
 
     results = sql("""
                         SELECT 
-                            p.pi, p.project_id, COUNT(*)
+                            p.pi, p.project_id, COUNT(*) as quantity
                         FROM
                             pi_projects p
                         LEFT JOIN
@@ -263,20 +263,19 @@ def data2b(date):
                         GROUP BY
                             p.pi, p.project_id;
                     """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
-    
     if "Exception" not in results:
         output = []
         for row in results:
             for dct in output:
-                if row[0] == dct["pi"]:
-                    dct[row[1]] = row[2]
+                if row["pi"] == dct["pi"]:
+                    dct[row["project_id"]] = row["quantity"]
                     break
             else:
-                dct = {"pi": row[0], row[1]:row[2]}
-                output.append(dct)
+                output.append({"pi": row["pi"], row["project_id"]:row["quantity"]})
         
         return jsonify(output)
     return jsonify(results)
+
 
 @app.route('/data3/<date>')
 def data3(date):
