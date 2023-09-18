@@ -249,7 +249,7 @@ def data2b(date):
 
     results = sql("""
                         SELECT 
-                            p.pi, p.project_id, COUNT(*)
+                            p.pi, p.project_id, COUNT(*) as quantity
                         FROM
                             pi_projects p
                         LEFT JOIN
@@ -263,19 +263,45 @@ def data2b(date):
                         GROUP BY
                             p.pi, p.project_id;
                     """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
-    
     if "Exception" not in results:
         output = []
         for row in results:
             for dct in output:
-                if row[0] == dct["pi"]:
-                    dct[row[1]] = row[2]
+                if row["pi"] == dct["pi"]:
+                    dct[row["project_id"]] = row["quantity"]
                     break
             else:
-                dct = {"pi": row[0], row[1]:row[2]}
-                output.append(dct)
+                output.append({"pi": row["pi"], row["project_id"]:row["quantity"]})
         
         return jsonify(output)
+    return jsonify(results)
+
+@app.route('/data2c/<date>')
+def data2c(date):
+    try:
+        start, end = parseDate(date)
+    except:
+        return "format should be 'yyyymmdd-yyyymmdd'"
+
+    results = sql("""
+                        SELECT 
+                            p.pi as "pi", p.project_id as "project", s.rg as "genome", COUNT(*) as "sample_count"
+                        FROM
+                            pi_projects p
+                        LEFT JOIN
+                            submissions s ON p.project_id = s.project_id
+                        LEFT JOIN
+                            samples sa ON s.submission_id = sa.submission_id
+                        LEFT JOIN
+                            flowcell f ON s.fc_id = f.fc_id
+                        WHERE
+                            f.demultiplex_date BETWEEN '%s' AND '%s'
+                        GROUP BY
+                            p.pi, p.project_id, s.rg
+                        ORDER BY
+                            "sample_count" DESC;
+                    """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
+    
     return jsonify(results)
 
 @app.route('/data3/<date>')
