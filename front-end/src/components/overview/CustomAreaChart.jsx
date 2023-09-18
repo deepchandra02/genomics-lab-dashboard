@@ -116,7 +116,7 @@ const CustomAreaChart = (props) => {
           </TabList>
         </TabGroup>
 
-        <div className="flex gap-x-4">
+        {props.data && (<div className="flex gap-x-4">
           <Select className="max-w-[14rem] justify-end text-gray-500 hover:text-black"
             value={view}
             defaultValue={3}
@@ -164,7 +164,7 @@ const CustomAreaChart = (props) => {
             <Subtitle>Cumulative</Subtitle>
           </Flex>
 
-        </div>
+        </div>)}
       </Flex>
       <div className="mt-4 h-[75%]">
         <AreaChart {...areaChartArgs} />

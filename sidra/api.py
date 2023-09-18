@@ -201,10 +201,10 @@ def data1(date):
 
     results = sql("""SELECT
                             TO_CHAR(demultiplex_date, 'MM-DD-YYYY') AS date,
-                            COUNT(DISTINCT samples.sample_id) AS Samples,
-                            COUNT(DISTINCT samples.fc_id) AS Flowcells,
-                            SUM(COUNT(DISTINCT samples.sample_id)) OVER (ORDER BY demultiplex_date) AS SamplesTotal,
-                            SUM(COUNT(DISTINCT samples.fc_id)) OVER (ORDER BY demultiplex_date) AS FlowcellsTotal
+                            COUNT(DISTINCT samples.sample_id) AS "Samples",
+                            COUNT(DISTINCT samples.fc_id) AS "Flowcells",
+                            SUM(COUNT(DISTINCT samples.sample_id)) OVER (ORDER BY demultiplex_date) AS "SamplesTotal",
+                            SUM(COUNT(DISTINCT samples.fc_id)) OVER (ORDER BY demultiplex_date) AS "FlowcellsTotal"
                         FROM
                             flowcell
                         INNER JOIN
