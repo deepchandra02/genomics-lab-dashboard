@@ -15,13 +15,13 @@ function formatJsDate(date, format = DATE_FORMAT) {
   return require$$0(date).format(format);
 }
 
-const data1 = require('../data/data1.json')
-const data2a = require('../data/data2a.json')
-const data2b = require('../data/data2b.json')
-const data3 = require('../data/data3.json')
-const data4 = require('../data/data4.json')
-const data5 = require('../data/data5.json')
-const data6 = require('../data/data6.json')
+// const data1 = require('../data/data1.json')
+// const data2a = require('../data/data2a.json')
+// const data2b = require('../data/data2b.json')
+// const data3 = require('../data/data3.json')
+// const data4 = require('../data/data4.json')
+// const data5 = require('../data/data5.json')
+// const data6 = require('../data/data6.json')
 const dataX = require('../data/dataX.json')
 
 
@@ -39,11 +39,14 @@ function Overview() {
     startDate: new Date("1990-01-01"),
     endDate: new Date()
   });
-  // const [data1, setData1] = useState(null);
-  // const [data2a, setData2a] = useState(null);
-  // const [data2b, setData2b] = useState(null);
-  // const [data3, setData3] = useState(null);
-  // const [data4, setData4] = useState(null);
+  const [data1, setData1] = useState(null);
+  const [data2a, setData2a] = useState(null);
+  const [data2b, setData2b] = useState(null);
+  const [data2c, setData2c] = useState(null);
+  const [data3, setData3] = useState(null);
+  const [data4, setData4] = useState(null);
+  const [data5, setData5] = useState(null);
+  const [data6, setData6] = useState(null);
 
   const handleValueChange = (newValue) => {
     console.log("newValue:", newValue);
@@ -57,70 +60,99 @@ function Overview() {
         const startDate = formatJsDate(value.startDate, 'YYYYMMDD');
         const endDate = formatJsDate(value.endDate, 'YYYYMMDD');
 
-        // const response1 = await fetch(`http://127.0.0.1:5000/type1/${startDate}-${endDate}`);
-        // if (!response1.ok) {
-        //   // Handle error
-        //   console.error('Server error:', response1);
-        // }
-        // else {
-        //   const data = await response1.json();
-        //   // Update the state with the fetched data
-        //   setData1(data);
-        // }
+        const response1 = await fetch(`http://127.0.0.1:5000/data1/${startDate}-${endDate}`);
+        if (!response1.ok) {
+          // Handle error
+          console.error('Server error:', response1);
+        }
+        else {
+          const data = await response1.json();
+          // Update the state with the fetched data
+          setData1(data);
+        }
 
-        // const response2a = await fetch(`http://127.0.0.1:5000/type2a/${startDate}-${endDate}`);
-        // if (!response2a.ok) {
-        //   // Handle error
-        //   console.error('Server error:', response2a);
-        // }
-        // else {
-        //   const data = await response2a.json();
-        //   // Update the state with the fetched data
-        //   setData2a(data);
-        // }
+        const response2a = await fetch(`http://127.0.0.1:5000/data2a/${startDate}-${endDate}`);
+        if (!response2a.ok) {
+          // Handle error
+          console.error('Server error:', response2a);
+        }
+        else {
+          const data = await response2a.json();
+          // Update the state with the fetched data
+          setData2a(data);
+        }
 
-        // const response2b = await fetch(`http://127.0.0.1:5000/type2b/${startDate}-${endDate}`);
-        // if (!response2b.ok) {
-        //   // Handle error
-        //   console.error('Server error:', response2b);
-        // }
-        // else {
-        //   const data = await response2b.json();
-        //   // Update the state with the fetched data
-        //   setData2b(data);
-        // }
+        const response2b = await fetch(`http://127.0.0.1:5000/data2b/${startDate}-${endDate}`);
+        if (!response2b.ok) {
+          // Handle error
+          console.error('Server error:', response2b);
+        }
+        else {
+          const data = await response2b.json();
+          // Update the state with the fetched data
+          setData2b(data);
+        }
 
-        // const response3 = await fetch(`http://127.0.0.1:5000/type3/${startDate}-${endDate}`);
-        // if (!response3.ok) {
-        //   // Handle error
-        //   console.error('Server error:', response3);
-        // }
-        // else {
-        //   const data = await response3.json();
-        //   // Update the state with the fetched data
-        //   setData3(data);
-        // }
+        const response2c = await fetch(`http://127.0.0.1:5000/data2c/${startDate}-${endDate}`);
+        if (!response2c.ok) {
+          // Handle error
+          console.error('Server error:', response2c);
+        }
+        else {
+          const data = await response2c.json();
+          // Update the state with the fetched data
+          setData2c(data);
+        }
 
-        // const response4 = await fetch(`http://127.0.0.1:5000/type4/${startDate}-${endDate}`);
-        // if (!response4.ok) {
-        //   // Handle error
-        //   console.error('Server error:', response4);
-        // }
-        // else {
-        //   const data = await response4.json();
-        //   // Update the state with the fetched data
-        //   setData4(data);
-        // }
+        const response3 = await fetch(`http://127.0.0.1:5000/data3/${startDate}-${endDate}`);
+        if (!response3.ok) {
+          // Handle error
+          console.error('Server error:', response3);
+        }
+        else {
+          const data = await response3.json();
+          // Update the state with the fetched data
+          setData3(data);
+        }
+
+        const response4 = await fetch(`http://127.0.0.1:5000/data4/${startDate}-${endDate}`);
+        if (!response4.ok) {
+          // Handle error
+          console.error('Server error:', response4);
+        }
+        else {
+          const data = await response4.json();
+          // Update the state with the fetched data
+          setData4(data);
+        }
+
+        const response5 = await fetch(`http://127.0.0.1:5000/data5/${startDate}-${endDate}`);
+        if (!response5.ok) {
+          // Handle error
+          console.error('Server error:', response5);
+        }
+        else {
+          const data = await response5.json();
+          // Update the state with the fetched data
+          setData5(data);
+        }
+
+        const response6 = await fetch(`http://127.0.0.1:5000/data6/${startDate}-${endDate}`);
+        if (!response6.ok) {
+          // Handle error
+          console.error('Server error:', response6);
+        }
+        else {
+          const data = await response6.json();
+          // Update the state with the fetched data
+          setData6(data);
+        }
       }
     }
 
 
     fetchData();
   }, [value]);
-
-  // useEffect(() => {
-  //   console.log("data1:", data1);
-  // }, [value, data1]);
 
   return (
     <main className="flex flex-col h-screen p-5">
@@ -256,6 +288,7 @@ function Overview() {
               tooltip="Overview of the distribution of sample requests per PI over the specified date range in different parameters"
               data2a={data2a}
               data2b={data2b}
+              data2c={data2c}
             />
           </div>
           <div className="flex flex-col w-[25%] space-y-4">

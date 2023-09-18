@@ -2,10 +2,13 @@
 from flask import Flask, jsonify, request
 import datetime
 import psycopg2
+from flask_cors import CORS
 import json
 import os
-app = Flask(__name__)   # Flask constructor
+from decimal import Decimal # for JSONEncoder
 
+app = Flask(__name__)   # Flask constructor
+CORS(app)
 conn = psycopg2.connect(database="sidra",
                         host="localhost",
                         user="deepc",
@@ -14,7 +17,13 @@ conn = psycopg2.connect(database="sidra",
 conn.set_session(autocommit=True)
 cursor = conn.cursor()
 
-
+#  for debugging, don't remove
+class JSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Decimal):
+            return str(obj)
+        return super(JSONEncoder, self).default(obj)
+    
 def sql(command):
     try:
         cursor.execute(command)
@@ -207,7 +216,10 @@ def data1(date):
                         ORDER BY
                             demultiplex_date;"""%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
     
-                
+    # for debugging, don't remove
+    # Write the results to a JSON file
+    with open('./front-end/src/newdata/data1.json', 'w') as f:
+        json.dump(results, f, cls=JSONEncoder)            
     return jsonify(results)
 
 
@@ -238,6 +250,11 @@ def data2a(date):
                             pi;
                     """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
     
+    # for debugging, don't remove
+    # Write the results to a JSON file
+    with open('./front-end/src/newdata/data2a.json', 'w') as f:
+        json.dump(results, f, cls=JSONEncoder)
+
     return jsonify(results)
 
 @app.route('/data2b/<date>')
@@ -273,6 +290,10 @@ def data2b(date):
             else:
                 output.append({"pi": row["pi"], row["project_id"]:row["quantity"]})
         
+        # for debugging, don't remove
+        # Write the results to a JSON file
+        with open('./front-end/src/newdata/data2b.json', 'w') as f:
+            json.dump(output, f, cls=JSONEncoder)
         return jsonify(output)
     return jsonify(results)
 
@@ -302,6 +323,11 @@ def data2c(date):
                             "sample_count" DESC;
                     """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
     
+    # for debugging, don't remove
+    # Write the results to a JSON file
+    with open('./front-end/src/newdata/data2c.json', 'w') as f:
+        json.dump(results, f, cls=JSONEncoder)
+
     return jsonify(results)
 
 @app.route('/data3/<date>')
@@ -317,7 +343,12 @@ def data3(date):
                         WHERE demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY fc_type
                         """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
-                        
+
+    # for debugging, don't remove
+    # Write the results to a JSON file
+    with open('./front-end/src/newdata/data3.json', 'w') as f:
+        json.dump(results, f, cls=JSONEncoder)
+
     return jsonify(results)
 
 @app.route('/data4/<date>')
@@ -335,7 +366,12 @@ def data4(date):
                         WHERE f.demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY srv
                         """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
-                    
+
+    # for debugging, don't remove
+    # Write the results to a JSON file
+    with open('./front-end/src/newdata/data4.json', 'w') as f:
+        json.dump(results, f, cls=JSONEncoder)
+
     return jsonify(results)
 
 @app.route('/data5/<date>')
@@ -348,11 +384,15 @@ def data5(date):
     results = sql("""
                         SELECT sequencer_id as type, COUNT(*) as quantity
                         FROM flowcell f
-                        LEFT JOIN samples s ON s.fc_id = f.fc_id
                         WHERE demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY sequencer_id
                         """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
-                        
+
+    # for debugging, don't remove
+    # Write the results to a JSON file
+    with open('./front-end/src/newdata/data5.json', 'w') as f:
+        json.dump(results, f, cls=JSONEncoder)
+
     return jsonify(results)
 
 @app.route('/data6/<date>')
@@ -370,7 +410,12 @@ def data6(date):
                         WHERE f.demultiplex_date BETWEEN '%s' AND '%s'
                         GROUP BY rg
                         """%(start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')))
-                    
+
+    # for debugging, don't remove
+    # Write the results to a JSON file
+    with open('./front-end/src/newdata/data6.json', 'w') as f:
+        json.dump(results, f, cls=JSONEncoder)
+    
     return jsonify(results)
 
 if __name__=='__main__':

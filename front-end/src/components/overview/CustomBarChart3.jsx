@@ -3,7 +3,6 @@ import { Card, Grid, Title, BarChart, Button, Legend } from "@tremor/react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ArrowsExpandIcon, XIcon, PlusCircleIcon, MinusCircleIcon } from "@heroicons/react/outline";
 
-const data2c = require('../../data/data2c.json');
 const predefinedColors = [
   "teal",
   "rose",
@@ -11,30 +10,33 @@ const predefinedColors = [
   "violet",
 ];
 
-const dataByPI = data2c.reduce((groups, row) => {
-  const pi = row.pi;
-  if (!groups[pi]) {
-    groups[pi] = [];
-  }
-  groups[pi].push(row);
-  return groups;
-}, {});
-
-const CustomBarChart3 = () => {
+const CustomBarChart3 = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [genomeColors, setGenomeColors] = useState({});
 
-  const [rowSize, setRowSize] = useState(4);
-  const plus = () => setRowSize(prevZoom => Math.max(prevZoom - 1, 1)); // Adjust these numbers as needed
-  const minus = () => setRowSize(prevZoom => Math.min(prevZoom + 1, 10)); // Adjust these numbers as needed
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+  const [rowSize, setRowSize] = useState(props.rowSize);
+  const plus = () => setRowSize(prevZoom => Math.max(prevZoom - 1, 1));
+  const minus = () => setRowSize(prevZoom => Math.min(prevZoom + 1, 10));
 
   // Calculate number of items in grid and card size based on rowSize level
-  const numItemsInGrid = rowSize //+ rowSize; // Adjust this calculation as needed
+  const numItemsInGrid = rowSize;
+  var cardSize = props.cardSize;
 
-  var cardSize = "w-auto h-[12vh]"; // Adjust this calculation as needed
-  const genomeNames = [...new Set(data2c.map(item => item.genome))];
+  const dataByPI = props.data.reduce((groups, row) => {
+    const pi = row.pi;
+    if (!groups[pi]) {
+      groups[pi] = [];
+    }
+    groups[pi].push(row);
+    return groups;
+  }, {});
+
+  const genomeNames = [...new Set(props.data.map(item => item.genome))];
+
   useEffect(() => {
-    const genomeNames = [...new Set(data2c.map(item => item.genome))];
+    const genomeNames = [...new Set(props.data.map(item => item.genome))];
     const genomeColorMapping = genomeNames.reduce((acc, genome, index) => {
       acc[genome] = predefinedColors[index % predefinedColors.length];  // Loop back to start if there are more genomes than colors
       return acc;
@@ -43,9 +45,6 @@ const CustomBarChart3 = () => {
   }, []);
 
   useEffect(() => { setRowSize(4) }, [isOpen]);
-
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
 
   return (
     <div className='flex flex-col space-y-4'>

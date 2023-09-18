@@ -5,7 +5,7 @@ import { InformationCircleIcon } from "@heroicons/react/solid";
 // This component is a wrapper around the DonutChart component from @tremor/react
 const CustomDonutChart = (props) => {
   // Calculate the total units across all categories by using the reduce method
-  const totalUnits = props.data.reduce((total, item) => total + item.quantity, 0);
+  const totalUnits = (props.data || []).reduce((total, item) => total + item.quantity, 0);
   const valueFormatter = (number) => {
     const percentage = ((number / totalUnits) * 100).toFixed(2);
     return `${percentage}% | ${Intl.NumberFormat("us").format(number).toString()}`;
@@ -30,7 +30,7 @@ const CustomDonutChart = (props) => {
   // Arguments to be passed to the Legend component
   const legendArgs = {
     className: "flex flex-col justify-end",
-    categories: props.data.map((item) => item.type), // Categories are the type of each data item
+    categories: (props.data || []).map((item) => item.type), // Categories are the type of each data item
     colors: props.colors // Colors received as props
   };
 
