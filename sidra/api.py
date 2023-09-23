@@ -105,8 +105,8 @@ def release():
 
 @app.route('/type0')
 def type0():
-    start = int(request.args.get('start', 0))
-    size = int(request.args.get('size', 25))
+    # start = int(request.args.get('start', 0))
+    # size = int(request.args.get('size', 25))
     filters = json.loads(request.args.get('filters', '[]'))
     # global_filter = request.args.get('globalFilter', '')
     sorting = json.loads(request.args.get('sorting', '[]'))
@@ -161,8 +161,7 @@ def type0():
         LEFT JOIN i7 AS i7 ON s.i7_id = i7.i7_id
         LEFT JOIN sequencer AS seq ON f.sequencer_id = seq.sequencer_id
         {where_clause}
-        {order_by_clause}
-        LIMIT {size} OFFSET {start};
+        {order_by_clause};
     """
     results = sql(query)
 

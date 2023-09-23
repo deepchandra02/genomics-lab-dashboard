@@ -1,177 +1,178 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { MaterialReactTable } from 'material-react-table';
-import { Typography, Box } from '@mui/material';
-import { QueryClient, QueryClientProvider, useInfiniteQuery } from '@tanstack/react-query';
 
-const fetchSize = 25;
+
+const dataJson = require('../../newdata/data0.json');
 
 const PreTableData = () => {
-  const tableContainerRef = useRef(null);
-  const rowVirtualizerInstanceRef = useRef(null);
+  //data and fetching state
+  const [data, setData] = useState([]);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isRefetching, setIsRefetching] = useState(false);
+  const [rowCount, setRowCount] = useState(0);
 
+  // Table state
   const [columnFilters, setColumnFilters] = useState([]);
-  const [globalFilter, setGlobalFilter] = useState();
+  const [globalFilter, setGlobalFilter] = useState('');
   const [sorting, setSorting] = useState([]);
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 100,
+  });
+
+  //if you want to avoid useEffect, look at the React Query example instead
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!data.length) {
+        setIsLoading(true);
+      } else {
+        setIsRefetching(true);
+      }
+
+      const url = new URL(
+        '/type0',
+        process.env.NODE_ENV === 'production'
+          ? 'https://www.material-react-table.com'
+          : 'http://127.0.0.1:5000',
+      );
+      // url.searchParams.set(
+      //   'start',
+      //   `${pagination.pageIndex * pagination.pageSize}`,
+      // );
+      // url.searchParams.set('size', `${pagination.pageSize}`);
+      url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
+      url.searchParams.set('globalFilter', globalFilter ?? '');
+      url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
+
+      // console.log(url);
+
+      const response0 = await fetch(url.href);
+      if (!response0.ok) {
+        // Handle error
+        setIsError(true);
+        console.error('Server error:', response0);
+        return;
+      }
+      else {
+        const data = await response0.json();
+        // Update the state with the fetched data
+        setData(data);
+        setRowCount(data.length);
+        console.log(data.length);
+      }
+
+      setIsError(false);
+      setIsLoading(false);
+      setIsRefetching(false);
+    };
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [columnFilters,
+    globalFilter,
+    pagination.pageIndex,
+    pagination.pageSize,
+    sorting,
+  ]);
 
   const columns = useMemo(
     () => [
-      {
-        id: 'sampleInfo',
-        header: 'Sample Info',
-        columns: [
-          {
-            accessorKey: 'sample_id',
-            header: 'Sample ID',
-          },
-          {
-            accessorKey: 'fc_id',
-            header: 'Flowcell ID',
-          },
-          {
-            accessorKey: 'submission_id',
-            header: 'Submission ID',
-          },
-        ],
-      },
-      {
-        id: 'dates',
-        header: 'Dates',
-        columns: [
-          {
-            accessorKey: 'demultiplex_date',
-            header: 'Demultiplexed',
-          },
-          {
-            accessorKey: 'stage_date',
-            header: 'Staged',
-          },
-          {
-            accessorKey: 'process_date',
-            header: 'Processed',
-          },
-        ],
-      },
-      // Additional columns as needed
-    ],
-    [],
-  );
+      { accessorKey: 'sample_id', header: 'Sample Id' },
+      { accessorKey: 'pooling_id', header: 'Pooling Id' },
+      { accessorKey: 'fc_id', header: 'Fc Id' },
+      { accessorKey: 'sample_name', header: 'Sample Name' },
+      { accessorKey: 'submission_id', header: 'Submission Id' },
+      { accessorKey: 'qpcr', header: 'Qpcr' },
+      { accessorKey: 'fragment', header: 'Fragment' },
+      { accessorKey: 'labchip_conc', header: 'Labchip Conc' },
+      { accessorKey: 'well', header: 'Well' },
+      { accessorKey: 'pre_norm_well', header: 'Pre Norm Well' },
+      { accessorKey: 'i5_id', header: 'I5 Id' },
+      { accessorKey: 'i7_id', header: 'I7 Id' },
+      { accessorKey: 'data_sample', header: 'Data Sample' },
+      { accessorKey: 'urgent', header: 'Urgent' },
+      { accessorKey: 'remark', header: 'Remark' },
+      { accessorKey: 'lib_received', header: 'Lib Received' },
+      { accessorKey: 'sample_qc', header: 'Sample Qc' },
+      { accessorKey: 'lib_qc', header: 'Lib Qc' },
+      { accessorKey: 'error', header: 'Error' },
+      { accessorKey: 'stage_date', header: 'Stage Date' },
+      { accessorKey: 'merged', header: 'Merged' },
+      { accessorKey: 'lane', header: 'Lane' },
+      { accessorKey: 'pf_reads', header: 'Pf Reads' },
+      { accessorKey: 'loading_conc', header: 'Loading Conc' },
+      { accessorKey: 'q30', header: 'Q30' },
+      { accessorKey: 'lane_1', header: 'Lane 1' },
+      { accessorKey: 'lane_2', header: 'Lane 2' },
+      { accessorKey: 'lane_3', header: 'Lane 3' },
+      { accessorKey: 'lane_4', header: 'Lane 4' },
+      { accessorKey: 'fc_type', header: 'Fc Type' },
+      { accessorKey: 'loaded_by', header: 'Loaded By' },
+      { accessorKey: 'loading_date', header: 'Loading Date' },
+      { accessorKey: 'completion_date', header: 'Completion Date' },
+      { accessorKey: 'demultiplex_date', header: 'Demultiplex Date' },
+      { accessorKey: 'process_date', header: 'Process Date' },
+      { accessorKey: 'order_no', header: 'Order No' },
+      { accessorKey: 'sequencer_id', header: 'Sequencer Id' },
+      { accessorKey: 'run_duration', header: 'Run Duration' },
+      { accessorKey: 'position', header: 'Position' },
+      { accessorKey: 'project_id', header: 'Project Id' },
+      { accessorKey: 'date', header: 'Date' },
+      { accessorKey: 'cov', header: 'Cov' },
+      { accessorKey: 'srv', header: 'Srv' },
+      { accessorKey: 'rg', header: 'Rg' },
+      { accessorKey: 'anl', header: 'Anl' },
+      { accessorKey: 'datatype', header: 'Datatype' },
+      { accessorKey: 'pi', header: 'Pi' },
+      { accessorKey: 'requirement', header: 'Requirement' },
+      { accessorKey: 'earliest', header: 'Earliest' },
+      { accessorKey: 'latest', header: 'Latest' },
+      { accessorKey: 'i5_sequence', header: 'I5 Sequence' },
+      { accessorKey: 'i7_sequence', header: 'I7 Sequence' }
+    ], []);
 
-  const { data, fetchNextPage, isError, isFetching, isLoading } =
-    useInfiniteQuery({
-      queryKey: ['table-data', columnFilters, globalFilter, sorting],
-      queryFn: async ({ pageParam = 0 }) => {
-        const url = new URL(
-          '/type0', // Update this to your API endpoint
-          process.env.NODE_ENV === 'production'
-            ? 'https://www.your-production-domain.com' // Update this to your production domain
-            : 'http://127.0.0.1:5000',
-        );
-        url.searchParams.set('start', `${pageParam * fetchSize}`);
-        url.searchParams.set('size', `${fetchSize}`);
-        url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
-        url.searchParams.set('globalFilter', globalFilter ?? '');
-        url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
-
-        const response = await fetch(url.href);
-        const json = await response.json();
-        return json;
-      },
-      getNextPageParam: (_lastGroup, groups) => groups.length,
-      keepPreviousData: true,
-      refetchOnWindowFocus: false,
-    });
-  const flatData = useMemo(() => data?.pages.flatMap((page) => page) ?? [], [data]);
-
-  const totalDBRowCount = flatData.length;
-  const totalFetched = flatData.length;
-
-  //called on scroll and possibly on mount to fetch more data as the user scrolls and reaches bottom of table
-  const fetchMoreOnBottomReached = useCallback(
-    (containerRefElement) => {
-      if (containerRefElement) {
-        const { scrollHeight, scrollTop, clientHeight } = containerRefElement;
-        //once the user has scrolled within 400px of the bottom of the table, fetch more data if we can
-        if (
-          scrollHeight - scrollTop - clientHeight < 400 &&
-          !isFetching &&
-          totalFetched < totalDBRowCount
-        ) {
-          fetchNextPage();
-        }
-      }
-    },
-    [fetchNextPage, isFetching, totalFetched, totalDBRowCount],
-  );
-
-  //scroll to top of table when sorting or filters change
-  useEffect(() => {
-    //scroll to the top of the table when the sorting changes
-    try {
-      rowVirtualizerInstanceRef.current?.scrollToIndex?.(0);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [sorting, columnFilters, globalFilter]);
-
-  //a check on mount to see if the table is already scrolled to the bottom and immediately needs to fetch more data
-  useEffect(() => {
-    fetchMoreOnBottomReached(tableContainerRef.current);
-  }, [fetchMoreOnBottomReached]);
 
   return (
     <MaterialReactTable
       columns={columns}
-      data={flatData}
-      enableColumnFilterModes
-      enableColumnOrdering
-      enableGrouping
-      enablePinning
-      enableRowActions
+      data={data}
       enableRowSelection
-      enableRowNumbers
-      enableRowVirtualization
+      // getRowId={(row) => row.phoneNumber}
+      initialState={{ showColumnFilters: true }}
       manualFiltering
+      manualPagination
       manualSorting
-      muiTableContainerProps={{
-        ref: tableContainerRef,
-        sx: { maxHeight: '600px' },
-        onScroll: (event) => fetchMoreOnBottomReached(event.target),
-      }}
-      muiToolbarAlertBannerProps={isError ? { color: 'error', children: 'Error loading data' } : undefined}
+      muiToolbarAlertBannerProps={
+        isError
+          ? {
+            color: 'error',
+            children: 'Error loading data',
+          }
+          : undefined
+      }
       onColumnFiltersChange={setColumnFilters}
       onGlobalFilterChange={setGlobalFilter}
+      onPaginationChange={setPagination}
       onSortingChange={setSorting}
-      renderBottomToolbarCustomActions={() => (
-        <Typography>
-          Fetched {totalFetched} of {totalDBRowCount} total rows.
-        </Typography>
-      )}
-      renderDetailPanel={({ row }) => (
-        <Box>
-          {/* Custom detail panel content */}
-        </Box>
-      )}
+      rowCount={rowCount}
       state={{
         columnFilters,
         globalFilter,
         isLoading,
+        pagination,
         showAlertBanner: isError,
-        showProgressBars: isFetching,
+        showProgressBars: isRefetching,
         sorting,
       }}
-      rowVirtualizerInstanceRef={rowVirtualizerInstanceRef}
-      rowVirtualizerProps={{ overscan: 4 }}
     />
-  )
+  );
 }
-
-const queryClient = new QueryClient();
 
 const TableData = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <PreTableData />
-    </QueryClientProvider>
+    // <QueryClientProvider client={queryClient}>
+    <PreTableData />
+    // </QueryClientProvider>
   )
 }
 
