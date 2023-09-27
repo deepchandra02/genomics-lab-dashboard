@@ -4,7 +4,6 @@ import TableData from "../components/progress/TableData";
 
 
 const Progress = () => {
-
   return (
     <div className="flex justify-stretch">
       <TableData />

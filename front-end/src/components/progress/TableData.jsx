@@ -4,7 +4,7 @@ import { MaterialReactTable } from 'material-react-table';
 
 // const dataJson = require('../../newdata/data0.json');
 
-const PreTableData = () => {
+const TableData = () => {
   //data and fetching state
   const [data, setData] = useState([]);
   const [isError, setIsError] = useState(false);
@@ -14,9 +14,11 @@ const PreTableData = () => {
 
   // Table state
   const [columnFilters, setColumnFilters] = useState([]);
-  const [globalFilter, setGlobalFilter] = useState('');
+  const [columnFilterFns, setColumnFilterFns] = useState({});
+
   const [sorting, setSorting] = useState([]);
 
+  console.log('ping 1');
   //if you want to avoid useEffect, look at the React Query example instead
   useEffect(() => {
     const fetchData = async () => {
@@ -34,10 +36,10 @@ const PreTableData = () => {
       );
 
       url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
-      url.searchParams.set('globalFilter', globalFilter ?? '');
+      url.searchParams.set('filterFns', JSON.stringify(columnFilterFns ?? []));
       url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
-      // console.log(url);
+      console.log(url.searchParams.toString());
 
       const response0 = await fetch(url.href);
       if (!response0.ok) {
@@ -51,7 +53,6 @@ const PreTableData = () => {
         // Update the state with the fetched data
         setData(data);
         setRowCount(data.length);
-        console.log(data.length);
       }
 
       setIsError(false);
@@ -61,13 +62,17 @@ const PreTableData = () => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columnFilters,
-    globalFilter,
     sorting,
   ]);
 
   const columns = useMemo(
     () => [
-      { accessorKey: 'sample_id', header: 'Sample Id', enableHiding: false, },
+      {
+        accessorKey: 'sample_id',
+        header: 'Sample Id',
+        enableHiding: false,
+        // columnFilterModeOptions: ['fuzzy', 'contains', 'startsWith']
+      },
       { accessorKey: 'fc_id', header: 'Fc Id', enableHiding: false, },
       { accessorKey: 'submission_id', header: 'Submission Id' },
       { accessorKey: 'loading_date', header: 'Loading Date' },
@@ -128,6 +133,8 @@ const PreTableData = () => {
       columns={columns}
       data={data}
       initialState={{
+        showColumnFilters: true,
+        // columnFilterFns: {
         columnVisibility: {
           sample_name: false,
           qpcr: false,
@@ -186,14 +193,16 @@ const PreTableData = () => {
       enableRowNumbers
 
       manualSorting
-      onColumnFiltersChange={setColumnFilters}
+
 
 
 
       // enableColumnFilterModes
 
       manualFiltering
-      manualPagination
+      enableColumnFilterModes
+      onColumnFiltersChange={setColumnFilters}
+      onColumnFilterFnsChange={setColumnFilterFns}
 
       muiToolbarAlertBannerProps={
         isError
@@ -209,8 +218,8 @@ const PreTableData = () => {
       onSortingChange={setSorting}
       rowCount={rowCount}
       state={{
+        columnFilterFns,
         columnFilters,
-        globalFilter,
         isLoading,
         showAlertBanner: isError,
         showProgressBars: isRefetching,
@@ -218,14 +227,6 @@ const PreTableData = () => {
       }}
     />
   );
-}
-
-const TableData = () => {
-  return (
-    // <QueryClientProvider client={queryClient}>
-    <PreTableData />
-    // </QueryClientProvider>
-  )
 }
 
 export default TableData
