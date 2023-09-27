@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { MaterialReactTable } from 'material-react-table';
 
 
-const dataJson = require('../../newdata/data0.json');
+// const dataJson = require('../../newdata/data0.json');
 
 const PreTableData = () => {
   //data and fetching state
@@ -16,10 +16,6 @@ const PreTableData = () => {
   const [columnFilters, setColumnFilters] = useState([]);
   const [globalFilter, setGlobalFilter] = useState('');
   const [sorting, setSorting] = useState([]);
-  const [pagination, setPagination] = useState({
-    pageIndex: 0,
-    pageSize: 100,
-  });
 
   //if you want to avoid useEffect, look at the React Query example instead
   useEffect(() => {
@@ -36,11 +32,7 @@ const PreTableData = () => {
           ? 'https://www.material-react-table.com'
           : 'http://127.0.0.1:5000',
       );
-      // url.searchParams.set(
-      //   'start',
-      //   `${pagination.pageIndex * pagination.pageSize}`,
-      // );
-      // url.searchParams.set('size', `${pagination.pageSize}`);
+
       url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
       url.searchParams.set('globalFilter', globalFilter ?? '');
       url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
@@ -70,19 +62,25 @@ const PreTableData = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columnFilters,
     globalFilter,
-    pagination.pageIndex,
-    pagination.pageSize,
     sorting,
   ]);
 
   const columns = useMemo(
     () => [
-      { accessorKey: 'sample_id', header: 'Sample Id' },
-      { accessorKey: 'pooling_id', header: 'Pooling Id' },
-      { accessorKey: 'fc_id', header: 'Fc Id' },
-      { accessorKey: 'sample_name', header: 'Sample Name' },
+      { accessorKey: 'sample_id', header: 'Sample Id', enableHiding: false, },
+      { accessorKey: 'fc_id', header: 'Fc Id', enableHiding: false, },
       { accessorKey: 'submission_id', header: 'Submission Id' },
+      { accessorKey: 'loading_date', header: 'Loading Date' },
+      { accessorKey: 'completion_date', header: 'Completion Date' },
+      { accessorKey: 'demultiplex_date', header: 'Demultiplex Date' },
+      { accessorKey: 'stage_date', header: 'Stage Date' },
+      { accessorKey: 'process_date', header: 'Process Date' },
+      { accessorKey: 'merged', header: 'Merged' },
+      { accessorKey: 'lane', header: 'Lane' },
+
+      { accessorKey: 'sample_name', header: 'Sample Name' },
       { accessorKey: 'qpcr', header: 'Qpcr' },
+      { accessorKey: 'pooling_id', header: 'Pooling Id' },
       { accessorKey: 'fragment', header: 'Fragment' },
       { accessorKey: 'labchip_conc', header: 'Labchip Conc' },
       { accessorKey: 'well', header: 'Well' },
@@ -96,9 +94,6 @@ const PreTableData = () => {
       { accessorKey: 'sample_qc', header: 'Sample Qc' },
       { accessorKey: 'lib_qc', header: 'Lib Qc' },
       { accessorKey: 'error', header: 'Error' },
-      { accessorKey: 'stage_date', header: 'Stage Date' },
-      { accessorKey: 'merged', header: 'Merged' },
-      { accessorKey: 'lane', header: 'Lane' },
       { accessorKey: 'pf_reads', header: 'Pf Reads' },
       { accessorKey: 'loading_conc', header: 'Loading Conc' },
       { accessorKey: 'q30', header: 'Q30' },
@@ -108,10 +103,6 @@ const PreTableData = () => {
       { accessorKey: 'lane_4', header: 'Lane 4' },
       { accessorKey: 'fc_type', header: 'Fc Type' },
       { accessorKey: 'loaded_by', header: 'Loaded By' },
-      { accessorKey: 'loading_date', header: 'Loading Date' },
-      { accessorKey: 'completion_date', header: 'Completion Date' },
-      { accessorKey: 'demultiplex_date', header: 'Demultiplex Date' },
-      { accessorKey: 'process_date', header: 'Process Date' },
       { accessorKey: 'order_no', header: 'Order No' },
       { accessorKey: 'sequencer_id', header: 'Sequencer Id' },
       { accessorKey: 'run_duration', header: 'Run Duration' },
@@ -136,12 +127,74 @@ const PreTableData = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
+      initialState={{
+        columnVisibility: {
+          sample_name: false,
+          qpcr: false,
+          pooling_id: false,
+          fragment: false,
+          labchip_conc: false,
+          well: false,
+          pre_norm_well: false,
+          i5_id: false,
+          i7_id: false,
+          data_sample: false,
+          urgent: false,
+          remark: false,
+          lib_received: false,
+          sample_qc: false,
+          lib_qc: false,
+          error: false,
+          pf_reads: false,
+          loading_conc: false,
+          q30: false,
+          lane_1: false,
+          lane_2: false,
+          lane_3: false,
+          lane_4: false,
+          fc_type: false,
+          loaded_by: false,
+          order_no: false,
+          sequencer_id: false,
+          run_duration: false,
+          position: false,
+          project_id: false,
+          date: false,
+          cov: false,
+          srv: false,
+          rg: false,
+          anl: false,
+          datatype: false,
+          pi: false,
+          requirement: false,
+          earliest: false,
+          latest: false,
+          i5_sequence: false,
+          i7_sequence: false
+        },
+        density: 'compact',
+        showGlobalFilter: true,
+      }}
       enableRowSelection
-      // getRowId={(row) => row.phoneNumber}
-      initialState={{ showColumnFilters: true }}
+      // enableColumnDragging
+      enableColumnResizing
+      enableGrouping
+      enableStickyHeader
+      enablePagination={false}
+      enableRowVirtualization
+      enablePinning
+      enableRowNumbers
+
+      manualSorting
+      onColumnFiltersChange={setColumnFilters}
+
+
+
+      // enableColumnFilterModes
+
       manualFiltering
       manualPagination
-      manualSorting
+
       muiToolbarAlertBannerProps={
         isError
           ? {
@@ -150,16 +203,15 @@ const PreTableData = () => {
           }
           : undefined
       }
-      onColumnFiltersChange={setColumnFilters}
-      onGlobalFilterChange={setGlobalFilter}
-      onPaginationChange={setPagination}
+
+      enableGlobalFilter={false}
+      // onGlobalFilterChange={setGlobalFilter}
       onSortingChange={setSorting}
       rowCount={rowCount}
       state={{
         columnFilters,
         globalFilter,
         isLoading,
-        pagination,
         showAlertBanner: isError,
         showProgressBars: isRefetching,
         sorting,

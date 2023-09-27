@@ -131,7 +131,10 @@ def type0():
         value = filter['value']
 
         if isinstance(value, str):
-            where_clause += f" {resolve(filter['id'])} LIKE '%{value}%'"
+            if filter['id'] == "qpcr":
+                where_clause += f" to_char({resolve(filter['id'])}, '99D99') LIKE '%{value}%'"
+            else:
+                where_clause += f" {resolve(filter['id'])} LIKE '%{value}%'"
         elif isinstance(value, list):
             where_clause += f" {resolve(filter['id'])} IN {tuple(value)}"
         else:
