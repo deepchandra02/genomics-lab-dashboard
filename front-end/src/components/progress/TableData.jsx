@@ -84,10 +84,18 @@ const TableData = () => {
       {
         accessorKey: 'loading_date',
         header: 'Loading Date',
-        // columnFilterModeOptions: ['between']
+        filterVariant: 'range'
       },
-      { accessorKey: 'completion_date', header: 'Completion Date' },
-      { accessorKey: 'demultiplex_date', header: 'Demultiplex Date' },
+      {
+        accessorKey: 'completion_date',
+        header: 'Completion Date',
+        filterVariant: 'range'
+      },
+      {
+        accessorKey: 'demultiplex_date',
+        header: 'Demultiplex Date',
+        filterVariant: 'range'
+      },
       { accessorKey: 'stage_date', header: 'Stage Date' },
       { accessorKey: 'process_date', header: 'Process Date' },
       { accessorKey: 'merged', header: 'Merged' },

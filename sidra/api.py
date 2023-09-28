@@ -128,11 +128,11 @@ def type0():
             # else:
             where_clause += f" {resolve(filter['id'])} LIKE '%{value}%' AND "
         elif isinstance(value, list):
-            if value[0] != '' and value[1] != '':
-                where_clause += f" {resolve(filter['id'])} BETWEEN {tuple(value)} AND "
-            elif value[0] != '':
+            if value[0] != '' and value[1] != '' and value[0] != None and value[1] != None:
+                where_clause += f" {resolve(filter['id'])} BETWEEN {value[0]} AND {value[1]} AND "
+            elif value[0] != '' and value[0] != None:
                 where_clause += f" {resolve(filter['id'])} >= {value[0]} AND "
-            elif value[1] != '':
+            elif value[1] != '' and value[1] != None:
                 where_clause += f" {resolve(filter['id'])} <= {value[1]} AND "
         else:
             return "value type inappropriate in filter"
