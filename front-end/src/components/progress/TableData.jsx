@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { MaterialReactTable } from 'material-react-table';
-
+// import { Box, Button } from '@mui/material';
 
 // const dataJson = require('../../newdata/data0.json');
 
@@ -13,11 +13,10 @@ const TableData = () => {
   const [rowCount, setRowCount] = useState(0);
 
   // Table state
+  const [rowSelection, setRowSelection] = useState({});
   const [columnFilters, setColumnFilters] = useState([]);
   const [sorting, setSorting] = useState([]);
 
-  console.log('ping 1');
-  //if you want to avoid useEffect, look at the React Query example instead
   useEffect(() => {
     const fetchData = async () => {
       if (!data.length) {
@@ -61,15 +60,9 @@ const TableData = () => {
   }, [columnFilters,
     sorting,
   ]);
-
+  console.log('rows', rowSelection);
   const columns = useMemo(
     () => [
-      //remove later
-      {
-        accessorKey: 'qpcr',
-        header: 'Qpcr',
-        filterVariant: 'range'
-      },
       {
         accessorKey: 'sample_id',
         header: 'Sample Id',
@@ -96,17 +89,39 @@ const TableData = () => {
         header: 'Demultiplex Date',
         filterVariant: 'range'
       },
-      { accessorKey: 'stage_date', header: 'Stage Date' },
-      { accessorKey: 'process_date', header: 'Process Date' },
-      { accessorKey: 'merged', header: 'Merged' },
-      { accessorKey: 'lane', header: 'Lane' },
+      // {
+      //   accessorKey: 'stage_date',
+      //   header: 'Stage Date',
+      //   filterVariant: 'range'
+      // },
+      // {
+      //   accessorKey: 'process_date',
+      //   header: 'Process Date',
+      //   filterVariant: 'range'
+      // },
+      // {
+      //   accessorKey: 'merged_fastq',
+      //   header: 'Merged fastq',
+      //   filterVariant: 'range'
+      // },
+      // {
+      //   accessorKey: 'lane_fastq',
+      //   header: 'Lane fastq',
+      //   filterVariant: 'range'
+      // },
+      // {
+      //   accessorKey: 'release_date',
+      //   header: 'Release Date',
+      //   filterVariant: 'range'
+      // },
+
 
       { accessorKey: 'sample_name', header: 'Sample Name' },
-      // {
-      //   accessorKey: 'qpcr',
-      //   header: 'Qpcr',
-      //   columnFilterModeOptions: ['between', 'greaterThan', 'lessThan']
-      // },
+      {
+        accessorKey: 'qpcr',
+        header: 'Qpcr',
+        filterVariant: 'range'
+      },
       { accessorKey: 'pooling_id', header: 'Pooling Id' },
       { accessorKey: 'fragment', header: 'Fragment' },
       { accessorKey: 'labchip_conc', header: 'Labchip Conc' },
@@ -155,11 +170,12 @@ const TableData = () => {
       columns={columns}
       data={data}
       initialState={{
+        isFullScreen: true,
         showColumnFilters: true,
         // columnFilterFns: {
         columnVisibility: {
           sample_name: false,
-          // qpcr: false,
+          qpcr: false,
           pooling_id: false,
           fragment: false,
           labchip_conc: false,
@@ -205,7 +221,50 @@ const TableData = () => {
         showGlobalFilter: true,
       }}
       enableRowSelection
-      // enableColumnDragging
+      //clicking anywhere on the row will select it
+      muiTableBodyRowProps={({ row }) => ({
+        onClick: row.getToggleSelectedHandler(),
+        sx: { cursor: 'pointer' },
+      })}
+      onRowSelectionChange={setRowSelection}
+      getRowId={(row) => row.sample_id + row.fc_id}
+
+      //add custom action buttons to top-left of top toolbar
+      // renderTopToolbarCustomActions={({ table }) => (
+      //   <Box sx={{ display: 'flex', gap: '1rem', p: '4px' }}>
+      //     <Button
+      //       color="primary"
+      //       disabled={!table.getIsSomeRowsSelected()}
+      //       onClick={() => {
+      //         const url = new URL(
+      //           '/Progress/release',
+      //           process.env.NODE_ENV === 'production'
+      //             ? 'https://www.material-react-table.com'
+      //             : 'http://127.0.0.1:5000',
+      //         );
+
+      //         url.searchParams.set('data', JSON.stringify(rowSelection ?? []));
+
+      //         const response = fetch(url.href);
+      //         console.log(response);
+      //         if (!response.ok) {
+      //           // Handle error
+      //           console.error('Server error:', response);
+      //           alert('Release Error');
+      //           return;
+      //         }
+      //         else {
+      //           alert('Released successfully!');
+      //         }
+      //       }}
+      //       variant="contained"
+      //     >
+      //       Mark as released
+      //     </Button>
+      //   </Box >
+      // )}
+
+      enableColumnOrdering
       enableColumnResizing
       enableGrouping
       enableStickyHeader
@@ -229,11 +288,12 @@ const TableData = () => {
           }
           : undefined
       }
-      positionToolbarAlertBanner='bottom'
+      // positionToolbarAlertBanner='top'
 
       onSortingChange={setSorting}
       rowCount={rowCount}
       state={{
+        rowSelection,
         columnFilters,
         isLoading,
         showAlertBanner: isError,

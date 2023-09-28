@@ -1,1 +1,18 @@
-[{"sample_id": "0201264391", "pooling_id": "pooling 15-A1-Top-up 120M", "fc_id": "HNKCVDSX5", "sample_name": "GHI-M0013", "submission_id": "MA_SDR400185_230321_WGS30N_B1", "qpcr": "4.00", "fragment": 707, "labchip_conc": "8.46", "well": "572-H9", "pre_norm_well": "", "i5_id": "UDI0072", "i7_id": "UDI0072", "data_sample": "Top-up", "urgent": false, "remark": "repreped due to low target base30x", "lib_received": 
+[
+  {
+    "sample_id": "0201264391",
+    "pooling_id": "pooling 15-A1-Top-up 120M",
+    "fc_id": "HNKCVDSX5",
+    "sample_name": "GHI-M0013",
+    "submission_id": "MA_SDR400185_230321_WGS30N_B1",
+    "qpcr": "4.00",
+    "fragment": 707,
+    "labchip_conc": "8.46",
+    "well": "572-H9",
+    "pre_norm_well": "",
+    "i5_id": "UDI0072",
+    "i7_id": "UDI0072",
+    "data_sample": "Top-up",
+    "urgent": false,
+    "remark": "repreped due to low target base30x",
+    "lib_received":

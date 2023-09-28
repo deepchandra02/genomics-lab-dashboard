@@ -83,24 +83,24 @@ def refresh():
     else:
         return "refresh failed for exception " + results
 
-@app.route('/Progress/release/',methods=['PUT'])
+@app.route('/Progress/release')
 def release():
-    data = request.data
+    data = json.loads(request.args.get("data", "[]"))
     failed = dict()
     for element in data:
-        sample_id, fc_id = element
+        sample_id, fc_id = element[:10], element[10:]
         result = sql("UPDATE samples SET release_date = '%s' WHERE sample_id = '%s' AND fc_id = '%s';"%(datetime.datetime.today().date(), sample_id, fc_id))
         if result != []:
             failed[element] = result
     
     if not failed:
-        return "Released successfully"
+        return {}
     
     s = ""
-    for key in failed:
-        s += "Release failed for " + key + " for the exception " + failed[key] + "\n"
+    # for key in failed:
+    #     s += "Release failed for " + key + " for the exception " + failed[key] + "\n"
 
-    return s
+    return {}
 
 
 @app.route('/type0')
@@ -126,14 +126,14 @@ def type0():
             # if filter['id'] in format:
             #     where_clause += f" to_char({resolve(filter['id'])}, {format[filter['id']]}) LIKE '%{value}%'"
             # else:
-            where_clause += f" {resolve(filter['id'])} LIKE '%{value}%' AND "
+            where_clause += f" UPPER({resolve(filter['id'])}) LIKE UPPER('%{value}%') AND "
         elif isinstance(value, list):
             if 'date' in filter['id']:
                 for i in range(len(value)):
                     if value[i] != '' and value[i] != None:
                         if len(value[i]) != 8:
                             return {}
-                        value[i] = datetime.datetime.strptime(value[i], '%d%m%Y').date()
+                        value[i] = f"TO_DATE('{value[i]}', 'DDMMYYYY')"
 
             if value[0] != '' and value[1] != '' and value[0] != None and value[1] != None:
                 where_clause += f" {resolve(filter['id'])} BETWEEN {value[0]} AND {value[1]} AND "
