@@ -187,8 +187,15 @@ def store_row(row):
         if data != None:
             # print(data)
             assert(len(data) == 8)
-            loading_date = datetime.datetime.strptime(row["Loading Date"], '%m/%d/%Y').date()
-            completion_date = datetime.datetime.strptime(row["Completion Date"], '%m/%d/%Y').date()
+            try:
+                loading_date = datetime.datetime.strptime(row["Loading Date"], '%m/%d/%Y').date()
+            except:
+                loading_date = datetime.datetime.strptime(row["Loading Date"], '%Y-%m-%d').date()
+
+            try:
+                completion_date = datetime.datetime.strptime(row["Completion Date"], '%m/%d/%Y').date()
+            except:
+                completion_date = datetime.datetime.strptime(row["Completion Date"], '%Y-%m-%d').date()
             # demultiplex_date = datetime.datetime.strptime(row["Demultiplex Date", ])
             if data[0] != row["FC Type"]:
                 print("FC Type data changed for flowcell %s from %s to %s"%(row["FC"], data[0], row["FC Type"]))
@@ -334,64 +341,65 @@ def store_fc(fc):
             for line in raw_info_file:
                 row = dict()
                 cells = line.split('\t')
-                assert(len(cells) == col_numbers)
-                for i in range(col_numbers):
-                  row[fields[i].strip()] = cells[i].strip()
+                # assert(len(cells) == col_numbers)
+                if cells[0] != "\n":
+                    for i in range(col_numbers):
+                        row[fields[i].strip()] = cells[i].strip()
 
-                if row["FC"] == fc:
-                    row["Demultiplex Date"] = datetime.datetime.strptime('20' + raw_info_filename, "%Y%m%d").date()
-                    row["Sequencer"] = sequencer
-                    row["Position"] = position
-                    tokens = row["Project name"].split("_")
-                    row["Project"] = tokens[1]
-                    row["PI"] = tokens[0]
-                    row["Submission Date"] = datetime.datetime.strptime('20' + tokens[-3], '%Y%m%d').date()
-                    row["Datatype"] = tokens[-2]
-                    if row["Pre-Norm Well"] == "":
-                        row["Pre-Norm Well"] = "_"
-                    
-                    row.pop("Submission ID", None)
-                    row.pop("Run Duration (H:M)", None)
-                    row.pop("Data Update Contacts", None)
-                    row["Submission ID"] = row["Project name"]
-                    row.pop("Project name", None)
+                    if row["FC"] == fc:
+                        row["Demultiplex Date"] = datetime.datetime.strptime('20' + raw_info_filename, "%Y%m%d").date()
+                        row["Sequencer"] = sequencer
+                        row["Position"] = position
+                        tokens = row["Project name"].split("_")
+                        row["Project"] = tokens[1]
+                        row["PI"] = tokens[0]
+                        row["Submission Date"] = datetime.datetime.strptime('20' + tokens[-3], '%Y%m%d').date()
+                        row["Datatype"] = tokens[-2]
+                        if row["Pre-Norm Well"] == "":
+                            row["Pre-Norm Well"] = "_"
+                        
+                        row.pop("Submission ID", None)
+                        row.pop("Run Duration (H:M)", None)
+                        row.pop("Data Update Contacts", None)
+                        row["Submission ID"] = row["Project name"]
+                        row.pop("Project name", None)
 
-                    row["Sample Name"] = row["Sample Name"].replace(" ", "")
+                        row["Sample Name"] = row["Sample Name"].replace(" ", "")
 
-                    if "Reads (PF B )" in row:
-                        row["Reads (PF)"] = row["Reads (PF B )"] + " B"
-                        row.pop("Reads (PF B )", None)
-                    elif "Reads (PF M )" in row:
-                        row["Reads (PF)"] = row["Reads (PF M )"] + " M"
-                        row.pop("Reads (PF M )", None)
+                        if "Reads (PF B )" in row:
+                            row["Reads (PF)"] = row["Reads (PF B )"] + " B"
+                            row.pop("Reads (PF B )", None)
+                        elif "Reads (PF M )" in row:
+                            row["Reads (PF)"] = row["Reads (PF M )"] + " M"
+                            row.pop("Reads (PF M )", None)
 
-                    if "Loading Conc. (pM)" in row:
-                        row["Loading Conc."] = row["Loading Conc. (pM)"] + " pM"
-                        row.pop("Loading Conc. (pM)", None)
-                    elif "Loading Conc. (nM)" in row:
-                        row["Loading Conc."] = row["Loading Conc. (nM)"] + " nM"
-                        row.pop("Loading Conc. (nM)", None)
+                        if "Loading Conc. (pM)" in row:
+                            row["Loading Conc."] = row["Loading Conc. (pM)"] + " pM"
+                            row.pop("Loading Conc. (pM)", None)
+                        elif "Loading Conc. (nM)" in row:
+                            row["Loading Conc."] = row["Loading Conc. (nM)"] + " nM"
+                            row.pop("Loading Conc. (nM)", None)
 
-                    if row["Urgency"] == "Urgent":
-                        row["Urgency"] = True
-                    else:
-                        row["Urgency"] = False
-                    
-                    if row["Data_Sample_Status"] == "":
-                        row["Data_Sample_Status"] = "New"
+                        if row["Urgency"] == "Urgent":
+                            row["Urgency"] = True
+                        else:
+                            row["Urgency"] = False
+                        
+                        if row["Data_Sample_Status"] == "":
+                            row["Data_Sample_Status"] = "New"
 
-                    if row["Sample QC P/F"] == "P":
-                        row["Sample QC P/F"] = True
-                    else:
-                        row["Sample QC P/F"] = False
-                    
-                    if row["Lib QC P/F"] == "P":
-                        row["Lib QC P/F"] = True
-                    else:
-                        row["Lib QC P/F"] = False
-                    
-                    store_row(row)
-                        # table.append(row)
+                        if row["Sample QC P/F"] == "P":
+                            row["Sample QC P/F"] = True
+                        else:
+                            row["Sample QC P/F"] = False
+                        
+                        if row["Lib QC P/F"] == "P":
+                            row["Lib QC P/F"] = True
+                        else:
+                            row["Lib QC P/F"] = False
+                        
+                        store_row(row)
+                            # table.append(row)
 
 
     else:
