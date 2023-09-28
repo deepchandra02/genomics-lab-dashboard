@@ -217,10 +217,10 @@ const TableData = () => {
 
       manualSorting
 
-
       manualFiltering
       onColumnFiltersChange={setColumnFilters}
 
+      enableGlobalFilter={false}
       muiToolbarAlertBannerProps={
         isError
           ? {
@@ -229,9 +229,8 @@ const TableData = () => {
           }
           : undefined
       }
+      positionToolbarAlertBanner='bottom'
 
-      enableGlobalFilter={false}
-      // onGlobalFilterChange={setGlobalFilter}
       onSortingChange={setSorting}
       rowCount={rowCount}
       state={{
