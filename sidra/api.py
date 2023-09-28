@@ -105,34 +105,26 @@ def release():
 
 @app.route('/type0')
 def type0():
-    # start = int(request.args.get('start', 0))
-    # size = int(request.args.get('size', 25))
     filters = json.loads(request.args.get('filters', '[]'))
-    # global_filter = request.args.get('globalFilter', '')
     sorting = json.loads(request.args.get('sorting', '[]'))
     
     print(filters)
 
     # Multiple column sorting isn't available
     assert(len(sorting) < 2)
+    
 
-    # Hardcoding to resolve ambiguity
-    # if len(sorting) == 1: 
-    #     if sorting[0]["id"] == "submission_id":
-    #         sorting[0]["id"] = "sub.submission_id"
-    #     if sorting[0]["id"] == "submission_id":
-    #         sorting[0]["id"] = "sub.submission_id"
-        
+    format = {"run_duration" : "999" , "q30": "99D999", "qpcr" : "99D9", "fragment" : "999", "labchip_conc" : "999D99", "mean_qscore" : "99D999", "yieldQ30" : "999999999999"}
+
+
     # Build the WHERE clause for filtering
     where_clause = "WHERE"
-    # if global_filter:
-    #     where_clause += f"WHERE (column1 LIKE '%{global_filter}%' OR column2 LIKE '%{global_filter}%' OR ...)" # Add appropriate columns
     for filter in filters:
         value = filter['value']
 
         if isinstance(value, str):
-            if filter['id'] == "qpcr":
-                where_clause += f" to_char({resolve(filter['id'])}, '99D99') LIKE '%{value}%'"
+            if filter['id'] in format:
+                where_clause += f" to_char({resolve(filter['id'])}, {format[filter['id']]}) LIKE '%{value}%'"
             else:
                 where_clause += f" {resolve(filter['id'])} LIKE '%{value}%'"
         elif isinstance(value, list):
@@ -141,11 +133,9 @@ def type0():
             return "value type inappropriate in filter"
         where_clause += " AND "
 
-    where_clause = where_clause[:-5]
+    where_clause = where_clause[:-5] # removing the last 'AND'
 
     print(where_clause)
-
-    # where_clause = "WHERE f.fc_id = 'dummy search'"
 
     # Build the ORDER BY clause for sorting
     order_by_clause = ""
@@ -171,27 +161,11 @@ def type0():
     print(query)
     print(results)
 
-    # Get the column names from the cursor description
-    # return cursor.description
-    # columns = [desc[0] for desc in cursor.description]
-
-    # Convert the results to a list of dictionaries
-    # output = []
-    # for row in results:
-    #     row_dict = {}
-    #     for i, column in enumerate(columns):
-    #         if isinstance(row[i], datetime.date):
-    #             row_dict[column] = row[i].isoformat()
-    #         else:
-    #             row_dict[column] = row[i]
-    #     output.append(row_dict)
-    
     # DEBUGGING< DON'T REMOVE
     # Write the results to a JSON file
-    # with open('./front-end/src/newdata/data0.json', 'w') as f:
-    #     json.dump(output, f, cls=JSONEncoder)
+    with open('./front-end/src/newdata/data0.json', 'w') as f:
+        json.dump(results, f, cls=JSONEncoder)
     return jsonify(results)
-
 
 
 @app.route('/data1/<date>')
