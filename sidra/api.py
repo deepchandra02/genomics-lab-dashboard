@@ -111,7 +111,7 @@ def type0():
     print(filters)
 
     # Multiple column sorting isn't available
-    assert(len(sorting) < 2)
+    # assert(len(sorting) < 2)
     
 
     # format = {"run_duration" : "999" , "q30": "99D999", "qpcr" : "9D99", "fragment" : "999", "labchip_conc" : "999D99", "mean_qscore" : "99D999", "yieldQ30" : "999999999999"}

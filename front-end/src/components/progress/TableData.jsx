@@ -15,7 +15,7 @@ const TableData = () => {
   // Table state
   const [rowSelection, setRowSelection] = useState({});
   const [columnFilters, setColumnFilters] = useState([]);
-  const [sorting, setSorting] = useState([]);
+  const [sorting, setSorting] = useState([{ id: 'loading_date', desc: true }, { id: 'submission_id', desc: false }]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,7 +73,10 @@ const TableData = () => {
         header: 'Fc Id',
         enableHiding: false,
       },
-      { accessorKey: 'submission_id', header: 'Submission Id' },
+      {
+        accessorKey: 'submission_id',
+        header: 'Submission Id'
+      },
       {
         accessorKey: 'loading_date',
         header: 'Loading Date',
@@ -89,80 +92,116 @@ const TableData = () => {
         header: 'Demultiplex Date',
         filterVariant: 'range'
       },
-      // {
-      //   accessorKey: 'stage_date',
-      //   header: 'Stage Date',
-      //   filterVariant: 'range'
-      // },
-      // {
-      //   accessorKey: 'process_date',
-      //   header: 'Process Date',
-      //   filterVariant: 'range'
-      // },
-      // {
-      //   accessorKey: 'merged_fastq',
-      //   header: 'Merged fastq',
-      //   filterVariant: 'range'
-      // },
-      // {
-      //   accessorKey: 'lane_fastq',
-      //   header: 'Lane fastq',
-      //   filterVariant: 'range'
-      // },
-      // {
-      //   accessorKey: 'release_date',
-      //   header: 'Release Date',
-      //   filterVariant: 'range'
-      // },
-
-
+      {
+        accessorKey: 'stage_date',
+        header: 'Stage Date',
+        filterVariant: 'range'
+      },
+      {
+        accessorKey: 'process_date',
+        header: 'Process Date',
+        filterVariant: 'range'
+      },
+      {
+        accessorKey: 'merged_fastq',
+        header: 'Merged fastq',
+        filterVariant: 'range'
+      },
+      {
+        accessorKey: 'lane_fastq',
+        header: 'Lane fastq',
+        filterVariant: 'range'
+      },
+      {
+        accessorKey: 'release_date',
+        header: 'Release Date',
+        filterVariant: 'range'
+      },
       { accessorKey: 'sample_name', header: 'Sample Name' },
       {
         accessorKey: 'qpcr',
         header: 'Qpcr',
         filterVariant: 'range'
       },
-      { accessorKey: 'pooling_id', header: 'Pooling Id' },
-      { accessorKey: 'fragment', header: 'Fragment' },
-      { accessorKey: 'labchip_conc', header: 'Labchip Conc' },
-      { accessorKey: 'well', header: 'Well' },
-      { accessorKey: 'pre_norm_well', header: 'Pre Norm Well' },
-      { accessorKey: 'i5_id', header: 'I5 Id' },
-      { accessorKey: 'i7_id', header: 'I7 Id' },
-      { accessorKey: 'data_sample', header: 'Data Sample' },
-      { accessorKey: 'urgent', header: 'Urgent' },
-      { accessorKey: 'remark', header: 'Remark' },
-      { accessorKey: 'lib_received', header: 'Lib Received' },
-      { accessorKey: 'sample_qc', header: 'Sample Qc' },
-      { accessorKey: 'lib_qc', header: 'Lib Qc' },
-      { accessorKey: 'error', header: 'Error' },
-      { accessorKey: 'pf_reads', header: 'Pf Reads' },
-      { accessorKey: 'loading_conc', header: 'Loading Conc' },
-      { accessorKey: 'q30', header: 'Q30' },
-      { accessorKey: 'lane_1', header: 'Lane 1' },
-      { accessorKey: 'lane_2', header: 'Lane 2' },
-      { accessorKey: 'lane_3', header: 'Lane 3' },
-      { accessorKey: 'lane_4', header: 'Lane 4' },
-      { accessorKey: 'fc_type', header: 'Fc Type' },
-      { accessorKey: 'loaded_by', header: 'Loaded By' },
-      { accessorKey: 'order_no', header: 'Order No' },
-      { accessorKey: 'sequencer_id', header: 'Sequencer Id' },
-      { accessorKey: 'run_duration', header: 'Run Duration' },
-      { accessorKey: 'position', header: 'Position' },
-      { accessorKey: 'project_id', header: 'Project Id' },
-      { accessorKey: 'date', header: 'Date' },
-      { accessorKey: 'cov', header: 'Cov' },
-      { accessorKey: 'srv', header: 'Srv' },
-      { accessorKey: 'rg', header: 'Rg' },
-      { accessorKey: 'anl', header: 'Anl' },
-      { accessorKey: 'datatype', header: 'Datatype' },
-      { accessorKey: 'pi', header: 'Pi' },
-      { accessorKey: 'requirement', header: 'Requirement' },
-      { accessorKey: 'earliest', header: 'Earliest' },
-      { accessorKey: 'latest', header: 'Latest' },
-      { accessorKey: 'i5_sequence', header: 'I5 Sequence' },
-      { accessorKey: 'i7_sequence', header: 'I7 Sequence' }
-    ], []);
+      { 'accessorKey': 'anl', 'header': 'Anl' },
+      { 'accessorKey': 'cov', 'header': 'Cov' },
+      { 'accessorKey': 'data_sample', 'header': 'Data Sample' },
+      { 'accessorKey': 'datatype', 'header': 'Datatype' },
+      { 'accessorKey': 'error', 'header': 'Error' },
+      { 'accessorKey': 'fc_type', 'header': 'Fc Type' },
+      {
+        'accessorKey': 'fragment',
+        'header': 'Fragment',
+        filterVariant: 'range'
+      },
+      { 'accessorKey': 'i5_id', 'header': 'I5 Id' },
+      { 'accessorKey': 'i5_sequence', 'header': 'I5 Sequence' },
+      { 'accessorKey': 'i7_id', 'header': 'I7 Id' },
+      { 'accessorKey': 'i7_sequence', 'header': 'I7 Sequence' },
+      {
+        'accessorKey': 'labchip_conc',
+        'header': 'Labchip Conc',
+        filterVariant: 'range'
+      },
+      { 'accessorKey': 'lane_1', 'header': 'Lane 1' },
+      { 'accessorKey': 'lane_2', 'header': 'Lane 2' },
+      { 'accessorKey': 'lane_3', 'header': 'Lane 3' },
+      { 'accessorKey': 'lane_4', 'header': 'Lane 4' },
+      {
+        'accessorKey': 'lib_qc',
+        'header': 'Lib Qc',
+        filterVariant: 'range'
+      },
+      {
+        'accessorKey': 'lib_received',
+        'header': 'Lib Received',
+        filterVariant: 'range'
+      },
+      { 'accessorKey': 'loaded_by', 'header': 'Loaded By' },
+      {
+        'accessorKey': 'loading_conc',
+        'header': 'Loading Conc',
+        filterVariant: 'range'
+      },
+      {
+        'accessorKey': 'mean_qscore',
+        'header': 'Mean Qscore',
+        filterVariant: 'range'
+      },
+      { 'accessorKey': 'order_no', 'header': 'Order No' },
+      { 'accessorKey': 'pf_reads', 'header': 'Pf Reads' },
+      { 'accessorKey': 'pi', 'header': 'Pi' },
+      { 'accessorKey': 'pooling_id', 'header': 'Pooling Id' },
+      { 'accessorKey': 'position', 'header': 'Position' },
+      { 'accessorKey': 'pre_norm_well', 'header': 'Pre Norm Well' },
+      { 'accessorKey': 'project_id', 'header': 'Project Id' },
+      {
+        'accessorKey': 'q30',
+        'header': 'Q30',
+        filterVariant: 'range'
+      },
+      { 'accessorKey': 'remark', 'header': 'Remark' },
+      { 'accessorKey': 'report_dir', 'header': 'Report Dir' },
+      { 'accessorKey': 'requirement', 'header': 'Requirement' },
+      { 'accessorKey': 'rg', 'header': 'Rg' },
+      { 'accessorKey': 'run_duration', 'header': 'Run Duration' },
+      { 'accessorKey': 'sample_qc', 'header': 'Sample Qc' },
+      { 'accessorKey': 'sequencer_id', 'header': 'Sequencer Id' },
+      { 'accessorKey': 'srv', 'header': 'Srv' },
+      {
+        'accessorKey': 'submission_date',
+        'header': 'Submission Date',
+        filterVariant: 'range'
+      },
+      { 'accessorKey': 'urgent', 'header': 'Urgent' },
+      { 'accessorKey': 'well', 'header': 'Well' },
+      {
+        'accessorKey': 'yieldq30',
+        'header': 'Yieldq30',
+        filterVariant: 'range'
+      }]
+
+    , []);
 
 
   return (
@@ -172,50 +211,50 @@ const TableData = () => {
       initialState={{
         isFullScreen: true,
         showColumnFilters: true,
-        // columnFilterFns: {
         columnVisibility: {
-          sample_name: false,
-          qpcr: false,
-          pooling_id: false,
-          fragment: false,
-          labchip_conc: false,
-          well: false,
-          pre_norm_well: false,
-          i5_id: false,
-          i7_id: false,
-          data_sample: false,
-          urgent: false,
-          remark: false,
-          lib_received: false,
-          sample_qc: false,
-          lib_qc: false,
-          error: false,
-          pf_reads: false,
-          loading_conc: false,
-          q30: false,
-          lane_1: false,
-          lane_2: false,
-          lane_3: false,
-          lane_4: false,
-          fc_type: false,
-          loaded_by: false,
-          order_no: false,
-          sequencer_id: false,
-          run_duration: false,
-          position: false,
-          project_id: false,
-          date: false,
-          cov: false,
-          srv: false,
-          rg: false,
-          anl: false,
-          datatype: false,
-          pi: false,
-          requirement: false,
-          earliest: false,
-          latest: false,
-          i5_sequence: false,
-          i7_sequence: false
+          'anl': false,
+          'cov': false,
+          'data_sample': false,
+          'datatype': false,
+          'error': false,
+          'fc_type': false,
+          'fragment': false,
+          'i5_id': false,
+          'i5_sequence': false,
+          'i7_id': false,
+          'i7_sequence': false,
+          'labchip_conc': false,
+          'lane_1': false,
+          'lane_2': false,
+          'lane_3': false,
+          'lane_4': false,
+          'lib_qc': false,
+          'lib_received': false,
+          'loaded_by': false,
+          'loading_conc': false,
+          'mean_qscore': false,
+          'order_no': false,
+          'pf_reads': false,
+          'pi': false,
+          'pooling_id': false,
+          'position': false,
+          'pre_norm_well': false,
+          'project_id': false,
+          'q30': false,
+          'qpcr': false,
+          'remark': false,
+          'report_dir': false,
+          'requirement': false,
+          'rg': false,
+          'run_duration': false,
+          'sample_name': false,
+          'sample_qc': false,
+          'sequencer_id': false,
+          'srv': false,
+          'submission_date': false,
+          'urgent': false,
+          'well': false,
+          'yieldq30': false
         },
         density: 'compact',
         showGlobalFilter: true,
@@ -275,6 +314,7 @@ const TableData = () => {
 
 
       manualSorting
+      isMultiSortEvent={() => true}
 
       manualFiltering
       onColumnFiltersChange={setColumnFilters}
