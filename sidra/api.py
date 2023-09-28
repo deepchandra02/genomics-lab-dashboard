@@ -123,20 +123,20 @@ def type0():
         value = filter['value']
 
         if isinstance(value, str):
-            if filter['id'] in format:
-                where_clause += f" to_char({resolve(filter['id'])}, {format[filter['id']]}) LIKE '%{value}%'"
-            else:
-                where_clause += f" {resolve(filter['id'])} LIKE '%{value}%'"
+            # if filter['id'] in format:
+            #     where_clause += f" to_char({resolve(filter['id'])}, {format[filter['id']]}) LIKE '%{value}%'"
+            # else:
+            where_clause += f" {resolve(filter['id'])} LIKE '%{value}%' AND "
         elif isinstance(value, list):
             if value[0] != '' and value[1] != '':
-                where_clause += f" {resolve(filter['id'])} IN {tuple(value)}"
+                where_clause += f" {resolve(filter['id'])} BETWEEN {tuple(value)} AND "
             elif value[0] != '':
-                where_clause += f" {resolve(filter['id'])} >= {value[0]}"
+                where_clause += f" {resolve(filter['id'])} >= {value[0]} AND "
             elif value[1] != '':
-                where_clause += f" {resolve(filter['id'])} <= {value[1]}"
+                where_clause += f" {resolve(filter['id'])} <= {value[1]} AND "
         else:
             return "value type inappropriate in filter"
-        where_clause += " AND "
+        # where_clause += " AND "
     where_clause = where_clause[:-5] # removing the last 'AND'
 
     print(where_clause)
