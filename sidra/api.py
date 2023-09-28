@@ -114,7 +114,7 @@ def type0():
     assert(len(sorting) < 2)
     
 
-    format = {"run_duration" : "999" , "q30": "99D999", "qpcr" : "9D99", "fragment" : "999", "labchip_conc" : "999D99", "mean_qscore" : "99D999", "yieldQ30" : "999999999999"}
+    # format = {"run_duration" : "999" , "q30": "99D999", "qpcr" : "9D99", "fragment" : "999", "labchip_conc" : "999D99", "mean_qscore" : "99D999", "yieldQ30" : "999999999999"}
 
 
     # Build the WHERE clause for filteri
@@ -124,15 +124,19 @@ def type0():
 
         if isinstance(value, str):
             if filter['id'] in format:
-                where_clause += f" to_char({resolve(filter['id'])}, '{format[filter['id']]}') LIKE '%{value}%'"
+                where_clause += f" to_char({resolve(filter['id'])}, {format[filter['id']]}) LIKE '%{value}%'"
             else:
                 where_clause += f" {resolve(filter['id'])} LIKE '%{value}%'"
         elif isinstance(value, list):
-            where_clause += f" {resolve(filter['id'])} IN {tuple(value)}"
+            if value[0] != '' and value[1] != '':
+                where_clause += f" {resolve(filter['id'])} IN {tuple(value)}"
+            elif value[0] != '':
+                where_clause += f" {resolve(filter['id'])} >= {value[0]}"
+            elif value[1] != '':
+                where_clause += f" {resolve(filter['id'])} <= {value[1]}"
         else:
             return "value type inappropriate in filter"
         where_clause += " AND "
-
     where_clause = where_clause[:-5] # removing the last 'AND'
 
     print(where_clause)
