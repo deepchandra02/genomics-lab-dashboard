@@ -128,6 +128,13 @@ def type0():
             # else:
             where_clause += f" {resolve(filter['id'])} LIKE '%{value}%' AND "
         elif isinstance(value, list):
+           if 'date' in filter['id']:
+                for i in range(len(value)):
+                    if value[i] != '' and value[i] != None:
+                        if len(value[i]) != 8:
+                            return "invalid date type"
+                        value[i] = datetime.datetime.strptime(value[i], '%Y%m%d').date()
+
             if value[0] != '' and value[1] != '' and value[0] != None and value[1] != None:
                 where_clause += f" {resolve(filter['id'])} BETWEEN {value[0]} AND {value[1]} AND "
             elif value[0] != '' and value[0] != None:
