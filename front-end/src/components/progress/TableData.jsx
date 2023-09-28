@@ -14,8 +14,6 @@ const TableData = () => {
 
   // Table state
   const [columnFilters, setColumnFilters] = useState([]);
-  const [columnFilterFns, setColumnFilterFns] = useState({});
-
   const [sorting, setSorting] = useState([]);
 
   console.log('ping 1');
@@ -36,7 +34,6 @@ const TableData = () => {
       );
 
       url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
-      url.searchParams.set('filterFns', JSON.stringify(columnFilterFns ?? []));
       url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
 
       console.log(url.searchParams.toString());
@@ -67,15 +64,28 @@ const TableData = () => {
 
   const columns = useMemo(
     () => [
+      //remove later
+      {
+        accessorKey: 'qpcr',
+        header: 'Qpcr',
+        filterVariant: 'range'
+      },
       {
         accessorKey: 'sample_id',
         header: 'Sample Id',
         enableHiding: false,
-        // columnFilterModeOptions: ['fuzzy', 'contains', 'startsWith']
       },
-      { accessorKey: 'fc_id', header: 'Fc Id', enableHiding: false, },
+      {
+        accessorKey: 'fc_id',
+        header: 'Fc Id',
+        enableHiding: false,
+      },
       { accessorKey: 'submission_id', header: 'Submission Id' },
-      { accessorKey: 'loading_date', header: 'Loading Date' },
+      {
+        accessorKey: 'loading_date',
+        header: 'Loading Date',
+        // columnFilterModeOptions: ['between']
+      },
       { accessorKey: 'completion_date', header: 'Completion Date' },
       { accessorKey: 'demultiplex_date', header: 'Demultiplex Date' },
       { accessorKey: 'stage_date', header: 'Stage Date' },
@@ -84,7 +94,11 @@ const TableData = () => {
       { accessorKey: 'lane', header: 'Lane' },
 
       { accessorKey: 'sample_name', header: 'Sample Name' },
-      { accessorKey: 'qpcr', header: 'Qpcr' },
+      // {
+      //   accessorKey: 'qpcr',
+      //   header: 'Qpcr',
+      //   columnFilterModeOptions: ['between', 'greaterThan', 'lessThan']
+      // },
       { accessorKey: 'pooling_id', header: 'Pooling Id' },
       { accessorKey: 'fragment', header: 'Fragment' },
       { accessorKey: 'labchip_conc', header: 'Labchip Conc' },
@@ -137,7 +151,7 @@ const TableData = () => {
         // columnFilterFns: {
         columnVisibility: {
           sample_name: false,
-          qpcr: false,
+          // qpcr: false,
           pooling_id: false,
           fragment: false,
           labchip_conc: false,
@@ -192,17 +206,12 @@ const TableData = () => {
       enablePinning
       enableRowNumbers
 
+
       manualSorting
 
 
-
-
-      // enableColumnFilterModes
-
       manualFiltering
-      enableColumnFilterModes
       onColumnFiltersChange={setColumnFilters}
-      onColumnFilterFnsChange={setColumnFilterFns}
 
       muiToolbarAlertBannerProps={
         isError
@@ -218,7 +227,6 @@ const TableData = () => {
       onSortingChange={setSorting}
       rowCount={rowCount}
       state={{
-        columnFilterFns,
         columnFilters,
         isLoading,
         showAlertBanner: isError,

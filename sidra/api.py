@@ -114,17 +114,17 @@ def type0():
     assert(len(sorting) < 2)
     
 
-    format = {"run_duration" : "999" , "q30": "99D999", "qpcr" : "99D9", "fragment" : "999", "labchip_conc" : "999D99", "mean_qscore" : "99D999", "yieldQ30" : "999999999999"}
+    format = {"run_duration" : "999" , "q30": "99D999", "qpcr" : "9D99", "fragment" : "999", "labchip_conc" : "999D99", "mean_qscore" : "99D999", "yieldQ30" : "999999999999"}
 
 
-    # Build the WHERE clause for filtering
+    # Build the WHERE clause for filteri
     where_clause = "WHERE"
     for filter in filters:
         value = filter['value']
 
         if isinstance(value, str):
             if filter['id'] in format:
-                where_clause += f" to_char({resolve(filter['id'])}, {format[filter['id']]}) LIKE '%{value}%'"
+                where_clause += f" to_char({resolve(filter['id'])}, '{format[filter['id']]}') LIKE '%{value}%'"
             else:
                 where_clause += f" {resolve(filter['id'])} LIKE '%{value}%'"
         elif isinstance(value, list):
@@ -163,8 +163,8 @@ def type0():
 
     # DEBUGGING< DON'T REMOVE
     # Write the results to a JSON file
-    with open('./front-end/src/newdata/data0.json', 'w') as f:
-        json.dump(results, f, cls=JSONEncoder)
+    # with open('./front-end/src/newdata/data0.json', 'w') as f:
+    #     json.dump(results, f, cls=JSONEncoder)
     return jsonify(results)
 
 
