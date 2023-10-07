@@ -3,11 +3,11 @@
 # Clear the terminal screen
 clear
 
-psql -U postgres -d postgres -c "ALTER USER postgres PASSWORD 'mypassword';"
+psql -U deepc -c "ALTER USER deepc PASSWORD 'mypassword';"
 
 # Drop and create the database using psql
-psql -U postgres -d postgres -c 'DROP DATABASE IF EXISTS sidra;'
-psql -U postgres -d postgres -c 'CREATE DATABASE sidra;'
+psql -U deepc -d template1 -c 'DROP DATABASE IF EXISTS sidra;'
+psql -U deepc -d template1 -c 'CREATE DATABASE sidra;'
 
 # Run the createDB.py script
 python3 createDB.py
