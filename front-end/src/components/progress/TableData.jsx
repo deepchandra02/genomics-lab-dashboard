@@ -26,11 +26,7 @@ const TableData = () => {
       }
 
       const url = new URL(
-        '/type0',
-        process.env.NODE_ENV === 'production'
-          ? 'https://www.material-react-table.com'
-          : 'http://172.32.79.51:5001',
-      );
+        '/type0', 'http://172.32.79.51:5001');
 
       url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
       url.searchParams.set('sorting', JSON.stringify(sorting ?? []));
