@@ -61,6 +61,10 @@ def resolve(column):
         return aliases[column] + "." + column
     return column
 
+@app.route('/')
+def index():
+    return "Hello World!"
+
 @app.route('/Progress/refresh')
 def refresh():
     paths_json = open("./paths.json", 'r')
@@ -408,4 +412,7 @@ def data6(date):
 if __name__=='__main__':
     # app.debug = True
     # app.run()
-    app.run(debug = True)
+    app.run(
+        host= "0.0.0.0",
+        port= 5001,
+            debug = True)

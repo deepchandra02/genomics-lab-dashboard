@@ -29,7 +29,7 @@ const TableData = () => {
         '/type0',
         process.env.NODE_ENV === 'production'
           ? 'https://www.material-react-table.com'
-          : 'http://127.0.0.1:5000',
+          : 'http://172.26.85.91:5001',
       );
 
       url.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
@@ -279,7 +279,7 @@ const TableData = () => {
       //           '/Progress/release',
       //           process.env.NODE_ENV === 'production'
       //             ? 'https://www.material-react-table.com'
-      //             : 'http://127.0.0.1:5000',
+      //             : 'http://172.26.85.91:5001',
       //         );
 
       //         url.searchParams.set('data', JSON.stringify(rowSelection ?? []));
