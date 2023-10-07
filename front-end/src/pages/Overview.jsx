@@ -60,7 +60,7 @@ function Overview() {
         const startDate = formatJsDate(value.startDate, 'YYYYMMDD');
         const endDate = formatJsDate(value.endDate, 'YYYYMMDD');
 
-        const response1 = await fetch(`http://172.26.85.91:5001/data1/${startDate}-${endDate}`);
+        const response1 = await fetch(`http://172.32.79.51:5001/data1/${startDate}-${endDate}`);
         if (!response1.ok) {
           // Handle error
           console.error('Server error:', response1);
@@ -71,7 +71,7 @@ function Overview() {
           setData1(data);
         }
 
-        const response2a = await fetch(`http://172.26.85.91:5001/data2a/${startDate}-${endDate}`);
+        const response2a = await fetch(`http://172.32.79.51:5001/data2a/${startDate}-${endDate}`);
         if (!response2a.ok) {
           // Handle error
           console.error('Server error:', response2a);
@@ -82,7 +82,7 @@ function Overview() {
           setData2a(data);
         }
 
-        const response2b = await fetch(`http://172.26.85.91:5001/data2b/${startDate}-${endDate}`);
+        const response2b = await fetch(`http://172.32.79.51:5001/data2b/${startDate}-${endDate}`);
         if (!response2b.ok) {
           // Handle error
           console.error('Server error:', response2b);
@@ -93,7 +93,7 @@ function Overview() {
           setData2b(data);
         }
 
-        const response2c = await fetch(`http://172.26.85.91:5001/data2c/${startDate}-${endDate}`);
+        const response2c = await fetch(`http://172.32.79.51:5001/data2c/${startDate}-${endDate}`);
         if (!response2c.ok) {
           // Handle error
           console.error('Server error:', response2c);
@@ -104,7 +104,7 @@ function Overview() {
           setData2c(data);
         }
 
-        const response3 = await fetch(`http://172.26.85.91:5001/data3/${startDate}-${endDate}`);
+        const response3 = await fetch(`http://172.32.79.51:5001/data3/${startDate}-${endDate}`);
         if (!response3.ok) {
           // Handle error
           console.error('Server error:', response3);
@@ -115,7 +115,7 @@ function Overview() {
           setData3(data);
         }
 
-        const response4 = await fetch(`http://172.26.85.91:5001/data4/${startDate}-${endDate}`);
+        const response4 = await fetch(`http://172.32.79.51:5001/data4/${startDate}-${endDate}`);
         if (!response4.ok) {
           // Handle error
           console.error('Server error:', response4);
@@ -126,7 +126,7 @@ function Overview() {
           setData4(data);
         }
 
-        const response5 = await fetch(`http://172.26.85.91:5001/data5/${startDate}-${endDate}`);
+        const response5 = await fetch(`http://172.32.79.51:5001/data5/${startDate}-${endDate}`);
         if (!response5.ok) {
           // Handle error
           console.error('Server error:', response5);
@@ -137,7 +137,7 @@ function Overview() {
           setData5(data);
         }
 
-        const response6 = await fetch(`http://172.26.85.91:5001/data6/${startDate}-${endDate}`);
+        const response6 = await fetch(`http://172.32.79.51:5001/data6/${startDate}-${endDate}`);
         if (!response6.ok) {
           // Handle error
           console.error('Server error:', response6);
