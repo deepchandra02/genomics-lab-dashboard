@@ -18,11 +18,11 @@ conn.set_session(autocommit=True)
 cursor = conn.cursor()
 
 #  for debugging, don't remove
-class JSONEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, Decimal):
-            return str(obj)
-        return super(JSONEncoder, self).default(obj)
+# class JSONEncoder(json.JSONEncoder):
+#     def default(self, obj):
+#         if isinstance(obj, Decimal):
+#             return str(obj)
+#         return super(JSONEncoder, self).default(obj)
     
 def sql(command):
     try:
@@ -209,8 +209,8 @@ def data1(date):
     
     # for debugging, don't remove
     # Write the results to a JSON file
-    with open('./front-end/src/newdata/data1.json', 'w') as f:
-        json.dump(results, f, cls=JSONEncoder)            
+    # with open('./front-end/src/newdata/data1.json', 'w') as f:
+    #     json.dump(results, f, cls=JSONEncoder)            
     return jsonify(results)
 
 
@@ -243,8 +243,8 @@ def data2a(date):
     
     # for debugging, don't remove
     # Write the results to a JSON file
-    with open('./front-end/src/newdata/data2a.json', 'w') as f:
-        json.dump(results, f, cls=JSONEncoder)
+    # with open('./front-end/src/newdata/data2a.json', 'w') as f:
+    #     json.dump(results, f, cls=JSONEncoder)
 
     return jsonify(results)
 
@@ -283,8 +283,8 @@ def data2b(date):
         
         # for debugging, don't remove
         # Write the results to a JSON file
-        with open('./front-end/src/newdata/data2b.json', 'w') as f:
-            json.dump(output, f, cls=JSONEncoder)
+        # with open('./front-end/src/newdata/data2b.json', 'w') as f:
+        #     json.dump(output, f, cls=JSONEncoder)
         return jsonify(output)
     return jsonify(results)
 
@@ -316,8 +316,8 @@ def data2c(date):
     
     # for debugging, don't remove
     # Write the results to a JSON file
-    with open('./front-end/src/newdata/data2c.json', 'w') as f:
-        json.dump(results, f, cls=JSONEncoder)
+    # with open('./front-end/src/newdata/data2c.json', 'w') as f:
+    #     json.dump(results, f, cls=JSONEncoder)
 
     return jsonify(results)
 
@@ -337,8 +337,8 @@ def data3(date):
 
     # for debugging, don't remove
     # Write the results to a JSON file
-    with open('./front-end/src/newdata/data3.json', 'w') as f:
-        json.dump(results, f, cls=JSONEncoder)
+    # with open('./front-end/src/newdata/data3.json', 'w') as f:
+    #     json.dump(results, f, cls=JSONEncoder)
 
     return jsonify(results)
 
@@ -360,8 +360,8 @@ def data4(date):
 
     # for debugging, don't remove
     # Write the results to a JSON file
-    with open('./front-end/src/newdata/data4.json', 'w') as f:
-        json.dump(results, f, cls=JSONEncoder)
+    # with open('./front-end/src/newdata/data4.json', 'w') as f:
+    #     json.dump(results, f, cls=JSONEncoder)
 
     return jsonify(results)
 
@@ -381,8 +381,8 @@ def data5(date):
 
     # for debugging, don't remove
     # Write the results to a JSON file
-    with open('./front-end/src/newdata/data5.json', 'w') as f:
-        json.dump(results, f, cls=JSONEncoder)
+    # with open('./front-end/src/newdata/data5.json', 'w') as f:
+    #     json.dump(results, f, cls=JSONEncoder)
 
     return jsonify(results)
 
@@ -404,14 +404,12 @@ def data6(date):
 
     # for debugging, don't remove
     # Write the results to a JSON file
-    with open('./front-end/src/newdata/data6.json', 'w') as f:
-        json.dump(results, f, cls=JSONEncoder)
+    # with open('./front-end/src/newdata/data6.json', 'w') as f:
+    #     json.dump(results, f, cls=JSONEncoder)
     
     return jsonify(results)
 
 if __name__=='__main__':
-    # app.debug = True
-    # app.run()
     app.run(
         host= "0.0.0.0",
         port= 5001,
