@@ -11,7 +11,7 @@ app = Flask(__name__)   # Flask constructor
 CORS(app)
 conn = psycopg2.connect(database="sidra",
                         host="localhost",
-                        user="deepc",
+                        user="postgres",
                         password="mypassword",
                         port="5432")
 conn.set_session(autocommit=True)
